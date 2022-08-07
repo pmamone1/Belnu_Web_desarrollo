@@ -35,8 +35,9 @@ class VariationAdmin(admin.ModelAdmin):
             return format_html('<img src={}  width="80px" height="80px" />',obj.image.url)
 
 class BannerAdmin(admin.ModelAdmin):
-    list_display = ('coleccion','image','is_active')
+    list_display = ('coleccion','image','date_created','proveedor','is_active')
     list_editable = ('is_active',)
+    list_filter = ('is_active', 'proveedor')
 
 class ReviewRatingAdmin(admin.ModelAdmin):
     list_display = ('product','rating')

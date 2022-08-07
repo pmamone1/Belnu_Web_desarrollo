@@ -162,9 +162,21 @@ class Variation(models.Model):
         ]       
 
 class Banner(models.Model):
+    Proveedor=(
+        ('Clarin','Clarin'),
+        ('La Nacion','La Nacion'),
+        ('Planeta','Planeta'),
+        ('Salvat','Salvat'),
+        ('Perfil','Perfil'),
+        ('Otro','Otro'),
+    )
+
+    
     coleccion = models.CharField(max_length=100,verbose_name='Coleccion')
     image = models.ImageField(upload_to='photos/banners',verbose_name='URL_Imagen')
+    proveedor = models.CharField(max_length=100,verbose_name='Proveedor',blank=True,null=True,choices=Proveedor)
     is_active = models.BooleanField(default=True,verbose_name='Activo')
+    date_created = models.DateField(auto_now_add=True,verbose_name='Fecha de creacion',blank=True,null=True)
     
     class Meta:
         verbose_name = "Banner"
