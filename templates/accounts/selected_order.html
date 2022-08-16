@@ -44,7 +44,7 @@
                                                         <li>Estado del Pedido:<strong style="color:green"> {{ order.status_verbose }}</strong></li>
                                                         <li>Nro. de Pedido: # {{ order.order_number }} </li>
                                                         {% elif order.status == 'Accepted' %}
-                                                        <li>Estado del Pedido:<strong style="color:blue"> {{ order.status_verbose }}</strong></li>
+                                                        <li>Estado del Pedido:<strong style="color:blue"> Pendiente</strong></li>
                                                         {% else %}
                                                         <li>Estado del Pedido:<strong style="color:red"> {{ order.status_verbose }}</strong></li>
                                                         {% endif %}
