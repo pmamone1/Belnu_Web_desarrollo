@@ -15,6 +15,8 @@ from .forms import ReviewForm
 from .models import Product, Variation,ReviewRating,Banner
 from category.models import Category
 from orders.models import OrderProduct
+from django.contrib.auth.decorators import login_required
+
 
 def store(request, category_slug=None):
     banner = Banner.objects.filter(is_active=True)
@@ -61,7 +63,7 @@ def search(request):
 
     return render(request, 'store/store.html', context)
 
-
+@login_required
 def product_detail(request, category_slug, product_slug):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)

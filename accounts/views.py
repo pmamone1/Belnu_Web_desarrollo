@@ -28,6 +28,7 @@ from email.message import EmailMessage
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 import requests
+import datetime
 
 import environ
 env = environ.Env()
@@ -336,13 +337,16 @@ def resetPassword(request):
     else:
         return render(request, 'accounts/resetPassword.html')
 
-def filtrar_pedido(request,filtro="1"):
-    if request.POST:
-        filtro= request.POST.get('filtro')
-    #print("*******POST***********"+str(filtro))
-    
-    
-    print("*******GET***********"+str(filtro))
+def filtrar_pedido(request,filtro=None):
+    print("DEbugear!!!!!!")
+    filtro = request.GET.get('filtro')
+    print(filtro)
+    print("DEbugear!!!!!!")
+    if request.method=="POST":
+        print("Entro al filtrar pedido!")
+        filtro =request.POST.get('filtro')
+        print(f' que filtro entro en el GET ={filtro}')
+        print("*******GET***********"+str(filtro))
     if filtro==None:
         filtro="1"
         print("Filtro hardcodeado: "+str(filtro))
@@ -351,13 +355,13 @@ def filtrar_pedido(request,filtro="1"):
     if not request.user.is_admin:
         print("no es admin")
         try:    
-            if filtro =="1":
+            if filtro =="1" or filtro == "Todos":
                 orders = Order.objects.filter(user=request.user).order_by('-created_at')
-            elif filtro =="2":
+            elif filtro =="2" or filtro == "Pendientes":
                 orders = Order.objects.filter(user=request.user,is_ordered=True,status="Accepted").order_by('-created_at')
-            elif filtro =="3":
+            elif filtro =="3" or filtro == "Completados":
                 orders = Order.objects.filter(user=request.user,is_ordered=True,status="Completed").order_by('-created_at')
-            elif filtro =="4":
+            elif filtro =="4" or filtro == "Cancelados":
                 orders = Order.objects.filter(user=request.user,is_ordered=False,status="Cancelado").order_by('-created_at')
             
         except:
@@ -366,25 +370,27 @@ def filtrar_pedido(request,filtro="1"):
     else:
         print("es admin")
         try:    
-            if filtro =="1":
+            if filtro =="1" or filtro=="Todos":
                 orders = Order.objects.all().order_by('-created_at')
-            elif filtro =="2":
+            elif filtro =="2" or filtro=="Pendientes":
                 orders = Order.objects.filter(is_ordered=True,status="Accepted").order_by('-created_at')
-            elif filtro =="3":
+            elif filtro =="3" or filtro=="Completados":
                 orders = Order.objects.filter(is_ordered=True,status="Completed").order_by('-created_at')
-            elif filtro =="4":
+            elif filtro =="4" or filtro=="Cancelados":
                 orders = Order.objects.filter(is_ordered=False,status="Cancelado").order_by('-created_at')
             
         except:
             print("Hay un error")
             pass
-    page = request.GET.get('page')
-    print("filtro? "+str(filtro))
-    print("pagina? " + str(page))
-    
+        
     paginator = Paginator(orders, 5)
+    page = request.GET.get('page')
     paged_products = paginator.get_page(page)
     product_count = orders.count()
+    
+    print("filtro? "+str(filtro))
+    print("pagina? " + str(page))
+    print(f'La cantidad de pedidos encontrados es {product_count}')
     
     if filtro=="1":
         filtro="Todos"
@@ -419,6 +425,7 @@ def my_orders(request):
     product_count = orders.count()
     profile=UserProfile.objects.get(user_id=request.user.id)
     
+        
     context = {
         'product_count': product_count,
         'orders': paged_products,
@@ -563,20 +570,27 @@ def cumplir_pedidos(request):
 
 
 def exporta_pedidos_xls(request):
+    fecha = datetime.datetime.now()
+    dia = int(fecha.strftime("%d"))
+    mes = int(fecha.strftime("%m"))
+    anio = int(fecha.strftime("%y"))
+    hoy = "_" + str(dia) + "_" + str(mes) + "_" + str(anio)
+    
     messages.success(request, 'Se exporto a excel los pedidos!')
     print("entro al exportador de peidos al excel")
     response = HttpResponse(content_type='application/ms-excel')
-    
-    response['Content-Disposition'] = 'attachment; filename="Pedidos.xls"'
+    filename="Pedidos" + hoy + ".xls"
+    response['Content-Disposition'] = f'attachment; filename="{filename}"'
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Pedidos')
 
     # Sheet header, first row
-    row_num = 0
+    row_num = 2
 
     font_style = xlwt.easyxf("pattern: pattern solid, fore_color black; font: color white; align: horiz center; border: left thick, top thick, bottom thick, right thick")
     font_style.font.bold = True
+    ws.write(0, 1, f"Pedidos del dia {hoy}", font_style)
 
     columns = ['Vendedor','Nombre Vendedor','Producto','Edicion','Cantidad','# Pedido', ]
 
