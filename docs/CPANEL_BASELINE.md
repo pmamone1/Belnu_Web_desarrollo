@@ -71,6 +71,27 @@ Mantener `forgotPassword.html` y `forgotpassword.html`: Linux distingue mayúscu
 Pendiente: arranque Django y pruebas funcionales en Python 3.7/MySQL; este
 entorno de trabajo no tiene Django ni las dependencias del servidor instaladas.
 
+## Corrección posterior: estáticos con DEBUG=False
+
+El propietario ejecutó en Python 3.7/MySQL los dos tests de configuración,
+`manage.py check` y `makemigrations --check --dry-run`: aprobados.
+La prueba de `collectstatic` detectó dos imágenes de fondo inexistentes en
+`ui.css`; el manifiesto incompleto impidió renderizar el login. Además,
+`templates/base.html` tenía la ruta del favicon equivocada, y otras plantillas
+usaban prefijos `./` que el manifiesto estricto no resuelve.
+
+Se eliminan únicamente las capas de imagen inexistentes, conservando los
+gradientes de fondo; se corrige el favicon a `images/icons/logo_belnu.ico`
+y se normalizan los static tags afectados. La corrección se aplica al CSS
+fuente y a su copia recogida. Se conserva el manifiesto estricto.
+
+Validación local: cinco tests aprobados usando Django 3.2.14 del ZIP, incluido
+un `collectstatic` con ManifestStaticFilesStorage en un directorio temporal y
+la resolución de todos los static tags literales de las plantillas. La prueba
+no importa la configuración privada ni accede a la base. Pendiente repetir
+`collectstatic` con WhiteNoise y el render del login en el servidor antes de
+publicar.
+
 ## Defectos heredados para una siguiente etapa
 
 No se alteró la lógica de pedidos durante esta captura de la versión publicada.
