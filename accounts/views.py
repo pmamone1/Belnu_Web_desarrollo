@@ -1,4 +1,5 @@
-from datetime import datetime
+from django.conf import settings
+import datetime
 from telnetlib import STATUS
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
@@ -21,6 +22,7 @@ from django.http import HttpResponse
 import json
 import xlwt
 
+
 import smtplib
 import ssl
 from email.message import EmailMessage
@@ -28,13 +30,17 @@ from email.message import EmailMessage
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
 import requests
-import datetime
 
 import environ
 env = environ.Env()
 environ.Env.read_env()
 
-PASSWORD_GMAIL = env('PASSWORD_GMAIL')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.belnu.com.ar'
+EMAIL_PORT=465
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER = settings.EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
 
 
 # Create your views here.
@@ -46,7 +52,13 @@ def register(request):
         nombre_vendedor = request.POST.get('nombre_vendedor',"")
         if numero_vendedor == "" or nombre_vendedor == "":
             messages.warning(request, 'No ingreso Numero y/o Nombre de Vendedor')
-            return redirect('register')             
+            return redirect('register')
+        if UserProfile.objects.filter(numero_vendedor=numero_vendedor).count()>0:
+            messages.warning(request, 'El numero de vendedor que ingreso ya se encuentra registrado')
+            return redirect('register')
+        if UserProfile.objects.filter(nombre_vendedor=nombre_vendedor).count()>0:
+            messages.warning(request, 'El nombre de vendedor que ingreso ya se encuentra registrado')
+            return redirect('register')
         form = RegistrationForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data['first_name']
@@ -59,20 +71,21 @@ def register(request):
             user = Account.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password )
             user.phone_number = phone_number
             user.save()
-
+            
 
             profile = UserProfile()
             profile.user_id = user.id
             profile.profile_picture = 'default/default-user.png'
             profile.numero_vendedor = numero_vendedor
-            profile.nombre_vendedor = nombre_vendedor
+            nombre_vendedor = nombre_vendedor.replace(' ','_')
+            profile.nombre_vendedor = nombre_vendedor.strip()
             profile.save()
 
             current_site = get_current_site(request)
 
             # Configuracion de los mails
-            email_sender = 'belnu.pedidos@gmail.com'
-            email_password = env('PASSWORD_GMAIL') #esta es la contraseña global de gmail para este mail
+            email_sender = EMAIL_HOST_USER
+            email_password = EMAIL_HOST_PASSWORD
             email_receiver = email
 
             # configuramos el mail 
@@ -94,7 +107,7 @@ def register(request):
             context = ssl.create_default_context()
 
             # Log in and send the email
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            with smtplib.SMTP_SSL('belnu.com.ar', 465, context=context) as smtp:
                 smtp.login(email_sender, email_password)
                 smtp.sendmail(email_sender, email_receiver, em.as_string())
                 messages.success(request, 'Se registro el usuario exitosamente')
@@ -172,17 +185,18 @@ def login(request):
     
         else:
             
-            if Account.objects.filter(email=email).exists():
+            if Account.objects.filter(email=email).exists() and Account.objects.filter(is_active=False).exists():
+                
                 user=Account.objects.filter(email=email).first()
                 print("pppp" +email)
                 messages.error(request, 'El usuario no se encuentra activo')
                 current_site = get_current_site(request)
 
                 # Configuracion de los mails
-                email_sender = 'belnu.pedidos@gmail.com'
-                email_password = env('PASSWORD_GMAIL') #esta es la contraseña global de gmail para este mail
                 email_receiver = email
-
+                email_sender = EMAIL_HOST_USER
+                email_password = EMAIL_HOST_PASSWORD
+                
                 # configuramos el mail 
                 subject = 'Por favor activa tu cuenta en Belnu Pedidos Web!'
                 body = render_to_string('accounts/account_verification_email.html', {
@@ -202,12 +216,12 @@ def login(request):
                 context = ssl.create_default_context()
 
                 # Log in and send the email
-                with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+                with smtplib.SMTP_SSL('belnu.com.ar', 465, context=context) as smtp:
                     smtp.login(email_sender, email_password)
                     smtp.sendmail(email_sender, email_receiver, em.as_string())
                     messages.success(request, 'No has activado tu cuenta todavia, te hemos enviado un nuevo enlace a tu mail para que puedas activar tu cuenta')
                 return redirect('/accounts/login/?command=verification&email='+email)
-            else:    
+            elif Account.objects.filter(email=email).exists() and Account.objects.filter(is_active=True).exists():
                 print("no hay usu")
                 messages.error(request, 'Las credenciales son incorrectas')
                 return redirect('login')
@@ -258,6 +272,7 @@ def dashboard(request):
 
     return render(request, 'accounts/dashboard.html', context)
 
+####
 
 def forgotPassword(request):
     if request.method == 'POST':
@@ -268,13 +283,13 @@ def forgotPassword(request):
             current_site = get_current_site(request)
 
             # Configuracion de los mails
-            email_sender = 'belnu.pedidos@gmail.com'
-            email_password = env('PASSWORD_GMAIL') #esta es la contraseña global de gmail para este mail
+            email_sender = EMAIL_HOST_USER
+            email_password = EMAIL_HOST_PASSWORD
             email_receiver = email
 
             # configuramos el mail 
-            subject = 'Por favor activa tu cuenta en Belnu Pedidos Web!'
-            body = render_to_string('accounts/account_verification_email.html', {
+            subject = 'Por favor Cambia tu contraseña en Belnu Pedidos Web!'
+            body = render_to_string('accounts/reset_password_email.html', {
                 'user': user,
                 'domain': current_site,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
@@ -291,11 +306,11 @@ def forgotPassword(request):
             context = ssl.create_default_context()
 
             # Log in and send the email
-            with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+            with smtplib.SMTP_SSL('belnu.com.ar', 465, context=context) as smtp:
                 smtp.login(email_sender, email_password)
                 smtp.sendmail(email_sender, email_receiver, em.as_string())
                 
-            messages.success(request, 'Un email fue enviado a tu bandeja de entrada para resetear tu password')
+            messages.success(request, 'Un email fue enviado a tu bandeja de entrada para cambiar tu contraseña')
             return redirect('login')
         else:
             messages.error(request, 'La cuenta de usuario no existe')
@@ -337,16 +352,13 @@ def resetPassword(request):
     else:
         return render(request, 'accounts/resetPassword.html')
 
-def filtrar_pedido(request,filtro=None):
-    print("DEbugear!!!!!!")
-    filtro = request.GET.get('filtro')
-    print(filtro)
-    print("DEbugear!!!!!!")
-    if request.method=="POST":
-        print("Entro al filtrar pedido!")
-        filtro =request.POST.get('filtro')
-        print(f' que filtro entro en el GET ={filtro}')
-        print("*******GET***********"+str(filtro))
+def filtrar_pedido(request,filtro="1"):
+    if request.POST:
+        filtro= request.POST.get('filtro')
+    #print("*******POST***********"+str(filtro))
+    
+    
+    print("*******GET***********"+str(filtro))
     if filtro==None:
         filtro="1"
         print("Filtro hardcodeado: "+str(filtro))
@@ -355,13 +367,13 @@ def filtrar_pedido(request,filtro=None):
     if not request.user.is_admin:
         print("no es admin")
         try:    
-            if filtro =="1" or filtro == "Todos":
+            if filtro =="1":
                 orders = Order.objects.filter(user=request.user).order_by('-created_at')
-            elif filtro =="2" or filtro == "Pendientes":
+            elif filtro =="2":
                 orders = Order.objects.filter(user=request.user,is_ordered=True,status="Accepted").order_by('-created_at')
-            elif filtro =="3" or filtro == "Completados":
+            elif filtro =="3":
                 orders = Order.objects.filter(user=request.user,is_ordered=True,status="Completed").order_by('-created_at')
-            elif filtro =="4" or filtro == "Cancelados":
+            elif filtro =="4":
                 orders = Order.objects.filter(user=request.user,is_ordered=False,status="Cancelado").order_by('-created_at')
             
         except:
@@ -370,27 +382,25 @@ def filtrar_pedido(request,filtro=None):
     else:
         print("es admin")
         try:    
-            if filtro =="1" or filtro=="Todos":
+            if filtro =="1":
                 orders = Order.objects.all().order_by('-created_at')
-            elif filtro =="2" or filtro=="Pendientes":
+            elif filtro =="2":
                 orders = Order.objects.filter(is_ordered=True,status="Accepted").order_by('-created_at')
-            elif filtro =="3" or filtro=="Completados":
+            elif filtro =="3":
                 orders = Order.objects.filter(is_ordered=True,status="Completed").order_by('-created_at')
-            elif filtro =="4" or filtro=="Cancelados":
+            elif filtro =="4":
                 orders = Order.objects.filter(is_ordered=False,status="Cancelado").order_by('-created_at')
             
         except:
             print("Hay un error")
             pass
-        
-    paginator = Paginator(orders, 5)
     page = request.GET.get('page')
-    paged_products = paginator.get_page(page)
-    product_count = orders.count()
-    
     print("filtro? "+str(filtro))
     print("pagina? " + str(page))
-    print(f'La cantidad de pedidos encontrados es {product_count}')
+    
+    paginator = Paginator(orders, 5)
+    paged_products = paginator.get_page(page)
+    product_count = orders.count()
     
     if filtro=="1":
         filtro="Todos"
@@ -425,7 +435,6 @@ def my_orders(request):
     product_count = orders.count()
     profile=UserProfile.objects.get(user_id=request.user.id)
     
-        
     context = {
         'product_count': product_count,
         'orders': paged_products,
@@ -446,8 +455,8 @@ def borrar_pedido(request, pk):
         current_site = get_current_site(request)
 
         # Configuracion de los mails
-        email_sender = 'belnu.pedidos@gmail.com'
-        email_password = env('PASSWORD_GMAIL') #esta es la contraseña global de gmail para este mail
+        email_sender = EMAIL_HOST_USER
+        email_password = EMAIL_HOST_PASSWORD
         email_receiver = order.email
 
         # configuramos el mail 
@@ -468,7 +477,7 @@ def borrar_pedido(request, pk):
         context = ssl.create_default_context()
 
         # Log in and send the email
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as smtp:
+        with smtplib.SMTP_SSL('belnu.com.ar', 465, context=context) as smtp:
             smtp.login(email_sender, email_password)
             smtp.sendmail(email_sender, email_receiver, em.as_string())
         return redirect('my_orders')
@@ -570,27 +579,26 @@ def cumplir_pedidos(request):
 
 
 def exporta_pedidos_xls(request):
-    fecha = datetime.datetime.now()
-    dia = int(fecha.strftime("%d"))
-    mes = int(fecha.strftime("%m"))
-    anio = int(fecha.strftime("%y"))
-    hoy = "_" + str(dia) + "_" + str(mes) + "_" + str(anio)
-    
     messages.success(request, 'Se exporto a excel los pedidos!')
     print("entro al exportador de peidos al excel")
     response = HttpResponse(content_type='application/ms-excel')
-    filename="Pedidos" + hoy + ".xls"
-    response['Content-Disposition'] = f'attachment; filename="{filename}"'
+    fecha=datetime.datetime.now()
+    dia=str(fecha.day)
+    mes=str(fecha.month)
+    anio=str(fecha.year)
+    hora=str(fecha.hour)
+    minutos=str(fecha.minute)
+    nombre_archivo="Pedidos_"+anio+mes+dia+hora+minutos+".xls"
+    response['Content-Disposition'] = 'attachment; filename='+nombre_archivo
 
     wb = xlwt.Workbook(encoding='utf-8')
     ws = wb.add_sheet('Pedidos')
 
     # Sheet header, first row
-    row_num = 2
+    row_num = 0
 
     font_style = xlwt.easyxf("pattern: pattern solid, fore_color black; font: color white; align: horiz center; border: left thick, top thick, bottom thick, right thick")
     font_style.font.bold = True
-    ws.write(0, 1, f"Pedidos del dia {hoy}", font_style)
 
     columns = ['Vendedor','Nombre Vendedor','Producto','Edicion','Cantidad','# Pedido', ]
 
@@ -629,3 +637,51 @@ def exporta_pedidos_xls(request):
     else:
         print("No hay pedidos para exportar")
         messages.error(request, 'No hay pedidos para exportar!')        
+
+def descargar_archivo(request):
+    messages.success(request, 'Se descargo el archivo a excel!')
+    #print("entro al exportador de peidos al excel")
+    response = HttpResponse(content_type='application/ms-excel')
+    
+    response['Content-Disposition'] = 'attachment; filename="Revisar_Pedidos.xls"'
+
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet('Pedidos')
+
+    # Sheet header, first row
+    row_num = 0
+
+    font_style = xlwt.easyxf("pattern: pattern solid, fore_color black; font: color white; align: horiz center; border: left thick, top thick, bottom thick, right thick")
+    font_style.font.bold = True
+
+    columns = ['Vendedor','Nombre Vendedor','Producto','Edicion','Cantidad','# Pedido', ]
+
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+    order=Order.objects.filter(status="Accepted")
+    if order.count() > 0:
+        for item in order:
+            rows = OrderProduct.objects.filter(order=item).values_list('profile__numero_vendedor', 'profile__nombre_vendedor', 'product__product_name', 'variation__variation_value', 'quantity', 'numero_pedido')
+            for row in rows:
+                print(row)
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], xlwt.easyxf("pattern: pattern solid, fore_color white; font: color black; align: horiz center; border: left thin, bottom thin, right thin"))
+
+        # Darle estilo al archivo XLS
+        estilo = xlwt.XFStyle()
+        estilo.alignment.horz = 'HORZ_CENTER'  
+        
+        bordes = estilo.borders
+        estilo.pattern_back_colour = 41
+        
+        wb.save(response)
+        print(response)
+        print("se guardo el archivo!")
+        return response
+        
+    else:
+        messages.danger(request, 'No se descargo el archivo a excel')

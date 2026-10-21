@@ -1,3 +1,4 @@
+from django.conf import settings
 from email import message
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
@@ -21,12 +22,12 @@ from django.contrib import messages, auth
 from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.sites.shortcuts import get_current_site
+import urllib 
 
 import environ
 env = environ.Env()
 environ.Env.read_env()
 
-PASSWORD_GMAIL = env('PASSWORD_GMAIL')
 
 # Create your views here.
 
@@ -46,11 +47,14 @@ def place_order(request, total=0, quantity=0):
 
     #inicializa el valor del total a 0
     grand_total = 0
-    
+    total=0
+    quantity=0
     # saca el total del pedido mas la cantidad de ejemplares
     for cart_item in cart_items:
-        total += (cart_item.product.price * cart_item.quantity)
         quantity += cart_item.quantity
+        for item in cart_item.variations.all():
+            total += ((item.precio_ed + cart_item.product.recargo_interior) * cart_item.quantity)
+        
 
     # guarda el total del pedido
     grand_total = total
@@ -72,7 +76,7 @@ def place_order(request, total=0, quantity=0):
     current_date = d.strftime("%Y%m%d%H%M%S")
         
     # arma el numero de pedido
-    order_number = current_date+"_"+str(numero_vendedor)+"_"+str(nombre_vendedor) 
+    order_number = current_date+"_"+str(numero_vendedor)
     
     if request.method == 'POST':
         print("entro en el post")
@@ -99,7 +103,7 @@ def place_order(request, total=0, quantity=0):
         order = Order.objects.filter(user=request.user, is_ordered=False, order_number=order_number).first()
         
         cart_items = CartItem.objects.filter(user=request.user)
-        
+        total=0
         for item in cart_items:
             orderproduct = OrderProduct()
             orderproduct.order = order
@@ -107,10 +111,14 @@ def place_order(request, total=0, quantity=0):
             orderproduct.user = user
             orderproduct.product = item.product
             orderproduct.quantity = item.quantity
-            orderproduct.product_price = item.product.price
             orderproduct.ordered = True
             orderproduct.numero_pedido = order_number
+            for i in item.variations.all():
+                total += ((i.precio_ed + cart_item.product.recargo_interior) * item.quantity)
+                
+            orderproduct.product_price = total
             orderproduct.save()
+            
             ############################
             print("el item id="+str(item.id))
             cart_item = CartItem.objects.get(id=item.id)
@@ -118,6 +126,9 @@ def place_order(request, total=0, quantity=0):
             orderproduct = OrderProduct.objects.get(id=orderproduct.id)
             orderproduct.variation.set(product_variation)
             print(product_variation)
+            
+            
+            
             orderproduct.save()
 
             # bajar del stock los ejemplares vendidos
@@ -130,25 +141,27 @@ def place_order(request, total=0, quantity=0):
                 else:
                     variation.save()   
                 print("bajamos del stock el producto")
+        grand_total = total
         CartItem.objects.filter(user=request.user).delete()
         data.is_ordered = True
         data.status ="Accepted"
-        
+        #urllib.parse.unquote('/El%20Ni%C3%B1o/')
+        nombre= urllib.parse.unquote(current_user.first_name + "," + current_user.last_name)
         data.save()
         print("borramos el carrito y se guardo todo!")
         context = {
             'user': user,
             'user_id': str(user.id),
             'user_email': user.email,
-            'grand_total': str(grand_total),
+            'grand_total': grand_total,
             'numero_vendedor': numero_vendedor,
             'nombre_vendedor': nombre_vendedor,
-            'nombre_completo': current_user.first_name + ", " + current_user.last_name,
+            'nombre_completo': nombre,
             'numero_pedido': order_number,
-            'status': data.status,
+            'status': 'Pendiente',
             'fecha': str(data.created_at),
         }
-        return redirect('order_complete', user_id=str(user.id),user_email=user.email, user=user, grand_total=grand_total, numero_vendedor=numero_vendedor, nombre_vendedor=nombre_vendedor, nombre_completo=current_user.first_name + ", " + current_user.last_name, numero_pedido=order_number, status=data.status, fecha=data.created_at)   
+        return redirect('order_complete', user_id=str(user.id),user_email=user.email, user=user, grand_total=grand_total, numero_vendedor=numero_vendedor, nombre_vendedor=nombre_vendedor, nombre_completo=nombre, numero_pedido=order_number, status=data.status, fecha=data.created_at)   
             
        
        
@@ -169,13 +182,22 @@ def place_order(request, total=0, quantity=0):
 
 def order_complete(request,user,user_id,user_email,numero_vendedor,grand_total,nombre_vendedor,nombre_completo,numero_pedido,status,fecha):
     domain = get_current_site(request).domain
+    current = 'https://' + str(domain)
+    
+    #nombre_completo = user.full_name
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST='smtp.belnu.com.ar'
+    EMAIL_PORT=465
+    EMAIL_USE_TLS=True
+    EMAIL_HOST_USER = settings.EMAIL_HOST_USER
+    EMAIL_HOST_PASSWORD = settings.EMAIL_HOST_PASSWORD
     try:
         order = Order.objects.get(order_number=numero_pedido, is_ordered=True)
         ordered_products = OrderProduct.objects.filter(order_id=order.id)
     except:
         pass
-    print(ordered_products)
-    print(ordered_products.count())
+    #print(ordered_products)
+    #print(ordered_products.count())
     
     context = {
             'ordered_products': ordered_products,
@@ -183,29 +205,31 @@ def order_complete(request,user,user_id,user_email,numero_vendedor,grand_total,n
             'numero_vendedor': numero_vendedor,
             'nombre_vendedor': nombre_vendedor,
             'numero_pedido': numero_pedido,
-            'status': status,
-            'domain': domain,
+            'status': 'Pendiente',
+            'domain': current,
             'order_id': order.id,
         }
     current_site = get_current_site(request)
-
+    current = 'https://' + str(current_site)
     # Configuracion de los mails
-    email_sender = 'belnu.pedidos@gmail.com'
-    email_password = env('PASSWORD_GMAIL') #esta es la contraseña global de gmail para este mail
+    email_sender = EMAIL_HOST_USER
+    email_password = EMAIL_HOST_PASSWORD
     
     email_receiver = user_email
 
     # configuramos el mail 
+    nombre= urllib.parse.unquote(nombre_completo)
+    
     subject = 'Su pedido fue procesado con exito! - Gracias por hacer tus pedidos en Belnu Pedidos Web!'
     body = render_to_string('orders/order_complete_email.html', {
     'user': user,
-    'domain': current_site,
-    'nombre_completo': nombre_completo,
+    'domain': current,
+    'nombre_completo': nombre,
     'numero_pedido': numero_pedido,
-    'status': status,
+    'status': 'Pendiente',
     'nombre_vendedor': nombre_vendedor,
     'numero_vendedor': numero_vendedor,
-    'grand_total': str(grand_total),
+    'grand_total': grand_total,
     'order_id': order.id,
     })
 
@@ -219,7 +243,7 @@ def order_complete(request,user,user_id,user_email,numero_vendedor,grand_total,n
     context_ssl = ssl.create_default_context()
 
     # Log in and send the email
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context_ssl) as smtp:
+    with smtplib.SMTP_SSL('belnu.com.ar', 465,context=context_ssl) as smtp:
         smtp.login(email_sender, email_password)
         smtp.sendmail(email_sender, email_receiver, em.as_string())
         messages.success(request, 'Tu pedido fue procesado con exito!')        
@@ -228,10 +252,10 @@ def order_complete(request,user,user_id,user_email,numero_vendedor,grand_total,n
 def order_recived_email(request,ordered_products,grand_total,numero_vendedor,nombre_vendedor,numero_pedido,status):
     context = {
             'ordered_products': ordered_products,
-            'grand_total': str(grand_total),
+            'grand_total': grand_total,
             'numero_vendedor': numero_vendedor,
             'nombre_vendedor': nombre_vendedor,
             'numero_pedido': numero_pedido,
-            'status': status,
+            'status': 'Pendiente',
         }
     return render(request,'orders/order_recived_email.html',context)

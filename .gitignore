@@ -172,3 +172,15 @@ cython_debug/
 #.idea/
 
 # End of https://www.toptal.com/developers/gitignore/api/django
+# cPanel private configuration and runtime data
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*settings*copy*.py
+media/
+static/admin/
+.superpowers/
+
