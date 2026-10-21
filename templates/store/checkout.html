@@ -75,7 +75,7 @@
               <tr class="small text-uppercase">
                 <th scope="col">Producto</th>
                 <th scope="col" width="120">Cantidad</th>
-                <th scope="col" width="120">Precio</th>
+                <!--<th scope="col" width="120">Precio</th>-->
               </tr>
               </thead>
               <tbody>
@@ -84,14 +84,14 @@
               <tr>
                   <td>
                       <figure class="itemside align-items-center">
-                          <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
+                          <!--<div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>-->
                           <figcaption class="info">
-                              <a href="{{ cart_item.product.get_url }}" class="title text-dark">{{ cart_item.product.product_name }}</a>
-
+                              
                               <p class="text-muted small">
                                   {% if cart_item.variations.all %}
                                       {% for item in cart_item.variations.all %}
-                                          {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                                        <a href="{{ item.get_url_2 }}"><div class="aside"><img id="imagen" src="{{ item.image.url }}" class="img-sm"></div><small>{{ item.product.product_name }}</a>
+                                          {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }}</small> <br>
                                       {% endfor %}
                                   {% endif %}
 
@@ -102,13 +102,16 @@
                   </td>
                   <td>
 
-                        <label for="">{{ cart_item.quantity }}</label>
+                        <label for="" id="cant"><strong>{{ cart_item.quantity }}</strong></label>
                   </td>
                   <td>
+                      <!--
                       <div class="price-wrap">
+                          {% for item in cart_item.variations.all %}
                           <var class="price">$  {{ cart_item.sub_total }}  </var>
-                          <small class="text-muted"> $ {{cart_item.product.price}}    cada uno </small>
-                      </div> <!-- price-wrap .// -->
+                          <small class="text-muted" id='precio_ed'> mas $ {{cart_item.product.recargo_interior}} (RI) cada uno</small>
+                          {% endfor %}
+                      </div>  price-wrap .// -->
                   </td>
 
               </tr>
@@ -138,4 +141,10 @@
 </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
 
+<style>
+    #cant{
+        padding-top:2em;
+        padding-left:2em;
+    }
+</style>
 {% endblock %}

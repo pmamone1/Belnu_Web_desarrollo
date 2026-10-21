@@ -54,8 +54,7 @@
                                 
                                 {% endfor %}
                         {% endif %}
-                        
-                    </p>
+                    
 
                 </figcaption>
             </figure>
@@ -67,7 +66,8 @@
                                 <div class="input-group-prepend">
                                 <a href="{% url 'remove_cart' cart_item.product.id cart_item.id %}" class="btn btn-light" type="button" id="button-plus"> <i class="fa fa-minus"></i> </a>
                                 </div>
-                                <input type="text" class="form-control"  value="{{ cart_item.quantity }}">
+                                <input type="text" class="form-control" id='cantidad' value="{{ cart_item.quantity }}">
+                                <p hidden class="cantidada">{{cart_item.quantity}}</p>
                                 <div class="input-group-append">
 
                                   <form action="{% url 'add_cart' cart_item.product.id  %}" method="post">
@@ -85,8 +85,15 @@
         </td>
         <td>
             <div class="price-wrap">
-                <var class="price">$  {{ cart_item.sub_total }}  </var>
-                <small class="text-muted"> $ {{ cart_item.product.price }}    cada uno + {{cart_item.product.recargo_interior}} (RI)</small>
+                {% for item in cart_item.variations.all %}
+                <p class="sub_total">$  </p>
+                
+                
+                <small class="text-muted" id='precio_ed'> $ {{ item.precio_ed }}    cada uno + {{cart_item.product.recargo_interior}} (RI)</small>
+                <p hidden class="recargo_interior">{{cart_item.product.recargo_interior}}</p>
+                <p hidden class="precio_edicion">{{ item.precio_ed }}</p>
+                {% endfor %}
+                
             </div> <!-- price-wrap .// -->
         </td>
         <td class="text-right">
@@ -106,7 +113,7 @@
             <div class="card-body">
                 <dl class="dlist-align">
                   <dt>Total Pedido:</dt>
-                  <dd class="text-right text-dark b"><strong>$ {{total}}</strong></dd>
+                  <dd class="text-right text-dark b" id='total_carro'><strong>$ {{total}}</strong></dd>
                 </dl>
                 <hr>
                 
@@ -126,6 +133,41 @@
     <!-- ========================= SECTION CONTENT END// ========================= -->
 
     <script>
+     
+    
+    var cant = document.querySelectorAll('.cantidada');
+      console.log(cant.length)
+    
+    $( document ).ready(function() {
+        let canti = document.querySelectorAll('.cantidada');
+        console.log(canti.length)
+    
+        for (let i = 0; i < canti.length ; i++) {
+        console.log("este es el valor de i = "+i)
+        cantidad = $(".cantidada")[i];
+        
+        precio = $(".precio_edicion")[i];
+        recargo = $(".recargo_interior")[i];
+        
+        rec=parseFloat(recargo.innerHTML);
+        price=parseFloat(precio.innerHTML);
+        cant = parseInt(cantidad.innerHTML);
+        resultado = parseFloat((price + rec) * cant)
+        
+        console.log("cantidad="+cant)
+        console.log("precio="+price)
+        console.log("recargo="+rec)
+        
+        console.log("Resultado="+resultado)
+        $(".sub_total")[i].innerHTML= "$ " + resultado;
+        console.log("----------------")
+        }
+        //subtotal[i].innerHTML="$ pablo";
+        
+  
+});
+   
+    
         // Funcion que debe estar siempre 
          function getCookie(name) {
            var cookieValue = null;

@@ -2,7 +2,7 @@
     <!--   SIDEBAR   -->
     {% if not users.is_admin %}
     <ul class="list-group">
-        <a class="list-group-item {% if '/accounts/' == request.path %} active {% endif%}" href="{% url 'dashboard' %}"> Dashboard </a>
+        <a class="list-group-item {% if '/accounts/' == request.path %} active {% endif%}" href="{% url 'dashboard' %}"> Menu </a>
         <a class="list-group-item {% if '/my_orders/' in request.path %} active {% endif %}" href="{% url 'my_orders' %}"> Mis Pedidos </a>
         <a class="list-group-item {% if '/edit_profile/' in request.path %} active {% endif %}" href="{% url 'edit_profile' %}"> Editar Perfil </a>
         <a class="list-group-item {% if '/change_password/' in request.path %} active {% endif %}" href="{% url 'change_password' %}"> Cambiar Password </a>
@@ -10,7 +10,7 @@
     {% else %}
     <div style="margin-bottom:10px;color:white;background-color:#2D862B;border-radius: 25px;text-align:center"><strong>Menu de Administrador</strong></div>
     <ul class="list-group">
-        <a class="list-group-item {% if '/accounts/' == request.path %} active {% endif%}" href="{% url 'dashboard' %}"> Dashboard </a>
+        <a class="list-group-item {% if '/accounts/' == request.path %} active {% endif%}" href="{% url 'dashboard' %}"> Menu </a>
         <a class="list-group-item {% if '/nuevo_producto/' in request.path %} active {% endif %}" href="#" style="background-color:silver;" disabled> Agregar Nuevo Producto </a><!--{% url 'nuevo_producto' %}-->
         <a class="list-group-item {% if '/my_orders/' in request.path %} active {% endif %}" href="{% url 'my_orders' %}"> Ver Pedidos Realizados </a>
         <a class="list-group-item {% if '/edit_profile/' in request.path %} active {% endif %}" href="{% url 'edit_profile' %}"> Editar Perfil </a>

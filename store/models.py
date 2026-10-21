@@ -144,13 +144,22 @@ class Variation(models.Model):
     
     objects = VariationManager()
     
+    def save(self, *args, **kwargs):
+        if self.precio_ed==0 or self.precio_ed==None:
+            self.precio_ed = self.product.price
+        super(Variation, self).save(*args, **kwargs)
+    
+    def precio_total(self):
+        return self.precio_ed + self.product.recargo_interior
+    
     def get_url_2(self):
         return reverse('product_detail_2', args=[self.product.category.slug, self.product.slug,self.variation_value])
     
     def __str__(self):
         return self.variation_category + ": " + self.variation_value
     
-    
+    def recargo_interior(self):
+        return self.product.recargo_interior
     
     class Meta:
         verbose_name = "Edicion"

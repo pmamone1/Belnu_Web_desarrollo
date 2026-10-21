@@ -63,6 +63,8 @@ def search(request):
 
     return render(request, 'store/store.html', context)
 
+
+
 @login_required
 def product_detail(request, category_slug, product_slug):
     try:
@@ -87,6 +89,7 @@ def product_detail(request, category_slug, product_slug):
             
     return render(request, 'store/product_detail.html', context)
 
+@login_required
 def product_detail_2(request, category_slug, product_slug,edicion):
     try:
         single_product = Product.objects.get(category__slug=category_slug, slug=product_slug)
@@ -133,6 +136,7 @@ def nuevo_producto(request):
         form = ProductForm()
     return render(request, 'store/nuevo_producto.html', {'form': form})
 
+@login_required
 def submit_review(request, product_id):
     print("El product id es="+ str(product_id))
     url = request.META.get('HTTP_REFERER') # get url of previous page

@@ -30,7 +30,6 @@
                 <span class="d-inline-block mr-2" id="titulo_pedidos">Mostrar pedidos {{ filtro }} de</span><span style="color:green"><strong>{{user.numero_vendedor}}-{{user.nombre_vendedor}}</strong></span>
               {% endif %}
               {% endif %}
-              
               <span style="margin-left:5vw;">Filtrar Pedidos:</span>
               
                 <span><select id="filtro" name="filtro" style="border-radius:10px;padding:3px;margin-left:2px;">
@@ -48,12 +47,20 @@
               {% if orders %}
               <hr>
               <div class="container">
+              <span>
+                  <form action="{% url 'descargar_archivo' %}" method="POST">
+                  {% csrf_token %}
+                  <button type="submit" id="btn" class="btn btn-outline-info btnA" disabled="true">Descargar archivo de Pedidos</button>
+                    </form>
+              </span>
+              <span>
               
                 <form action="{% url 'exporta_pedidos_xls' %}" method="POST">
                   {% csrf_token %}    
-                <button type="submit" id="btn" class="btn btn-outline-success" disabled="true">Cumplir Pedidos Aceptados</button>
+                <button type="submit" id="btn" class="btn btn-outline-success btnA" disabled="true">Cumplir Pedidos Aceptados</button>
+                
                 </form>
-
+                </span>
               </div>
               {% endif %}
               {% endif %}
@@ -123,30 +130,29 @@
 
 
                 </div> <!-- row.// -->
-                
                 <nav class="mt-4" aria-label="Page navigation sample">
 
                     {% if orders.has_other_pages %}
                     <ul class="pagination">
           
                       {% if orders.has_previous %}
-                      <li class="page-item"><a class="page-link" href="?page={{orders.previous_page_number}}&filtro={{filtro}}">Anterior</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{orders.previous_page_number}}">Anterior</a></li>
                       {% else %}
                       <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
                       {% endif %}
-                      
+          
                       {% for i in orders.paginator.page_range %}
           
                         {% if orders.number == i %}
                           <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
                         {% else %}
-                          <li class="page-item"><a class="page-link" href="?page={{i}}&filtro={{filtro}}">{{i}}</a></li>
+                          <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
                         {% endif %}
           
                       {% endfor %}
           
                       {% if orders.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{orders.next_page_number}}&filtro={{filtro}}">Siguiente</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{orders.next_page_number}}">Siguiente</a></li>
                       {% else %}
                         <li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
                       {% endif %}
@@ -168,17 +174,24 @@
 
     </section>
     <!-- ========================= SECTION CONTENT END// ========================= -->
+   
     <script>
       var boton_filtro = document.getElementById("boton_filtro");
       var filtro = document.getElementById("filtro");
-      var button = document.getElementById("btn");
+      var button = document.getElementsByClassName("btnA");
+      
       var op0 = document.getElementById("op0");
 
+     
+     
       $( document ).ready(function() {
         if(op0.innerHTML =="Pendientes"){
-          button.disabled = false;
+          for(var i = 0; i < button.length+1; i++)
+         {
+            button[i].disabled = false;
+            }
         }
-    });
+        });
 
       boton_filtro.addEventListener("change", modifyText);
      
@@ -199,7 +212,11 @@
         if(filtro==2){
           document.getElementById("2").classList.add = "selected";
           $("#titulo_pedidos").text("Pedidos Pendientes");
-          button.disabled = false;
+          for(var i = 0; i < button.length+1; i++)
+         {
+            button[i].disabled = false;
+            }
+          
         }
         if(filtro==3){
           document.getElementById("3").classList.add = "selected";

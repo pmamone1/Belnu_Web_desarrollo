@@ -3,24 +3,30 @@ from pathlib import Path
 
 
 # Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
-
+#env = environ.Env()
+#environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env()
+environ.Env.read_env(str(BASE_DIR / 'belnuweb' / '.env'))
 
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DEBUG', default=False)
 
-PASSWORD_GMAIL = env('PASSWORD_GMAIL')
 
-ALLOWED_HOSTS = []
 
+
+PASSWORD_GMAIL = env('PASSWORD_GMAIL', default='')
+
+ALLOWED_HOSTS = ['belnu.com.ar']
+
+CROS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -48,6 +54,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -62,7 +69,7 @@ SESSION_EXPIRE_SECONDS = 3600
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
 SESSION_TIMEOUT_REDIRECT = 'accounts/login'
 
-ROOT_URLCONF = env('ROOT_URLCONF')
+ROOT_URLCONF = 'belnuweb.urls'
 
 TEMPLATES = [
     {
@@ -85,6 +92,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'belnuweb.wsgi.application'
 
 
+
 AUTH_USER_MODEL = 'accounts.Account'
 
 # Database
@@ -99,16 +107,14 @@ DATABASES = {
 
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'BelnuWeb',
-        'USER': 'postgres',
-        'PASSWORD': 'pablo1612',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
+DATABASES = {'default': {
+    'ENGINE': 'django.db.backends.mysql',
+    'NAME': env('DATABASE_NAME'),
+    'USER': env('DATABASE_USER'),
+    'PASSWORD': env('DATABASE_PASSWORD'),
+    'HOST': env('DATABASE_HOST'),
+    'PORT': env('DATABASE_PORT', default='3306'),
+}}
 
 
 # Password validation
@@ -133,7 +139,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es-ar'
 
 TIME_ZONE = 'UTC'
 
@@ -145,16 +151,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / 'static'
+STATIC_URL = '/static/'
+STATIC_ROOT = str(BASE_DIR / 'static')
 STATICFILES_DIRS = [
     'belnuweb/static',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR /'media'
+#MEDIA_ROOT = '/home/mcollini/belnuweb/media/'
 
+MEDIA_ROOT = BASE_DIR /'media'
 
 
 
@@ -168,3 +176,10 @@ MESSAGE_TAGS = {
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.belnu.com.ar'
+EMAIL_PORT=465
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')

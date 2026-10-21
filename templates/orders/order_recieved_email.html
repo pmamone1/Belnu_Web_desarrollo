@@ -24,7 +24,7 @@
                         <!-- Start .row -->
                         <div class="col-lg-6">
                             <!-- col-lg-6 start here -->
-                            <div class="invoice-logo"><img src="{% static './images/icons/logo_belnu.ico' %}" alt="Invoice logo" style="max-height: 40px;"></div>
+                            <div class="invoice-logo"><img src="{% static 'images/icons/logo_belnu.ico' %}" alt="Invoice logo" style="max-height: 40px;"></div>
                         </div>
                         <!-- col-lg-6 end here -->
                         <div class="col-lg-6">
@@ -35,7 +35,7 @@
                                     <li>Vendedor : {{ numero_vendedor}} - {{ nombre_vendedor }}</li>
                                     <li>Nombre y Apellido: {{ nombre_completo }}</li>
                                     <li>Nro. de Pedido: # {{ numero_pedido }} </li>
-                                    <li>Estado del Pedido: {{ status }}</li>
+                                    <li>Estado del Pedido: Pendiente</li>
                                     
                                 </ul>
                             </div>
@@ -50,7 +50,7 @@
                                         <li><strong>Pedido</strong> #<a href="{% url 'selected_order' order_id %}"> {{ numero_pedido }} </a></li>
                                         <li><strong>Total</strong>$ {{ grand_total }}</li>
                                         
-                                        <li><strong>Estado:</strong> {{ status }} </li>
+                                        <li><strong>Estado:</strong> Pendiente </li>
                                     </ul>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                                             <tr>
                                                 <th class="per70 text-center">Descripción</th>
                                                 <th class="per5 text-center">Cantidad</th>
-                                                <th class="per25 text-center">Total</th>
+                                                <!--<th class="per25 text-center">Total</th>-->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -81,7 +81,7 @@
                                                     </p>
                                                 </td>
                                                 <td class="text-center">{{ item.quantity }}</td>
-                                                <td class="text-center">$ {{item.product_price}}</td>
+                                                <!--<td class="text-center">$ {{item.product_price}}</td>-->
                                             </tr>
                                           {% endfor %}
                                         </tbody>
