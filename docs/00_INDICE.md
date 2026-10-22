@@ -1,3 +1,9 @@
+## Vigente v6
+
+- [Pedidos parciales, contactos e instalación](PEDIDOS_PARCIALES_v6.md).
+- [Validación y límites](VALIDACION_v6.md).
+- Manual principal: capítulo v6 al inicio; instrucciones previas subordinadas.
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

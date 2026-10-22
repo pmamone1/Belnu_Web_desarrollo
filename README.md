@@ -1,3 +1,8 @@
+## MiDistri-Pedidos v6 · Catálogo y preparación parcial
+
+Candidato, base v5; instalar antes de Urban Soft v584. Categorías y precio vendedor públicos junto al PVP. Carrito personal al precio vendedor; preparación parcial desde el panel con revisión y cancelación automática del resto. Detalle individual actualizado, PDF y Excel para Urban Point. Sin nuevas migraciones ni campaña enviada.
+Ver [guía](docs/PEDIDOS_PARCIALES_v6.md) y [validación](docs/VALIDACION_v6.md).
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.
