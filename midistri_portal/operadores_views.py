@@ -1,5 +1,7 @@
 """Distributor pages use delegated identities, never Django staff elevation."""
 import secrets
+import hashlib
+import logging
 from urllib.parse import urlencode
 from django.conf import settings
 from django.core import signing
@@ -11,6 +13,43 @@ from django.views.decorators.csrf import csrf_exempt
 from . import operadores as op
 from .client import ApiError
 SALT='midistri.operador.desafio.v1'
+HANDOFF_COOKIE_PREFIX='midistri_desafio_'
+
+
+def nombre_cookie_desafio(nonce):
+    return HANDOFF_COOKIE_PREFIX+hashlib.sha256(nonce.encode()).hexdigest()[:20]
+
+
+def clasificar_desafio(request):
+    if request.method != 'POST':return None,'cookie_missing'
+    if request.headers.get('Origin')!=op.origen_urban():return None,'origin_invalid'
+    sent=request.POST.get('desafio','')
+    if not 20<=len(sent)<=100:return None,'challenge_mismatch'
+    cookie=request.COOKIES.get(nombre_cookie_desafio(sent))
+    # Permit an already-started v6 handoff during a rolling update, with its
+    # original shorter expiry and the same nonce/origin checks.
+    legacy=cookie is None
+    cookie=cookie or request.COOKIES.get('midistri_desafio')
+    if not cookie:return None,'cookie_missing'
+    try:nonce=signing.loads(cookie,salt=SALT,max_age=120 if legacy else 600)
+    except signing.SignatureExpired:return None,'challenge_expired'
+    except signing.BadSignature:return None,'signature_invalid'
+    if not isinstance(nonce,str) or not secrets.compare_digest(nonce,sent):return None,'challenge_mismatch'
+    if not 20<=len(request.POST.get('codigo',''))<=100:return None,'challenge_mismatch'
+    return nonce,None
+
+
+def fallo_desafio(request,motivo):
+    referencia=secrets.token_hex(6)
+    logging.getLogger('midistri.handoff').warning('handoff_failed reason=%s reference=%s',motivo,referencia)
+    mensajes={
+        'challenge_expired':'La pantalla de acceso venció. Iniciá nuevamente el acceso.',
+        'cookie_missing':'Falta la validación de este navegador. Iniciá el acceso desde Urban Soft en esta misma pestaña.',
+        'challenge_mismatch':'La validación de acceso cambió. Iniciá nuevamente el acceso.',
+        'signature_invalid':'La validación del navegador no es válida. Iniciá nuevamente el acceso.',
+        'origin_invalid':'No pudimos comprobar el origen del acceso. Iniciá nuevamente desde Urban Soft.'}
+    return render(request,'midistri_portal/operador_acceso_error.html',
+        {'titulo':'Acceso de Distribuidor','error':mensajes[motivo],'referencia':referencia},status=403)
 
 def fallo(request,error):
     if error.status==401:return redirect('midistri_operador_entrada')
@@ -24,22 +63,21 @@ def entrada(request):
     try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce})
     except ApiError as e:return fallo(request,e)
     response=redirect(url)
-    response.set_cookie('midistri_desafio',signing.dumps(nonce,salt=SALT),max_age=120,
+    old=[name for name in request.COOKIES if name.startswith(HANDOFF_COOKIE_PREFIX)]
+    for name in old[:-9]:
+        response.delete_cookie(name,path='/portal/administrar/',samesite='None')
+    response.set_cookie(nombre_cookie_desafio(nonce),signing.dumps(nonce,salt=SALT),max_age=600,
         secure=True,httponly=True,samesite='None',path='/portal/administrar/')
     return response
 
 @csrf_exempt
-@require_POST
 def completar(request):
     if not op.habilitado():return HttpResponse('Administración de MiDistri desactivada.',status=503)
     try:
-        if request.headers.get('Origin')!=op.origen_urban():raise ValueError
-        nonce=signing.loads(request.COOKIES.get('midistri_desafio',''),salt=SALT,max_age=120)
+        nonce,motivo=clasificar_desafio(request)
+        if motivo:return fallo_desafio(request,motivo)
         sent=request.POST.get('desafio','');code=request.POST.get('codigo','')
-        if not isinstance(nonce,str) or not 20<=len(sent)<=100 or not secrets.compare_digest(nonce,sent):raise ValueError
-        if not 20<=len(code)<=100:raise ValueError
-    except (ValueError,signing.BadSignature):
-        return HttpResponse('El acceso no pertenece a este navegador. Ingrese desde Urban Soft.',status=403)
+    except ApiError as e:return fallo(request,e)
     try:
         result=op.api('operator-exchange',method='POST',data={'codigo':code,'desafio':sent})
         op.perfil_valido(result['perfil'])
@@ -52,6 +90,7 @@ def completar(request):
     request.session['midistri_operador_token']=token
     request.session.set_expiry(8*60*60)
     response=redirect('midistri_operador_panel')
+    response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')
     return response
 
