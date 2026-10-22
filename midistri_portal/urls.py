@@ -1,6 +1,10 @@
 from django.urls import path
-from . import views
+from . import views, operadores_views
 urlpatterns=[
+path('administrar/entrada/',operadores_views.entrada,name='midistri_operador_entrada'),
+path('administrar/entrar/',operadores_views.completar,name='midistri_operador_completar'),
+path('administrar/salir/',operadores_views.salir,name='midistri_operador_salir'),
+path('administrar/',operadores_views.panel,name='midistri_operador_panel'),
 path('',views.catalogo,name='midistri_catalogo'),
 path('activar/<str:token>/',views.activar,name='midistri_activar'),
 path('cantidad/',views.cantidad,name='midistri_cantidad'),

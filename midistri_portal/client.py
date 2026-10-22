@@ -10,7 +10,7 @@ class ApiError(Exception):
         super().__init__(message)
 
 
-def api(action,method='GET',data=None,token=None,binary=False):
+def api(action,method='GET',data=None,token=None,binary=False,operator_token=None):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
@@ -20,6 +20,7 @@ def api(action,method='GET',data=None,token=None,binary=False):
         raise ApiError('Operación inválida.',400)
     headers={'Authorization':'Bearer '+settings.URBAN_API_TOKEN,'Accept':'application/json'}
     if token:headers['X-Midistri-Session']=token
+    if operator_token:headers['X-Midistri-Operator']=operator_token
     try:
         with requests.request(method,base+action+'/',json=data if method=='POST' else None,
                 headers=headers,timeout=(5,30),allow_redirects=False,stream=True) as r:
