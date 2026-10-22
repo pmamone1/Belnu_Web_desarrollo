@@ -2,6 +2,7 @@ from decimal import Decimal
 from hashlib import sha256
 import json
 from uuid import uuid4, UUID
+from urllib.parse import urlencode
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
@@ -31,7 +32,8 @@ def identificar(request):
 
 
 def base(request,perfil=None,distribuidora=None):
-    return {'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
+    saved=request.session.get('midistri_catalogo_filtros',{})
+    return {'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
         (' - '+perfil['distribuidora'] if perfil else (' - '+distribuidora.nombre if distribuidora else '')),
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
@@ -67,14 +69,21 @@ def catalogo(request):
     selected=perfil['distribuidora_id'] if perfil else request.GET.get('distribuidora')
     d=ds.filter(pk=selected).first() if str(selected or '').isdigit() else None
     products=Publicacion.objects.filter(activa=True,distribuidora=d,distribuidora__activa=True)
-    q=request.GET.get('q','')[:100]
+    saved=request.session.get('midistri_catalogo_filtros',{})
+    if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
+    q=request.GET.get('q',saved.get('q',''))[:100]
+    categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
+    categorias=list(products.exclude(categoria='').order_by('categoria').values_list('categoria',flat=True).distinct())
+    if categoria=='__sin_categoria__':products=products.filter(categoria='')
+    elif categoria:products=products.filter(categoria=categoria)
+    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria}
     if q:products=products.filter(nombre__icontains=q)
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
     from .presentacion import presentacion_publica
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,presentacion=presentacion_publica(d))
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d))
     return render(request,'midistri_portal/catalogo.html',context)
 
 

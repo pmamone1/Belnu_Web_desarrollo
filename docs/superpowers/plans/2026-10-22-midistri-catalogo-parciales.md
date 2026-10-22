@@ -46,7 +46,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - Para P, PYTHONPATH=.;tmp/qa_dependencies y python -B manage.py test ... --settings=midistri_portal.test_settings --noinput. La sintaxis de producto e instalador se valida para Python 3.7.
 - Registrar RED y GREEN de cada tarea; no ejecutar otra vez suites completas sin cambios/fallos que lo justifiquen.
 
-### T1 — Atención final aditiva y contrato
+### Task 1: Atención final aditiva y contrato
 **Files:** crear U/midistri_bridge/preparacion.py, U/consignaciones/tests_midistri_parciales_v584.py; modificar U/midistri_bridge/models.py, services.py; crear U/midistri_bridge/migrations/0006_preparacion.py.
 **Interfaces:** normalizar_cantidades(items:list, cantidades:list)->list canónica; resumir_atencion(sol, propuesta=None)->dict del contrato; services.serializar(sol) añade contrato_pedido=2 y atencion.
 - [ ] Escribir test RED: pedido de 10 a 25000/PVP30000 y propuesta6 produce preparada6/cancelada4/total_solicitado250000.00/total_preparado150000.00; Solicitud.items queda idéntica.
@@ -56,7 +56,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Reejecutar focal y verificar migración sobre fixture anterior sin cambiar items, huella, saldos o documentos.
 - [ ] Commit sólo archivos T1; no afirmar pruebas productivas.
 
-### T2 — Revisión común, emisión parcial y PDF nativo
+### Task 2: Revisión común, emisión parcial y PDF nativo
 **Files:** modificar U/midistri_bridge/preparacion.py, services.py, administracion.py, operadores_api.py, views.py, urls.py; crear U/midistri_bridge/preparacion_views.py y templates/midistri_bridge/preparacion.xhtml; modificar gestion.xhtml; crear U/consignaciones/tests_midistri_preparacion_pg_v584.py.
 **Interfaces:** preparar_revision(user,ident,cantidades,*,ctx=None,conexion_id=None)->{revision,pedido,preparacion_previa}; confirmar_revision(user,revision_id,*,ctx=None,conexion_id=None)->resultado. services.emitir(user,ident,*,ctx=None,cantidades=None) consume cantidades ya validadas; None conserva emisión completa antigua.
 - [ ] RED PostgreSQL: aprobar10, revisar6, confirmar genera asignación6, cargo150000, remito con6; items original10. Segundo POST misma revisión conserva ids/PDF/saldo. Todas0 cancela sin pedido/PDF/cargo.
@@ -66,7 +66,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Urban nativo pasa por una pantalla de revisión; su POST antiguo emitir sin revisión no carga saldos y redirige a revisar; operador MiDistri usa los mismos servicios. Añadir inputs y resumen readonly; checkbox para confirmar cargo y preparación.
 - [ ] GREEN focal PG; comparar bytes del documento histórico previo y saldos de otro vendedor. Commit T2.
 
-### T3 — Invitaciones independientes por contacto
+### Task 3: Invitaciones independientes por contacto
 **Files:** modificar U/midistri_bridge/models.py, services.py; crear U/midistri_bridge/migrations/0007_contactos_acceso.py y U/consignaciones/tests_midistri_contactos_v584.py.
 **Interfaces:** invitar_contacto(user,conexion_id,vendedor_id,contacto,*,ctx=None)->(Invitacion,token); contacto contiene contacto_id, destino y version, resueltos por backend. crear_acceso(c,vendedor,*,invitacion=None) conserva el uso legado y guarda AccesoVendedor.invitacion_origen cuando corresponde.
 - [ ] RED: dos contactos A/B del mismo vendedor crean invitaciones distintas; activar A y luego B permite identificar ambos accesos. Renovar A invalida pendiente anterior de A, no B.
@@ -76,7 +76,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Mantener invitar/activar históricos; para invitaciones con destino, bloquear vendedor y reemplazar sólo sesiones del mismo destino. En identificar revalidar identidad/contacto vigente sin confundir baja promocional con revocación de sesión.
 - [ ] GREEN focal más activación/revocación antigua de tests_midistri_bridge/tests_midistri_v580; commit T3.
 
-### T4 — Todos los Emails y aviso con cantidades realmente preparadas
+### Task 4: Todos los Emails y aviso con cantidades realmente preparadas
 **Files:** modificar U/consignaciones/comunicaciones_contactos.py, comunicaciones_campanas.py, comunicaciones_campanas_views.py, comunicaciones_campanas_models.py, templates/consignaciones/comunicaciones_campanas_detalle.xhtml y comunicaciones_campanas_previa.xhtml; U/midistri_bridge/campanas_acceso.py, avisos.py, views.py; crear U/consignaciones/migrations/0123_midistri_acceso_destinos.py y tests_midistri_envios_contactos_v584.py.
 **Interfaces:** candidatos_contacto(...,respetar_preferencia=True) y destinos_habilitados(...,respetar_preferencia=True) conservan default; consumidores MiDistri usan False pero respetan contactos activos/recibe_email y bajas. elegir_contactos(...,choice=None) devuelve todos para None, '' o 'todos'; selección explícita de principal/id sigue disponible.
 - [ ] RED: principal y adicional producen2 Emails, duplicado normalizado sólo1 por vendedor; dos vendedores con igual Email generan2 accesos privados. Preferencia principal de circuitos ajenos no cambia.
@@ -87,7 +87,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Bloquear/releer el EnvioCampana antes de crear su invitación; usar invitar_contacto por envío y sobre cifrado exacto; conservar cola/Aviso y resultados por destino. No enviar SMTP real en tests.
 - [ ] GREEN focal, tests_midistri_campanas_v583 y regresiones de comunicaciones de contactos/transportes; commit T4.
 
-### T5 — Abastecimiento agregado para Urban Point
+### Task 5: Abastecimiento agregado para Urban Point
 **Files:** crear U/midistri_bridge/abastecimiento.py, abastecimiento_views.py, templates/midistri_bridge/abastecimiento.xhtml y U/consignaciones/tests_midistri_abastecimiento_v584.py; modificar urls.py, gestion.xhtml, operadores_api.py.
 **Interfaces:** filas_abastecimiento(user,*,desde,hasta,estado='pendientes',ctx=None,conexion_id=None,distribuidora_ids=None)->list agregada; excel_abastecimiento(filas)->bytes XLSX; API operator-order-supply usa alcance delegado y devuelve binario XLSX.
 - [ ] RED: original10/preparado6 genera solicitadas10, preparadas6, canceladas4 y pendientes0 al filtrar todos; pendiente10 muestra pendientes10. Histórico emitido completo no cambia.
@@ -97,7 +97,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Implementar consulta autorizada y agrupación por distribuidora/producto/SKU/nombre histórico; descargar Excel y auditar sin contactos. No cruzar contra stock ni generar compras.
 - [ ] GREEN focal; revisar libro con openpyxl; commit T5.
 
-### T6 — Catálogo público con categoría y precio vendedor
+### Task 6: Catálogo público con categoría y precio vendedor
 **Files:** modificar P/midistri_portal/views.py, templates/midistri_portal/catalogo.html y carrito.html; crear P/midistri_portal/test_catalogo_v6.py.
 **Interfaces:** contexto catalogo añade categorias y categoria seleccionada; GET categoria conserva valor al paginar y volver del carrito. Valores reservados: '' Todas y '__sin_categoria__' para vacío; categorías reales se validan contra la tienda actual.
 - [ ] RED: visitante ve Precio vendedor25000 y PVP30000; filtro categoría+nombre reduce publicaciones y conserva ambos filtros al paginar; no muestra categoría exclusiva de otra tienda ni producto inactivo.
@@ -106,7 +106,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Implementar filtros y etiquetas públicas, manteniendo las validaciones existentes, Display0 y cálculos Decimal. Mantener forma de pedir protegida.
 - [ ] GREEN focal y test_display_cero; commit T6 en P.
 
-### T7 — Contrato validado y preparación parcial en MiDistri
+### Task 7: Contrato validado y preparación parcial en MiDistri
 **Files:** modificar P/midistri_portal/contract.py, administracion_contract.py, operadores_views.py, views.py y templates detalle.html/operador_pedido.html/pedidos.html; crear test_parciales_v6.py. U/midistri_bridge/api.py añade GET order/<uuid> y capabilities, y prueba en tests_midistri_parciales_v584.
 **Interfaces:** pedido_valido valida contrato_pedido=2/atencion y retorna sus campos; ausencia permite legado. Endpoint individual sólo propio. capabilities anuncia contrato_pedido=2 y preparacion_parcial/acceso_por_contacto; sólo respuesta antigua404/405 permite modo legado. Panel envía cantidades al revisar; confirmar sólo revision y aceptación.
 - [ ] RED: contrato v2 con solicitadas10/preparadas6/canceladas4 y totales correctos pasa; inconsistencia de precio/cantidades o producto extra falla sin sobrescribir copia local.
@@ -116,7 +116,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Implementar validación de aritmética Decimal, formularios con solicitado/preparado/cancelado, revisión y confirmación del resultado parcial. Exponer descarga PDF y estado de Email sin crear otra cola.
 - [ ] GREEN focal P más test_contract/test_operadores/test_administracion; commit T7 por repo.
 
-### T8 — Descargar abastecimiento desde el panel Distribuidor
+### Task 8: Descargar abastecimiento desde el panel Distribuidor
 **Files:** crear P/midistri_portal/templates/midistri_portal/operador_abastecimiento.html y test_abastecimiento_v6.py; modificar operadores_views.py, urls.py, operador_pedidos.html.
 **Interfaces:** POST a midistri_operador_abastecimiento pasa distribuidora de contexto, fechas y estado a operator-order-supply usando operator_token; valida MIME/estructura XLSX con client.api existente.
 - [ ] RED: descarga devuelve sólo agregado de su tienda; parámetro oculto de otra distribuidora se rechaza/ignora fijando contexto autorizado; permisos insuficientes403. Respuesta HTML o binario inválido no se ofrece como Excel.
@@ -124,7 +124,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Añadir filtros y botón Excel para Urban Point, distinto al Excel de depósito. No configurar destinatario ni enviar Email.
 - [ ] GREEN focal P; commit T8.
 
-### T9 — Verificación conjunta y revisión independiente
+### Task 9: Verificación conjunta y revisión independiente
 **Files:** fixtures y scripts sólo U/tmp y P/tmp; pruebas PG entregables de T2/T3 se amplían si falla concurrencia. Sin datos de producción.
 - [ ] Ejecutar suites focales nuevas y regresiones existentes de U bridge/menu/catálogos/campañas/permisos, y toda midistri_portal de P una vez.
 - [ ] Probar PG real local con dos confirmaciones simultáneas; un único cargo/PDF/pedido y un solo aviso. Dos contactos activados en paralelo siguen vigentes.
@@ -133,7 +133,7 @@ Crear módulos pequeños: U/midistri_bridge/preparacion.py para cantidades/revis
 - [ ] Django check, makemigrations --check --dry-run en ambas. Registrar entorno real de cada prueba; no declarar Python3.7/MariaDB probado si sólo se validó sintaxis en Python3.12/SQLite.
 - [ ] Pedir revisión independiente final del diff conjunto; corregir hallazgos Important/Critical y revalidar el cambio afectado antes de publicar.
 
-### T10 — Documentación y dos releases instalables
+### Task 10: Documentación y dos releases instalables
 **Files U:** README.md, HANDOFF.md, VERSION_DOCUMENTADA.txt, docs/00_INDICE.md, 04_REGLAS_DE_NEGOCIO.md, 05_FLUJOS_FUNCIONALES.md, 17_CHECKLIST_ENTREGA.md, 19_PRUEBAS_MANUALES_CRITICAS.md, MANUAL_USUARIO.md, Manual_Urban_Soft.pdf; CAMBIOS_v1_18_584_midistri_parciales.txt, COMANDOS_CPANEL_v1_18_584.txt, docs/MIDISTRI_PARCIALES_v584.md, scripts/instalar_v584.py, test_instalar_v584.py, paquete_v584.py, actualizar_manual_v584.py, release_files_v584.json.
 **Files P:** mismos documentos base de P, Manual_MiDistri_Pedidos_Online.pdf; CAMBIOS_v6_pedidos_parciales.txt, COMANDOS_CPANEL_MIDISTRI_v6.txt, docs/PEDIDOS_PARCIALES_v6.md; tools/instalar_release_midistri_v6.py, test_instalar_release_midistri_v6.py, paquete_integracion_v6.py, actualizar_manual_v6.py, release_files_v6.json.
 - [ ] Actualizar manuales/reglas/compatibilidad, contratos públicos/privados, cantidades canceladas, contactos e informe. Capítulo vigente delante de cada PDF, verificar visualmente la unión. Estado instalación productiva pendiente.
