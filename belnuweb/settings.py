@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'midistri_portal',
     'category',
     'accounts',
     'store',
@@ -61,7 +62,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    'midistri_portal.middleware.PortalMiddleware',
+    'midistri_portal.middleware.LegacyTimeoutMiddleware',
 ]
 
 
@@ -183,3 +185,11 @@ EMAIL_PORT=465
 EMAIL_USE_TLS=True
 EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+
+# MiDistri: no habilitar hasta configurar y probar la conexión con Urban Soft.
+MIDISTRI_ENABLED = env.bool("MIDISTRI_ENABLED", default=False)
+URBAN_API_BASE = env("URBAN_API_BASE", default="https://sistema7000.belnu.com.ar/midistri/api/")
+URBAN_API_TOKEN = env("URBAN_API_TOKEN", default="")
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=not DEBUG)
+CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=not DEBUG)

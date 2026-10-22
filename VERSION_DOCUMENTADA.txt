@@ -1,0 +1,3 @@
+MiDistri - Pedidos Online
+Candidato documentado: v2 compatible con Urban Soft v1.18.580 (instalación pendiente)
+Cambio: catálogo privado por distribuidora, invitación personal, pedidos sin pago, validación estricta de respuestas y remitos, LIN/VV. Paquete e instalación independientes de Urban Soft.
