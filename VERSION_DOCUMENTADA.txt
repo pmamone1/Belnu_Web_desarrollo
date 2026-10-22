@@ -1,3 +1,3 @@
-MiDistri - Pedidos Online
-Candidato documentado: v4 (requiere v3 y Urban Soft v1.18.583; instalación pendiente)
-Cambio: administración delegada por distribuidora de productos, pedidos y presentación de tienda. Migración midistri_portal0003; requiere MIDISTRI_ADMIN_ENABLED explícito en ambos extremos. Precios y autoridad comercial en Urban Soft; instalaciones separadas, sin cargos ni Email al instalar.
+MiDistri-Pedidos Online
+Candidato documentado: v5 (instalación en producción pendiente; requiere v4)
+Cambio: Display0 de Urban se interpreta como presentación no informada; sincronización conserva fotos, precio vendedor, PVP y permisos. Sin nuevas migraciones ni modificaciones de Urban, stock, cargos o documentos.

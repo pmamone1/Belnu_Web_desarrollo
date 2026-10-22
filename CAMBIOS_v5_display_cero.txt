@@ -1,0 +1,6 @@
+MiDistri-Pedidos v5 —22/10/2026
+Corrige el rechazo global de catálogo cuando Urban informa Display entero0.
+Normaliza a presentación no informada en la copia local; no modifica Urban ni precios.
+Conserva validaciones de tipos, finitud monetaria, imágenes y alcance.
+Sin nuevas migraciones ni dependencias. Requiere v4. No envía Email ni genera cargos.
+41 pruebas del portal y14 del instalador OK localmente. Instalación productiva pendiente.

@@ -30,6 +30,8 @@ def validar_snapshot(data):
                 if u.scheme!='https' or u.netloc!=base.netloc or not u.path.startswith('/catalogo-imagenes/') or u.query or u.fragment:raise ValueError
                 images.append(i['url'])
             display=p.get('display')
+            # Urban allows zero for an unspecified optional presentation.
+            if type(display) is int and display == 0:display=None
             if display is not None and (type(display) is not int or display<1):raise ValueError
             rows.append((did,pid,{'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))

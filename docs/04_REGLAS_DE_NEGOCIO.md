@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v5 — presentación opcional del catálogo
+
+La sincronización admite Display0 de Urban como presentación no informada.
+Se conservan fotos, precios, PVP y permisos. Sin nuevas migraciones ni cambios
+en Urban. Después de instalar v5, actualizar la copia del catálogo desde el panel.
+Instalación productiva pendiente. Ver [guía v5](DISPLAY_CERO_v5.md).
+
 ## MiDistri-Pedidos v4 - Panel de Distribuidor
 Instalación pendiente; requiere Urban Soft v583. Entrada desde Urban Soft con
 permisos y alcance actuales, sin cuenta staff adicional. Productos y pedidos,
