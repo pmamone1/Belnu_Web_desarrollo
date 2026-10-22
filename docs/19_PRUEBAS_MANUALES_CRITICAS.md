@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v5 — presentación opcional del catálogo
+
+La sincronización admite Display0 de Urban como presentación no informada.
+Se conservan fotos, precios, PVP y permisos. Sin nuevas migraciones ni cambios
+en Urban. Después de instalar v5, actualizar la copia del catálogo desde el panel.
+Instalación productiva pendiente. Ver [guía v5](DISPLAY_CERO_v5.md).
+
 ## MiDistri-Pedidos v4 - Panel de Distribuidor
 Instalación pendiente; requiere Urban Soft v583. Entrada desde Urban Soft con
 permisos y alcance actuales, sin cuenta staff adicional. Productos y pedidos,
@@ -57,3 +64,5 @@ No generar cargos ni enviar Email para comprobar esta corrección.
   cookies Secure/HttpOnly, escritorio y móvil. Esto permanece pendiente en cPanel.
 - Instalación: los paquetes rechazan destino/base/plan ajenos. --restore después de
   migrar debe detenerse antes de modificar código; usar corrección hacia adelante.
+
+Validación v5: sincronizar un catálogo sintético con Display0, comprobar fotos y ambos precios, ausencia de presentación0, separación20/65 y conservación de copia previa ante texto/booleano/negativo. En cPanel revisar sincronización real después de instalar; no generar pedidos de prueba en producción.

@@ -1,0 +1,17 @@
+MIDISTRI v5 — sólo belnuweb, Python3.7. Requiere v4 instalada.
+No instalar otro paquete en Urban. Sin nuevas dependencias/migraciones/variables.
+(
+set -e
+umask 077
+cd /home/mcollini
+PAQUETE_MIDISTRI="/home/mcollini/midistri_pedidos_v5_display_cero.zip"
+sha256sum -c "${PAQUETE_MIDISTRI}.sha256"
+unzip -t "$PAQUETE_MIDISTRI"
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v5_XXXXXX)
+unzip -oq "$PAQUETE_MIDISTRI" -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+cd /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python manage.py midistri_sincronizar
+)
+No cambiar variables ni claves. No se envían invitaciones con este comando.
