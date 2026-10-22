@@ -1,0 +1,7 @@
+MiDistri-Pedidos v4 - instalación pendiente.
+Panel de Distribuidor autorizado desde Urban Soft; productos y pedidos por alcance,
+presentación de tienda con logo y contacto, sin crear cuentas staff.
+Nuevos permisos se gestionan en Urban v583. Requiere ambas aplicaciones actualizadas.
+Migración aditiva midistri_portal0003_tienda_presentacion.
+Conserva Django3.2/Python3.7, base, media, secretos, pedidos e historial.
+No publica catálogo, invita, envía Email ni crea cargos al instalar.

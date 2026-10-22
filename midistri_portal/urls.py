@@ -1,6 +1,18 @@
 from django.urls import path
-from . import views
+from . import views, operadores_views
 urlpatterns=[
+path('administrar/tienda/',operadores_views.tienda_panel,name='midistri_operador_tienda'),
+path('administrar/productos/',operadores_views.productos,name='midistri_operador_productos'),
+path('administrar/publicar/',operadores_views.publicar,name='midistri_operador_publicar'),
+path('administrar/sincronizar/',operadores_views.sincronizar_panel,name='midistri_operador_sincronizar'),
+path('administrar/pedidos/',operadores_views.pedidos_panel,name='midistri_operador_pedidos'),
+path('administrar/pedido/<uuid:ident>/',operadores_views.pedido_panel,name='midistri_operador_pedido'),
+path('administrar/pedidos/excel/',operadores_views.excel_panel,name='midistri_operador_excel'),
+path('administrar/pedido/<uuid:ident>/remito/',operadores_views.remito_panel,name='midistri_operador_remito'),
+path('administrar/entrada/',operadores_views.entrada,name='midistri_operador_entrada'),
+path('administrar/entrar/',operadores_views.completar,name='midistri_operador_completar'),
+path('administrar/salir/',operadores_views.salir,name='midistri_operador_salir'),
+path('administrar/',operadores_views.panel,name='midistri_operador_panel'),
 path('',views.catalogo,name='midistri_catalogo'),
 path('activar/<str:token>/',views.activar,name='midistri_activar'),
 path('cantidad/',views.cantidad,name='midistri_cantidad'),

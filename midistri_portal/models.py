@@ -36,3 +36,23 @@ class PedidoLocal(models.Model):
     estado=models.CharField(max_length=16,default='pendiente')
     error=models.CharField(max_length=300,blank=True)
     creado=models.DateTimeField(default=timezone.now)
+
+
+class Tienda(models.Model):
+    distribuidora=models.OneToOneField(Distribuidora,on_delete=models.PROTECT)
+    logo=models.FileField(upload_to='midistri/tiendas/',blank=True)
+    email=models.EmailField(max_length=254,blank=True)
+    telefono=models.CharField(max_length=40,blank=True)
+    bienvenida=models.CharField(max_length=500,blank=True)
+    instrucciones=models.CharField(max_length=1000,blank=True)
+    revision=models.PositiveIntegerField(default=0)
+
+class CambioTienda(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    tienda=models.ForeignKey(Tienda,on_delete=models.PROTECT,related_name='cambios')
+    operador_id=models.PositiveIntegerField()
+    antes=models.JSONField(default=dict)
+    despues=models.JSONField(default=dict)
+    huella=models.CharField(max_length=64)
+    creado=models.DateTimeField(default=timezone.now)
+    confirmado_urban=models.BooleanField(default=False)

@@ -1,0 +1,17 @@
+{% extends 'midistri_portal/operador_base.html' %}{% block panel %}
+<h3>Productos · {{ tienda.nombre }}</h3>
+{% if sync_pendiente %}<p class="notice">Guardado en Urban; falta actualizar catálogo para vendedores.</p><form method="post" action="{% url 'midistri_operador_sincronizar' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Actualizar copia del catálogo</button></form>{% endif %}
+<form method="get" class="search"><input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input name="q" value="{{ q }}" placeholder="Producto o nombre" aria-label="Buscar producto"><button>Buscar</button></form>
+<p>{{ catalogo.total }} productos activos. Los precios y las fotos se administran en Urban Soft.</p>
+<form method="post" action="{% url 'midistri_operador_publicar' %}">{% csrf_token %}
+<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
+<label>Proveedor para productos nuevos <select name="proveedor" required><option value="">Elegir proveedor</option>{% for p in catalogo.proveedores %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}</select></label>
+<p>Los productos ya publicados conservan su proveedor. Ningún cambio genera stock ni cargos.</p>
+<div class="row"><button name="modo" value="todos">Publicar catálogo completo</button><button name="modo" value="seleccionados">Publicar seleccionados</button><button name="modo" value="ocultar" class="secondary" formnovalidate>Ocultar seleccionados</button></div>
+<div style="overflow:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th>Elegir</th><th>Foto</th><th>Producto / SKU</th><th>Precio vendedor</th><th>PVP</th><th>Estado</th></tr></thead><tbody>
+{% for p in catalogo.productos %}<tr><td><input type="checkbox" name="productos" value="{{ p.id }}" aria-label="Elegir {{ p.nombre }}"></td><td>{% for im in p.imagenes %}{% if forloop.first %}<img src="{{ im.url }}" alt="" style="width:70px;height:70px;object-fit:contain">{% endif %}{% endfor %}</td><td>{{ p.nombre }}<br><small>{{ p.sku }}</small></td><td>$ {{ p.precio }}</td><td>$ {{ p.pvp }}</td><td>{% if p.publicado %}Publicado{% else %}Oculto{% endif %}</td></tr>{% empty %}<tr><td colspan="6">Sin productos para este filtro.</td></tr>{% endfor %}
+</tbody></table></div></form>
+<p>Página {{ catalogo.pagina }} de {{ catalogo.paginas }}</p>
+{% if anterior %}<a href="?distribuidora={{ tienda.id }}&amp;q={{ q|urlencode }}&amp;pagina={{ anterior }}">Anterior</a>{% endif %}
+{% if siguiente %}<a href="?distribuidora={{ tienda.id }}&amp;q={{ q|urlencode }}&amp;pagina={{ siguiente }}">Siguiente</a>{% endif %}
+{% endblock %}

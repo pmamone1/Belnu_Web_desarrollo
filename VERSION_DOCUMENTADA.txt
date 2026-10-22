@@ -1,3 +1,3 @@
 MiDistri - Pedidos Online
-Candidato documentado: v3 (requiere v2 instalada; instalación pendiente)
-Cambio: corrige403 de formularios con política de referencia same-origin. Conserva CSRF, permisos y privacidad externa; sin migraciones, cambios económicos, claves, cron, envíos o venv.
+Candidato documentado: v4 (requiere v3 y Urban Soft v1.18.583; instalación pendiente)
+Cambio: administración delegada por distribuidora de productos, pedidos y presentación de tienda. Migración midistri_portal0003; requiere MIDISTRI_ADMIN_ENABLED explícito en ambos extremos. Precios y autoridad comercial en Urban Soft; instalaciones separadas, sin cargos ni Email al instalar.

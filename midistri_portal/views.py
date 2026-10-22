@@ -46,6 +46,10 @@ def activar(request,token):
     if request.method=='POST':
         try:result=api('activate',method='POST',data={'token':token})
         except ApiError as e:return render(request,'midistri_portal/activar.html',dict(base(request),error=str(e)),status=400 if e.status<500 else 503)
+        operator=request.session.pop('midistri_operador_token',None)
+        if operator:
+            try:api('operator-logout',method='POST',operator_token=operator)
+            except ApiError:pass
         request.session.cycle_key()
         request.session['midistri_token']=result['session_token']
         request.session['midistri_cart']={};request.session.pop('midistri_cart_id',None)
@@ -69,7 +73,8 @@ def catalogo(request):
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q)
+    from .presentacion import presentacion_publica
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,presentacion=presentacion_publica(d))
     return render(request,'midistri_portal/catalogo.html',context)
 
 

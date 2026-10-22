@@ -10,7 +10,7 @@ class ApiError(Exception):
         super().__init__(message)
 
 
-def api(action,method='GET',data=None,token=None,binary=False):
+def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
@@ -20,6 +20,7 @@ def api(action,method='GET',data=None,token=None,binary=False):
         raise ApiError('Operación inválida.',400)
     headers={'Authorization':'Bearer '+settings.URBAN_API_TOKEN,'Accept':'application/json'}
     if token:headers['X-Midistri-Session']=token
+    if operator_token:headers['X-Midistri-Operator']=operator_token
     try:
         with requests.request(method,base+action+'/',json=data if method=='POST' else None,
                 headers=headers,timeout=(5,30),allow_redirects=False,stream=True) as r:
@@ -31,6 +32,17 @@ def api(action,method='GET',data=None,token=None,binary=False):
                 try:message=json.loads(content.decode('utf-8')).get('error','No se pudo completar la operación.')
                 except (ValueError,AttributeError):message='No se pudo completar la operación.'
                 raise ApiError(str(message)[:300],r.status_code)
+            if binary_mime:
+                from io import BytesIO
+                from zipfile import ZipFile,BadZipFile
+                if binary_mime not in r.headers.get('Content-Type','').lower():raise ApiError('Tipo de documento inválido.')
+                if binary_mime=='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                    try:
+                        with ZipFile(BytesIO(content)) as z:
+                            if '[Content_Types].xml' not in z.namelist() or 'xl/workbook.xml' not in z.namelist():raise BadZipFile
+                    except BadZipFile:raise ApiError('El Excel no es válido.') from None
+                else:raise ApiError('Tipo de documento no permitido.')
+                return bytes(content)
             if binary:
                 if not content.startswith(b'%PDF-') or 'application/pdf' not in r.headers.get('Content-Type','').lower():
                     raise ApiError('El remito no es un PDF válido. Reintentá más tarde.')
