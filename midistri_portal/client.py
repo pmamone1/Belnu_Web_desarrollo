@@ -31,7 +31,10 @@ def api(action,method='GET',data=None,token=None,binary=False):
                 try:message=json.loads(content.decode('utf-8')).get('error','No se pudo completar la operación.')
                 except (ValueError,AttributeError):message='No se pudo completar la operación.'
                 raise ApiError(str(message)[:300],r.status_code)
-            if binary:return bytes(content)
+            if binary:
+                if not content.startswith(b'%PDF-') or 'application/pdf' not in r.headers.get('Content-Type','').lower():
+                    raise ApiError('El remito no es un PDF válido. Reintentá más tarde.')
+                return bytes(content)
             value=json.loads(content.decode('utf-8'))
             if not isinstance(value,dict):raise ValueError
             return value

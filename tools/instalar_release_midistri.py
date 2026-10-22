@@ -14,11 +14,33 @@ from datetime import datetime
 PROJECT = 'midistri-pedidos'
 MARKERS = {'urban-soft': 'sistema7000.settings', 'midistri-pedidos': 'belnuweb.settings'}
 
+APPS = {'urban-soft':'midistri_bridge','midistri-pedidos':'midistri_portal'}
+VERSIONS = {'urban-soft':(3,10),'midistri-pedidos':(3,7)}
+ROOTS = {'urban-soft':'sistema7000','midistri-pedidos':'belnuweb'}
+
+def validar_entorno(root):
+    version=VERSIONS[PROJECT]; app=ROOTS[PROJECT]
+    expected=Path('/home/mcollini/virtualenv')/app/(str(version[0])+'.'+str(version[1]))
+    if tuple(sys.version_info[:2])!=version or Path(sys.prefix).resolve()!=expected.resolve():
+        raise ValueError('Entorno incorrecto. Usar '+str(expected/'bin/python')+'. No se modificó el proyecto.')
+    if root.resolve()!=Path('/home/mcollini')/app:
+        raise ValueError('Destino incorrecto para este proyecto.')
+
+def control(root,accion):
+    command=shutil.which('cloudlinux-selector')
+    if not command:raise ValueError('No se encontró cloudlinux-selector; no se confirmó '+accion+'.')
+    result=subprocess.run([command,accion,'--json','--interpreter','python','--user','mcollini',
+        '--app-root',ROOTS[PROJECT]],capture_output=True,text=True,timeout=60)
+    try:status=json.loads(result.stdout)
+    except ValueError:raise ValueError('cPanel no confirmó '+accion+'.') from None
+    if result.returncode or status.get('result')!='success':
+        raise ValueError('cPanel no confirmó '+accion+'. Revisar Python App sin forzar la instalación.')
+
 def sha(data):return hashlib.sha256(data).hexdigest()
 def normalized(data):return sha(data.replace(b'\r\n', b'\n').rstrip(b'\n'))
 def relative(name):
     p=PurePosixPath(name)
-    if p.is_absolute() or '..' in p.parts or '\\' in name or name!=str(p) or name.startswith('.'):
+    if p.is_absolute() or '..' in p.parts or '\\' in name or name!=str(p) or any(part.startswith('.') for part in p.parts):
         raise ValueError('Ruta de paquete no permitida.')
     return Path(*p.parts)
 def no_links(path):
@@ -28,6 +50,7 @@ def run(root,*args):
     subprocess.run([sys.executable,'manage.py']+list(args),cwd=str(root),check=True)
 
 def restore(backup,root):
+    no_links(backup)
     meta=json.loads((backup/'restauracion.json').read_text(encoding='utf-8'))
     if meta['project']!=PROJECT or Path(meta['root'])!=root:raise ValueError('Respaldo de otro proyecto o carpeta.')
     for item in meta['files']:
@@ -35,7 +58,7 @@ def restore(backup,root):
         if dst.exists() and sha(dst.read_bytes())!=item['installed_sha256']:
             raise ValueError('El archivo cambió después de instalar. Revisar antes de restaurar: '+item['path'])
     for item in reversed(meta['files']):
-        dst=root/relative(item['path']);src=backup/'files'/relative(item['path'])
+        dst=root/relative(item['path']);src=backup/'files'/relative(item['path']);no_links(src)
         if src.exists():shutil.copy2(str(src),str(dst))
         elif dst.exists():dst.unlink()
     print('Código restaurado. Las migraciones/datos no se revierten. Respaldo: '+str(backup))
@@ -49,15 +72,26 @@ def main():
     opts=parser.parse_args();root=Path(opts.root).absolute();no_links(root)
     if not root.is_dir() or not (root/'manage.py').is_file() or MARKERS[PROJECT] not in (root/'manage.py').read_text(encoding='utf-8'):
         raise ValueError('Destino incorrecto. Este paquete es únicamente para '+PROJECT+'.')
+    validar_entorno(root)
     if opts.restore:
-        restore(Path(opts.restore).absolute(),root);return
+        control(root,'stop')
+        restore(Path(opts.restore).absolute(),root)
+        control(root,'start')
+        return
     bundle=Path(__file__).resolve().parent
     manifest=json.loads((bundle/'release_manifest.json').read_text(encoding='utf-8'))
-    if manifest['project']!=PROJECT or manifest['schema']!=1:raise ValueError('Manifiesto de otro proyecto.')
+    if manifest['project']!=PROJECT or manifest['schema']!=1 or manifest.get('app')!=APPS[PROJECT]:raise ValueError('Manifiesto de otro proyecto.')
+    entries=manifest.get('files')
+    if not isinstance(entries,list) or not 1<=len(entries)<=500:
+        raise ValueError('Inventario de paquete inválido.')
+    names=[item['path'] for item in entries]
+    if len(names)!=len(set(names)):raise ValueError('Entradas repetidas en paquete.')
     pending=[]
     for item in manifest['files']:
         rel=relative(item['path']);src=bundle/'payload'/rel;dst=root/rel
         no_links(src);no_links(dst)
+        if src.is_file() and src.stat().st_size>100*1024*1024:raise ValueError('Archivo demasiado grande.')
+        if src.suffix=='.py' and src.is_file():compile(src.read_bytes(),str(src),'exec')
         if not src.is_file() or sha(src.read_bytes())!=item['sha256']:raise ValueError('Paquete incompleto o alterado: '+item['path'])
         if dst.exists() and sha(dst.read_bytes())==item['sha256']:continue
         if item.get('base_normalized_sha256') and (not dst.is_file() or normalized(dst.read_bytes())!=item['base_normalized_sha256']):
@@ -66,6 +100,13 @@ def main():
         pending.append(item)
     required=manifest['required_migration']
     code="from django.db import connection; from django.db.migrations.recorder import MigrationRecorder; assert "+repr(tuple(required))+" in MigrationRecorder(connection).applied_migrations(), 'Falta la migración base requerida: "+'/'.join(required)+"'"
+    if PROJECT=='urban-soft':
+        code += "; import rest_framework, urllib3, hachoir, mutagen, pypdf"
+        code += "; from django.db.migrations.loader import MigrationLoader; loader=MigrationLoader(connection)"
+        code += "; unknown={name for app,name in MigrationRecorder(connection).applied_migrations() if app=='consignaciones' and (app,name) not in loader.graph.nodes}"
+        code += "; assert not (unknown-{'0015_alter_salidaproducto_options_proveedor_matricula_and_more'}), 'Migraciones desconocidas: detener sin copiar'"
+    else:
+        code += "; import requests"
     run(root,'shell','-c',code)
     print('DESTINO VERIFICADO: '+PROJECT+' — '+str(root))
     print('Versión base y paquete correctos. Archivos por actualizar: '+str(len(pending)))
@@ -80,6 +121,7 @@ def main():
         meta['files'].append({'path':item['path'],'installed_sha256':item['sha256']})
     (backup/'restauracion.json').write_text(json.dumps(meta,indent=2),encoding='utf-8')
     print('Respaldo privado del código: '+str(backup))
+    control(root,'stop')
     try:
         for item in pending:
             rel=relative(item['path']);dst=root/rel;dst.parent.mkdir(parents=True,exist_ok=True);no_links(dst)
@@ -91,12 +133,15 @@ def main():
                 if os.path.exists(temp):os.unlink(temp)
         run(root,'check')
         run(root,'makemigrations','--check','--dry-run')
+        plan_code="from django.db import connection; from django.db.migrations.executor import MigrationExecutor; ex=MigrationExecutor(connection); plan=ex.migration_plan(ex.loader.graph.leaf_nodes("+repr(manifest['app'])+")); assert all(m.app_label=="+repr(manifest['app'])+" and not backward for m,backward in plan), 'El plan incluye cambios fuera de la app nueva'"
+        run(root,'shell','-c',plan_code)
         run(root,'migrate',manifest['app'],'--noinput')
         run(root,'collectstatic','--noinput')
     except Exception:
         print('La instalación no terminó. No se revierten datos automáticamente. Conservar salida y respaldo: '+str(backup),file=sys.stderr)
         raise
     (root/'tmp').mkdir(exist_ok=True);no_links(root/'tmp'/'restart.txt');(root/'tmp'/'restart.txt').touch()
+    control(root,'start')
     print('CÓDIGO INSTALADO: '+PROJECT+'. Falta configurar conexión y realizar prueba funcional antes de habilitar a vendedores.')
     print('Respaldo: '+str(backup))
 

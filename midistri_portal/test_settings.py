@@ -20,3 +20,5 @@ PASSWORD_GMAIL=''
 EMAIL_HOST_USER=''
 EMAIL_HOST_PASSWORD=''
 EMAIL_BACKEND='django.core.mail.backends.locmem.EmailBackend'
+
+LANGUAGE_CODE='es-ar'

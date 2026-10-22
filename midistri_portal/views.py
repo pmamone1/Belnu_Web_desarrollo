@@ -9,6 +9,7 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import redirect,render
 from django.views.decorators.http import require_GET,require_POST,require_http_methods
 from .client import api,ApiError
+from .contract import perfil_valido, pedido_valido
 from .models import Distribuidora,Publicacion,PedidoLocal,Sincronizacion
 from .services import sincronizar
 
@@ -17,7 +18,7 @@ def identificar(request):
     token=request.session.get('midistri_token')
     if not token:return None
     try:
-        perfil=api('profile',token=token)
+        perfil=perfil_valido(api('profile',token=token))
         if not all(k in perfil for k in ('id','nombre','linea','distribuidora_id','distribuidora')):raise ApiError('Respuesta inválida.')
         request.midistri_perfil=perfil
         return perfil
@@ -129,7 +130,7 @@ def carrito(request):
 def transmitir(request,pedido):
     try:
         result=api('orders',method='POST',data=pedido.datos,token=request.session['midistri_token'])
-        if result.get('id')!=str(pedido.pk):raise ApiError('No se pudo confirmar el número del pedido.')
+        result=pedido_valido(result,request.midistri_perfil,ident=pedido.pk)
         pedido.respuesta=result;pedido.estado=result['estado'];pedido.error=''
         messages.success(request,'Recibimos tu pedido N.º '+str(pedido.pk)+' — '+result['vendedor'])
     except ApiError as e:
@@ -183,7 +184,9 @@ def pedidos(request):
         perfil=identificar(request)
         if not perfil:return redirect('midistri_catalogo')
         data=api('orders',token=request.session['midistri_token'])
-        for row in data['pedidos']:
+        if not isinstance(data.get('pedidos'),list) or len(data['pedidos'])>100:raise ApiError('Respuesta de pedidos inválida.')
+        validos=[pedido_valido(row,perfil) for row in data['pedidos']]
+        for row in validos:
             defaults={'respuesta':row,'estado':row['estado'],'error':''}
             old=PedidoLocal.objects.filter(pk=row['id']).first()
             if old and (old.vendedor_id!=perfil['id'] or old.distribuidora_id!=perfil['distribuidora_id']):raise ApiError('Pedido fuera de alcance.',403)
