@@ -61,3 +61,12 @@ class ContractTests(TestCase):
         response.status_code=200;response.iter_content.return_value=[b'<html>Error</html>']
         response.headers={'Content-Type':'text/html'}
         with self.assertRaises(ApiError):api('document/'+str(uuid4()),token='a'*43,binary=True)
+
+    def test_contrato_codigo_de_80_y_limite_81(self):
+        from midistri_portal.contract import pedido_valido
+        data={'id':str(uuid4()),'vendedor_id':7,'distribuidora_id':20,'vendedor':'Vendedor',
+            'estado':'recibido','items':[{'producto_id':5,'cantidad':1,'nombre':'Pilas',
+            'codigo':'S'*80,'precio':'123.45','pvp':'456.78'}]}
+        self.assertEqual(pedido_valido(data,self.perfil)['items'][0]['codigo'],'S'*80)
+        data['items'][0]['codigo']='S'*81
+        with self.assertRaises(ApiError):pedido_valido(data,self.perfil)

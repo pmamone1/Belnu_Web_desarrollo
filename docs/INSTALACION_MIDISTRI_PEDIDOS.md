@@ -19,7 +19,7 @@ head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
 )
 ```
 
-Valida store0017 aplicada y requests existente. Sólo migra midistri_portal0001.
+Valida store0017 aplicada y requests existente. Sólo migra midistri_portal0001–0002.
 No instala dependencias, no sustituye media/.env ni configura cron/credenciales.
 Conservar MIDISTRI_ENABLED=False hasta tener Urban v580, conexión y publicaciones.
 Variables sólo en este cPanel: URBAN_API_BASE=https://sistema7000.belnu.com.ar/midistri/api/

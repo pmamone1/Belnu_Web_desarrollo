@@ -11,7 +11,7 @@ class Publicacion(models.Model):
     producto_id=models.PositiveIntegerField()
     distribuidora=models.ForeignKey(Distribuidora,on_delete=models.PROTECT)
     nombre=models.CharField(max_length=200)
-    codigo=models.CharField(max_length=50,blank=True)
+    codigo=models.CharField(max_length=80,blank=True)
     categoria=models.CharField(max_length=100,blank=True)
     precio=models.DecimalField(max_digits=12,decimal_places=2)
     pvp=models.DecimalField(max_digits=12,decimal_places=2)

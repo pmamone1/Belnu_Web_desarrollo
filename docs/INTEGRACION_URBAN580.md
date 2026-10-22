@@ -82,3 +82,5 @@ Dos commits/PRs y ZIP distintos. Ninguna instalación, SMTP real ni piloto se ac
 QA usa bases y usuarios sintéticos. Runtime localPython3.12 con Django5.2 y3.2 separados;
 sintaxis mínima comprobada3.10/3.7. Pruebas en motores productivos y runtime3.7 real pendientes.
 Mantener flags apagados hasta conectar, sincronizar, verificar ámbitos y autorizar piloto concreto.
+
+Revisión final: SKU/código hasta80 mediante migración aditiva0002; contrato de pedido alineado con Urban. Recuperación de instalación parcial comprueba hashes originales y nuevos antes de restaurar. No edita migraciones anteriores.

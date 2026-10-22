@@ -53,13 +53,23 @@ def restore(backup,root):
     no_links(backup)
     meta=json.loads((backup/'restauracion.json').read_text(encoding='utf-8'))
     if meta['project']!=PROJECT or Path(meta['root'])!=root:raise ValueError('Respaldo de otro proyecto o carpeta.')
+    # Verify every original and both legal copy states before changing any file.
     for item in meta['files']:
-        dst=root/relative(item['path']);no_links(dst)
-        if dst.exists() and sha(dst.read_bytes())!=item['installed_sha256']:
+        dst=root/relative(item['path']);src=backup/'files'/relative(item['path'])
+        no_links(dst);no_links(src)
+        original=item.get('original_sha256')
+        if original is not None and (not src.is_file() or sha(src.read_bytes())!=original):
+            raise ValueError('Respaldo incompleto o alterado: '+item['path'])
+        if original is None and src.exists():
+            raise ValueError('Respaldo inesperado: '+item['path'])
+        current=sha(dst.read_bytes()) if dst.is_file() else None
+        if current not in {item['installed_sha256'],original}:
             raise ValueError('El archivo cambió después de instalar. Revisar antes de restaurar: '+item['path'])
     for item in reversed(meta['files']):
-        dst=root/relative(item['path']);src=backup/'files'/relative(item['path']);no_links(src)
-        if src.exists():shutil.copy2(str(src),str(dst))
+        dst=root/relative(item['path']);src=backup/'files'/relative(item['path'])
+        if item.get('original_sha256') is not None:
+            dst.parent.mkdir(parents=True,exist_ok=True)
+            shutil.copy2(str(src),str(dst))
         elif dst.exists():dst.unlink()
     print('Código restaurado. Las migraciones/datos no se revierten. Respaldo: '+str(backup))
 
@@ -118,7 +128,8 @@ def main():
         rel=relative(item['path']);dst=root/rel;no_links(dst)
         if dst.exists():
             saved=backup/'files'/rel;saved.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(str(dst),str(saved))
-        meta['files'].append({'path':item['path'],'installed_sha256':item['sha256']})
+        meta['files'].append({'path':item['path'],'installed_sha256':item['sha256'],
+            'original_sha256':sha(dst.read_bytes()) if dst.is_file() else None})
     (backup/'restauracion.json').write_text(json.dumps(meta,indent=2),encoding='utf-8')
     print('Respaldo privado del código: '+str(backup))
     control(root,'stop')

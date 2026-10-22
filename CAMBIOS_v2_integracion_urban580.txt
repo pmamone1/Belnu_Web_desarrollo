@@ -1,3 +1,5 @@
 MiDistri v2. Base10b49c4; propuesta2eea423.
 Implementa catálogo Urban por distribuidora y acceso personal sin registro/pago. Preserva UUID/reintentos y controla identidad/estado/valores/PDF de cada respuesta.
 Muestra LIN/VV; no matrícula. App y migración midistri_portal0001. Instalador valida Python3.7/destino/base antes de copiar. No instala dependencias ni activa cron/portal.
+
+Revisión final: SKU/código hasta80 mediante migración aditiva0002; contrato de pedido alineado con Urban. Recuperación de instalación parcial comprueba hashes originales y nuevos antes de restaurar. No edita migraciones anteriores.

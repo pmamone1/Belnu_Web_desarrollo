@@ -57,4 +57,23 @@ class InstallerTests(unittest.TestCase):
         (self.bundle/'release_manifest.json').write_text(json.dumps(self.manifest))
         with self.assertRaises(ValueError):self.invoke('--apply')
         self.assertEqual((self.root/self.path).read_text(),'original\n')
+
+    def test_restaurar_copia_parcial_conserva_originales_y_borra_nuevos(self):
+        self.invoke('--apply')
+        backup=next(Path(self.temp.name).glob('respaldo*'))
+        meta=json.loads((backup/'restauracion.json').read_text())
+        (self.root/self.path).write_bytes((backup/'files'/self.path).read_bytes())
+        meta['files'].append({'path':'nuevo.py','installed_sha256':self.module.sha(b'nuevo'),'original_sha256':None})
+        (backup/'restauracion.json').write_text(json.dumps(meta))
+        self.module.restore(backup,self.root)
+        self.assertEqual((self.root/self.path).read_text(),'original\n')
+        self.assertFalse((self.root/'nuevo.py').exists())
+
+    def test_restaurar_rechaza_respaldo_alterado_antes_de_escribir(self):
+        self.invoke('--apply')
+        backup=next(Path(self.temp.name).glob('respaldo*'))
+        (backup/'files'/self.path).write_text('alterado')
+        with self.assertRaises(ValueError):self.module.restore(backup,self.root)
+        self.assertEqual((self.root/self.path).read_text(),'valor=1\n')
+
 if __name__=='__main__':unittest.main()

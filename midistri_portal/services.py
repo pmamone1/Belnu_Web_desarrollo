@@ -20,7 +20,7 @@ def validar_snapshot(data):
             did=p['distribuidora_id'];pid=p['producto_id']
             if type(pid) is not int or pid<1 or did not in ids or (did,pid) in seen:raise ValueError
             seen.add((did,pid))
-            for k,limit in [('nombre',200),('codigo',50),('categoria',100)]:
+            for k,limit in [('nombre',200),('codigo',80),('categoria',100)]:
                 if not isinstance(p[k],str) or len(p[k])>limit:raise ValueError
             price=Decimal(str(p['precio']));pvp=Decimal(str(p['pvp']))
             if not all(x.is_finite() and 0<=x<Decimal('10000000000') and x==x.quantize(Decimal('.01')) for x in (price,pvp)):raise ValueError

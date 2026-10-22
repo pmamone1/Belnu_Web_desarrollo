@@ -31,7 +31,7 @@ def pedido_valido(data,perfil,ident=None):
         for item in items:
             if type(item['producto_id']) is not int or item['producto_id']<1:raise ValueError
             if type(item['cantidad']) is not int or not 1<=item['cantidad']<=9999:raise ValueError
-            for key,limit in (('nombre',200),('codigo',50)):
+            for key,limit in (('nombre',200),('codigo',80)):
                 if not isinstance(item[key],str) or len(item[key])>limit:raise ValueError
             for key in ('precio','pvp'):
                 price=Decimal(str(item[key]))
