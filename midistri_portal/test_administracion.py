@@ -29,3 +29,10 @@ class AdministracionPortalTests(TestCase):
         with patch('midistri_portal.operadores.api',return_value=PROFILE),patch('midistri_portal.operadores_views.api',create=True,return_value={'version':0,'productos':[{'nombre':'PRIVADO AJENO'}]}):
             r=self.client.get('/portal/administrar/productos/?distribuidora=20')
             self.assertEqual(r.status_code,503);self.assertNotContains(r,'PRIVADO AJENO',status_code=503)
+
+    def test_precio_negativo_se_puede_ver_para_corregir_sin_publicarlo(self):
+        from .administracion_contract import catalogo_valido
+        data={'version':1,'total':1,'pagina':1,'paginas':1,
+            'productos':[{'id':1,'nombre':'A corregir','sku':'P1','precio':'-1.00','pvp':'-2.00','imagenes':[],'publicado':False}],
+            'proveedores':[]}
+        self.assertEqual(catalogo_valido(data,20)['productos'][0]['precio'],'-1.00')

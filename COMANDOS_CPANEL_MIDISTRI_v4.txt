@@ -1,0 +1,31 @@
+MIDISTRI v4 - sólo /home/mcollini/belnuweb, Python3.7.
+Requiere Urban Soft v583 instalado. Paquete e instalación separados.
+
+(
+set -e
+umask 077
+cd /home/mcollini
+PAQUETE_MIDISTRI="/home/mcollini/midistri_pedidos_v4_panel_distribuidor.zip"
+sha256sum -c "${PAQUETE_MIDISTRI}.sha256"
+unzip -t "$PAQUETE_MIDISTRI"
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v4_XXXXXX)
+unzip -oq "$PAQUETE_MIDISTRI" -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+sed -n '1,3p' /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+
+Después de instalar ambos paquetes, cPanel > Setup Python App > belnuweb:
+MIDISTRI_ADMIN_ENABLED=True
+Conservar MIDISTRI_ENABLED=True, URBAN_API_BASE y URBAN_API_TOKEN existentes.
+Configurar también la bandera de administración en sistema7000; reiniciar ambas apps.
+No compartir ni mostrar claves privadas.
+
+Para catálogo automático, comprobar si ya existe midistri_sincronizar antes de crear cron.
+Si falta, crear carpetas privadas de logs/tmp:
+mkdir -p /home/mcollini/midistri_logs /home/mcollini/belnuweb/tmp
+Cron cada5 minutos (sólo una instancia):
+/usr/bin/flock -n /home/mcollini/belnuweb/tmp/midistri_catalogo.lock /bin/bash -lc 'cd /home/mcollini/belnuweb && umask 077 && /home/mcollini/virtualenv/belnuweb/3.7/bin/python manage.py midistri_sincronizar >> /home/mcollini/midistri_logs/catalogo.log 2>&1'
+
+La cola de campañas permanece en Urban; no agregarla a belnuweb.
+No se amplía la conexión20/65, no se publican productos ni se envían invitaciones al instalar.

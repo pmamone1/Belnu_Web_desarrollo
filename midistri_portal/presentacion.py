@@ -57,6 +57,9 @@ def guardar_tienda(perfil,dist_id,datos,logo=None,*,revision,operacion_id,token,
     cleaned=form.cleaned_data;archivo=validar_logo(logo) if logo else None
     from hashlib import sha256
     import json
+    request_fp=sha256(json.dumps([cleaned,bool(quitar_logo),
+        sha256(archivo.read()).hexdigest() if archivo else None],sort_keys=True).encode()).hexdigest()
+    if archivo:archivo.seek(0)
     new_file=None
     try:
         with transaction.atomic():
@@ -68,6 +71,8 @@ def guardar_tienda(perfil,dist_id,datos,logo=None,*,revision,operacion_id,token,
             if cambio:
                 if cambio.tienda_id!=tienda.pk or cambio.operador_id!=fresh['operador_id']:
                     raise ApiError('Operación fuera de alcance.',403)
+                if cambio.despues.get('peticion_huella')!=request_fp:
+                    raise ValidationError('La referencia ya fue utilizada con otro contenido.')
             else:
                 if tienda.revision!=revision:raise ValidationError('La tienda cambió. Recargue antes de guardar.')
                 before={k:getattr(tienda,k) for k in cleaned}
@@ -78,7 +83,7 @@ def guardar_tienda(perfil,dist_id,datos,logo=None,*,revision,operacion_id,token,
                 elif quitar_logo:tienda.logo=''
                 tienda.revision+=1;tienda.save()
                 after={k:getattr(tienda,k) for k in cleaned}
-                after.update(logo=tienda.logo.name,revision=tienda.revision)
+                after.update(logo=tienda.logo.name,revision=tienda.revision,peticion_huella=request_fp)
                 fp=sha256(json.dumps(after,sort_keys=True).encode()).hexdigest()
                 cambio=CambioTienda.objects.create(id=oid,tienda=tienda,operador_id=fresh['operador_id'],
                     antes=before,despues=after,huella=fp)

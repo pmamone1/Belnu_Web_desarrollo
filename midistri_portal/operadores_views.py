@@ -15,7 +15,7 @@ SALT='midistri.operador.desafio.v1'
 def fallo(request,error):
     if error.status==401:return redirect('midistri_operador_entrada')
     return render(request,'midistri_portal/operador_base.html',{'error':str(error)},
-                  status=403 if error.status==403 else 503)
+                  status=error.status if error.status in (400,403,409,503) else 503)
 
 @require_GET
 def entrada(request):
@@ -57,9 +57,12 @@ def completar(request):
 
 @require_GET
 def panel(request):
-    try:perfil=op.perfil_operador(request)
+    try:
+        perfil=op.perfil_operador(request)
+        did=op.tienda_permitida(perfil,request.GET.get('distribuidora',perfil['distribuidoras'][0]['id']))
+        return render(request,'midistri_portal/operador_base.html',{'operador':perfil,'titulo':'Administrar MiDistri-Pedidos',
+            'tienda':next(d for d in perfil['distribuidoras'] if d['id']==did)})
     except ApiError as e:return fallo(request,e)
-    return render(request,'midistri_portal/operador_base.html',{'operador':perfil,'tienda':next(d for d in perfil['distribuidoras'] if d['id']==op.tienda_permitida(perfil,request.GET.get('distribuidora',perfil['distribuidoras'][0]['id'])))})
 
 @require_POST
 def salir(request):
@@ -149,7 +152,7 @@ def pedidos_panel(request):
             data={'distribuidora':did,'estado':estado,'pagina':request.GET.get('pagina',1)})
         if result.get('version')!=1 or not isinstance(result.get('pedidos'),list) or len(result['pedidos'])>50:
             raise ApiError('Bandeja de pedidos inválida.')
-        ctx.update(result);ctx['pedidos']=[pedido_admin_valido(p,did) for p in result['pedidos']]
+        ctx.update({k:result[k] for k in ('total','pagina','paginas')});ctx['pedidos']=[pedido_admin_valido(p,did) for p in result['pedidos']]
         if any(type(result.get(k)) is not int for k in ('total','pagina','paginas')):raise ApiError('Paginación inválida.')
         ctx.update(estado=estado,estados=[('pendientes','Pendientes'),('','Todos'),('recibido','Recibidos'),('ok','OK para preparar'),('emitido','Preparados'),('cancelado','Cancelados')],
             anterior=result['pagina']-1 if result['pagina']>1 else None,
@@ -219,7 +222,7 @@ def tienda_panel(request):
             except (ValidationError,ValueError,TypeError) as e:error=str(e)
         current=Tienda.objects.filter(distribuidora_id=did).first()
         if current:
-            for cambio in current.cambios.filter(confirmado_urban=False).order_by('creado')[:10]:
+            for cambio in current.cambios.filter(confirmado_urban=False,operador_id=ctx['operador']['operador_id']).order_by('creado')[:10]:
                 _confirmar(cambio,token)
         form=TiendaForm(request.POST if request.method=='POST' else None,
             initial={k:getattr(current,k) for k in ('email','telefono','bienvenida','instrucciones')} if current else {})

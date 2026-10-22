@@ -1,8 +1,9 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
 <h3>Revisar publicación · {{ tienda.nombre }}</h3><p>Altas: {{ previa.resumen.altas }} · Ya publicados: {{ previa.resumen.existentes }} · Reactivados: {{ previa.resumen.reactivados }} · A ocultar: {{ previa.resumen.ocultados }}</p>
 <p>Distribuidoras: {% for d in destinos %}{{ d.nombre }}{% if not forloop.last %} / {% endif %}{% endfor %}.</p>
-<ul>{% for f in previa.filas|slice:":100" %}<li>{{ f.nombre }} · {{ f.estado }}</li>{% endfor %}</ul>
+{% for d in previa.detalle_distribuidoras %}<p><strong>{{ d.nombre }}</strong>: Altas {{ d.altas }} · Ya publicados {{ d.existentes }} · Reactivados {{ d.reactivados }} · A ocultar {{ d.ocultados }}</p>{% endfor %}
+<ul>{% for f in previa.filas|slice:":100" %}<li>{{ f.distribuidora_nombre }} · {{ f.nombre }} · {{ f.estado }}</li>{% endfor %}</ul>
 {% if previa.filas|length > 100 %}<p>Se muestran los primeros 100 productos; el resumen incluye toda la selección.</p>{% endif %}
-{% if previa.excluidos %}<h4>Excluidos</h4><ul>{% for f in previa.excluidos %}<li>{{ f.nombre }} · {{ f.motivo }}</li>{% endfor %}</ul>{% endif %}
+{% if previa.excluidos %}<h4>Excluidos</h4><ul>{% for f in previa.excluidos %}<li>{{ f.distribuidora_nombre }} · {{ f.nombre }} · {{ f.motivo }}</li>{% endfor %}</ul>{% endif %}
 <form method="post" action="{% url 'midistri_operador_publicar' %}">{% csrf_token %}<input type="hidden" name="accion" value="confirmar"><input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input type="hidden" name="operacion" value="{{ previa.id }}"><button>Confirmar cambios revisados</button></form>
 <p><a href="{% url 'midistri_operador_productos' %}?distribuidora={{ tienda.id }}">Volver sin confirmar</a></p>{% endblock %}

@@ -14,6 +14,9 @@ class OperadoresPortalTests(TestCase):
         self.assertEqual(r.status_code,302)
         self.assertTrue(r['Location'].startswith('https://sistema7000.belnu.com.ar/midistri/administrar/?desafio='))
         self.assertIn('midistri_desafio',r.cookies)
+        self.assertTrue(r.cookies['midistri_desafio']['secure'])
+        self.assertTrue(r.cookies['midistri_desafio']['httponly'])
+        self.assertEqual(r.cookies['midistri_desafio']['samesite'],'None')
 
     @patch('midistri_portal.operadores.api')
     def test_callback_rota_sesion_y_no_crea_usuario(self,api):
@@ -59,3 +62,10 @@ class OperadoresPortalTests(TestCase):
     def test_bandera_apagada_bloquea_intercambio(self):
         with override_settings(MIDISTRI_ADMIN_ENABLED=False):
             self.assertEqual(self.client.get('/portal/administrar/entrada/').status_code,503)
+
+    @patch('midistri_portal.operadores.api')
+    def test_panel_con_distribuidora_ajena_no_da_500(self,api):
+        api.return_value=PROFILE
+        s=self.client.session;s['midistri_operador_token']='x'*43;s.save()
+        response=self.client.get('/portal/administrar/?distribuidora=61')
+        self.assertEqual(response.status_code,403)
