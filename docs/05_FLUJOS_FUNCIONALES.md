@@ -1,3 +1,9 @@
+## Planificación MiDistri · pendiente de implementación
+
+Flujo propuesto: URL general > Email > código válido 30 minutos > elección autorizada si corresponde > sesión por pestaña > Salir. Recuperación del acceso Distribuidor primero; aún no integrado.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Flujo v6
 
 Pedido web recibido > marcar OK > revisar productos/cantidades > confirmar preparación > cargo y PDF sólo de preparados > cola de Email a todos los contactos habilitados. Ver remito para imprimir usa el mismo PDF. Abrir detalle en MiDistri consulta el estado actual; si falla informa última copia. Mercadería necesaria permite exportar agregado a Urban Point; el Excel por vendedor para depósito permanece separado. No hay pago online ni stock reservado por este circuito.

@@ -1,3 +1,9 @@
+## Planificación MiDistri · pendiente de implementación
+
+Reglas propuestas: código 1800 segundos de un uso; sesión separada de su vencimiento; no ampliar permisos ni enviar campañas. Las reglas vigentes que siguen conservan su prioridad hasta implementar y entregar.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Reglas vigentes v6
 
 Solicitud original y precios congelados inmutables. Cantidad preparada entera0..solicitada; resto cancelado por falta de stock. Revisión15min vinculada a actor/conexión/pedido/alcance; confirmar es atómico e idempotente. Cero preparado no genera deuda ni PDF. Accesos separados por contacto, respetando bajas. Excel agregado sin identidad; no interpreta cancelaciones como pedidos pendientes. Se mantienen permisos y excepción actual de SuperUsuario.

@@ -1,3 +1,12 @@
+## Planificación MiDistri · pendiente de implementación
+
+- [ ] Revisar plan principal y ejecutar sus subplanes.
+- [ ] Verificar código/sesión, callback, contactos, multimedia y presentación en pruebas locales.
+- [ ] Actualizar PDF principal, migraciones, instalador y ZIP del proyecto al completar la implementación.
+- [ ] Publicar dos commits/PRs y entregar comandos separados; no enviar campaña.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Checklist v6
 
 - [ ] Usuario confirma instalación P6 y luego U584 en sus runtimes y raíces separados.

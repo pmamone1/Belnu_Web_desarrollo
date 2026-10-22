@@ -1,3 +1,9 @@
+## Planificación MiDistri · pendiente de implementación
+
+Casos nuevos pendientes: código justo antes/a los 30 minutos; un uso/cinco errores; sesión de más de 30 minutos; recarga y Salir; nueva pestaña/cookie sola; Email compartido; callback vencido/dos pestañas/origen falso; fotos/videos retirados; temas y campañas con Reply-To correcto. No se ejecutaron aún para la funcionalidad nueva.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Pruebas v6
 
 En datos sintéticos: pedir10 a$25.000 y2 de otro producto; preparar6 del primero y0 del segundo. Esperado: cargo$150.000, canceladas4+2, un PDF sin el segundo, original intacto. Repetir confirmación: sin duplicados. Cero todo: sin cargo/PDF. Alterar cantidades/revisión ajena/caducada: rechazar. Dos contactos activan a la vez sin revocarse; baja de uno lo excluye. Excel: pendientes0 para esa preparación, sin LIN/VV/contactos. Sin autorización65, ni pedidos ni exportación65. Revisar catálogo público y filtros sin acceso a pedidos personales.

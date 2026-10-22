@@ -1,0 +1,8 @@
+PLANIFICACIÓN · NO ES PAQUETE INSTALABLE
+22/10/2026 · v7 previsto, sin implementar
+
+Se documentan diseño y tres subplanes: acceso con código de 30 minutos/sesión por pestaña; campañas e historial; galerías, temas y promociones. El error administrativo reiterado es la primera tarea. Su causa en el navegador del usuario todavía no está identificada.
+
+No cambia código, modelo, ruta, permiso, base, cargo, documento histórico, venv, catálogo ni campaña. No se ejecutaron migraciones ni se produjo ZIP nuevo. Las pruebas de la investigación previa corresponden al código existente, no a estas funciones. Manual PDF de nueva release pendiente; los manuales vigentes no se reemplazan por documentación de diseño.
+
+Ver docs/superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md y docs/superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md.

@@ -1,3 +1,9 @@
+## Planificación MiDistri · pendiente de implementación
+
+Funciones planificadas, todavía no disponibles por este documento: ingresar con Email y código válido 30 minutos; conservar acceso al usar la pestaña; Salir cierra de forma garantizada. Cerrar normalmente la pestaña elimina su identificación local, pero el navegador puede restaurarla. También se prevén galería ampliada, temas y promociones, campañas configurables e historial ordenado. La campaña pendiente no se envía.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Manual vigente v6 · pedidos de MiDistri
 
 1. Abrir **Salidas / Anuncios > Pedidos > Pedidos web de MiDistri** y marcar OK lo recibido.

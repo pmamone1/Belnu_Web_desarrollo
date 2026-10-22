@@ -1,3 +1,9 @@
+## Planificación MiDistri · pendiente de implementación
+
+Diseño y planes de trabajo preparados; todavía no son funciones instaladas.
+
+Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Vigente v6
 
 - [Pedidos parciales, contactos e instalación](PEDIDOS_PARCIALES_v6.md).

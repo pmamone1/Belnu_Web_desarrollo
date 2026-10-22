@@ -1,3 +1,7 @@
+## Planificación MiDistri · 22/10/2026 · sin implementar
+
+Código de ingreso de 30 minutos, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables y galerías/tienda. Diseño conversacional aprobado; implementación y paquetes pendientes de revisar el plan. No se envió la campaña ni se modificó código de aplicación. Ver [diseño](docs/superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](docs/superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## Entrega MiDistri v6 · 22/10/2026
 
 Instalación productiva pendiente. Base v5; instalar P6 antes de U584. Sin migraciones MiDistri nuevas. Runtimes separados: belnuweb Python3.7; Urban Python3.10. No enviar campaña. Conservar templates/accounts/forgotPassword.html ajeno a esta entrega; no incluirlo. Restauración a v5 bloqueada si Urban anuncia contrato nuevo o no puede comprobarse. [Guía](docs/PEDIDOS_PARCIALES_v6.md) y [validación](docs/VALIDACION_v6.md).

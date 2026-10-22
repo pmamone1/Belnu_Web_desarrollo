@@ -1,3 +1,4 @@
 MiDistri / Pedidos Online
 Candidato documentado: v6 (instalación productiva pendiente; base v5; instalar antes de Urban Soft v584)
 Cambio: filtro por categoría, precio vendedor público y carrito al precio vendedor; revisión parcial por producto, actualización individual de estado y Excel agregado. Sin nuevas migraciones propias ni cambios de claves, campañas o venv.
+Planificación 22/10/2026: siguiente candidato v7 para acceso con código de 30 minutos y tienda; diseño/plan documentados, sin implementación ni nueva instalación. La versión candidata indicada arriba no se cambia por esta planificación.

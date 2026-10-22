@@ -1,3 +1,7 @@
+## Planificación MiDistri · 22/10/2026 · sin implementar
+
+Código de ingreso de 30 minutos, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables y galerías/tienda. Diseño conversacional aprobado; implementación y paquetes pendientes de revisar el plan. No se envió la campaña ni se modificó código de aplicación. Ver [diseño](docs/superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](docs/superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+
 ## MiDistri-Pedidos v6 · Catálogo y preparación parcial
 
 Candidato, base v5; instalar antes de Urban Soft v584. Categorías y precio vendedor públicos junto al PVP. Carrito personal al precio vendedor; preparación parcial desde el panel con revisión y cancelación automática del resto. Detalle individual actualizado, PDF y Excel para Urban Point. Sin nuevas migraciones ni campaña enviada.
