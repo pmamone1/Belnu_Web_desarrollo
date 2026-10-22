@@ -1,3 +1,7 @@
+## Flujo v6
+
+Pedido web recibido > marcar OK > revisar productos/cantidades > confirmar preparación > cargo y PDF sólo de preparados > cola de Email a todos los contactos habilitados. Ver remito para imprimir usa el mismo PDF. Abrir detalle en MiDistri consulta el estado actual; si falla informa última copia. Mercadería necesaria permite exportar agregado a Urban Point; el Excel por vendedor para depósito permanece separado. No hay pago online ni stock reservado por este circuito.
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

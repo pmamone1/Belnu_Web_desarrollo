@@ -1,11 +1,18 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
 <h3>Pedido {{ pedido.id }}</h3><p>{{ pedido.vendedor }} · LIN {{ pedido.lin|default_if_none:"—" }} · VV {{ pedido.vv|default_if_none:"—" }} · {{ pedido.estado }}</p>
-{% for i in pedido.items %}<p>{{ i.nombre }} · {{ i.codigo }} · {{ i.cantidad }} unidades × $ {{ i.precio }}</p>{% endfor %}
-{% if revision %}<p class="notice">Confirmar preparación genera el cargo al vendedor y el remito. Revisá este detalle antes de continuar.</p>{% endif %}
+{% if not parciales %}<p>Urban Soft todavía permite únicamente la preparación completa. Para cantidades parciales, actualice Urban Soft.</p>{% endif %}
 <form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
+<table><thead><tr><th>Producto</th><th>Solicitadas</th><th>Precio vendedor</th><th>Preparadas / a preparar</th><th>Canceladas por falta de stock</th></tr></thead><tbody>
+{% for i in items %}<tr><td>{{ i.nombre }} · {{ i.codigo }}</td><td>{{ i.cantidad }}</td><td>$ {{ i.precio }}</td><td>
+{% if parciales and puede_emitir and pedido.estado == "ok" and not revision %}
+<label><input type="checkbox" name="incluir" value="{{ i.producto_id }}" checked> Incluir</label>
+<input type="number" name="preparada_{{ i.producto_id }}" min="0" max="{{ i.cantidad }}" value="{{ i.cantidad }}" required aria-label="Cantidad a preparar de {{ i.nombre }}">
+{% else %}{{ i.cantidad_preparada|default_if_none:"—" }}{% endif %}</td><td>{{ i.cantidad_cancelada|default_if_none:"—" }}</td></tr>{% endfor %}</tbody></table>
+{% if preparacion_previa %}<p class="notice">Se cobrarán sólo las unidades preparadas. El resto se cancelará por falta de stock, sin quedar pendiente.</p><p>Total solicitado: $ {{ preparacion_previa.total_solicitado }} · <strong>Total a preparar: $ {{ preparacion_previa.total_preparado }}</strong></p>{% endif %}
+{% if pedido.atencion %}<p>Total solicitado: $ {{ pedido.atencion.total_solicitado }} · Total preparado: $ {{ pedido.atencion.total_preparado }}</p>{% endif %}
 {% if pedido.estado == "recibido" %}<button name="accion" value="aprobar">Marcar OK para preparar</button>{% endif %}
 {% if pedido.estado == "recibido" or pedido.estado == "ok" %}<button name="accion" value="cancelar" class="secondary" formnovalidate>Cancelar por falta de stock</button>{% endif %}
-{% if puede_emitir and pedido.estado == "ok" %}{% if revision %}<input type="hidden" name="revision" value="{{ revision }}"><label><input type="checkbox" name="confirmar_preparacion" value="si" required> Confirmo la preparación y el cargo del detalle revisado.</label><button name="accion" value="emitir">Confirmar preparación y generar cargo / remito</button>{% else %}<button name="accion" value="revisar_preparacion">Revisar preparación</button>{% endif %}{% endif %}
+{% if puede_emitir and pedido.estado == "ok" %}{% if revision %}<input type="hidden" name="revision" value="{{ revision }}"><label><input type="checkbox" name="confirmar_preparacion" value="si" required> Confirmo las cantidades y el cargo revisado.</label><button name="accion" value="emitir">Confirmar preparación y generar cargo / remito</button>{% else %}<button name="accion" value="revisar_preparacion">Revisar preparación</button>{% endif %}{% endif %}
 </form>
-{% if pedido.estado == "emitido" and puede_remito %}<form method="post" action="{% url 'midistri_operador_remito' ident=pedido.id %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Descargar remito</button></form>{% endif %}
+{% if pedido.estado == "emitido" %}<p>Estado de Email: {{ pedido.email_estado|default:"Consultar en Urban Soft" }}. El envío se procesa por la cola configurada.</p>{% if puede_remito %}<form method="post" action="{% url 'midistri_operador_remito' ident=pedido.id %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Ver / imprimir remito</button></form>{% endif %}{% endif %}
 <p><a href="{% url 'midistri_operador_pedidos' %}?distribuidora={{ tienda.id }}">Volver a pedidos</a></p>{% endblock %}

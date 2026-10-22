@@ -40,7 +40,45 @@ def pedido_valido(data,perfil,ident=None):
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ApiError('No se pudo validar la respuesta del pedido. Conservamos el intento para reintentar.') from None
     result={k:data[k] for k in ('id','vendedor_id','distribuidora_id','vendedor','estado')}
+    if len({i['producto_id'] for i in clean})!=len(clean):raise ApiError('Productos repetidos en el pedido.')
+    if 'contrato_pedido' in data or 'atencion' in data:
+        if type(data.get('contrato_pedido')) is not int or data['contrato_pedido']!=2:raise ApiError('Contrato de pedido incompatible.')
+        result.update(contrato_pedido=2,atencion=atencion_valida(clean,data.get('atencion'),data['estado']))
+    if 'email_estado' in data:
+        if not isinstance(data['email_estado'],str) or len(data['email_estado'])>30:raise ApiError('Estado de Email inválido.')
+        result['email_estado']=data['email_estado']
     result.update(items=clean)
     for key in ('distribuidora','linea','lin','vv','creado','pedidos'):
         if key in data:result[key]=data[key]
     return result
+
+
+def atencion_valida(items,data,estado=None):
+    try:
+        if not isinstance(data,dict) or type(data.get('version')) is not int or data['version']!=1:raise ValueError
+        rows=data['items']
+        original={i['producto_id']:i for i in items}
+        if len(original)!=len(items) or not isinstance(rows,list) or len(rows)!=len(original):raise ValueError
+        seen=set();prepared=Decimal('0');requested=Decimal('0');n=0;c=0
+        pending=data['estado']=='pendiente'
+        for row in rows:
+            pid=row['producto_id'];p=row['cantidad_preparada'];x=row['cantidad_cancelada']
+            if type(pid) is not int or pid in seen or pid not in original or type(p) is not int or type(x) is not int:raise ValueError
+            item=original[pid];seen.add(pid)
+            if p<0 or x<0 or p+x>item['cantidad']:raise ValueError
+            if pending:
+                if p or x:raise ValueError
+            elif p+x!=item['cantidad']:raise ValueError
+            n+=p;c+=x;prepared+=Decimal(str(item['precio']))*p;requested+=Decimal(str(item['precio']))*item['cantidad']
+        expected='pendiente' if pending else ('cancelada' if not n else 'parcial' if c else 'total')
+        if data['estado']!=expected:raise ValueError
+        if estado is not None:
+            if (estado in ('ok','recibido')) != pending:raise ValueError
+            if estado=='cancelado' and expected!='cancelada':raise ValueError
+            if estado=='emitido' and expected not in ('total','parcial'):raise ValueError
+        for key,total in (('total_preparado',prepared),('total_solicitado',requested)):
+            if not isinstance(data[key],str) or Decimal(data[key])!=total:raise ValueError
+        return {'version':1,'estado':expected,'items':[{k:r[k] for k in ('producto_id','cantidad_preparada','cantidad_cancelada')} for r in rows],
+            'total_solicitado':format(requested,'.2f'),'total_preparado':format(prepared,'.2f')}
+    except (KeyError,TypeError,ValueError,InvalidOperation):
+        raise ApiError('No se pudo conciliar la preparación del pedido. No se guardaron los datos recibidos.') from None

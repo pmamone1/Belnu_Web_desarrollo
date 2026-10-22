@@ -1,3 +1,7 @@
+## Entrega MiDistri v6 · 22/10/2026
+
+Instalación productiva pendiente. Base v5; instalar P6 antes de U584. Sin migraciones MiDistri nuevas. Runtimes separados: belnuweb Python3.7; Urban Python3.10. No enviar campaña. Conservar templates/accounts/forgotPassword.html ajeno a esta entrega; no incluirlo. Restauración a v5 bloqueada si Urban anuncia contrato nuevo o no puede comprobarse. [Guía](docs/PEDIDOS_PARCIALES_v6.md) y [validación](docs/VALIDACION_v6.md).
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

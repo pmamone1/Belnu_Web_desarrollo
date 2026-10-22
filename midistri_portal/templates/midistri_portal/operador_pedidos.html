@@ -1,5 +1,6 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
 <h3>Pedidos · {{ tienda.nombre }}</h3>
+<p><a href="{% url 'midistri_operador_abastecimiento' %}?distribuidora={{ tienda.id }}">Mercadería necesaria · Excel para Urban Point</a></p>
 <form method="get"><input type="hidden" name="distribuidora" value="{{ tienda.id }}"><label>Estado <select name="estado">{% for value,label in estados %}<option value="{{ value }}" {% if estado == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label><button>Consultar</button></form>
 <form method="post" action="{% url 'midistri_operador_excel' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 {% for p in pedidos %}<article class="card"><p><strong>{{ p.vendedor }}</strong> · LIN {{ p.lin|default_if_none:"—" }} · VV {{ p.vv|default_if_none:"—" }}</p>

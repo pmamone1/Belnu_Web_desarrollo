@@ -1,3 +1,13 @@
+## Checklist v6
+
+- [ ] Usuario confirma instalación P6 y luego U584 en sus runtimes y raíces separados.
+- [ ] Confirmar check/reinicio y ausencia de migraciones nuevas de MiDistri; no inferir instalación de VERSION.
+- [ ] Validar catálogo público con precio vendedor/PVP y filtro; permisos de20/65.
+- [ ] Validar preparación parcial, cero, reintento, PDF y resumen sin identidad en entorno de pruebas.
+- [ ] Controlar remitente/bajas por contacto sin enviar campaña existente.
+- [ ] ZIP/commit, manualPDF y validación incluidos; ningún secreto, base, media o venv.
+- [ ] Registrar instalación y contador de respaldos sólo después del recibo productivo.
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

@@ -1,0 +1,9 @@
+MiDistri-Pedidos v6 · 22/10/2026
+Instalación productiva pendiente. Base v5; instalar antes de Urban Soft v584.
+Catálogo: categoría y búsqueda combinables; Precio vendedor y PVP públicos. Los pedidos requieren acceso personal y se calculan con precio vendedor.
+Preparación: revisar cada producto, incluir o no y cantidades enteras de cero a lo solicitado. Los precios originales no se editan. Confirmar genera sólo unidades preparadas, cargo y remito congelado; el resto queda cancelado por falta de stock, sin pendiente.
+Contactos: una invitación independiente por destino Email habilitado de cada vendedor, respetando bajas. Dos contactos pueden mantener sesiones simultáneas. Los avisos operativos usan todos los contactos habilitados y el mismo PDF; SMTP aceptado no equivale a entrega final.
+Abastecimiento: Excel agregado por distribuidora, producto y SKU/nombre históricos, con solicitadas, pendientes, preparadas y canceladas. Sin identidad de vendedor, contactos ni costo. Hasta 200 pedidos por rango; no trunca, no cruza stock ni crea compras.
+Seguridad: backend conserva permisos actuales y alcance privado; 20 incluye 65 sólo si ambas están autorizadas. No cambia claves, habilitaciones, cron, venv ni sistemas ajenos.
+
+Ver docs/PEDIDOS_PARCIALES_v6.md y docs/VALIDACION_v6.md.

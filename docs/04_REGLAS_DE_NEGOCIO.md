@@ -1,3 +1,8 @@
+## Reglas vigentes v6
+
+Solicitud original y precios congelados inmutables. Cantidad preparada entera0..solicitada; resto cancelado por falta de stock. Revisión15min vinculada a actor/conexión/pedido/alcance; confirmar es atómico e idempotente. Cero preparado no genera deuda ni PDF. Accesos separados por contacto, respetando bajas. Excel agregado sin identidad; no interpreta cancelaciones como pedidos pendientes. Se mantienen permisos y excepción actual de SuperUsuario.
+Ver [detalle y compatibilidad](PEDIDOS_PARCIALES_v6.md).
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

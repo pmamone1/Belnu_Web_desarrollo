@@ -12,12 +12,12 @@ class ContractTests(TestCase):
         self.perfil={'id':7,'nombre':'Vendedor','linea':'Ruta','lin':112,'vv':5,
             'distribuidora_id':20,'distribuidora':'20 - Belgrano'}
         session=self.client.session;session['midistri_token']='a'*43;session.save()
-    def test_catalogo_anonimo_solo_pvp(self):
+    def test_catalogo_anonimo_precio_vendedor_y_pvp(self):
         session=self.client.session;session.flush()
         response=self.client.get('/portal/?distribuidora=20')
         self.assertEqual(response.status_code,200)
         self.assertNotContains(response,'Tu precio')
-        self.assertNotContains(response,'123.45')
+        self.assertContains(response,'123.45')
         self.assertContains(response,'456.78')
     @patch('midistri_portal.views.api')
     def test_perfil_malformado_no_produce_500(self,server):

@@ -1,3 +1,12 @@
+## Manual vigente v6 · pedidos de MiDistri
+
+1. Abrir **Salidas / Anuncios > Pedidos > Pedidos web de MiDistri** y marcar OK lo recibido.
+2. **Confirmar preparación** abre una revisión. Desmarcar productos sin stock o cambiar sus cantidades. Los precios no se cambian.
+3. **Revisar cantidades e importe**, comprobar preparados y cancelados y confirmar. Lo no preparado se cancela; no queda en espera.
+4. **Abrir remito para imprimir**. El mismo documento queda para la cola de Email; consultar su estado, no confirmar de nuevo para enviarlo.
+5. **Mercadería necesaria > Excel para Urban Point** resume productos sin datos de vendedores. Para preparar reparto se conserva el Excel privado de depósito.
+En Campañas, los accesos se preparan para todos los Email habilitados por vendedor; se puede elegir uno. Revisar siempre la audiencia. Esta actualización no manda la campaña existente.
+
 ## MiDistri-Pedidos v5 — presentación opcional del catálogo
 
 La sincronización admite Display0 de Urban como presentación no informada.

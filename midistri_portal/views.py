@@ -2,6 +2,7 @@ from decimal import Decimal
 from hashlib import sha256
 import json
 from uuid import uuid4, UUID
+from urllib.parse import urlencode
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
@@ -31,7 +32,8 @@ def identificar(request):
 
 
 def base(request,perfil=None,distribuidora=None):
-    return {'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
+    saved=request.session.get('midistri_catalogo_filtros',{})
+    return {'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
         (' - '+perfil['distribuidora'] if perfil else (' - '+distribuidora.nombre if distribuidora else '')),
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
@@ -67,14 +69,21 @@ def catalogo(request):
     selected=perfil['distribuidora_id'] if perfil else request.GET.get('distribuidora')
     d=ds.filter(pk=selected).first() if str(selected or '').isdigit() else None
     products=Publicacion.objects.filter(activa=True,distribuidora=d,distribuidora__activa=True)
-    q=request.GET.get('q','')[:100]
+    saved=request.session.get('midistri_catalogo_filtros',{})
+    if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
+    q=request.GET.get('q',saved.get('q',''))[:100]
+    categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
+    categorias=list(products.exclude(categoria='').order_by('categoria').values_list('categoria',flat=True).distinct())
+    if categoria=='__sin_categoria__':products=products.filter(categoria='')
+    elif categoria:products=products.filter(categoria=categoria)
+    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria}
     if q:products=products.filter(nombre__icontains=q)
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
     from .presentacion import presentacion_publica
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,presentacion=presentacion_publica(d))
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d))
     return render(request,'midistri_portal/catalogo.html',context)
 
 
@@ -209,8 +218,28 @@ def detalle(request,ident):
     except ApiError as e:return error_page(request,e)
     if not perfil:return redirect('midistri_catalogo')
     pedido=propio(perfil,ident)
+    stale=False
+    if pedido.estado not in ('pendiente','revisar'):
+        try:
+            try:data=api('order/'+str(ident),token=request.session['midistri_token'])
+            except ApiError as e:
+                if e.status not in (404,405):raise
+                listing=api('orders',token=request.session['midistri_token'])
+                data=next((x for x in listing.get('pedidos',[]) if x.get('id')==str(ident)),None)
+                if data is None:raise ApiError('El pedido no está disponible para actualizar.',404)
+            result=pedido_valido(data,perfil,ident)
+            from django.utils import timezone
+            result['_consultado_en']=timezone.now().isoformat()
+            pedido.respuesta=result;pedido.estado=result['estado'];pedido.error=''
+            pedido.save(update_fields=['respuesta','estado','error'])
+        except ApiError:
+            stale=True
     items=pedido.respuesta.get('items',pedido.datos.get('items',[]))
-    ctx=base(request,perfil);ctx.update(pedido=pedido,items=items,total=sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0')))
+    attention=pedido.respuesta.get('atencion')
+    shown=[];byid={i['producto_id']:i for i in attention['items']} if attention else {}
+    for item in items:shown.append(dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'}))
+    total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
+    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
 
 
