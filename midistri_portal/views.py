@@ -218,8 +218,28 @@ def detalle(request,ident):
     except ApiError as e:return error_page(request,e)
     if not perfil:return redirect('midistri_catalogo')
     pedido=propio(perfil,ident)
+    stale=False
+    if pedido.estado not in ('pendiente','revisar'):
+        try:
+            try:data=api('order/'+str(ident),token=request.session['midistri_token'])
+            except ApiError as e:
+                if e.status not in (404,405):raise
+                listing=api('orders',token=request.session['midistri_token'])
+                data=next((x for x in listing.get('pedidos',[]) if x.get('id')==str(ident)),None)
+                if data is None:raise ApiError('El pedido no está disponible para actualizar.',404)
+            result=pedido_valido(data,perfil,ident)
+            from django.utils import timezone
+            result['_consultado_en']=timezone.now().isoformat()
+            pedido.respuesta=result;pedido.estado=result['estado'];pedido.error=''
+            pedido.save(update_fields=['respuesta','estado','error'])
+        except ApiError:
+            stale=True
     items=pedido.respuesta.get('items',pedido.datos.get('items',[]))
-    ctx=base(request,perfil);ctx.update(pedido=pedido,items=items,total=sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0')))
+    attention=pedido.respuesta.get('atencion')
+    shown=[];byid={i['producto_id']:i for i in attention['items']} if attention else {}
+    for item in items:shown.append(dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'}))
+    total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
+    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
 
 

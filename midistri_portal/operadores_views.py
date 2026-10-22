@@ -160,24 +160,59 @@ def pedidos_panel(request):
         return render(request,'midistri_portal/operador_pedidos.html',ctx)
     except ApiError as e:return fallo(request,e)
 
+def capacidades():
+    try:
+        data=api('capabilities')
+    except ApiError as e:
+        if e.status in (404,405):return False
+        raise
+    if (type(data.get('version')) is not int or data['version']!=1 or
+        type(data.get('contrato_pedido')) is not int or data['contrato_pedido']!=2 or
+        data.get('preparacion_parcial') is not True or data.get('acceso_por_contacto') is not True):
+        raise ApiError('Capacidades de Urban Soft incompatibles. No se confirmó la preparación.')
+    return True
+
 @require_http_methods(['GET','POST'])
 def pedido_panel(request,ident):
+    from .contract import atencion_valida
     try:
         ctx=contexto_panel(request,'pedidos.gestionar');did=ctx['tienda']['id']
+        partial=capacidades()
         accion=request.POST.get('accion','detalle') if request.method=='POST' else 'detalle'
         if accion=='emitir' and request.POST.get('confirmar_preparacion')!='si':
             raise ApiError('Confirme la preparación del detalle revisado.',409)
-        result=api('operator-order',method='POST',operator_token=request.session['midistri_operador_token'],
-            data={'pedido':str(ident),'accion':accion,'revision':request.POST.get('revision','')})
+        data={'pedido':str(ident),'accion':accion,'revision':request.POST.get('revision','')}
+        if accion=='emitir' and any(k.startswith('preparada_') or k=='incluir' for k in request.POST):
+            raise ApiError('El detalle cambió. Revise nuevamente antes de confirmar.',409)
+        if accion=='revisar_preparacion' and partial:
+            cantidades=[]
+            selected=set(request.POST.getlist('incluir'))
+            for key in request.POST:
+                if key.startswith('preparada_'):
+                    pid=key[len('preparada_'):]
+                    if not pid.isdigit():raise ValueError
+                    qty=int(request.POST[key])
+                    cantidades.append({'producto_id':int(pid),'cantidad_preparada':qty if pid in selected else 0})
+            data['cantidades']=cantidades
+        result=api('operator-order',method='POST',operator_token=request.session['midistri_operador_token'],data=data)
         pedido=pedido_admin_valido(result['pedido'],did,str(ident))
-        ctx.update(pedido=pedido,revision=result.get('revision',''),
+        preview=None
+        if result.get('revision') and partial:
+            preview=atencion_valida(pedido['items'],result.get('preparacion_previa'))
+        rows=[]
+        attention=preview or pedido.get('atencion')
+        byid={i['producto_id']:i for i in attention['items']} if attention else {}
+        for i in pedido['items']:
+            row=dict(i);row.update(byid.get(i['producto_id'],{}));rows.append(row)
+        ctx.update(pedido=pedido,items=rows,parciales=partial,preparacion_previa=preview,
+            revision=result.get('revision',''),
             puede_emitir=ctx['operador']['financiero'] and 'pedidos.remitos' in ctx['operador']['permisos'],
             puede_remito='pedidos.remitos_ver' in ctx['operador']['permisos'])
         if request.method=='POST' and accion in ('aprobar','cancelar','emitir'):
             messages.success(request,'Operación registrada en Urban Soft.')
             return redirect('/portal/administrar/pedido/'+str(ident)+'/?'+urlencode({'distribuidora':did}))
         return render(request,'midistri_portal/operador_pedido.html',ctx)
-    except (KeyError,TypeError):return fallo(request,ApiError('Detalle de pedido inválido.'))
+    except (KeyError,TypeError,ValueError):return fallo(request,ApiError('Detalle o cantidades de pedido inválidos.',400))
     except ApiError as e:return fallo(request,e)
 
 @require_POST
