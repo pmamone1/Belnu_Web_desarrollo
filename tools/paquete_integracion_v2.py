@@ -30,7 +30,8 @@ def build(output):
         if previous.returncode==0:item['base_normalized_sha256']=normalized(previous.stdout)
         else:item['new_code']=True
         files.append(item);payload['payload/'+name]=data
-    manifest={'schema':1,'project':PROJECT,'version':VERSION,'base_commit':BASE,'app':APP,
+    source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=str(ROOT),text=True).strip()
+    manifest={'source_commit':source_commit,'schema':1,'project':PROJECT,'version':VERSION,'base_commit':BASE,'app':APP,
         'required_migration':REQUIRED,'production_installation':'pending','files':files}
     manifest_data=(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     installer=(ROOT/INSTALLER).read_bytes()

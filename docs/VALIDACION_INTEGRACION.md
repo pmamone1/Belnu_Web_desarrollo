@@ -12,3 +12,5 @@ La aplicación nueva agrega0001–0002, sin tocar store ni migraciones aplicadas
 ZIP contiene sólo inventario explícito; media, secretos, bases, entornos y datos QA excluidos.
 La batería global de Urban tiene fallos existentes y se documenta en su propio repositorio;
 no se declara aprobada por las pruebas de este portal.
+
+Contraparte Urban adicionalmente probada con36/36 casos sobre PostgreSQL17.11 local real; no representa ejecución del portal en el motor productivo ni cambio de conexión.

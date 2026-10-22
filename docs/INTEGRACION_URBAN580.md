@@ -59,7 +59,7 @@ Cron propio opcional midistri_enviar_avisos sólo pendientes; no instala cron ni
 Urban requiere consignaciones0121 aplicada; crea sólo midistri_bridge0001–0004.
 0001 depende de0121. No modifica migraciones anteriores de consignaciones.
 Compatibilidad de lectura con registro legado adicional0015 informado, sin borrar ni editar ese registro.
-Portal requiere store0017_alter_variation_precio_ed aplicada; crea sólo midistri_portal0001.
+Portal requiere store0017_alter_variation_precio_ed aplicada; crea sólo midistri_portal0001–0002.
 Archivos presentes no demuestran aplicación; preflight consulta MigrationRecorder antes de copiar.
 Tras copiar, plan de migración sólo puede contener pasos hacia adelante de la app propia.
 Flags apagados por defecto y app nueva sin permisos automáticos ni publicaciones iniciales.
