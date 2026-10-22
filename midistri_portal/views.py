@@ -73,7 +73,8 @@ def catalogo(request):
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q)
+    from .presentacion import presentacion_publica
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,presentacion=presentacion_publica(d))
     return render(request,'midistri_portal/catalogo.html',context)
 
 

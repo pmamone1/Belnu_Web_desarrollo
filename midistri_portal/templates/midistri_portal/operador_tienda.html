@@ -1,0 +1,13 @@
+{% extends 'midistri_portal/operador_base.html' %}{% block panel %}
+<h3>Mi tienda · {{ tienda.nombre }}</h3><p>Logo, contacto y mensajes que verán los vendedores de esta distribuidora.</p>
+{% if error_form %}<p class="notice" role="alert">{{ error_form }}</p>{% endif %}
+{% if presentacion.logo %}<img src="{{ presentacion.logo.url }}" alt="Logo actual" style="max-width:160px;max-height:120px">{% endif %}
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input type="hidden" name="revision" value="{{ presentacion.revision|default:0 }}"><input type="hidden" name="operacion" value="{{ operacion }}">
+{{ form.as_p }}<label>Logo de la tienda <input type="file" name="logo" accept=".jpg,.jpeg,.png,.webp"></label>
+<small>Hasta 2 MB y ocho megapíxeles. El logo se adapta a 768 píxeles como máximo.</small>
+<label><input type="checkbox" name="quitar_logo" value="si"> Quitar logo actual</label>
+<button>Guardar presentación</button></form>
+<p>Estos datos son públicos. El remitente de los Email y los precios se configuran en Urban Soft.</p>
+{% if auditoria_pendiente %}<p class="notice">El cambio quedó guardado con su historial local. Falta confirmar la referencia de auditoría en Urban Soft.</p>{% endif %}
+{% endblock %}
