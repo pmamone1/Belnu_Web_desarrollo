@@ -18,7 +18,7 @@ class PortalMiddleware(MiddlewareMixin):
     def process_response(self,request,response):
         if request.path.startswith('/portal/'):
             response['Cache-Control']='private, no-store'
-            response['Referrer-Policy']='no-referrer'
+            response['Referrer-Policy']='same-origin'
             response['X-Robots-Tag']='noindex, nofollow'
         return response
 

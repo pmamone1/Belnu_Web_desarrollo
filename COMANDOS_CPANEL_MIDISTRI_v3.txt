@@ -1,0 +1,18 @@
+# Instalar MiDistri Pedidos Online v3
+Sólo /home/mcollini/belnuweb y Python3.7.
+El SHA256 confiable se publica en el chat; verificarlo antes de extraer.
+No requiere nuevo respaldo completo por este ajuste; respalda automáticamente los archivos.
+No instala paquetes ni cambia variables, claves, cron o datos.
+
+```bash
+(
+set -e
+umask 077
+PAQUETE_MIDISTRI="/home/mcollini/midistri_pedidos_online_v3_csrf.zip"
+unzip -t "$PAQUETE_MIDISTRI"
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v3_XXXXXX)
+unzip -q "$PAQUETE_MIDISTRI" -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+)
+```

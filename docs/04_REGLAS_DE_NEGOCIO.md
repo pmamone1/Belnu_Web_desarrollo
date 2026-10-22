@@ -1,3 +1,11 @@
+## MiDistri Pedidos Online v3 - corrección de formularios MiDistri
+Corrige el403 CSRF provocado por Referrer-Policy:no-referrer en formularios.
+Se usa same-origin: conserva la referencia interna, sin enviarla a otros sitios.
+CSRF, autenticación, alcance y permisos se conservan. No hay migraciones,
+cambios de importes, datos históricos, claves, venv, cron ni habilitación de envíos.
+Instalación productiva pendiente. Requiere MiDistri v2 instalada.
+Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
+
 # Reglas MiDistri
 Sólo productos activos publicados para su distribuidora. Sin registro, pago ni reserva online.
 Recibir/revisar/exportar no debita. Preparación se confirma en Urban bajo permisos financieros.
