@@ -226,6 +226,27 @@ def excel_panel(request):
         response['Content-Disposition']='attachment; filename="MiDistri_deposito.xlsx"';return response
     except ApiError as e:return fallo(request,e)
 
+@require_http_methods(['GET','POST'])
+def abastecimiento_panel(request):
+    from datetime import datetime,timedelta
+    try:
+        ctx=contexto_panel(request,'pedidos.gestionar')
+        if request.method=='POST':
+            data=api('operator-order-supply',method='POST',operator_token=request.session['midistri_operador_token'],
+                data={'distribuidora':ctx['tienda']['id'],'desde':request.POST.get('desde',''),
+                    'hasta':request.POST.get('hasta',''),'estado':request.POST.get('estado','pendientes')},
+                binary_mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            r=HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            r['Content-Disposition']='attachment; filename="MiDistri_abastecimiento_Urban_Point.xlsx"'
+            r['Cache-Control']='private, no-store'
+            return r
+        # Python 3.7 production: use pytz already required by Django 3.2.
+        import pytz
+        today=datetime.now(pytz.timezone('America/Argentina/Buenos_Aires')).date()
+        ctx.update(desde=(today-timedelta(days=29)).isoformat(),hasta=today.isoformat())
+        return render(request,'midistri_portal/operador_abastecimiento.html',ctx)
+    except ApiError as e:return fallo(request,e)
+
 @require_POST
 def remito_panel(request,ident):
     try:
