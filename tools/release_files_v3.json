@@ -1,0 +1,23 @@
+[
+  "CAMBIOS_v3_csrf.txt",
+  "COMANDOS_CPANEL_MIDISTRI_v3.txt",
+  "HANDOFF.md",
+  "Manual_MiDistri_Pedidos_Online.pdf",
+  "README.md",
+  "VERSION_DOCUMENTADA.txt",
+  "docs/00_INDICE.md",
+  "docs/04_REGLAS_DE_NEGOCIO.md",
+  "docs/05_FLUJOS_FUNCIONALES.md",
+  "docs/17_CHECKLIST_ENTREGA.md",
+  "docs/19_PRUEBAS_MANUALES_CRITICAS.md",
+  "docs/CSRF_PORTAL_v3.md",
+  "docs/MANUAL_USUARIO.md",
+  "docs/VALIDACION_v3.md",
+  "midistri_portal/middleware.py",
+  "midistri_portal/test_contract.py",
+  "tools/actualizar_manual_v3.py",
+  "tools/instalar_release_midistri_v3.py",
+  "tools/paquete_integracion_v3.py",
+  "tools/release_files_v3.json",
+  "tools/test_instalar_release_midistri_v3.py"
+]

@@ -54,7 +54,7 @@ class ContractTests(TestCase):
     def test_cabeceras_privadas(self):
         response=self.client.get('/portal/activar/'+'a'*43+'/')
         self.assertEqual(response['Cache-Control'],'private, no-store')
-        self.assertEqual(response['Referrer-Policy'],'no-referrer')
+        self.assertEqual(response['Referrer-Policy'],'same-origin')
     @patch('midistri_portal.client.requests.request')
     def test_html_200_no_se_trata_como_remito(self,request):
         response=request.return_value.__enter__.return_value
@@ -70,3 +70,31 @@ class ContractTests(TestCase):
         self.assertEqual(pedido_valido(data,self.perfil)['items'][0]['codigo'],'S'*80)
         data['items'][0]['codigo']='S'*81
         with self.assertRaises(ApiError):pedido_valido(data,self.perfil)
+
+    @patch('midistri_portal.views.api')
+    def test_activar_https_con_csrf_y_referencia_local(self,server):
+        from django.test import Client
+        client=Client(enforce_csrf_checks=True)
+        url='/portal/activar/'+'a'*43+'/'
+        page=client.get(url,secure=True)
+        self.assertEqual(page['Referrer-Policy'],'same-origin')
+        token=client.cookies['csrftoken'].value
+        server.return_value={'session_token':'b'*43,'perfil':self.perfil}
+        response=client.post(url,{'csrfmiddlewaretoken':token},secure=True,
+            HTTP_ORIGIN='https://testserver',HTTP_REFERER='https://testserver'+url)
+        self.assertEqual(response.status_code,302)
+        self.assertEqual(client.session['midistri_token'],'b'*43)
+
+    def test_activar_rechaza_sin_token_y_origen_externo(self):
+        from django.test import Client
+        client=Client(enforce_csrf_checks=True)
+        url='/portal/activar/'+'a'*43+'/'
+        client.get(url,secure=True)
+        response=client.post(url,{},secure=True,HTTP_ORIGIN='https://testserver')
+        self.assertEqual(response.status_code,403)
+        token=client.cookies['csrftoken'].value
+        for origin in ('https://otro.example.test','null'):
+            with self.subTest(origin=origin):
+                response=client.post(url,{'csrfmiddlewaretoken':token},secure=True,HTTP_ORIGIN=origin)
+                self.assertEqual(response.status_code,403)
+        self.assertNotIn('midistri_token',client.session)
