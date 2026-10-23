@@ -1,0 +1,37 @@
+MiDistri-Pedidos v7
+
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
+
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
+
+## Arquitectura y permisos
+
+Urban es autoridad de identidades, permisos, precios, documentos y SMTP. MiDistri mantiene presentación y sesiones de pestaña; no comparte repositorio, base ni instalación. Cada API administrativa revalida el usuario y su alcance privado. 20/65 sólo se agrupan si ambas están autorizadas.
+
+OTP: hash salteado del código, 1800 segundos, un uso, cinco intentos. Respuesta genérica para Email inexistente. Límite por Email: tres emisiones por ventana móvil de 15 minutos y espera mínima de 60 segundos; IP: veinte solicitudes por ventana. No se confía en X-Forwarded-For. Si el proxy presenta una sola IP compartida, ajustar el despliegue antes de ampliar la audiencia.
+
+El código se entrega después del commit en hasta ocho trabajadores efímeros del proceso. No se guarda el código en claro. Un reinicio del proceso puede interrumpir la entrega; pedir un nuevo código después de 60 segundos. No se reintenta automáticamente una aceptación SMTP incierta. SMTP real de producción no fue probado con destinatarios reales en esta entrega.
+
+La prueba aleatoria de pestaña se guarda en sessionStorage; el token Urban sólo en el servidor. Cookie y prueba son necesarias. Carrito, filtros, revisión y mensajes están aislados. La vida del código no limita la sesión; el acceso remoto mantiene una concesión renovable de 90 días, además de revalidar el contacto. Salir borra la prueba antes de la llamada remota y revoca el acceso local; si no hay red, la interfaz lo informa. El navegador puede copiar/restaurar sessionStorage: no prometer detección infalible del cierre.
+
+Callback administrativo: cookie firmada distinta por desafío, hasta diez, 600 segundos; pase Urban de 120 segundos, un uso y Origin exacto. El fallback de la cookie antigua sólo conserva su plazo de 120 segundos. Logs de fallo: motivo y referencia aleatoria, nunca código ni cookie.
+
+Multimedia: originales y copias siguen fuera de MEDIA/STATIC. La publicación revisada crea copias inmutables con UUID/hash/tamaño. Endpoint GET/HEAD, Range simple, nosniff/noindex/no-store; retira el recurso si medio, producto, publicación o distribuidora dejan de estar activos. Fotos de producto usan derivados públicos ya existentes. Copias promocionales se activan sólo mediante referencia de un bloque autorizado; archivar la última referencia retira el recurso. No se eliminan originales ni auditorías.
+
+MiDistri valida el contrato sin descargar URLs: origen Urban y rutas dedicadas para fotos/MP4; YouTube/Vimeo HTTPS según lista permitida. Nunca se solicitan destinos elegidos por el navegador. Subida P->U al endpoint fijo, 16 MiB más 64 KiB de margen multipart, temporales en Urban y validación real de contenido. requests construye multipart acotado en memoria, no hay dependencia nueva de video en P. CPanel/Passenger/servidor web deben admitir el tamaño; un 413 externo exige revisar ese límite, sin aumentar el límite JSON de 1 MiB.
+
+Cambios comerciales con revisión/UUID y auditoría en Urban; campañas congelan la presentación al guardar/revisar el borrador. El remitente SMTP no se cambia por editar el nombre visible. Reply-To y pie salen de la presentación revisada. Las campañas anteriores conservan su modalidad y huella cuando no tienen la nueva presentación.
+
+## Compatibilidad, migración y rollback
+
+Base mínima: Urban584 / MiDistri6. Instalar P7 primero con flags nuevos apagados, luego U585. Mantener MIDISTRI_LOGIN_CODIGO_ENABLED=False en ambas durante la instalación y MIDISTRI_MULTIMEDIA_ENABLED=False en P. Después de verificar ambos paquetes y capacidades, habilitar login en U y P y multimedia en P, reiniciar ambas aplicaciones y sincronizar. No se instala nada en el venv ni se modifican claves, conexiones, catálogo, pedidos o destinatarios al instalar.
+
+Urban agrega bridge0008_ingreso_codigo,0009_configuracion_tienda,0010_material_publicable,0011_uso_material_promocional y consignaciones0124_midistri_presentacion_campanas. MiDistri agrega portal0004_sesion_pestana,0005_configuracion_comercial,0006_multimedia_publicacion,0007_temas_promociones. Son tablas/campos aditivos; las migraciones anteriores se conservan. No hay operaciones económicas ni reescritura histórica.
+
+Instalador: verificar inventario/hashes, raíz, runtime, esquema base, dependencias y plan exacto antes de copiar. Sólo hojas finales como destinos y lista blanca de migraciones nuevas; rechaza reversiones/ajenas. Respaldo privado de archivos reemplazados, parada, check/modelos/migraciones/estáticos y arranque. Reintento del mismo paquete acepta archivos idénticos y migraciones aplicadas.
+
+Ante fallo: conservar salida y respaldo. Si no se aplicó ninguna migración nueva, --restore valida todos los archivos antes de restaurar. Si hay migraciones nuevas, se bloquea el rollback de código: apagar funciones nuevas en ambas aplicaciones y corregir hacia adelante. No borrar tablas, accesos, cargos, snapshots o documentos para forzar la instalación.
+
+No se exige otro respaldo completo de BD para esta entrega: respetar 30 instalaciones confirmadas o 15 días; no contar ZIPs, candidatos ni reintentos. El historial local antiguo registra 17/10 y existe un respaldo posterior comunicado en el chat; no se revalidó el archivo en esta ejecución ni se inventan instalaciones. No hay instalación585/7 confirmada.
+
+Guía: docs/ACCESO_TIENDA_v7.md

@@ -1,0 +1,26 @@
+# Subir ZIP y .sha256 a /home/mcollini. Instalar MiDistri7 antes de Urban585.
+# Mantener los flags nuevos apagados hasta terminar ambas instalaciones.
+(
+set -e
+umask 077
+cd /home/mcollini
+sha256sum -c midistri_pedidos_v7_acceso_tienda.zip.sha256
+unzip -t midistri_pedidos_v7_acceso_tienda.zip
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_belnuweb_7_XXXXXX)
+unzip -oq /home/mcollini/midistri_pedidos_v7_acceso_tienda.zip -d "$STAGING_MIDISTRI"
+cd "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python instalar.py --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python instalar.py --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+
+# Después de instalar los dos paquetes:
+# cPanel / sistema7000: MIDISTRI_LOGIN_CODIGO_ENABLED=True.
+# cPanel / belnuweb: MIDISTRI_LOGIN_CODIGO_ENABLED=True y MIDISTRI_MULTIMEDIA_ENABLED=True.
+# Sin espacios al principio/final. Reiniciar ambas aplicaciones.
+# Email en Urban requiere los flags existentes MIDISTRI_EMAIL_ENABLED=True y COMUNICACIONES_ENVIOS_HABILITADOS=True.
+# Sincronizar:
+cd /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python manage.py midistri_sincronizar
+# No crear otro cron para los códigos. No confirmar ni procesar la campaña pendiente.
+# Si hay error, conservar salida completa y respaldo de código; no forzar hashes ni borrar migraciones.

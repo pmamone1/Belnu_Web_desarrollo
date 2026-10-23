@@ -32,7 +32,7 @@ class PromocionForm(forms.Form):
     material_producto=forms.CharField(required=False,max_length=100,label='Material de producto (opcional)')
     def clean_enlace(self):return enlace_https(self.cleaned_data['enlace'])
 
-def validar_material(datos,did):
+def validar_material(datos,did,existente=None):
     tipo=datos['tipo'];url=datos['url'];material=datos['material_id']
     selected=datos.pop('material_producto','')
     if selected:
@@ -45,6 +45,7 @@ def validar_material(datos,did):
         datos.update(tipo=media['tipo'],url=media['url'],material_id='')
         datos['producto_id']=product.producto_id
         return
+    if existente and not datos['activo'] and (existente.tipo,existente.url,existente.material_id)==(tipo,url,material):return
     if tipo=='texto':
         if url or material:raise ValidationError('Una promoción de texto no lleva archivo.')
         return
@@ -53,6 +54,10 @@ def validar_material(datos,did):
         validar_multimedia([dict(id=str(uuid4()),tipo=tipo,url=url,principal=False,orden=0)],settings.URBAN_API_BASE)
         if material:raise ValidationError('El enlace externo no necesita archivo.')
         return
+    if not material:
+        for product in Publicacion.objects.filter(distribuidora_id=did,activa=True).only('multimedia','producto_id'):
+            if any(i.get('tipo')==tipo and i.get('url')==url for i in product.multimedia):
+                datos['producto_id']=product.producto_id;return
     try:mid=str(UUID(material))
     except (ValueError,TypeError):raise ValidationError('Subí y elegí un archivo para la promoción.') from None
     base=urlsplit(settings.URBAN_API_BASE)
@@ -66,7 +71,8 @@ def guardar_promocion(perfil,tienda_id,datos,revision,operacion_id,token,*,bloqu
     did=tienda_permitida(fresh,tienda_id)
     form=PromocionForm(datos)
     if not form.is_valid():raise ValidationError(form.errors.as_text())
-    clean=form.cleaned_data;validar_material(clean,did)
+    existente=BloquePromocional.objects.filter(pk=bloque_id,tienda__distribuidora_id=did).first() if bloque_id else None
+    clean=form.cleaned_data;validar_material(clean,did,existente)
     if type(revision) is not int or revision<0:raise ValidationError('Revisión inválida.')
     try:oid=UUID(str(operacion_id));bid=UUID(str(bloque_id)) if bloque_id else uuid4()
     except (ValueError,TypeError):raise ValidationError('Referencia inválida.') from None

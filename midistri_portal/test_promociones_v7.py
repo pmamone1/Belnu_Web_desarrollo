@@ -48,3 +48,13 @@ class PromocionesTests(TestCase):
         from .client import ApiError
         with patch('midistri_portal.promociones.api',return_value=dict(self.profile,permisos=['pedidos.gestionar'])):
             self.assertRaises(ApiError,self.s.guardar_promocion,self.profile,20,self.data,0,str(uuid4()),'x'*32)
+
+    def test_material_producto_puede_archivarse_sin_reseleccion(self):
+        from .models import Publicacion
+        photo='https://sistema7000.belnu.com.ar/catalogo-imagenes/abbeddef-abcd-4444-aaaa-123456789012/'+'a'*64+'/'
+        p=Publicacion.objects.create(distribuidora=self.d,producto_id=3,nombre='Producto',precio=10,pvp=15,
+            multimedia=[dict(tipo='foto',url=photo,id='1',orden=0,principal=True)])
+        a=self.guardar(dict(self.data,material_producto=str(p.pk)+':0'))
+        p.activa=False;p.save()
+        self.guardar(dict(self.data,tipo='foto',url=photo,material_id='',activo=False),bloque=str(a.pk),revision=1)
+        a.refresh_from_db();self.assertFalse(a.activo)

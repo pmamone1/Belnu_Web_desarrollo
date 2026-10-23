@@ -1,8 +1,10 @@
-## Planificación MiDistri · pendiente de implementación
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-Casos nuevos pendientes: código justo antes/a los 30 minutos; un uso/cinco errores; sesión de más de 30 minutos; recarga y Salir; nueva pestaña/cookie sola; Email compartido; callback vencido/dos pestañas/origen falso; fotos/videos retirados; temas y campañas con Reply-To correcto. No se ejecutaron aún para la funcionalidad nueva.
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
-Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+En QA: código1799válido/1800vencido,5errores, dos identidades, sesión31min, pestaña nueva sin identidad, recarga/Salir; callback simultáneo y Origen falso; foto principal/miniaturas/Escape, recurso retirado/Range; promoción fuera de alcance/revisión vieja/diezmáximo. En producción pendientes: SMTP real, entrada administrativa desde navegador del usuario y subida16MiB a través de cPanel. No probar con pedidos reales ni enviar la campaña para verificar instalación.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## Pruebas v6
 

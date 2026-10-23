@@ -1,8 +1,10 @@
-## Planificación MiDistri · pendiente de implementación
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-Flujo propuesto: URL general > Email > código válido 30 minutos > elección autorizada si corresponde > sesión por pestaña > Salir. Recuperación del acceso Distribuidor primero; aún no integrado.
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
-Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+URLgeneral > Email > código > elegir identidad > catálogo/carrito > revisión > pedido > preparación parcial/cargo/PDF. Administrar desde Urban > Mi tienda/Productos > revisar/publicar > sincronizar. Campañas: borrador/vista previa > confirmación explícita; no se confirma al instalar.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## Flujo v6
 

@@ -1,6 +1,8 @@
-## Planificación MiDistri · 22/10/2026 · sin implementar
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-Código de ingreso de 30 minutos, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables y galerías/tienda. Diseño conversacional aprobado; implementación y paquetes pendientes de revisar el plan. No se envió la campaña ni se modificó código de aplicación. Ver [diseño](docs/superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](docs/superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](docs/ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## MiDistri-Pedidos v6 · Catálogo y preparación parcial
 

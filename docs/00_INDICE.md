@@ -1,8 +1,12 @@
-## Planificación MiDistri · pendiente de implementación
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-Diseño y planes de trabajo preparados; todavía no son funciones instaladas.
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
-Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+- [Guía técnica y uso](ACCESO_TIENDA_v7.md).
+- [Validación](VALIDACION_v7.md).
+- [Revisión final](REVISION_FINAL_v7.md).
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## Vigente v6
 

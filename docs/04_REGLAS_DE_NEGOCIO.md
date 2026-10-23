@@ -1,8 +1,10 @@
-## Planificación MiDistri · pendiente de implementación
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-Reglas propuestas: código 1800 segundos de un uso; sesión separada de su vencimiento; no ampliar permisos ni enviar campañas. Las reglas vigentes que siguen conservan su prioridad hasta implementar y entregar.
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
-Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+OTP1800s no determina vencimiento de sesión; cinco errores, cupos, contacto vigente, scope actual. Videos privados requieren publicación explícita. Cantidad preparada0..solicitada, sólo preparados generan cargo. Promociones10/tienda, fotos20/videos10 por producto; no autoplay.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## Reglas vigentes v6
 

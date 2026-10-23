@@ -1,11 +1,14 @@
-## Planificación MiDistri · pendiente de implementación
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
-- [ ] Revisar plan principal y ejecutar sus subplanes.
-- [ ] Verificar código/sesión, callback, contactos, multimedia y presentación en pruebas locales.
-- [ ] Actualizar PDF principal, migraciones, instalador y ZIP del proyecto al completar la implementación.
-- [ ] Publicar dos commits/PRs y entregar comandos separados; no enviar campaña.
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
-Ver [diseño](superpowers/specs/2026-10-22-midistri-acceso-codigo-y-tienda-design.md) y [plan principal](superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md).
+- [x] Pruebas locales de acceso, sesión, medios, permisos, precios y preparaciones.
+- [x] Instaladores16/16 por proyecto.
+- [ ] Revisión independiente final y resolución de hallazgos.
+- [ ] Verificar PDF principal y ZIP/commit final.
+- [ ] Instalación y activación funcional en cPanel por el usuario.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
 
 ## Checklist v6
 
