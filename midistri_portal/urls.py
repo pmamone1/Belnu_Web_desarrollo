@@ -1,6 +1,8 @@
 from django.urls import path
-from . import views, operadores_views, acceso_views, comercial_views
+from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views
 urlpatterns=[
+path('administrar/producto/<int:producto>/videos/',materiales_views.panel,name='midistri_operador_materiales'),
+path('administrar/promociones/',promociones_views.panel,name='midistri_operador_promociones'),
 path('administrar/comunicacion/',comercial_views.configuracion,name='midistri_operador_comunicacion'),
 path('acceso/',acceso_views.pantalla,name='midistri_codigo'),
 path('acceso/iniciar/',acceso_views.iniciar,name='midistri_codigo_iniciar'),

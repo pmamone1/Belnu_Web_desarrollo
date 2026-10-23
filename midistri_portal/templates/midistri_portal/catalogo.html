@@ -1,7 +1,10 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
+{% if distribuidora %}<label class="tema-selector">Apariencia <select data-tema-tienda="{{ distribuidora.pk }}">{% for clave,nombre in temas %}<option value="{{ clave }}" {% if presentacion.tema == clave %}selected{% endif %}>{{ nombre }}</option>{% endfor %}</select></label>{% endif %}
+{% include 'midistri_portal/promociones.html' %}
+
 {% if presentacion %}<section>{% if presentacion.logo %}<img src="{{ presentacion.logo.url }}" alt="Logo de {{ distribuidora.nombre }}" style="max-width:180px;max-height:140px">{% endif %}
 {% if presentacion.bienvenida %}<p>{{ presentacion.bienvenida|linebreaksbr }}</p>{% endif %}
-{% if presentacion.email %}<p>Email: <a href="mailto:{{ presentacion.email }}">{{ presentacion.email }}</a></p>{% endif %}{% if presentacion.telefono %}<p>Teléfono: {{ presentacion.telefono }}</p>{% endif %}
+{% if distribuidora.email_respuesta %}<p>Email: <a href="mailto:{{ distribuidora.email_respuesta }}">{{ distribuidora.email_respuesta }}</a></p>{% elif presentacion.email %}<p>Email: <a href="mailto:{{ presentacion.email }}">{{ presentacion.email }}</a></p>{% endif %}{% if presentacion.telefono %}<p>Teléfono: {{ presentacion.telefono }}</p>{% endif %}
 {% if presentacion.instrucciones %}<p>{{ presentacion.instrucciones|linebreaksbr }}</p>{% endif %}</section>{% endif %}
 <h2>Elegí los productos para tu negocio</h2><p class="muted">Portal para realizar pedidos. La distribuidora confirma disponibilidad. Sin pago online.</p>
 {% if not perfil %}<section><h3>¿Sos vendedor?</h3><p>{% if request.midistri_codigo_enabled %}Entrá con un Email asociado a tu vendedor y el código que recibirás. No necesitás registrarte ni crear contraseña.</p><a class="button" href="{% url 'midistri_codigo' %}">Entrar con mi Email</a>{% else %}Entrá desde el enlace personal que recibiste por Email o WhatsApp. No necesitás registrarte ni crear una contraseña.</p>{% endif %}<form method="get"><label>Ver catálogo de<select name="distribuidora" required><option value="">Elegí tu distribuidora</option>{% for d in distribuidoras %}<option value="{{ d.pk }}" {% if distribuidora.pk == d.pk %}selected{% endif %}>{{ d.nombre }}</option>{% endfor %}</select></label><button>Ver catálogo</button></form></section>{% endif %}

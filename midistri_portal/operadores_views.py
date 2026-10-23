@@ -320,7 +320,7 @@ def tienda_panel(request):
             for cambio in current.cambios.filter(confirmado_urban=False,operador_id=ctx['operador']['operador_id']).order_by('creado')[:10]:
                 _confirmar(cambio,token)
         form=TiendaForm(request.POST if request.method=='POST' else None,
-            initial={k:getattr(current,k) for k in ('email','telefono','bienvenida','instrucciones')} if current else {})
+            initial={k:getattr(current,k) for k in ('tema','email','telefono','bienvenida','instrucciones')} if current else {})
         ctx.update(form=form,presentacion=current,error_form=error,operacion=str(uuid4()),
             auditoria_pendiente=bool(current and current.cambios.filter(confirmado_urban=False).exists()))
         return render(request,'midistri_portal/operador_tienda.html',ctx)

@@ -1,0 +1,14 @@
+{% extends 'midistri_portal/operador_base.html' %}{% block panel %}
+<h3>Promociones y carrusel · {{ tienda.nombre }}</h3><p>Hasta diez bloques activos. El carrusel se recorre manualmente, sin reproducción automática.</p>
+{% if error_form %}<p role="alert" class="notice">{{ error_form }}</p>{% endif %}
+<h4>1. Subir material propio (opcional)</h4>
+<form method="post" enctype="multipart/form-data">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input type="hidden" name="accion" value="subir"><input type="hidden" name="operacion" value="{{ operacion }}">
+<label>Foto o video <input type="file" name="archivo" required accept=".jpg,.jpeg,.png,.webp,.mp4"></label><p>Fotos: 5 MB / 20 megapíxeles. Videos: MP4 H.264/AAC, hasta 16 MB. La subida se valida en Urban Soft y todavía no se publica.</p><button>Subir y preparar promoción</button></form>
+{% if uploaded %}<p class="notice">Archivo listo. Completá y guardá la promoción para publicarlo.</p>{% endif %}
+<h4>2. Contenido de la promoción</h4>
+<form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input type="hidden" name="bloque" value="{{ bloque.pk|default:'' }}"><input type="hidden" name="nuevo_bloque" value="{{ nuevo_bloque }}"><input type="hidden" name="operacion" value="{{ operacion }}"><input type="hidden" name="revision" value="{{ revision }}">
+{% for field in form %}{% if field.name != 'material_producto' %}{{ field.errors }}<p>{{ field.label_tag }}{{ field }}</p>{% endif %}{% endfor %}
+<label>Usar foto o video de un producto <select name="material_producto"><option value="">No usar material de producto</option>{% for p in productos_media %}{% for m in p.multimedia %}<option value="{{ p.pk }}:{{ forloop.counter0 }}">{{ p.nombre }} · {{ m.tipo }} · {{ m.descripcion }}</option>{% endfor %}{% endfor %}</select></label>
+<p>También podés usar un enlace HTTPS de YouTube o Vimeo. El enlace de la promoción es opcional y se abre en otra pestaña.</p><button>Guardar promoción</button></form>
+<h4>Promociones guardadas</h4><table><thead><tr><th>Orden</th><th>Título</th><th>Estado</th><th>Editar / archivar</th></tr></thead><tbody>{% for p in promociones %}<tr><td>{{ p.orden }}</td><td>{{ p.titulo }}</td><td>{% if p.activo %}Publicada{% else %}Archivada{% endif %}</td><td><a href="?distribuidora={{ tienda.id }}&bloque={{ p.pk }}">Editar</a></td></tr>{% empty %}<tr><td colspan="4">Sin promociones.</td></tr>{% endfor %}</tbody></table><p>Para archivar: abrí Editar, quitá «Publicar en la tienda» y guardá. El historial se conserva.</p>
+<p><a href="{% url 'midistri_operador_tienda' %}?distribuidora={{ tienda.id }}">Volver a Mi tienda</a> · <a href="/portal/?distribuidora={{ tienda.id }}" target="_blank" rel="noopener">Vista pública</a></p>{% endblock %}

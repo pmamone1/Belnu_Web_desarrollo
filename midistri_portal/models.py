@@ -42,6 +42,7 @@ class PedidoLocal(models.Model):
 
 
 class Tienda(models.Model):
+    tema=models.CharField(max_length=20,default='claro')
     distribuidora=models.OneToOneField(Distribuidora,on_delete=models.PROTECT)
     logo=models.FileField(upload_to='midistri/tiendas/',blank=True)
     email=models.EmailField(max_length=254,blank=True)
@@ -72,3 +73,25 @@ class SesionVendedorPortal(models.Model):
     creado=models.DateTimeField(default=timezone.now)
     actividad=models.DateTimeField(default=timezone.now)
     revocado=models.BooleanField(default=False)
+
+class BloquePromocional(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    tienda=models.ForeignKey(Tienda,on_delete=models.PROTECT)
+    titulo=models.CharField(max_length=150)
+    texto=models.TextField(max_length=1500,blank=True)
+    enlace=models.URLField(max_length=500,blank=True)
+    tipo=models.CharField(max_length=10,default='texto')
+    material_id=models.CharField(max_length=36,blank=True)
+    url=models.URLField(max_length=500,blank=True)
+    orden=models.PositiveIntegerField(default=0)
+    activo=models.BooleanField(default=False)
+    revision=models.PositiveIntegerField(default=0)
+
+class CambioPromocional(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    bloque=models.ForeignKey(BloquePromocional,on_delete=models.PROTECT)
+    operador_id=models.PositiveIntegerField()
+    antes=models.JSONField(default=dict)
+    despues=models.JSONField(default=dict)
+    huella=models.CharField(max_length=64)
+    creado=models.DateTimeField(default=timezone.now)

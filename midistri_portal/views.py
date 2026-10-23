@@ -93,8 +93,9 @@ def catalogo(request):
         product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)
         product.galeria_dom_id='galeria-'+str(product.producto_id)
         product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
-    from .presentacion import presentacion_publica
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d))
+    from .presentacion import presentacion_publica,TEMAS
+    from .promociones import promociones_publicas
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     return render(request,'midistri_portal/catalogo.html',context)
 
 
