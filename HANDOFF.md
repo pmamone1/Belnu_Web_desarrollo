@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v10 - Catálogo coordinado
+
+Operación cada cinco minutos con Urban v588: altas autorizadas, cambios y bajas, conservando exclusiones, ocultos y pedidos anteriores. Mantiene sincronizador/API y galería v9; acumulativo v8/v9, sin migraciones nuevas. Instalación v10 y cron productivos pendientes. El video Alma Chocolate141 ya fue publicado/sincronizado para20/65 según confirmación del usuario y lectura del portal23/10/2026. SMTP y campaña sin cambios.
+
+Guía vigente: [CATALOGO_AUTOMATICO_v10.md](docs/CATALOGO_AUTOMATICO_v10.md). Prioridad sobre instrucciones antiguas para este flujo.
+
 ## MiDistri-Pedidos v9 - Galería sin controles redundantes
 
 Con un recurso se ocultan flechas y miniaturas; con varios se conserva la navegación de fotos y videos. Sin migraciones nuevas, cambios de permisos, precios o pedidos. Instalación productiva pendiente. El diagnóstico confirmó que el video2 de Alma Chocolate no está publicado para19/68 (20/65); requiere publicación expresa y sincronización, no se resuelve sólo instalando esta versión.
