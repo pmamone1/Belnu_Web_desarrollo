@@ -10,7 +10,7 @@ Corrección visual sobre v8. Instalación v9 productiva pendiente.
 5. Después de publicar, sincronizar el catálogo de MiDistri para recibir el material. Si todavía no aparece, revisar publicación y última sincronización antes de volver a subirlo.
 
 ## Diagnóstico del caso informado
-Consulta pública del 23/10/2026: Alma de Campeon (Chocolate), producto Urban141, muestra dos fotos y ningún video recibido en el portal20. El catálogo indica sincronización 23/10/2026 02:11. No se determinó todavía si falta publicar el enlace YouTube XLi-hLJLm0A o volver a sincronizar; se solicitó diagnóstico de sólo lectura de ProductoVideo y MaterialPublicable.
+Consulta pública del 23/10/2026: Alma de Campeon (Chocolate), producto Urban141, muestra dos fotos y ningún video recibido en el portal20. El catálogo indica sincronización 23/10/2026 02:11. El diagnóstico cPanel confirmó ProductoVideo2 activo con el enlace YouTube XLi-hLJLm0A, publicaciones19/68 activas para20/65 y PUBLICADOS vacío. Falta publicar expresamente ese enlace en ambas y sincronizar. Se preparó un procedimiento acotado al video y publicaciones confirmados, con actor SuperUsuario identificado, transacción global y servicios de revisión/auditoría existentes; no duplica al repetir y aborta si aparecen otros materiales.
 No se cambió la reproducción ni se asegura que el video haya quedado publicado en producción. No se publican automáticamente originales privados al instalar. El cambio v9 elimina únicamente controles redundantes de la galería.
 
 ## Implementación y validación
