@@ -1,0 +1,22 @@
+[
+  "CAMBIOS_v9_galeria.txt",
+  "COMANDOS_CPANEL_MIDISTRI_v9.txt",
+  "HANDOFF.md",
+  "Manual_MiDistri_Pedidos_Online.pdf",
+  "README.md",
+  "VERSION_DOCUMENTADA.txt",
+  "docs/00_INDICE.md",
+  "docs/04_REGLAS_DE_NEGOCIO.md",
+  "docs/05_FLUJOS_FUNCIONALES.md",
+  "docs/17_CHECKLIST_ENTREGA.md",
+  "docs/19_PRUEBAS_MANUALES_CRITICAS.md",
+  "docs/GALERIA_v9.md",
+  "docs/MANUAL_USUARIO.md",
+  "docs/VALIDACION_v9.md",
+  "midistri_portal/static/midistri_portal/galeria.js",
+  "tools/actualizar_manual_v9.py",
+  "tools/instalar_release_midistri_v9.py",
+  "tools/paquete_integracion_v9.py",
+  "tools/release_files_v9.json",
+  "tools/test_instalar_release_midistri_v9.py"
+]

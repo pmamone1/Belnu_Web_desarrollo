@@ -1,3 +1,16 @@
+## MiDistri-Pedidos v9 - Galería sin controles redundantes
+
+Con un recurso se ocultan flechas y miniaturas; con varios se conserva la navegación de fotos y videos. Sin migraciones nuevas, cambios de permisos, precios o pedidos. Instalación productiva pendiente. El video de Alma Chocolate requiere revisar publicación/sincronización: el portal recibió dos fotos y ningún video; no se afirma resuelto por instalar esta versión.
+
+Guía vigente: [GALERIA_v9.md](GALERIA_v9.md). Para el resto del portal se mantiene v8.
+
+1. Tocá la foto del producto para ampliarla. Si tiene un solo recurso, la ventana muestra la foto y Cerrar, sin flechas ni miniaturas para repetir la misma imagen.
+2. Si hay varias fotos o videos publicados, aparecen Anterior, Siguiente y las miniaturas para elegir. Las fotos se mantienen con la principal primero.
+3. Los videos MP4 publicados tienen controles de reproducción. Los enlaces de YouTube y Vimeo muestran un botón para abrir el video en su sitio de origen.
+4. Que un video figure en Productos de Urban Soft no significa que ya esté publicado en MiDistri. En Administrar MiDistri-Pedidos > Productos > Fotos y videos, elegir el video, revisar y confirmar su publicación para la distribuidora correspondiente.
+5. Después de publicar, sincronizar el catálogo de MiDistri para recibir el material. Si todavía no aparece, revisar publicación y última sincronización antes de volver a subirlo.
+
+
 ## MiDistri-Pedidos v8 - Fotos, textos y cuatro temas
 
 Vigente sobre v7 r2 confirmada por el usuario; instalación v8 pendiente. Apariencia: Claro, Nocturno, Azul y Verde. Catálogo para el Kiosco, texto de disponibilidad simplificado, fotos en carrito y detalle, y botón «Armar un nuevo pedido». Fotos actuales de la misma distribuidora; cantidades y precios históricos intactos. Sin modelos, migraciones nuevas, cargos ni campañas. No requiere actualización Urban Soft.
