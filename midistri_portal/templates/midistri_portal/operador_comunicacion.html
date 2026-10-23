@@ -1,0 +1,5 @@
+{% extends 'midistri_portal/operador_base.html' %}{% block panel %}
+<h3>Nombre comercial y mensajes · {{ tienda.nombre }}</h3><p>Se guardan en Urban Soft para usarlos en las campañas de esta distribuidora. El envío utiliza la cuenta SMTP autorizada.</p>
+<form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input type="hidden" name="revision" value="{{ revision }}"><input type="hidden" name="operacion" value="{{ operacion }}">{{ form.as_p }}<button>Guardar nombre y mensajes</button></form>
+<p>Guardar no envía campañas. Revisá siempre el mensaje y sus destinatarios antes de confirmar.</p>
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views, operadores_views, acceso_views
+from . import views, operadores_views, acceso_views, comercial_views
 urlpatterns=[
+path('administrar/comunicacion/',comercial_views.configuracion,name='midistri_operador_comunicacion'),
 path('acceso/',acceso_views.pantalla,name='midistri_codigo'),
 path('acceso/iniciar/',acceso_views.iniciar,name='midistri_codigo_iniciar'),
 path('acceso/verificar/',acceso_views.verificar,name='midistri_codigo_verificar'),

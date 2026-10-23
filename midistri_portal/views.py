@@ -34,7 +34,7 @@ def identificar(request):
 def base(request,perfil=None,distribuidora=None):
     saved=request.session.get('midistri_catalogo_filtros',{})
     return {'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
-        (' - '+perfil['distribuidora'] if perfil else (' - '+distribuidora.nombre if distribuidora else '')),
+        (' - '+perfil['distribuidora'] if perfil else (' - '+(distribuidora.nombre_comercial or distribuidora.nombre) if distribuidora else '')),
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
 

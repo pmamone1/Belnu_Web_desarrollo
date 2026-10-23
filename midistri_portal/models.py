@@ -6,6 +6,8 @@ class Distribuidora(models.Model):
     id=models.PositiveIntegerField(primary_key=True)
     nombre=models.CharField(max_length=150)
     activa=models.BooleanField(default=True)
+    nombre_comercial=models.CharField(max_length=150,blank=True)
+    email_respuesta=models.EmailField(max_length=254,blank=True)
 
 class Publicacion(models.Model):
     producto_id=models.PositiveIntegerField()
