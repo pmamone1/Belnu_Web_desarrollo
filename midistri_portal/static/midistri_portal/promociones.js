@@ -1,6 +1,6 @@
 (function(){'use strict';
-const temas=['claro','nocturno','azul','verde','terracota','violeta_pastel','ambar_pastel'];
-function init(){const selector=document.querySelector('[data-tema-tienda]');if(!selector)return;const key='midistri.tema.'+selector.dataset.temaTienda;let chosen=null;try{chosen=localStorage.getItem(key);}catch(e){}if(temas.includes(chosen))selector.value=chosen;document.body.dataset.tema=selector.value;selector.addEventListener('change',()=>{if(!temas.includes(selector.value))return;document.body.dataset.tema=selector.value;try{localStorage.setItem(key,selector.value);}catch(e){}});}
+const temas=['claro','nocturno','azul','verde'];
+function init(){const selector=document.querySelector('[data-tema-tienda]');if(!selector)return;const key='midistri.tema.'+selector.dataset.temaTienda;let chosen=null;try{chosen=localStorage.getItem(key);}catch(e){}if(chosen)selector.value=temas.includes(chosen)?chosen:"claro";document.body.dataset.tema=selector.value;selector.addEventListener('change',()=>{if(!temas.includes(selector.value))return;document.body.dataset.tema=selector.value;try{localStorage.setItem(key,selector.value);}catch(e){}});}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-carrusel]');if(!b)return;const rail=document.querySelector('.promociones-rail');if(rail)rail.scrollBy({left:rail.clientWidth*Number(b.dataset.carrusel),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});});
 document.addEventListener('midistri:render',init);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();

@@ -11,7 +11,7 @@ from .client import api,ApiError
 from .operadores import perfil_valido,tienda_permitida
 from .models import Distribuidora,Tienda,CambioTienda
 
-TEMAS=[('claro','Claro'),('nocturno','Nocturno'),('azul','Azul'),('verde','Verde'),('terracota','Terracota'),('violeta_pastel','Violeta pastel'),('ambar_pastel','Ámbar pastel')]
+TEMAS=[('claro','Claro'),('nocturno','Nocturno'),('azul','Azul'),('verde','Verde')]
 
 class TiendaForm(forms.Form):
     tema=forms.ChoiceField(choices=TEMAS,required=False,label='Tema predeterminado')

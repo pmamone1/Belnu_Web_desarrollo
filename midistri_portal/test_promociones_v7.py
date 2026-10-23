@@ -20,10 +20,10 @@ class PromocionesTests(TestCase):
         with patch('midistri_portal.promociones.api') as api:
             api.side_effect=lambda action,**kwargs:self.profile if action=='operator-profile' else {'ok':True,'revision':kw.get('revision',0)+1}
             return self.s.guardar_promocion(self.profile,20,data or self.data,kw.get('revision',0),kw.get('operacion',str(uuid4())),'op'*22,bloque_id=kw.get('bloque'))
-    def test_siete_temas_y_preferencia_por_tienda(self):
+    def test_cuatro_temas_y_preferencia_por_tienda(self):
         from .presentacion import TiendaForm
         choices=dict(TiendaForm.base_fields['tema'].choices)
-        self.assertEqual(set(choices),{'claro','nocturno','azul','verde','terracota','violeta_pastel','ambar_pastel'})
+        self.assertEqual(set(choices),{'claro','nocturno','azul','verde'})
         self.assertEqual(self.t.tema,'claro')
     def test_maximo_diez_y_revision_obsoleta(self):
         a=self.guardar()

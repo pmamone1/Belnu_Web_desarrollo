@@ -1,0 +1,8 @@
+MiDistri-Pedidos v8
+- Temas Claro, Nocturno, Azul y Verde; preferencias retiradas se muestran como Claro.
+- Catálogo: Elegí los productos para tu Kiosco! y aviso de disponibilidad.
+- Carrito: fotos ampliables de productos y texto sujeto a disponibilidad y aceptación.
+- Detalle: foto actual del catálogo sin modificar nombre, cantidades ni precios históricos.
+- Botón Armar un nuevo pedido sin el sufijo de precios.
+- Sin modelos ni migraciones nuevas; sólo belnuweb. No envía campañas.
+Guía: docs/FOTOS_PRESENTACION_v8.md. Instalación productiva pendiente.
