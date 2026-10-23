@@ -46,3 +46,10 @@ class SesionPestanaTests(CodigoPortalTests):
         headers=dict(self.headers,HTTP_X_MIDISTRI_TAB_PROOF='b'*64)
         self.assertEqual(self.client.get('/portal/carrito/',**headers).status_code,403)
         self.assertEqual(self.client.post('/portal/cantidad/',{'producto':'1','cantidad':'2'},**headers).status_code,403)
+
+    def test_salir_ajax_no_redirige_con_prueba_revocada(self):
+        self.login()
+        with patch('midistri_portal.views.api'):
+            response=self.client.post('/portal/salir/',HTTP_ACCEPT='application/json',**self.headers)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.json()['url'],'/portal/')

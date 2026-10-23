@@ -26,7 +26,7 @@ def identificar(request):
     except ApiError as e:
         if e.status in (401,403):
             for key in ('midistri_token','midistri_cart','midistri_cart_id'):request.session.pop(key,None)
-            messages.error(request,'Tu acceso venció o fue desactivado. Pedí un nuevo enlace a tu distribuidora.')
+            messages.error(request,'Tu acceso fue desactivado. Entrá nuevamente con tu Email y código.' if getattr(request,'midistri_codigo_enabled',False) else 'Tu acceso venció o fue desactivado. Pedí un nuevo enlace a tu distribuidora.')
             return None
         raise
 
@@ -302,6 +302,7 @@ def salir(request):
     if getattr(request,'midistri_tab',None):
         from .sesion_pestana import cerrar_sesion_pestana
         cerrar_sesion_pestana(request)
+        if 'application/json' in request.headers.get('Accept',''):return JsonResponse({'ok':True,'url':'/portal/'})
     else:request.session.flush()
     return redirect('midistri_catalogo')
 
