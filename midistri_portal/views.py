@@ -89,6 +89,10 @@ def catalogo(request):
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
+        product.galeria=product.multimedia if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) else []
+        product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)
+        product.galeria_dom_id='galeria-'+str(product.producto_id)
+        product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
     from .presentacion import presentacion_publica
     context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d))
     return render(request,'midistri_portal/catalogo.html',context)
