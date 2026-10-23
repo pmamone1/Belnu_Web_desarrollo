@@ -20,5 +20,6 @@
   "tools/instalar_release_midistri_v10.py",
   "tools/paquete_integracion_v10.py",
   "tools/release_files_v10.json",
-  "tools/test_instalar_release_midistri_v10.py"
+  "tools/test_instalar_release_midistri_v10.py",
+  "tools/test_paquete_v10.py"
 ]

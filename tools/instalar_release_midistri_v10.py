@@ -163,10 +163,13 @@ def main():
         if src.is_file() and src.stat().st_size>100*1024*1024:raise ValueError('Archivo demasiado grande.')
         if src.suffix=='.py' and src.is_file():compile(src.read_bytes(),str(src),'exec')
         if not src.is_file() or sha(src.read_bytes())!=item['sha256']:raise ValueError('Paquete incompleto o alterado: '+item['path'])
+        if dst.exists() and not dst.is_file():raise ValueError('El destino no es un archivo: '+item['path'])
         if dst.exists() and sha(dst.read_bytes())==item['sha256']:continue
         accepted=set(item.get('accepted_base_normalized_sha256',[]))
         if item.get('base_normalized_sha256'):accepted.add(item['base_normalized_sha256'])
-        if accepted and (not dst.is_file() or normalized(dst.read_bytes()) not in accepted):
+        known=(dst.is_file() and normalized(dst.read_bytes()) in accepted)
+        missing=(not dst.exists() and item.get('base_missing_allowed') is True)
+        if accepted and not (known or missing):
             raise ValueError('La versión instalada difiere de la revisada: '+item['path']+'. Detenido sin modificar archivos. Compartir este mensaje para preparar la adaptación.')
         if item.get('new_code') and dst.exists():raise ValueError('Ya existe código diferente en '+item['path']+'. Detenido sin reemplazarlo.')
         pending.append(item)

@@ -7,7 +7,7 @@ Se incluyen las distribuidoras expresamente habilitadas en MiDistri, también la
 La regla general se configura en Urban con proveedor revisado y exclusiones. Las cuatro Esferas 328, 329, 330 y 331 permanecen excluidas.
 Dar de baja un producto en Urban lo retira del catálogo; los pedidos anteriores conservan sus datos y precios. El pedido nuevo se calcula al precio vendedor.
 Tocá la foto para ampliarla. Con un solo recurso no aparecen flechas; con varias fotos o videos publicados sí hay navegación. Los enlaces de YouTube/Vimeo abren el sitio de origen.
-Una subida de video privada no se publica automáticamente: sigue requiriendo revisión y confirmación. Alma Chocolate141 tiene publicadas las dos fotos y el enlace de video para20/65, confirmado por el usuario y lectura del portal el23/10/2026.
+Una subida de video privada no se publica automáticamente: sigue requiriendo revisión y confirmación. Alma de Campeón Chocolate, producto 141, tiene publicadas las dos fotos y el enlace de video para 20/65, confirmado por el usuario y lectura del portal el 23/10/2026.
 Si hay un error, el portal conserva la última copia válida. Revisá su fecha de última sincronización y el registro del cron. No se envía ninguna campaña durante esta actualización.
 
 ## Instalación y operación técnica

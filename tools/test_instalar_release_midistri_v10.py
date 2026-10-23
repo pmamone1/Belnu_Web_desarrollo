@@ -45,6 +45,20 @@ class InstallerTests(unittest.TestCase):
         self.invoke()
         self.assertEqual((self.root/self.path).read_bytes(),b'alternativa')
 
+    def test_ausencia_revisada_de_base_antigua_es_admitida(self):
+        self.manifest['files'][0]['accepted_base_normalized_sha256']=[self.module.normalized(b'original')]
+        self.manifest['files'][0]['base_missing_allowed']=True
+        (self.root/self.path).unlink()
+        (self.bundle/'release_manifest.json').write_text(json.dumps(self.manifest))
+        self.invoke()
+        self.assertFalse((self.root/self.path).exists())
+
+    def test_directorio_no_se_admite_como_archivo_ausente(self):
+        self.manifest['files'][0]['base_missing_allowed']=True
+        (self.root/self.path).unlink();(self.root/self.path).mkdir()
+        (self.bundle/'release_manifest.json').write_text(json.dumps(self.manifest))
+        with self.assertRaises(ValueError):self.invoke()
+
     def test_version_distinta_no_copia_ni_respalda(self):
         (self.root/self.path).write_text('personalizado\n')
         with self.assertRaises(ValueError):self.invoke('--apply')
