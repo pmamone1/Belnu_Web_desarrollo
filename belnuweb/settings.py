@@ -56,7 +56,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware','midistri_portal.sesion_middleware.SesionPestanaMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -195,3 +195,7 @@ SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=not DEBUG)
 CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=not DEBUG)
 
 MIDISTRI_ADMIN_ENABLED = env.bool('MIDISTRI_ADMIN_ENABLED', default=False)
+
+MIDISTRI_LOGIN_CODIGO_ENABLED = env.bool('MIDISTRI_LOGIN_CODIGO_ENABLED', default=False)
+
+MIDISTRI_MULTIMEDIA_ENABLED = env.bool('MIDISTRI_MULTIMEDIA_ENABLED', default=False)

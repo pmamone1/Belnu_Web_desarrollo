@@ -11,7 +11,12 @@ from .client import api,ApiError
 from .operadores import perfil_valido,tienda_permitida
 from .models import Distribuidora,Tienda,CambioTienda
 
+TEMAS=[('claro','Claro'),('nocturno','Nocturno'),('azul','Azul'),('verde','Verde'),('terracota','Terracota'),('violeta_pastel','Violeta pastel'),('ambar_pastel','Ámbar pastel')]
+
 class TiendaForm(forms.Form):
+    tema=forms.ChoiceField(choices=TEMAS,required=False,label='Tema predeterminado')
+    def clean_tema(self):return self.cleaned_data.get('tema') or 'claro'
+
     email=forms.EmailField(required=False,max_length=254,label='Email de contacto')
     telefono=forms.CharField(required=False,max_length=40,label='Teléfono de contacto')
     bienvenida=forms.CharField(required=False,max_length=500,widget=forms.Textarea(attrs={'rows':3}))

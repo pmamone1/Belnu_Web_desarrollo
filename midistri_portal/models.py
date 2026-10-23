@@ -6,6 +6,8 @@ class Distribuidora(models.Model):
     id=models.PositiveIntegerField(primary_key=True)
     nombre=models.CharField(max_length=150)
     activa=models.BooleanField(default=True)
+    nombre_comercial=models.CharField(max_length=150,blank=True)
+    email_respuesta=models.EmailField(max_length=254,blank=True)
 
 class Publicacion(models.Model):
     producto_id=models.PositiveIntegerField()
@@ -16,6 +18,7 @@ class Publicacion(models.Model):
     precio=models.DecimalField(max_digits=12,decimal_places=2)
     pvp=models.DecimalField(max_digits=12,decimal_places=2)
     imagenes=models.JSONField(default=list)
+    multimedia=models.JSONField(default=list)
     display=models.PositiveIntegerField(null=True)
     activa=models.BooleanField(default=True)
     class Meta:
@@ -39,6 +42,7 @@ class PedidoLocal(models.Model):
 
 
 class Tienda(models.Model):
+    tema=models.CharField(max_length=20,default='claro')
     distribuidora=models.OneToOneField(Distribuidora,on_delete=models.PROTECT)
     logo=models.FileField(upload_to='midistri/tiendas/',blank=True)
     email=models.EmailField(max_length=254,blank=True)
@@ -56,3 +60,40 @@ class CambioTienda(models.Model):
     huella=models.CharField(max_length=64)
     creado=models.DateTimeField(default=timezone.now)
     confirmado_urban=models.BooleanField(default=False)
+
+
+class SesionVendedorPortal(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    prueba_hash=models.CharField(max_length=64)
+    navegador_hash=models.CharField(max_length=64)
+    token_urban=models.TextField()
+    vendedor_id=models.PositiveIntegerField()
+    distribuidora_id=models.PositiveIntegerField()
+    datos=models.JSONField(default=dict)
+    creado=models.DateTimeField(default=timezone.now)
+    actividad=models.DateTimeField(default=timezone.now)
+    revocado=models.BooleanField(default=False)
+
+class BloquePromocional(models.Model):
+    origen_publicacion=models.ForeignKey(Publicacion,on_delete=models.PROTECT,null=True,blank=True)
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    tienda=models.ForeignKey(Tienda,on_delete=models.PROTECT)
+    titulo=models.CharField(max_length=150)
+    texto=models.TextField(max_length=1000,blank=True)
+    enlace=models.URLField(max_length=500,blank=True)
+    tipo=models.CharField(max_length=10,default='texto')
+    material_id=models.CharField(max_length=36,blank=True)
+    url=models.URLField(max_length=500,blank=True)
+    orden=models.PositiveIntegerField(default=0)
+    activo=models.BooleanField(default=False)
+    revision=models.PositiveIntegerField(default=0)
+
+class CambioPromocional(models.Model):
+    estado=models.CharField(max_length=12,default='confirmado')
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    bloque=models.ForeignKey(BloquePromocional,on_delete=models.PROTECT)
+    operador_id=models.PositiveIntegerField()
+    antes=models.JSONField(default=dict)
+    despues=models.JSONField(default=dict)
+    huella=models.CharField(max_length=64)
+    creado=models.DateTimeField(default=timezone.now)

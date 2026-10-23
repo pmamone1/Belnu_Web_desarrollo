@@ -1,3 +1,22 @@
+## MiDistri-Pedidos v7 r2 · Recuperación de instalación
+
+Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](RECUPERACION_MIDISTRI_v7_r2.md).
+
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
+
+Vigente revisión final: promociones con revisión privada y confirmación separada; recuperación durable de respuestas perdidas; retiro por fuente vigente; campañas20/65 conservan sus datos propios. Salir reintenta el cierre sin restaurar identidad. Ver guía de esta versión.
+
+
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
+
+- [x] Pruebas locales de acceso, sesión, medios, permisos, precios y preparaciones.
+- [x] Instaladores16/16 por proyecto.
+- [ ] Revisión independiente final y resolución de hallazgos.
+- [ ] Verificar PDF principal y ZIP/commit final.
+- [ ] Instalación y activación funcional en cPanel por el usuario.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
+
 ## Checklist v6
 
 - [ ] Usuario confirma instalación P6 y luego U584 en sus runtimes y raíces separados.

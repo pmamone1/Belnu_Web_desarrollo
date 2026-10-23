@@ -1,3 +1,3 @@
 MiDistri / Pedidos Online
-Candidato documentado: v6 (instalación productiva pendiente; base v5; instalar antes de Urban Soft v584)
-Cambio: filtro por categoría, precio vendedor público y carrito al precio vendedor; revisión parcial por producto, actualización individual de estado y Excel agregado. Sin nuevas migraciones propias ni cambios de claves, campañas o venv.
+Candidato documentado: v7 r2 (recuperación del intento v7; instalación r2 productiva pendiente; compatible con base v6 y archivos exactos de v7)
+Cambio: corrige la lectura de la bandera multimedia en settings y permite reintento verificado del instalador sin escritura durante el preflight. Sin migraciones nuevas respecto de v7; no cambia venv ni envía campañas.

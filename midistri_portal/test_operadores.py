@@ -13,10 +13,10 @@ class OperadoresPortalTests(TestCase):
         r=self.client.get('/portal/administrar/entrada/')
         self.assertEqual(r.status_code,302)
         self.assertTrue(r['Location'].startswith('https://sistema7000.belnu.com.ar/midistri/administrar/?desafio='))
-        self.assertIn('midistri_desafio',r.cookies)
-        self.assertTrue(r.cookies['midistri_desafio']['secure'])
-        self.assertTrue(r.cookies['midistri_desafio']['httponly'])
-        self.assertEqual(r.cookies['midistri_desafio']['samesite'],'None')
+        cookie=next(c for name,c in r.cookies.items() if name.startswith('midistri_desafio_'))
+        self.assertTrue(cookie['secure'])
+        self.assertTrue(cookie['httponly'])
+        self.assertEqual(cookie['samesite'],'None')
 
     @patch('midistri_portal.operadores.api')
     def test_callback_rota_sesion_y_no_crea_usuario(self,api):

@@ -1,5 +1,6 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
-<h3>Mi tienda · {{ tienda.nombre }}</h3><p>Logo, contacto y mensajes que verán los vendedores de esta distribuidora.</p>
+<p><a class="button" href="{% url 'midistri_operador_promociones' %}?distribuidora={{ tienda.id }}">Carruseles, fotos, videos y promociones</a></p><h3>Mi tienda · {{ tienda.nombre }}</h3><p>Logo, contacto y mensajes que verán los vendedores de esta distribuidora.</p>
+<p><a class="button" href="{% url 'midistri_operador_comunicacion' %}?distribuidora={{ tienda.id }}">Nombre comercial y mensajes de Email</a></p>
 {% if error_form %}<p class="notice" role="alert">{{ error_form }}</p>{% endif %}
 {% if presentacion.logo %}<img src="{{ presentacion.logo.url }}" alt="Logo actual" style="max-width:160px;max-height:120px">{% endif %}
 <form method="post" enctype="multipart/form-data">{% csrf_token %}

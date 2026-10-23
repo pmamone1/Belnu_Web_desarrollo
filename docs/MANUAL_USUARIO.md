@@ -1,3 +1,29 @@
+## MiDistri-Pedidos v7 r2 · Recuperación de instalación
+
+Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](RECUPERACION_MIDISTRI_v7_r2.md).
+
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
+
+Vigente revisión final: promociones con revisión privada y confirmación separada; recuperación durable de respuestas perdidas; retiro por fuente vigente; campañas20/65 conservan sus datos propios. Salir reintenta el cierre sin restaurar identidad. Ver guía de esta versión.
+
+
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
+
+## Pasos actuales
+
+1. El vendedor abre belnu.com.ar/portal/ y toca Entrar con mi Email. Usa un Email habilitado en la agenda de su distribuidora; no se crea una cuenta nueva. El código tiene seis números, dura 30 minutos desde la emisión y se usa una vez. Si ese Email corresponde a varios vendedores, elige el suyo después de validarlo.
+2. La sesión se conserva mientras usa la pestaña, incluso después de vencer el código. Salir elimina la prueba local y revoca ese acceso en el servidor. En equipos compartidos usar siempre Salir. Una pestaña nueva no hereda la identidad sólo por tener la cookie; duplicar/restaurar pestañas puede restaurar sessionStorage, por lo que cerrar la pestaña no garantiza revocación.
+3. El catálogo muestra Precio vendedor y PVP (precio al público). El pedido se calcula al precio vendedor. Tocando la foto se abre la galería: principal primero, miniaturas, anterior/siguiente y Cerrar. Escape cierra y devuelve el foco. Los MP4 tienen controles y no se reproducen solos; YouTube/Vimeo se abren en el origen.
+4. La distribuidora entra desde Urban Soft > Salidas / Anuncios > Pedidos > Administrar MiDistri-Pedidos. Cada intento de entrada tiene su propia validación durante diez minutos; el pase final dura dos minutos. Si vence, iniciar un acceso nuevo desde Urban Soft. No reutilizar la dirección del resultado.
+5. Mi tienda permite logo, contacto alternativo, bienvenida, instrucciones y siete temas. Nombre comercial y Email de respuesta se editan en Nombre comercial y mensajes de Email y se guardan en Urban. La preferencia de apariencia del visitante se guarda por tienda y no contiene identidad.
+6. En Productos > Fotos y videos, seleccionar hasta diez videos existentes del producto, revisar y confirmar su publicación para esa distribuidora. Los originales privados no se publican al instalar. Sincronizar la copia del catálogo después de confirmar. Las fotos publicables se conservan y ordenan con la principal primero, hasta veinte.
+7. En Mi tienda > Carruseles, fotos, videos y promociones, subir un archivo opcional, completar título, texto, enlace HTTPS, orden y Publicar en la tienda. Hasta diez promociones activas. Para archivar, abrir Editar, quitar Publicar y guardar; conserva historial. Fotos hasta 5 MiB/20 megapíxeles; MP4 H.264/AAC hasta 16 MiB. No se publican hasta guardar el bloque.
+8. En Campañas elegir Acceso MiDistri y modalidad Portal con Email y código para enviar una URL general. Se pueden configurar nombre comercial, asunto, mensaje, entrega y Email de respuesta. Revisar la vista previa completa y destinatarios antes de confirmar. La modalidad de enlaces personales anteriores se conserva. Esta actualización no envía la campaña existente.
+9. La bandeja MiDistri muestra el número de avisos pendientes y un acceso separado al historial, con filtros y páginas. Los avisos enviando o por conciliar exigen revisar el resultado antes de reenviar. Se mantienen contactos adicionales habilitados, deduplicación y bajas.
+10. La preparación parcial conserva el circuito anterior: revisar por producto y cantidad, cancelar el resto por falta de stock, confirmar una vez y obtener el cargo y el mismo PDF para imprimir y compartir. No se reescriben pedidos, precios, remitos ni cargos históricos.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
+
 ## Manual vigente v6 · pedidos de MiDistri
 
 1. Abrir **Salidas / Anuncios > Pedidos > Pedidos web de MiDistri** y marcar OK lo recibido.

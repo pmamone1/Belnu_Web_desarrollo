@@ -6,7 +6,7 @@ from urllib.parse import urlencode
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect,render
 from django.views.decorators.http import require_GET,require_POST,require_http_methods
 from .client import api,ApiError
@@ -26,7 +26,7 @@ def identificar(request):
     except ApiError as e:
         if e.status in (401,403):
             for key in ('midistri_token','midistri_cart','midistri_cart_id'):request.session.pop(key,None)
-            messages.error(request,'Tu acceso venció o fue desactivado. Pedí un nuevo enlace a tu distribuidora.')
+            messages.error(request,'Tu acceso fue desactivado. Entrá nuevamente con tu Email y código.' if getattr(request,'midistri_codigo_enabled',False) else 'Tu acceso venció o fue desactivado. Pedí un nuevo enlace a tu distribuidora.')
             return None
         raise
 
@@ -34,7 +34,7 @@ def identificar(request):
 def base(request,perfil=None,distribuidora=None):
     saved=request.session.get('midistri_catalogo_filtros',{})
     return {'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
-        (' - '+perfil['distribuidora'] if perfil else (' - '+distribuidora.nombre if distribuidora else '')),
+        (' - '+perfil['distribuidora'] if perfil else (' - '+(distribuidora.nombre_comercial or distribuidora.nombre) if distribuidora else '')),
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
 
@@ -46,9 +46,16 @@ def error_page(request,e):
 @require_http_methods(['GET','POST'])
 def activar(request,token):
     if request.method=='POST':
+        if getattr(request,'midistri_codigo_enabled',False):
+            from .sesion_pestana import datos_prueba
+            datos_prueba(request)
         try:result=api('activate',method='POST',data={'token':token})
         except ApiError as e:return render(request,'midistri_portal/activar.html',dict(base(request),error=str(e)),status=400 if e.status<500 else 503)
-        operator=request.session.pop('midistri_operador_token',None)
+        if getattr(request,'midistri_codigo_enabled',False):
+            from .sesion_pestana import crear_sesion_pestana
+            ident,proof=datos_prueba(request)
+            return JsonResponse(crear_sesion_pestana(request,result['perfil'],result['session_token'],ident,proof))
+        operator=None if getattr(request,'midistri_codigo_enabled',False) else request.session.pop('midistri_operador_token',None)
         if operator:
             try:api('operator-logout',method='POST',operator_token=operator)
             except ApiError:pass
@@ -82,8 +89,13 @@ def catalogo(request):
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
-    from .presentacion import presentacion_publica
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d))
+        product.galeria=product.multimedia if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) else []
+        product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)
+        product.galeria_dom_id='galeria-'+str(product.producto_id)
+        product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
+    from .presentacion import presentacion_publica,TEMAS
+    from .promociones import promociones_publicas
+    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     return render(request,'midistri_portal/catalogo.html',context)
 
 
@@ -287,7 +299,11 @@ def salir(request):
     if token:
         try:api('logout',method='POST',token=token)
         except ApiError:pass
-    request.session.flush()
+    if getattr(request,'midistri_tab',None):
+        from .sesion_pestana import cerrar_sesion_pestana
+        cerrar_sesion_pestana(request)
+        if 'application/json' in request.headers.get('Accept',''):return JsonResponse({'ok':True,'url':'/portal/'})
+    else:request.session.flush()
     return redirect('midistri_catalogo')
 
 

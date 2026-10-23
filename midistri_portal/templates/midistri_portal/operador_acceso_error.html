@@ -1,0 +1,6 @@
+{% extends 'midistri_portal/base.html' %}{% block content %}
+<section role="alert"><h2>No pudimos completar el acceso de Distribuidor</h2>
+<p>{{ error }}</p><p>No se otorgó un acceso nuevo ni se cambiaron tus permisos.</p>
+<a class="button" href="{% url 'midistri_operador_entrada' %}">Iniciar de nuevo desde Urban Soft</a>
+<p class="tiny">Referencia: {{ referencia }}</p></section>
+{% endblock %}

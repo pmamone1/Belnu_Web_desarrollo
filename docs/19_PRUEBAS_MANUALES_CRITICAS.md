@@ -1,3 +1,18 @@
+## MiDistri-Pedidos v7 r2 · Recuperación de instalación
+
+Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](RECUPERACION_MIDISTRI_v7_r2.md).
+
+## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
+
+Vigente revisión final: promociones con revisión privada y confirmación separada; recuperación durable de respuestas perdidas; retiro por fuente vigente; campañas20/65 conservan sus datos propios. Salir reintenta el cierre sin restaurar identidad. Ver guía de esta versión.
+
+
+Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
+
+En QA: código1799válido/1800vencido,5errores, dos identidades, sesión31min, pestaña nueva sin identidad, recarga/Salir; callback simultáneo y Origen falso; foto principal/miniaturas/Escape, recurso retirado/Range; promoción fuera de alcance/revisión vieja/diezmáximo. En producción pendientes: SMTP real, entrada administrativa desde navegador del usuario y subida16MiB a través de cPanel. No probar con pedidos reales ni enviar la campaña para verificar instalación.
+
+Documentación vigente: [ACCESO_TIENDA_v7.md](ACCESO_TIENDA_v7.md). Instrucciones anteriores que siguen son antecedentes y no prevalecen sobre este capítulo.
+
 ## Pruebas v6
 
 En datos sintéticos: pedir10 a$25.000 y2 de otro producto; preparar6 del primero y0 del segundo. Esperado: cargo$150.000, canceladas4+2, un PDF sin el segundo, original intacto. Repetir confirmación: sin duplicados. Cero todo: sin cargo/PDF. Alterar cantidades/revisión ajena/caducada: rechazar. Dos contactos activan a la vez sin revocarse; baja de uno lo excluye. Excel: pendientes0 para esa preparación, sin LIN/VV/contactos. Sin autorización65, ni pedidos ni exportación65. Revisar catálogo público y filtros sin acceso a pedidos personales.
@@ -70,3 +85,7 @@ No generar cargos ni enviar Email para comprobar esta corrección.
   migrar debe detenerse antes de modificar código; usar corrección hacia adelante.
 
 Validación v5: sincronizar un catálogo sintético con Display0, comprobar fotos y ambos precios, ausencia de presentación0, separación20/65 y conservación de copia previa ante texto/booleano/negativo. En cPanel revisar sincronización real después de instalar; no generar pedidos de prueba en producción.
+
+Caso de regresión: abrir vendedor y administración en el mismo navegador; el carrito sigue vigente. Validar código a1799s y elegir después: ticket120s. Perder respuesta al publicar, recargar y reintentar la misma operación. Revisar material propio sin acceso público, confirmar, retirar producto/sincronizar y comprobar retiro de promoción. Cambiar sólo título en campaña20/65 y conservar nombre/Reply-To de cada una. Salir sin red y comprobar revocación al recuperar conexión.
+
+Regresión r2: importar belnuweb/settings.py con valores ficticios; reconocer sólo la huella v7 defectuosa; comprobar sin escritura; retomar archivos v7 exactos; rechazar un cambio desconocido; luego aplicar, cargar configuración instalada real y completar migraciones/estáticos/arranque. No usar producción como banco de pruebas.

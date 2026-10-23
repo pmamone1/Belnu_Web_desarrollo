@@ -1,6 +1,14 @@
 from django.urls import path
-from . import views, operadores_views
+from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views
 urlpatterns=[
+path('administrar/promociones/material/<int:distribuidora>/<uuid:material>/',promociones_views.archivo_previo,name='midistri_promocion_archivo_previo'),
+path('administrar/producto/<int:producto>/videos/',materiales_views.panel,name='midistri_operador_materiales'),
+path('administrar/promociones/',promociones_views.panel,name='midistri_operador_promociones'),
+path('administrar/comunicacion/',comercial_views.configuracion,name='midistri_operador_comunicacion'),
+path('acceso/',acceso_views.pantalla,name='midistri_codigo'),
+path('acceso/iniciar/',acceso_views.iniciar,name='midistri_codigo_iniciar'),
+path('acceso/verificar/',acceso_views.verificar,name='midistri_codigo_verificar'),
+path('acceso/seleccionar/',acceso_views.seleccionar,name='midistri_codigo_seleccionar'),
 path('administrar/abastecimiento/',operadores_views.abastecimiento_panel,name='midistri_operador_abastecimiento'),
 path('administrar/tienda/',operadores_views.tienda_panel,name='midistri_operador_tienda'),
 path('administrar/productos/',operadores_views.productos,name='midistri_operador_productos'),

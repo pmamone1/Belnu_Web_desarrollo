@@ -1,0 +1,16 @@
+# MiDistri v7 r2: usar este paquete en lugar del v7 original.
+# Subir ZIP y .sha256 a /home/mcollini. Mantener funciones nuevas apagadas.
+(
+set -e
+umask 077
+cd /home/mcollini
+sha256sum -c midistri_pedidos_v7_acceso_tienda_r2.zip.sha256
+unzip -t midistri_pedidos_v7_acceso_tienda_r2.zip
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v7_r2_XXXXXX)
+unzip -oq midistri_pedidos_v7_acceso_tienda_r2.zip -d "$STAGING_MIDISTRI"
+cd "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python instalar.py --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python instalar.py --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+# No activar todavía ni enviar campaña. Continuar con Urban585 tras confirmar éxito.

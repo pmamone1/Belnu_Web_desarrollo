@@ -33,7 +33,9 @@ def validar_snapshot(data):
             # Urban allows zero for an unspecified optional presentation.
             if type(display) is int and display == 0:display=None
             if display is not None and (type(display) is not int or display<1):raise ValueError
-            rows.append((did,pid,{'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
+            from .multimedia_contract import validar_multimedia
+            multimedia=validar_multimedia(p.get('multimedia',[]),settings.URBAN_API_BASE)
+            rows.append((did,pid,{'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ValueError('Catálogo incompleto o inválido. Se conserva la última copia válida.') from None
@@ -43,11 +45,23 @@ def validar_snapshot(data):
 @transaction.atomic
 def aplicar_snapshot(data):
     ds,rows=validar_snapshot(data)
+    stores={}
+    try:
+        from .comercial_views import validar_config
+        from .client import ApiError
+        for store in data.get('tiendas',[]):
+            did=store['distribuidora_id']
+            if did not in {d['id'] for d in ds} or did in stores:raise ValueError
+            stores[did]=validar_config(store,did)
+    except (KeyError,ValueError,TypeError,ApiError):raise ValueError('Configuración de tienda inválida. Se conserva la copia anterior.') from None
     # All synchronizations lock this singleton before applying a complete snapshot.
     Sincronizacion.objects.get_or_create(pk=1)
     state=Sincronizacion.objects.select_for_update().get(pk=1)
     Distribuidora.objects.update(activa=False);Publicacion.objects.update(activa=False)
-    for d in ds:Distribuidora.objects.update_or_create(pk=d['id'],defaults={'nombre':d['nombre'],'activa':True})
+    for d in ds:
+        defaults={'nombre':d['nombre'],'activa':True}
+        if d['id'] in stores:defaults.update({k:stores[d['id']][k] for k in ('nombre_comercial','email_respuesta')})
+        Distribuidora.objects.update_or_create(pk=d['id'],defaults=defaults)
     for did,pid,defaults in rows:Publicacion.objects.update_or_create(distribuidora_id=did,producto_id=pid,defaults=defaults)
     state.completada=timezone.now();state.error='';state.save()
     return len(rows)
