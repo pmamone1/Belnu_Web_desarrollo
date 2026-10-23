@@ -1,0 +1,20 @@
+MiDistri-Pedidos v9: sólo belnuweb Python3.7, base v8.
+Subir ZIP y .sha256 a /home/mcollini y ejecutar:
+(
+set -e
+umask 077
+cd /home/mcollini
+sha256sum -c midistri_pedidos_v9_galeria.zip.sha256
+unzip -t midistri_pedidos_v9_galeria.zip
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v9_XXXXXX)
+unzip -oq midistri_pedidos_v9_galeria.zip -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+Sin nuevas variables ni migraciones. Si el preflight difiere, detener sin forzar.
+Rollback de código: mismo instalar.py --root /home/mcollini/belnuweb --restore RUTA_RESPALDO.
+Para recibir videos después de publicarlos expresamente:
+cd /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python manage.py midistri_sincronizar
+Sincronizar actualiza catálogo; no envía campañas. No incluir el archivo .sha256 dentro del ZIP.

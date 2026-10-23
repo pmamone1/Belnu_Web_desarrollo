@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v9 - Galería sin controles redundantes
+
+Con un recurso se ocultan flechas y miniaturas; con varios se conserva la navegación de fotos y videos. Sin migraciones nuevas, cambios de permisos, precios o pedidos. Instalación productiva pendiente. El diagnóstico confirmó que el video2 de Alma Chocolate no está publicado para19/68 (20/65); requiere publicación expresa y sincronización, no se resuelve sólo instalando esta versión.
+
+Guía vigente: [GALERIA_v9.md](GALERIA_v9.md). Para el resto del portal se mantiene v8.
+
+- [x] Revisión independiente y navegación verificadas en navegador con datos sintéticos.
+- [x] 114 pruebas del proyecto y 17 del instalador; PDF y revisión visual verificados. Ver entrega para ZIP/hash/commit finales.
+- [ ] Confirmación de instalación productiva y publicación/sincronización del video informado.
+
 ## MiDistri-Pedidos v8 - Fotos, textos y cuatro temas
 
 Vigente sobre v7 r2 confirmada por el usuario; instalación v8 pendiente. Apariencia: Claro, Nocturno, Azul y Verde. Catálogo para el Kiosco, texto de disponibilidad simplificado, fotos en carrito y detalle, y botón «Armar un nuevo pedido». Fotos actuales de la misma distribuidora; cantidades y precios históricos intactos. Sin modelos, migraciones nuevas, cargos ni campañas. No requiere actualización Urban Soft.

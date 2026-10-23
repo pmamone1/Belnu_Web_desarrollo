@@ -1,0 +1,7 @@
+MiDistri-Pedidos v9
+- Oculta Anterior/Siguiente y miniaturas redundantes con un solo recurso.
+- Mantiene navegación de múltiples fotos y videos, Cerrar, Escape y foco.
+- Videos de YouTube/Vimeo conservan apertura en origen; no se agrega otro reproductor.
+- El caso Alma Chocolate tiene publicación pendiente confirmada en20/65; v9 no lo publica automáticamente.
+- Sin modelos, migraciones nuevas, cambios de permisos, importes ni envíos.
+Guía: docs/GALERIA_v9.md. Instalación productiva pendiente.
