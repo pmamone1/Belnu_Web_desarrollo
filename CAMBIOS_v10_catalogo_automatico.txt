@@ -1,0 +1,5 @@
+MiDistri-Pedidos v10 - Catálogo coordinado
+Documenta la operación con Urban v588; conserva sincronizador y API existentes, galería v9 y textos/fotos v8. Compatible con bases exactas v8/v9.
+Cuatro contratos adicionales prueban modificaciones de catálogo, altas repetidas, distribuidoras futuras, bajas e históricos y rechazo de snapshot inválido. Proyecto local:118 pruebas OK.
+Sin modelos/migraciones nuevas, cambios de conexión, SMTP, permisos o precios históricos. Coordinador y configuración se instalan en Urban; esta instalación no activa tareas ni envía campañas.
+Publicación del video Alma Chocolate para20/65 confirmada por usuario y lectura del portal23/10/2026. Instalación v10 pendiente.

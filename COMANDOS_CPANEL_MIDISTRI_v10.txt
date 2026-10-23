@@ -1,0 +1,19 @@
+MiDistri-Pedidos v10 - sólo belnuweb/Python3.7
+Subir ZIP a /home/mcollini y cotejar SHA256 con entrega. No instalar paquetes Urban en este destino.
+Instalación independiente sobre v8/v9:
+(
+set -e
+umask 077
+cd /home/mcollini
+PAQUETE_MIDISTRI10="/home/mcollini/midistri_pedidos_v10_catalogo_automatico.zip"
+unzip -t "$PAQUETE_MIDISTRI10"
+STAGING_MIDISTRI10=$(mktemp -d /home/mcollini/staging_midistri10_XXXXXX)
+unzip -oq "$PAQUETE_MIDISTRI10" -d "$STAGING_MIDISTRI10"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI10/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI10/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+
+El sincronizador actual ya es compatible. La tarea coordinada y la regla de altas se instalan/activan en Urban v588: ver COMANDOS_CPANEL_v1_18_588.txt de ese paquete.
+No crear otro cron de sincronización ni cambiar secretos, SMTP, venv o conexiones.
+Sin nuevas migraciones, envío de campañas ni cambios de pedidos. Instalación productiva pendiente.

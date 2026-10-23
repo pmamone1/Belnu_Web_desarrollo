@@ -1,3 +1,3 @@
 MiDistri / Pedidos Online
-Candidato documentado: v9 (instalación productiva pendiente; requiere v8)
-Cambio: oculta flechas y miniaturas para un solo recurso; conserva navegación con varias fotos/videos. Sin migraciones nuevas, cambios de permisos, importes, pedidos, envíos o Urban Soft. Publicación del video informado pendiente de verificar.
+Candidato documentado: v10 (instalación productiva pendiente; acumulativo sobre v8/v9)
+Cambio: operación documentada y probada del catálogo coordinado cada5min con Urban v588; conserva galería v9 y sincronizador actual. Sin migraciones nuevas, cambios de permisos, históricos, SMTP o venv. Regla/cron se activan aparte; sin campañas.
