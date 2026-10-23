@@ -1,3 +1,16 @@
+## MiDistri-Pedidos v8 - Fotos, textos y cuatro temas
+
+Vigente sobre v7 r2 confirmada por el usuario; instalación v8 pendiente. Apariencia: Claro, Nocturno, Azul y Verde. Catálogo para el Kiosco, texto de disponibilidad simplificado, fotos en carrito y detalle, y botón «Armar un nuevo pedido». Fotos actuales de la misma distribuidora; cantidades y precios históricos intactos. Sin modelos, migraciones nuevas, cargos ni campañas. No requiere actualización Urban Soft.
+
+Guía vigente: [FOTOS_PRESENTACION_v8.md](FOTOS_PRESENTACION_v8.md). Este capítulo prevalece sobre los temas y textos de versiones anteriores.
+
+1. En Apariencia quedan Claro, Nocturno, Azul y Verde, tanto para visitantes como en Mi tienda del Distribuidor. Preferencias retiradas se muestran como Claro; no se borra la configuración guardada.
+2. El catálogo encabeza «Elegí los productos para tu Kiosco!». Debajo dice «Portal para realizar pedidos. La distribuidora confirma disponibilidad.»
+3. Al abrir Ver mi pedido se muestra la foto de cada producto junto a su nombre, cantidades, precio vendedor y PVP. Tocando la foto se abre ampliada. Si no hay foto disponible, aparece «Foto pendiente».
+4. Antes de enviar se informa: «Este pedido queda sujeto a disponibilidad y aceptación por parte de la distribuidora.» El pedido se sigue calculando al precio vendedor.
+5. El detalle del pedido recibido también muestra las fotos. El botón se llama «Armar un nuevo pedido» y abre la revisión del nuevo carrito antes de enviarlo. Revisar siempre cantidades y precios allí.
+
+
 ## MiDistri-Pedidos v7 r2 · Recuperación de instalación
 
 Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](RECUPERACION_MIDISTRI_v7_r2.md).

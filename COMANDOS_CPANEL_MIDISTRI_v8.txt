@@ -1,0 +1,19 @@
+MiDistri-Pedidos v8. Sólo belnuweb Python 3.7. Base v7 r2; Urban Soft queda intacto.
+Subir ZIP y .sha256 a /home/mcollini y ejecutar:
+(
+set -e
+umask 077
+cd /home/mcollini
+sha256sum -c midistri_pedidos_v8_fotos_textos.zip.sha256
+unzip -t midistri_pedidos_v8_fotos_textos.zip
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v8_XXXXXX)
+unzip -oq midistri_pedidos_v8_fotos_textos.zip -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+No cambiar variables ni cron. No requiere sincronizar de nuevo si las fotos ya están en el catálogo.
+Si el preflight detecta diferencias, detener sin forzar.
+Respaldo automático privado del código; sin respaldo completo de base nuevo.
+Rollback de código: mismo instalar.py --root /home/mcollini/belnuweb --restore RUTA_RESPALDO.
+Verificar catálogo, carrito y detalle en la operación habitual. No enviar la campaña para probar.

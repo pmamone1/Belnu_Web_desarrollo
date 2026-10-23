@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v8 - Fotos, textos y cuatro temas
+
+Vigente sobre v7 r2 confirmada por el usuario; instalación v8 pendiente. Apariencia: Claro, Nocturno, Azul y Verde. Catálogo para el Kiosco, texto de disponibilidad simplificado, fotos en carrito y detalle, y botón «Armar un nuevo pedido». Fotos actuales de la misma distribuidora; cantidades y precios históricos intactos. Sin modelos, migraciones nuevas, cargos ni campañas. No requiere actualización Urban Soft.
+
+Guía vigente: [docs/FOTOS_PRESENTACION_v8.md](docs/FOTOS_PRESENTACION_v8.md). Este capítulo prevalece sobre los temas y textos de versiones anteriores.
+
+Cambio ajeno templates/accounts/forgotPassword.html preservado y excluido de la entrega. Sin cambios en Urban Soft ni envío de campaña.
+
 ## MiDistri-Pedidos v7 r2 · Recuperación de instalación
 
 Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](docs/RECUPERACION_MIDISTRI_v7_r2.md).

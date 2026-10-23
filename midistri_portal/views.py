@@ -99,13 +99,21 @@ def catalogo(request):
     return render(request,'midistri_portal/catalogo.html',context)
 
 
+def foto_producto(producto):
+    if producto is None:return ''
+    if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False):
+        foto=next((i['url'] for i in producto.multimedia if i['tipo']=='foto'),None)
+        if foto:return foto
+    return producto.imagenes[0] if producto.imagenes else ''
+
+
 def productos_carrito(request,perfil):
     cart=request.session.get('midistri_cart',{})
     products={str(p.producto_id):p for p in Publicacion.objects.filter(activa=True,distribuidora_id=perfil['distribuidora_id'],distribuidora__activa=True,producto_id__in=cart)}
     rows=[]
     for pid,qty in cart.items():
         if pid in products:
-            p=products[pid];rows.append({'producto':p,'cantidad':qty,'importe':p.precio*qty})
+            p=products[pid];rows.append({'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p)})
     return rows,len(rows)!=len(cart)
 
 
@@ -249,7 +257,13 @@ def detalle(request,ident):
     items=pedido.respuesta.get('items',pedido.datos.get('items',[]))
     attention=pedido.respuesta.get('atencion')
     shown=[];byid={i['producto_id']:i for i in attention['items']} if attention else {}
-    for item in items:shown.append(dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'}))
+    # Photos are display-only catalog data; quantities and prices keep their order snapshot.
+    photos={p.producto_id:foto_producto(p) for p in Publicacion.objects.filter(
+        distribuidora_id=perfil['distribuidora_id'],producto_id__in=[i['producto_id'] for i in items])}
+    for item in items:
+        row=dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'})
+        row['foto']=photos.get(item['producto_id'],'')
+        shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
     ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
