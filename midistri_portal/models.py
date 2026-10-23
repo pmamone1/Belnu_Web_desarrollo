@@ -18,6 +18,7 @@ class Publicacion(models.Model):
     precio=models.DecimalField(max_digits=12,decimal_places=2)
     pvp=models.DecimalField(max_digits=12,decimal_places=2)
     imagenes=models.JSONField(default=list)
+    multimedia=models.JSONField(default=list)
     display=models.PositiveIntegerField(null=True)
     activa=models.BooleanField(default=True)
     class Meta:
