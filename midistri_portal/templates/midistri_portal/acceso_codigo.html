@@ -8,5 +8,6 @@
 <label>Código de seis números <input name="codigo" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button>Entrar</button></form>
 <form data-codigo="seleccionar" method="post" action="{% url 'midistri_codigo_seleccionar' %}" hidden>{% csrf_token %}
 <label>Elegí tu vendedor <select name="seleccion" required></select></label><button>Continuar</button></form>
+<p id="acceso-opciones" hidden><button type="button" data-acceso-reenviar>Reenviar código</button> <button type="button" data-acceso-cambiar>Cambiar Email</button></p>
 <noscript><p>Para ingresar con código necesitás habilitar JavaScript. Podés seguir consultando el catálogo público.</p></noscript></section>
 {% endblock %}

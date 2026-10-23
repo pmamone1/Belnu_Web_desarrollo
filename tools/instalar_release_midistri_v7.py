@@ -75,8 +75,8 @@ def restore(backup,root):
     print('Código restaurado. Las migraciones/datos no se revierten. Respaldo: '+str(backup))
 
 
-TARGETS=[['midistri_portal', '0004_sesion_pestana'], ['midistri_portal', '0005_configuracion_comercial'], ['midistri_portal', '0006_multimedia_publicacion'], ['midistri_portal', '0007_temas_promociones']]
-DESTINATIONS=[['midistri_portal', '0007_temas_promociones']]
+TARGETS=[['midistri_portal', '0004_sesion_pestana'], ['midistri_portal', '0005_configuracion_comercial'], ['midistri_portal', '0006_multimedia_publicacion'], ['midistri_portal', '0007_temas_promociones'], ['midistri_portal', '0008_recuperacion_promociones']]
+DESTINATIONS=[['midistri_portal', '0008_recuperacion_promociones']]
 
 
 def validar_restauracion(applied):

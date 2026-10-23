@@ -12,6 +12,12 @@ from django.views.decorators.http import require_GET,require_POST
 from django.views.decorators.csrf import csrf_exempt
 from . import operadores as op
 from .client import ApiError
+def limpiar_autenticacion_heredada(request):
+    keep={key:request.session[key] for key in ('midistri_browser','midistri_login_pending') if key in request.session}
+    logout(request)
+    request.session.update(keep)
+    request.session.set_expiry(0)
+
 SALT='midistri.operador.desafio.v1'
 HANDOFF_COOKIE_PREFIX='midistri_desafio_'
 
@@ -85,10 +91,11 @@ def completar(request):
         if not isinstance(token,str) or not 20<=len(token)<=100:raise ApiError('Respuesta de acceso inválida.')
     except (KeyError,TypeError):return fallo(request,ApiError('Respuesta de acceso inválida.'))
     except ApiError as e:return fallo(request,e)
-    logout(request)
+    limpiar_autenticacion_heredada(request)
     request.session.cycle_key()
     request.session['midistri_operador_token']=token
-    request.session.set_expiry(8*60*60)
+    # The delegated token expires server-side; the browser cookie must not expire seller tabs.
+    request.session.set_expiry(0)
     response=redirect('midistri_operador_panel')
     response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')
@@ -109,7 +116,7 @@ def salir(request):
     if token:
         try:op.api('operator-logout',method='POST',operator_token=token)
         except ApiError:pass
-    logout(request)
+    limpiar_autenticacion_heredada(request)
     return redirect('midistri_catalogo')
 
 from django.contrib import messages

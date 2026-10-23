@@ -83,7 +83,8 @@ def verificar(request):
             clean.append({k:item[k] for k in ('seleccion','nombre','distribuidora')})
         ticket=result.get('ticket')
         if not isinstance(ticket,str) or not 20<=len(ticket)<=100:raise ApiError('Respuesta de acceso inválida.')
-        row['ticket']=ticket;pending[ident]=row;request.session['midistri_login_pending']=pending
+        row['ticket']=ticket;row['vence']=time.time()+120
+        pending[ident]=row;request.session['midistri_login_pending']=pending
         if len(clean)==1:return _select(request,clean[0]['seleccion'])
         return JsonResponse({'fase':'elegir','identidades':clean})
     except (ApiError,PermissionDenied) as e:return respuesta_error(e)

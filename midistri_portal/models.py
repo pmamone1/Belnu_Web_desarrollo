@@ -75,10 +75,11 @@ class SesionVendedorPortal(models.Model):
     revocado=models.BooleanField(default=False)
 
 class BloquePromocional(models.Model):
+    origen_publicacion=models.ForeignKey(Publicacion,on_delete=models.PROTECT,null=True,blank=True)
     id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
     tienda=models.ForeignKey(Tienda,on_delete=models.PROTECT)
     titulo=models.CharField(max_length=150)
-    texto=models.TextField(max_length=1500,blank=True)
+    texto=models.TextField(max_length=1000,blank=True)
     enlace=models.URLField(max_length=500,blank=True)
     tipo=models.CharField(max_length=10,default='texto')
     material_id=models.CharField(max_length=36,blank=True)
@@ -88,6 +89,7 @@ class BloquePromocional(models.Model):
     revision=models.PositiveIntegerField(default=0)
 
 class CambioPromocional(models.Model):
+    estado=models.CharField(max_length=12,default='confirmado')
     id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
     bloque=models.ForeignKey(BloquePromocional,on_delete=models.PROTECT)
     operador_id=models.PositiveIntegerField()

@@ -32,7 +32,7 @@ def build(output):
         files.append(item);payload['payload/'+name]=data
     source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=str(ROOT),text=True).strip()
     manifest={'source_commit':source_commit,'schema':1,'project':PROJECT,'version':VERSION,'base_commit':BASE,'app':APP,
-        'required_migration':REQUIRED,'migration_targets':[['midistri_portal', '0004_sesion_pestana'], ['midistri_portal', '0005_configuracion_comercial'], ['midistri_portal', '0006_multimedia_publicacion'], ['midistri_portal', '0007_temas_promociones']],'production_installation':'pending','files':files}
+        'required_migration':REQUIRED,'migration_targets':[['midistri_portal', '0004_sesion_pestana'], ['midistri_portal', '0005_configuracion_comercial'], ['midistri_portal', '0006_multimedia_publicacion'], ['midistri_portal', '0007_temas_promociones'], ['midistri_portal', '0008_recuperacion_promociones']],'production_installation':'pending','files':files}
     manifest_data=(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n').encode('utf-8')
     installer=(ROOT/INSTALLER).read_bytes()
     output=Path(output);output.parent.mkdir(parents=True,exist_ok=True)

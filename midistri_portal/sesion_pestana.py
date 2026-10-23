@@ -48,7 +48,9 @@ def crear_sesion_pestana(request,perfil,token_urban,tab_id,prueba):
 def resolver_sesion_pestana(request):
     ident,proof=datos_prueba(request)
     browser=navegador(request)
-    row=SesionVendedorPortal.objects.select_for_update().filter(pk=ident,revocado=False).first()
+    rows=SesionVendedorPortal.objects.select_for_update().filter(pk=ident)
+    if request.path!='/portal/salir/':rows=rows.filter(revocado=False)
+    row=rows.first()
     if row is None or not browser or not secrets.compare_digest(row.navegador_hash,browser) or not secrets.compare_digest(row.prueba_hash,hash_texto(proof)):
         raise PermissionDenied('Tu acceso no está disponible en esta pestaña. Ingresá con tu Email.')
     return row

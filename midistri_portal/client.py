@@ -10,7 +10,7 @@ class ApiError(Exception):
         super().__init__(message)
 
 
-def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None):
+def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None,binary_media=False):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
@@ -32,6 +32,13 @@ def api(action,method='GET',data=None,token=None,binary=False,operator_token=Non
                 try:message=json.loads(content.decode('utf-8')).get('error','No se pudo completar la operación.')
                 except (ValueError,AttributeError):message='No se pudo completar la operación.'
                 raise ApiError(str(message)[:300],r.status_code)
+            if binary_media:
+                mime=r.headers.get('Content-Type','').split(';')[0].strip().lower()
+                if action!='operator-promotion-preview' or mime not in ('image/png','video/mp4'):
+                    raise ApiError('Material de vista previa inválido.')
+                if mime=='image/png' and not content.startswith(b'\x89PNG\r\n\x1a\n'):raise ApiError('Foto inválida.')
+                if mime=='video/mp4' and content[4:8]!=b'ftyp':raise ApiError('Video inválido.')
+                return bytes(content),mime
             if binary_mime:
                 from io import BytesIO
                 from zipfile import ZipFile,BadZipFile

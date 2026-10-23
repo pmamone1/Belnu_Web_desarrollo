@@ -1,5 +1,8 @@
 ## MiDistri-Pedidos v7 - Acceso con código, galerías y tienda
 
+Vigente revisión final: promociones con revisión privada y confirmación separada; recuperación durable de respuestas perdidas; retiro por fuente vigente; campañas20/65 conservan sus datos propios. Salir reintenta el cierre sin restaurar identidad. Ver guía de esta versión.
+
+
 Implementación local integrada; instalación productiva pendiente. Código de30min, sesión por pestaña, recuperación del acceso Distribuidor, campañas configurables, avisos con historial, galerías y siete temas/promociones. Conserva precios, preparación parcial, contactos y permisos. Instalar MiDistri7 primero y Urban585 después con funciones nuevas apagadas; activar coordinadamente. La campaña no se envía.
 
 URLgeneral > Email > código > elegir identidad > catálogo/carrito > revisión > pedido > preparación parcial/cargo/PDF. Administrar desde Urban > Mi tienda/Productos > revisar/publicar > sincronizar. Campañas: borrador/vista previa > confirmación explícita; no se confirma al instalar.

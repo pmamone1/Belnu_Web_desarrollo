@@ -58,3 +58,71 @@ class PromocionesTests(TestCase):
         p.activa=False;p.save()
         self.guardar(dict(self.data,tipo='foto',url=photo,material_id='',activo=False),bloque=str(a.pk),revision=1)
         a.refresh_from_db();self.assertFalse(a.activo)
+
+    def test_operacion_durable_antes_de_llamar_y_reintento_tras_timeout(self):
+        from .models import CambioPromocional,BloquePromocional
+        from .client import ApiError
+        oid=str(uuid4());bid=str(uuid4());calls=[]
+        def remote(action,**kwargs):
+            if action=='operator-profile':return self.profile
+            calls.append(kwargs['data']['operacion'])
+            self.assertTrue(CambioPromocional.objects.filter(pk=oid,estado='pendiente').exists())
+            if len(calls)==1:raise ApiError('Respuesta incierta',503)
+            return {'ok':True,'revision':1}
+        with patch('midistri_portal.promociones.api',side_effect=remote):
+            self.assertRaises(ApiError,self.s.guardar_promocion,self.profile,20,self.data,0,oid,'op'*22,bloque_id=bid)
+            self.assertFalse(BloquePromocional.objects.get(pk=bid).activo)
+            self.assertRaises(ValidationError,self.s.guardar_promocion,self.profile,20,self.data,0,str(uuid4()),'op'*22,bloque_id=bid)
+            row=self.s.guardar_promocion(self.profile,20,self.data,0,oid,'op'*22,bloque_id=bid)
+        self.assertTrue(row.activo)
+        self.assertEqual(calls,[oid,oid])
+        self.assertEqual(CambioPromocional.objects.get(pk=oid).estado,'confirmado')
+
+    def test_retirar_producto_o_material_oculta_promocion(self):
+        from .models import Publicacion
+        url='https://www.youtube.com/watch?v=demo'
+        product=Publicacion.objects.create(distribuidora=self.d,producto_id=7,nombre='Demo',precio=10,pvp=15,
+            multimedia=[dict(tipo='youtube',url=url,id='x',orden=0,principal=False)])
+        a=self.guardar(dict(self.data,material_producto=str(product.pk)+':0'))
+        self.assertEqual([x.pk for x in self.s.promociones_publicas(self.d)],[a.pk])
+        product.activa=False;product.save()
+        self.assertFalse(self.s.promociones_publicas(self.d))
+        product.activa=True;product.multimedia=[];product.save()
+        self.assertFalse(self.s.promociones_publicas(self.d))
+
+    def test_vista_previa_privada_no_guarda_ni_publica(self):
+        from .models import BloquePromocional
+        session=self.client.session;session['midistri_operador_token']='op'*22;session.save()
+        with patch('midistri_portal.operadores.api',return_value=self.profile):
+            r=self.client.post('/portal/administrar/promociones/',dict(self.data,distribuidora=20,accion='revisar',
+                operacion=str(uuid4()),nuevo_bloque=str(uuid4()),revision='0'))
+        self.assertContains(r,'Confirmar promoción revisada')
+        self.assertContains(r,'name="accion" value="revisar"')
+        self.assertContains(r,'Oferta &lt;script&gt;')
+        self.assertFalse(BloquePromocional.objects.exists())
+
+    def test_previa_firmada_no_admite_modificacion_y_confirma_una_vez(self):
+        from .models import BloquePromocional
+        session=self.client.session;session['midistri_operador_token']='op'*22;session.save()
+        with patch('midistri_portal.operadores.api',return_value=self.profile):
+            r=self.client.post('/portal/administrar/promociones/',dict(self.data,distribuidora=20,accion='revisar',
+                operacion=str(uuid4()),nuevo_bloque=str(uuid4()),revision='0'))
+            signed=r.context['firma_previa']
+            with patch('midistri_portal.promociones.api') as remote:
+                remote.side_effect=lambda action,**kwargs:self.profile if action=='operator-profile' else {'ok':True,'revision':1}
+                for _ in range(2):
+                    r=self.client.post('/portal/administrar/promociones/',dict(distribuidora=20,accion='confirmar',previa=signed,titulo='Inyectado'))
+                    self.assertEqual(r.status_code,302)
+        self.assertEqual(BloquePromocional.objects.count(),1)
+        self.assertEqual(BloquePromocional.objects.get().titulo,self.data['titulo'])
+
+    def test_transporte_previa_solo_acepta_archivo_y_operacion_fijos(self):
+        from unittest.mock import MagicMock
+        from .client import api,ApiError
+        raw=b'\x89PNG\r\n\x1a\nsynthetic'
+        response=MagicMock();response.status_code=200;response.headers={'Content-Type':'image/png'}
+        response.iter_content.return_value=[raw]
+        with patch('midistri_portal.client.requests.request') as request:
+            request.return_value.__enter__.return_value=response
+            self.assertEqual(api('operator-promotion-preview',binary_media=True),(raw,'image/png'))
+            self.assertRaises(ApiError,api,'profile',binary_media=True)

@@ -65,3 +65,20 @@ class CodigoPortalTests(TestCase):
         self.assertEqual(r.status_code,503)
         from .models import SesionVendedorPortal
         self.assertFalse(SesionVendedorPortal.objects.exists())
+
+    def test_eleccion_dos_vendedores_al_final_del_codigo_tiene_su_propio_plazo(self):
+        original=self.response
+        def response(action,**kwargs):
+            result=original(action,**kwargs)
+            if action=='login-code-verify':
+                result['identidades'].append(dict(result['identidades'][0],seleccion='z'*32,nombre='Otro'))
+            return result
+        with patch('midistri_portal.acceso_views.api',side_effect=response):
+            with patch('midistri_portal.acceso_views.time.time',return_value=10000):
+                self.client.post('/portal/acceso/iniciar/',{'email':'seller@example.test'},**self.headers)
+            with patch('midistri_portal.acceso_views.time.time',return_value=11799):
+                r=self.client.post('/portal/acceso/verificar/',{'codigo':'004321'},**self.headers)
+                self.assertEqual(r.json()['fase'],'elegir')
+            with patch('midistri_portal.acceso_views.time.time',return_value=11801):
+                r=self.client.post('/portal/acceso/seleccionar/',{'seleccion':'s'*32},**self.headers)
+                self.assertEqual(r.status_code,200)

@@ -75,3 +75,22 @@ class HandoffV7Tests(TestCase):
         self.assertContains(r, 'Referencia', status_code=403)
         self.assertIn('cookie_missing', ' '.join(captured.output))
         self.assertFalse(api.called)
+
+    @patch('midistri_portal.operadores.api')
+    def test_entrada_y_salida_admin_conservan_navegador_y_login_pendiente(self, api):
+        api.return_value={'perfil':PROFILE,'session_token':'s'*43}
+        session=self.client.session
+        session['midistri_browser']='browser-existing'
+        session['midistri_login_pending']={'tab':{'vence':9999999999}}
+        session['midistri_token']='legacy-seller'
+        session.save()
+        nonce,_=self.start()
+        r=self.client.post('/portal/administrar/entrar/',{'codigo':'c'*43,'desafio':nonce},
+            HTTP_ORIGIN='https://sistema7000.belnu.com.ar')
+        self.assertEqual(r.status_code,302)
+        self.assertEqual(self.client.session.get('midistri_browser'),'browser-existing')
+        self.assertIn('tab',self.client.session.get('midistri_login_pending',{}))
+        self.assertNotIn('midistri_token',self.client.session)
+        self.client.post('/portal/administrar/salir/')
+        self.assertEqual(self.client.session.get('midistri_browser'),'browser-existing')
+        self.assertNotIn('midistri_operador_token',self.client.session)

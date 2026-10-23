@@ -53,3 +53,11 @@ class SesionPestanaTests(CodigoPortalTests):
             response=self.client.post('/portal/salir/',HTTP_ACCEPT='application/json',**self.headers)
         self.assertEqual(response.status_code,200)
         self.assertEqual(response.json()['url'],'/portal/')
+
+    def test_reintentar_salida_revocada_es_idempotente(self):
+        self.login()
+        with patch('midistri_portal.views.api'):
+            for _ in range(2):
+                r=self.client.post('/portal/salir/',HTTP_ACCEPT='application/json',**self.headers)
+                self.assertEqual(r.status_code,200)
+        self.assertEqual(self.client.get('/portal/carrito/',**self.headers).status_code,403)

@@ -35,3 +35,5 @@ Ante fallo: conservar salida y respaldo. Si no se aplicó ninguna migración nue
 No se exige otro respaldo completo de BD para esta entrega: respetar 30 instalaciones confirmadas o 15 días; no contar ZIPs, candidatos ni reintentos. El historial local antiguo registra 17/10 y existe un respaldo posterior comunicado en el chat; no se revalidó el archivo en esta ejecución ni se inventan instalaciones. No hay instalación585/7 confirmada.
 
 Guía: docs/ACCESO_TIENDA_v7.md
+
+Revisión final: corrige convivencia de sesiones, límite OTP/selección, recuperación de promociones, retiro por origen, sobreescrituras de campaña y cierre sin red; agrega vista previa privada antes de publicar. MiDistri0008 aditiva. No envía campañas.
