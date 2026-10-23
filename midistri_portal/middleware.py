@@ -6,6 +6,9 @@ from django_session_timeout.middleware import SessionTimeoutMiddleware
 
 class PortalMiddleware(MiddlewareMixin):
     def process_request(self,request):
+        if getattr(request,'midistri_codigo_enabled',False) and request.path.startswith('/portal/') and not request.path.startswith(('/portal/administrar/','/portal/gestion/')):
+            from django.contrib.messages.storage.session import SessionStorage
+            request._messages=SessionStorage(request)
         if not settings.MIDISTRI_ENABLED:
             if request.path.startswith('/portal/'):
                 return HttpResponse('MiDistri - Pedidos Online: integración pendiente de habilitación.',status=503)

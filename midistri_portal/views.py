@@ -6,7 +6,7 @@ from urllib.parse import urlencode
 from django.conf import settings
 from django.contrib import messages
 from django.db import transaction
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect,render
 from django.views.decorators.http import require_GET,require_POST,require_http_methods
 from .client import api,ApiError
@@ -46,9 +46,16 @@ def error_page(request,e):
 @require_http_methods(['GET','POST'])
 def activar(request,token):
     if request.method=='POST':
+        if getattr(request,'midistri_codigo_enabled',False):
+            from .sesion_pestana import datos_prueba
+            datos_prueba(request)
         try:result=api('activate',method='POST',data={'token':token})
         except ApiError as e:return render(request,'midistri_portal/activar.html',dict(base(request),error=str(e)),status=400 if e.status<500 else 503)
-        operator=request.session.pop('midistri_operador_token',None)
+        if getattr(request,'midistri_codigo_enabled',False):
+            from .sesion_pestana import crear_sesion_pestana
+            ident,proof=datos_prueba(request)
+            return JsonResponse(crear_sesion_pestana(request,result['perfil'],result['session_token'],ident,proof))
+        operator=None if getattr(request,'midistri_codigo_enabled',False) else request.session.pop('midistri_operador_token',None)
         if operator:
             try:api('operator-logout',method='POST',operator_token=operator)
             except ApiError:pass
@@ -287,7 +294,10 @@ def salir(request):
     if token:
         try:api('logout',method='POST',token=token)
         except ApiError:pass
-    request.session.flush()
+    if getattr(request,'midistri_tab',None):
+        from .sesion_pestana import cerrar_sesion_pestana
+        cerrar_sesion_pestana(request)
+    else:request.session.flush()
     return redirect('midistri_catalogo')
 
 

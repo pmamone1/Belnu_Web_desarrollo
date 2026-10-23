@@ -56,3 +56,16 @@ class CambioTienda(models.Model):
     huella=models.CharField(max_length=64)
     creado=models.DateTimeField(default=timezone.now)
     confirmado_urban=models.BooleanField(default=False)
+
+
+class SesionVendedorPortal(models.Model):
+    id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
+    prueba_hash=models.CharField(max_length=64)
+    navegador_hash=models.CharField(max_length=64)
+    token_urban=models.TextField()
+    vendedor_id=models.PositiveIntegerField()
+    distribuidora_id=models.PositiveIntegerField()
+    datos=models.JSONField(default=dict)
+    creado=models.DateTimeField(default=timezone.now)
+    actividad=models.DateTimeField(default=timezone.now)
+    revocado=models.BooleanField(default=False)
