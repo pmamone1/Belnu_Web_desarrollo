@@ -6,8 +6,8 @@ ROOT=Path(__file__).resolve().parents[1]
 BASE='6734ce86aced5cc199fd8320231eaffb80774c72'
 PROJECT="midistri-pedidos"
 APP="midistri_portal"
-VERSION='7'
-ZIP_NAME='midistri_pedidos_v7_acceso_tienda.zip'
+VERSION='7-r2'
+ZIP_NAME='midistri_pedidos_v7_acceso_tienda_r2.zip'
 INSTALLER='tools/instalar_release_midistri_v7.py'
 REQUIRED=['midistri_portal', '0003_tienda_presentacion']
 FILELIST='tools/release_files_v7.json'
@@ -29,6 +29,8 @@ def build(output):
         item={'path':name,'sha256':digest(data)}
         if previous.returncode==0:item['base_normalized_sha256']=normalized(previous.stdout)
         else:item['new_code']=True
+        interrupted=subprocess.run(['git','show','e2e4510554254f00765dc66eb71de3647481f0e4:'+name],cwd=str(ROOT),capture_output=True)
+        if interrupted.returncode==0:item['accepted_normalized_sha256']=[normalized(interrupted.stdout)]
         files.append(item);payload['payload/'+name]=data
     source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=str(ROOT),text=True).strip()
     manifest={'source_commit':source_commit,'schema':1,'project':PROJECT,'version':VERSION,'base_commit':BASE,'app':APP,

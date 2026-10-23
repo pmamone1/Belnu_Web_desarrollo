@@ -1,3 +1,3 @@
 MiDistri / Pedidos Online
-Candidato documentado: v7 (implementado localmente; instalación productiva pendiente; requiere MiDistri6; instalar antes de Urban585)
-Cambio: Email y código de30min, sesión por pestaña, acceso Distribuidor recuperable, campaña configurable sin envío, galerías, temas y promociones. Migraciones aditivas; preserva permisos, precios, parciales, históricos y venv.
+Candidato documentado: v7 r2 (recuperación del intento v7; instalación r2 productiva pendiente; compatible con base v6 y archivos exactos de v7)
+Cambio: corrige la lectura de la bandera multimedia en settings y permite reintento verificado del instalador sin escritura durante el preflight. Sin migraciones nuevas respecto de v7; no cambia venv ni envía campañas.

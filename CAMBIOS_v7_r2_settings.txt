@@ -1,0 +1,5 @@
+MiDistri-Pedidos v7 r2
+Corrige NameError de os al cargar settings usando env.bool, sin nuevas migraciones ni cambios de dependencias.
+Recupera el intento v7 interrumpido: preflight sin escritura con configuración corregida sólo en memoria para la huella exacta conocida; aplicación con respaldo y controles normales sobre el código instalado.
+Acepta archivos exactos de v6/v7/r2; rechaza cambios ajenos. Conserva pedidos, permisos, tienda, multimedia y precios. No modifica Urban Soft ni envía campañas.
+Instalación productiva r2 pendiente; el intento v7 comunicado falló en check antes de migraciones.

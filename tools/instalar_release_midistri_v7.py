@@ -46,8 +46,43 @@ def relative(name):
 def no_links(path):
     if any(p.is_symlink() for p in [path]+list(path.parents)):
         raise ValueError('No se reemplazan rutas con enlaces simbólicos: '+str(path))
+
+# Only the exact settings distributed in v7 may use this in-memory repair.
+# It lets the read-only preflight inspect the interrupted install without changing files.
+BROKEN_SETTINGS_HASH='b04855e7ee872edf34d91c8144f78dd0a185b8b7e7aa9305d0c8df8044763598'
+BROKEN_SETTINGS_LINE="MIDISTRI_MULTIMEDIA_ENABLED = os.environ.get('MIDISTRI_MULTIMEDIA_ENABLED', 'False') == 'True'"
+FIXED_SETTINGS_LINE="MIDISTRI_MULTIMEDIA_ENABLED = env.bool('MIDISTRI_MULTIMEDIA_ENABLED', default=False)"
+PREFLIGHT_SETTINGS=None
+
+def preparar_preflight(root):
+    global PREFLIGHT_SETTINGS
+    path=root/'belnuweb/settings.py'
+    PREFLIGHT_SETTINGS=path if path.is_file() and normalized(path.read_bytes())==BROKEN_SETTINGS_HASH else None
+    if PREFLIGHT_SETTINGS:
+        print('Configuración v7 interrumpida reconocida; comprobación con corrección sólo en memoria.')
+
+def comando_django(root,args):
+    if PREFLIGHT_SETTINGS is None:return [sys.executable,'manage.py']+list(args)
+    code="""import os,sys,types,hashlib
+from pathlib import Path
+path=Path(%r)
+raw=path.read_bytes()
+assert hashlib.sha256(raw.replace(b'\\r\\n',b'\\n').rstrip(b'\\n')).hexdigest()==%r, 'La configuración cambió; detenido'
+source=raw.decode('utf-8')
+assert source.count(%r)==1, 'Configuración no reconocida'
+source=source.replace(%r,%r)
+import belnuweb
+module=types.ModuleType('belnuweb.settings');module.__file__=str(path)
+exec(compile(source,str(path),'exec'),module.__dict__)
+sys.modules['belnuweb.settings']=module;belnuweb.settings=module
+os.environ['DJANGO_SETTINGS_MODULE']='belnuweb.settings'
+from django.core.management import execute_from_command_line
+execute_from_command_line(['manage.py']+%r)
+""" % (str(PREFLIGHT_SETTINGS),BROKEN_SETTINGS_HASH,BROKEN_SETTINGS_LINE,BROKEN_SETTINGS_LINE,FIXED_SETTINGS_LINE,list(args))
+    return [sys.executable,'-c',code]
+
 def run(root,*args):
-    subprocess.run([sys.executable,'manage.py']+list(args),cwd=str(root),check=True)
+    subprocess.run(comando_django(root,args),cwd=str(root),check=True)
 
 def restore(backup,root):
     comprobar_restauracion(root)
@@ -127,6 +162,8 @@ print('Plan exacto de migraciones verificado, sin modificar datos.')
     run(root,'shell','-c',code)
 
 def main():
+    global PREFLIGHT_SETTINGS
+    PREFLIGHT_SETTINGS=None
     os.umask(0o077)
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root',required=True,help='Carpeta de ESTE proyecto; nunca la de la otra aplicación.')
@@ -158,10 +195,16 @@ def main():
         if src.suffix=='.py' and src.is_file():compile(src.read_bytes(),str(src),'exec')
         if not src.is_file() or sha(src.read_bytes())!=item['sha256']:raise ValueError('Paquete incompleto o alterado: '+item['path'])
         if dst.exists() and sha(dst.read_bytes())==item['sha256']:continue
-        if item.get('base_normalized_sha256') and (not dst.is_file() or normalized(dst.read_bytes())!=item['base_normalized_sha256']):
+        additional=item.get('accepted_normalized_sha256',[])
+        if not isinstance(additional,list) or len(additional)>2 or any(not isinstance(v,str) or len(v)!=64 for v in additional):
+            raise ValueError('Huellas de recuperación inválidas.')
+        accepted=set(additional)|{item.get('base_normalized_sha256')}
+        current=normalized(dst.read_bytes()) if dst.is_file() else None
+        if item.get('base_normalized_sha256') and current not in accepted:
             raise ValueError('La versión instalada difiere de la revisada: '+item['path']+'. Detenido sin modificar archivos. Compartir este mensaje para preparar la adaptación.')
-        if item.get('new_code') and dst.exists():raise ValueError('Ya existe código diferente en '+item['path']+'. Detenido sin reemplazarlo.')
+        if item.get('new_code') and dst.exists() and current not in additional:raise ValueError('Ya existe código diferente en '+item['path']+'. Detenido sin reemplazarlo.')
         pending.append(item)
+    preparar_preflight(root)
     required=manifest['required_migration']
     code="from django.db import connection; from django.db.migrations.recorder import MigrationRecorder; assert "+repr(tuple(required))+" in MigrationRecorder(connection).applied_migrations(), 'Falta la migración base requerida: "+'/'.join(required)+"'"
     if PROJECT=='urban-soft':
@@ -197,6 +240,7 @@ def main():
                 os.chmod(temp,0o644);os.replace(temp,str(dst))
             finally:
                 if os.path.exists(temp):os.unlink(temp)
+        PREFLIGHT_SETTINGS=None
         run(root,'check')
         run(root,'makemigrations','--check','--dry-run')
         comprobar_plan(root,bundle,manifest,overlay=False)
@@ -207,7 +251,7 @@ def main():
         raise
     (root/'tmp').mkdir(exist_ok=True);no_links(root/'tmp'/'restart.txt');(root/'tmp'/'restart.txt').touch()
     control(root,'start')
-    print('CÓDIGO INSTALADO: midistri-pedidos v7. Falta activar funciones coordinadamente y verificar en el sitio. No se enviaron campañas ni se cambiaron conexiones, catálogo o venv.')
+    print('CÓDIGO INSTALADO: midistri-pedidos v7 r2. Falta activar funciones coordinadamente y verificar en el sitio. No se enviaron campañas ni se cambiaron conexiones, catálogo o venv.')
     print('Respaldo: '+str(backup))
 
 if __name__=='__main__':

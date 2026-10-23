@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v7 r2 · Recuperación de instalación
+
+Corrige el error de configuración que detuvo el v7 en Django check. Usar el ZIP r2 completo para retomar el intento; no editar hashes ni settings a mano. Conserva el circuito aprobado. Instalación r2 productiva pendiente; el intento comunicado no llegó a migrar. Ver [recuperación y compatibilidad](RECUPERACION_MIDISTRI_v7_r2.md).
+
 # MiDistri-Pedidos v7 - Acceso con código y tienda
 
 Implementado localmente; instalación y activación productivas pendientes. La campaña sigue sin enviarse.
@@ -44,7 +48,7 @@ Salir sin red elimina la identidad visible y guarda únicamente un cierre pendie
 
 ## Guía de uso
 
-1. El vendedor abre belnu.com.ar/portal/ y toca Entrar con mi Email. Usa un Email habilitado en la agenda de su distribuidora; no se crea una cuenta nueva. El código tiene seis números, dura 30 minutos desde la emisión y se usa una vez. Si ese Email corresponde a varios vendedores, elige el suyo después de validarlo. Reenviar código respeta la espera de 60 segundos y los cupos; Cambiar Email permite corregirlo sin recargar.
+1. Si la instalación v7 se detuvo por el error de configuración, la distribuidora debe completar primero el paquete v7 r2; conserva el respaldo anterior. El vendedor abre belnu.com.ar/portal/ y toca Entrar con mi Email. Usa un Email habilitado en la agenda de su distribuidora; no se crea una cuenta nueva. El código tiene seis números, dura 30 minutos desde la emisión y se usa una vez. Si ese Email corresponde a varios vendedores, elige el suyo después de validarlo. Reenviar código respeta la espera de 60 segundos y los cupos; Cambiar Email permite corregirlo sin recargar.
 2. La sesión se conserva mientras usa la pestaña, incluso después de vencer el código. Salir elimina la prueba local y revoca ese acceso en el servidor. En equipos compartidos usar siempre Salir. Una pestaña nueva no hereda la identidad sólo por tener la cookie; duplicar/restaurar pestañas puede restaurar sessionStorage, por lo que cerrar la pestaña no garantiza revocación.
 3. El catálogo muestra Precio vendedor y PVP (precio al público). El pedido se calcula al precio vendedor. Tocando la foto se abre la galería: principal primero, miniaturas, anterior/siguiente y Cerrar. Escape cierra y devuelve el foco. Los MP4 tienen controles y no se reproducen solos; YouTube/Vimeo se abren en el origen.
 4. La distribuidora entra desde Urban Soft > Salidas / Anuncios > Pedidos > Administrar MiDistri-Pedidos. Cada intento de entrada tiene su propia validación durante diez minutos; el pase final dura dos minutos. Si vence, iniciar un acceso nuevo desde Urban Soft. No reutilizar la dirección del resultado.

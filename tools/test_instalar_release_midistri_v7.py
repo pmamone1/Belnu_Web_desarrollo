@@ -119,6 +119,22 @@ class InstallerTests(unittest.TestCase):
         self.assertTrue(dst.is_file())
 
 
+    def test_reintento_desde_archivos_v7_conocidos(self):
+        previous=b'parcial_v7\n'
+        (self.root/self.path).write_bytes(previous)
+        self.manifest['files'][0]['accepted_normalized_sha256']=[self.module.normalized(previous)]
+        (self.bundle/'release_manifest.json').write_text(json.dumps(self.manifest))
+        self.invoke()
+        self.assertEqual((self.root/self.path).read_bytes(),previous)
+        self.invoke('--apply')
+        self.assertEqual((self.root/self.path).read_bytes(),b'valor=1\n')
+
+    def test_hash_parcial_no_autoriza_otra_modificacion(self):
+        self.manifest['files'][0]['accepted_normalized_sha256']=[self.module.normalized(b'parcial_v7\n')]
+        (self.bundle/'release_manifest.json').write_text(json.dumps(self.manifest))
+        (self.root/self.path).write_bytes(b'otra_cosa\n')
+        with self.assertRaises(ValueError):self.invoke('--apply')
+
 class MigrationRecoveryTests(unittest.TestCase):
     def test_planes_reales_en_cada_etapa_sin_reversion(self):
         from types import SimpleNamespace
@@ -146,4 +162,28 @@ class MigrationRecoveryTests(unittest.TestCase):
             self.assertFalse(any(back for m,back in plan))
             release.validar_plan([(m.app_label,m.name,back) for m,back in plan])
             self.assertEqual({(m.app_label,m.name) for m,back in plan},allkeys-applied)
+
+
+class BrokenSettingsPreflightTests(unittest.TestCase):
+    def test_preflight_carga_settings_corregido_solo_en_memoria(self):
+        import subprocess,sys
+        spec=importlib.util.spec_from_file_location('recovery',Path(__file__).with_name('instalar_release_midistri_v7.py'))
+        module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
+        root=Path(__file__).resolve().parents[1]
+        original=subprocess.check_output(['git','-c','core.fsmonitor=false','show','e2e4510554254f00765dc66eb71de3647481f0e4:belnuweb/settings.py'],cwd=root)
+        with tempfile.TemporaryDirectory() as temp:
+            target=Path(temp);package=target/'belnuweb';package.mkdir()
+            (package/'__init__.py').write_text('')
+            path=package/'settings.py';path.write_bytes(original)
+            (target/'environ.py').write_text('class Env:\n def __call__(self,k,default=None): return default or "synthetic"\n def bool(self,k,default=False): return default\n @staticmethod\n def read_env(*a): pass\n')
+            for name in ('django','django/core','django/core/management','django/contrib','django/contrib/messages'):
+                d=target/name;d.mkdir(exist_ok=True);(d/'__init__.py').write_text('')
+            (target/'django/contrib/messages/constants.py').write_text('ERROR="error"\n')
+            (target/'django/core/management/__init__.py').write_text('def execute_from_command_line(args):\n from belnuweb import settings\n assert settings.MIDISTRI_MULTIMEDIA_ENABLED is False\n print("SETTINGS_RECUPERADO_SIN_ESCRIBIR")\n')
+            module.preparar_preflight(target)
+            result=subprocess.run(module.comando_django(target,('check',)),cwd=target,capture_output=True,text=True)
+            self.assertEqual(result.returncode,0,result.stderr)
+            self.assertIn('SETTINGS_RECUPERADO_SIN_ESCRIBIR',result.stdout)
+            self.assertEqual(path.read_bytes(),original)
+
 if __name__=='__main__':unittest.main()

@@ -1,7 +1,9 @@
 [
   "CAMBIOS_v7_acceso_tienda.txt",
   "CAMBIOS_v7_planificacion_midistri.txt",
+  "CAMBIOS_v7_r2_settings.txt",
   "COMANDOS_CPANEL_MIDISTRI_v7.txt",
+  "COMANDOS_CPANEL_MIDISTRI_v7_r2.txt",
   "HANDOFF.md",
   "Manual_MiDistri_Pedidos_Online.pdf",
   "README.md",
@@ -14,6 +16,7 @@
   "docs/19_PRUEBAS_MANUALES_CRITICAS.md",
   "docs/ACCESO_TIENDA_v7.md",
   "docs/MANUAL_USUARIO.md",
+  "docs/RECUPERACION_MIDISTRI_v7_r2.md",
   "docs/REVISION_FINAL_v7.md",
   "docs/VALIDACION_v7.md",
   "docs/superpowers/plans/2026-10-22-midistri-acceso-codigo-y-tienda.md",
@@ -77,5 +80,6 @@
   "tools/instalar_release_midistri_v7.py",
   "tools/paquete_integracion_v7.py",
   "tools/release_files_v7.json",
-  "tools/test_instalar_release_midistri_v7.py"
+  "tools/test_instalar_release_midistri_v7.py",
+  "tools/test_settings_midistri_v7.py"
 ]

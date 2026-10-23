@@ -1,3 +1,9 @@
+## Corrección v7 r2
+
+Reproducción del NameError al ejecutar belnuweb/settings.py completo con un entorno ficticio. La prueba de configuración pasó después de sustituir la expresión por env.bool. El fallo del v7 no quedó cubierto por la suite anterior porque usaba test_settings; AST no evalúa nombres en ejecución.
+
+Resultado r2 local: 1 prueba de carga de configuración, 19 pruebas del instalador y 109 del portal verdes. El instalador se probó con archivos parciales exactos y con un subproceso que carga la configuración corregida sólo en memoria, sin cambiar el archivo. Conserva los controles que rechazan modificaciones desconocidas y reversiones de migraciones. No se conectó a producción ni se ejecutó Python3.7/MariaDB en este equipo. La instalación r2 sigue pendiente.
+
 # Validación local y límites
 
 Producción pendiente. No se usó producción para probar ni se enviaron campañas o Emails a destinatarios reales.

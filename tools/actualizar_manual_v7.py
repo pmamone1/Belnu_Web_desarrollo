@@ -12,14 +12,14 @@ ROOT=Path(__file__).resolve().parents[1]
 BASE='6734ce86aced5cc199fd8320231eaffb80774c72'
 MANUAL='Manual_MiDistri_Pedidos_Online.pdf'
 GUIDE='docs/ACCESO_TIENDA_v7.md'
-TITLE='MiDistri-Pedidos v7'
+TITLE='MiDistri-Pedidos v7 r2'
 def main():
     styles=getSampleStyleSheet()
     styles['BodyText'].fontSize=11;styles['BodyText'].leading=15
     styles['BodyText'].spaceAfter=9
     text=(ROOT/GUIDE).read_text(encoding='utf-8').split('## Guía de uso')[1].strip().splitlines()
     story=[Paragraph(TITLE+' - Guía actual',styles['Title']),
-        Paragraph('Prioridad sobre capturas e instrucciones antiguas. Implementación local; instalación y activación en producción pendientes. La campaña no se envía.',styles['BodyText']),Spacer(1,4*mm)]
+        Paragraph('Prioridad sobre capturas e instrucciones antiguas. Corrección de configuración: usar el paquete r2 para retomar la instalación v7 interrumpida. Instalación r2 y activación en producción pendientes. La campaña no se envía.',styles['BodyText']),Spacer(1,4*mm)]
     for index,line in enumerate(text):
         if index==5:story.extend([PageBreak(),Paragraph('Administrar la tienda y compartir',styles['Title'])])
         story.append(Paragraph(escape(line),styles['BodyText']))
