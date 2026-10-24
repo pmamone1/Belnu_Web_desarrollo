@@ -12,7 +12,7 @@ Implementado y revisado localmente; instalación y aceptación productiva pendie
 - Revisión independiente y su pasada de correcciones:ver REVISION_FINAL_v598_v14.md. No se afirma revisión independiente posterior a la pasada.
 
 ## Suite histórica general Urban
-Se inició la suite consignaciones completa en SQLite local; su resultado y tiempo se agregarán al cerrar la entrega. No se presenta como aprobada mientras esté en curso. Las pruebas nuevas y de concurrencia se ejecutaron también en PostgreSQL, sin usar producción.
+La suite general ejecutó3294 casos en SQLite durante2057,584s:271fallos,461errores/59omisiones. Se repitieron los697 casos históricos distintos con incidencias sobre el commit597 exacto en una copia y base separadas:las732cabeceras y repeticiones fueron idénticas, también byte a byte. No hubo casos598 con incidencia. No se afirma una suite global verde. Inventario y límites en BASELINE_v598.md y BASELINE_FALLOS_v598.json. La regresión del árbol final de ingreso/permisos, incluidos contratoHTTP, replay y CSRF, se ejecutó aparte en PostgreSQL:109casosOK.
 
 ## Entrega y aceptación
 Urban598 exige base597 y esquema consignaciones0125/bridge0014; agrega sólo bridge0015. MiDistri14 exige base13/esquema0009 y Urban598. Instalar en ese orden. Las banderas, conexiones, productos, precios, saldos, documentos y credenciales se conservan.

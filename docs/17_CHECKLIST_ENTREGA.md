@@ -6,6 +6,7 @@ Guía vigente: [ACCESO_EMAIL_v14.md](ACCESO_EMAIL_v14.md). Prevalece para este f
 
 - [x] Pruebas dirigidas, revisión independiente y PDF verificados localmente.
 - [ ] Cotejar ZIP definitivo con commit publicado y copiar a Downloads.
+- [x] Suite histórica general comparada contra597: mismas732incidencias, documentadas sin afirmar aprobación global.
 - [ ] Confirmar instalación y aceptación real del ingreso sin enviar campañas.
 
 ## MiDistri-Pedidos v13
