@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v17 · Fotos completas en banners
+
+Las fotos de productos del catálogo se ajustan completas y centradas dentro del banner, sin deformar ni recortar, incluso si la página conserva el modo «rellenar». La altura elegida se conserva; puede quedar espacio libre a los lados. El material promocional propio conserva su ajuste configurado.
+
+Guía: [BANNERS_v17.md](BANNERS_v17.md). Actualización exclusiva del portal sobre v16, compatible con Urban600; sin migraciones ni cambios de datos. Instalación productiva pendiente; sin campaña.
+
 ## MiDistri-Pedidos v16
 
 Editor visual de bloques, alturas y capas con borrador AJAX; encabezado de tienda configurable y saludo con nombre/LIN/VV. Catálogo exige activo, foto pública y precio vendedor/PVP positivos. Bandeja Urban permite reducir/quitar productos con motivo y aviso; faltantes Excel y mensaje interno explícito. MiDistri-Puntos permanece sólo en análisis.

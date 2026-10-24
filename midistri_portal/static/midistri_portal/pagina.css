@@ -43,3 +43,6 @@ body{container-type:inline-size}
 @media(max-width:480px){.banner-visual [data-slide]{grid-template-columns:1fr}.banner-copy{padding-bottom:8px}.banner-visual .button{max-width:100%;white-space:normal}.tienda-apariencia{margin-left:0}}
 
 header .tienda-apariencia{color:inherit}
+
+/* Product photos keep their whole frame even in an older cover banner. */
+.banner-visual .banner-media.producto-completo img{object-fit:contain;object-position:center}

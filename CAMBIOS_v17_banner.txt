@@ -1,0 +1,5 @@
+MiDistri v17 — Fotos completas en banners
+Base: v16. Sólo plantilla/CSS y versión de caché del estilo.
+Las fotos de catálogo usan contain centrado, sin recortes ni deformación. Material propio conserva su ajuste.
+Sin cambios de modelos, rutas, permisos, importes o históricos. No requiere paquete Urban.
+Instalación productiva pendiente. No envía campañas ni modifica credenciales.
