@@ -1,3 +1,3 @@
-MiDistri-Pedidos v14
-Candidato documentado: v14 (implementación local; instalación productiva pendiente; base 13)
-Cambio: ingreso sólo con Email, código30min y perfiles posteriores; remitentes propios por tienda y autenticación administrativa Urban conservados. Sin nueva migración propia; requiere Urban598. Sin campañas, cambios económicos, SMTP ni venv.
+MiDistri-Pedidos v15
+Candidato documentado: v15 (implementación local; instalación productiva pendiente; base 14)
+Cambio: Pegar o completar los seis números verifica el código automáticamente una sola vez. Hay botón Pegar código y alternativa Entrar. Se conserva la elección entre perfiles. Sin migraciones nuevas, envíos de campaña, cambios de SMTP, WhatsApp, precios, pedidos ni venv.

@@ -1,0 +1,6 @@
+MiDistri-Pedidos v15
+
+Pegar o completar los seis números verifica el código automáticamente una sola vez. Hay botón Pegar código y alternativa Entrar. Se conserva la elección entre perfiles.
+
+Instalar Urban599 y luego MiDistri15; bases exactas598/14. Sin migraciones nuevas, cambios de permisos, datos económicos o históricos. No modifica las casillas ni envía la campaña.
+Detalle, compatibilidad, rollback y validación: docs/CODIGO_AGIL_v15.md
