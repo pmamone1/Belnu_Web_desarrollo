@@ -1,3 +1,3 @@
-MiDistri / Pedidos Online
-Candidato documentado: v13 (implementación local; instalación productiva pendiente; acumulativo v8..v12; requiere Urban594)
-Cambio: Acceso Distribuidor desde portal, regreso a tienda/editor y selección de tienda para código30min. Sin migración propia; conserva permisos, pedidos, precios, banners y credenciales. No envía campaña.
+MiDistri-Pedidos v14
+Candidato documentado: v14 (implementación local; instalación productiva pendiente; base 13)
+Cambio: ingreso sólo con Email, código30min y perfiles posteriores; remitentes propios por tienda y autenticación administrativa Urban conservados. Sin nueva migración propia; requiere Urban598. Sin campañas, cambios económicos, SMTP ni venv.

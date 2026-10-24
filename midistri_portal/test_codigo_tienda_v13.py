@@ -9,8 +9,8 @@ class CodigoTiendaPortalTests(TestCase):
     def test_selector_publico_sin_revelar_contactos(self):
         Distribuidora.objects.create(id=61,nombre='61 - Recova')
         r=self.client.get('/portal/acceso/?distribuidora=61')
-        self.assertContains(r,'Elegí tu distribuidora')
-        self.assertContains(r,'value="61" selected')
+        self.assertNotContains(r,'name="distribuidora"')
+        self.assertContains(r,'name="email"')
         self.assertNotContains(r,'seller@example.test')
     def test_tienda_viaja_a_urban(self):
         calls=[]
@@ -27,7 +27,7 @@ class CodigoTiendaPortalTests(TestCase):
             r=self.client.post('/portal/acceso/iniciar/',{'email':'seller@example.test','distribuidora':'999'},**self.headers)
         self.assertEqual(r.status_code,400)
         self.assertFalse(any(c.args[0]=='login-code-request' for c in api.call_args_list))
-    def test_multitienda_exige_elegir(self):
+    def test_multitienda_usa_email_sin_selector_previo(self):
         Distribuidora.objects.create(id=61,nombre='61 - Recova')
         r=self.client.post('/portal/acceso/iniciar/',{'email':'seller@example.test'},**self.headers)
-        self.assertEqual(r.status_code,400)
+        self.assertEqual(r.status_code,200)
