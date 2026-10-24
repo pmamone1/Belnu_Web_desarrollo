@@ -1,3 +1,3 @@
 MiDistri / Pedidos Online
-Candidato documentado: v12 (validación local; instalación productiva pendiente; acumulativo v8/v9/v10/v11)
-Cambio: banners panorámicos con fotos grandes y fundido accesible600ms; conserva tienda, pedidos, precios y sesión por pestaña. Sin nueva migración propia, SMTP, conexiones, venv ni envío de campaña.
+Candidato documentado: v13 (implementación local; instalación productiva pendiente; acumulativo v8..v12; requiere Urban594)
+Cambio: Acceso Distribuidor desde portal, regreso a tienda/editor y selección de tienda para código30min. Sin migración propia; conserva permisos, pedidos, precios, banners y credenciales. No envía campaña.
