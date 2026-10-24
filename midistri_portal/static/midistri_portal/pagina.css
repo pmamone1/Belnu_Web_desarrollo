@@ -6,3 +6,33 @@
 .diseno-lista .producto-info .price{font-size:22px}
 @media(max-width:700px){.diseno-lista .grid>.card,.preview-movil .diseno-lista .grid>.card{grid-template-columns:95px minmax(0,1fr)}
 .diseno-lista .producto-media{grid-column:1}.diseno-lista .producto-info{grid-column:2}.diseno-lista .producto-compra{grid-column:1 / -1}}
+
+/* Full-width promotions; the body container excludes the scrollbar from cqw. */
+body{container-type:inline-size}
+.banner-panoramico{width:100cqw;max-width:none;margin-inline:calc(50% - 50cqw);padding:clamp(24px,4vw,56px) max(20px,calc((100cqw - 1280px)/2));border-radius:0;border-inline:0;background:linear-gradient(130deg,var(--panel) 30%,var(--soft));overflow:hidden}
+.banner-panoramico>h2{font-size:clamp(28px,3.2vw,46px);margin:0 0 10px;letter-spacing:-.025em}
+.banner-panoramico>p{max-width:850px;margin:0 0 24px;color:var(--muted)}
+.banner-slides{display:grid;isolation:isolate}
+.banner-slides>[data-slide]{grid-area:1/1;min-width:0}
+.banner-panoramico [data-slide]{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,1fr);gap:clamp(24px,5vw,64px);align-items:center}
+.banner-media{min-width:0}
+.banner-copy{min-width:0;overflow-wrap:anywhere}
+.banner-copy h3{font-size:clamp(26px,2.8vw,40px);line-height:1.15;letter-spacing:-.02em}
+.banner-copy .button{margin:8px 8px 0 0}
+.banner-panoramico .banner-media img,.banner-panoramico .banner-media video{width:100%;height:clamp(480px,40vw,600px);max-height:none;object-fit:contain;border-radius:20px}
+.banner-panoramico.ajuste-cover .banner-media img{object-fit:cover}
+.banner-panoramico.formato-cuadrado .banner-media img{aspect-ratio:1}
+.banner-controles button{min-width:100px}
+.banner-controles{gap:16px}
+.preview-movil .banner-panoramico{width:100%;margin-inline:0;padding:20px;border-radius:14px}
+.preview-movil .banner-panoramico [data-slide]{grid-template-columns:1fr;gap:12px}
+.preview-movil .banner-panoramico .banner-media img,.preview-movil .banner-panoramico .banner-media video{height:320px}
+@media(max-width:700px){
+ .banner-panoramico [data-slide]{grid-template-columns:1fr;gap:12px}
+ .banner-panoramico{padding:24px 20px}
+ .banner-panoramico .banner-media img,.banner-panoramico .banner-media video{height:clamp(300px,85vw,420px);border-radius:14px}
+ .banner-copy h3{margin:10px 0}
+ .banner-controles{gap:8px}
+ .banner-controles button{min-width:0;padding:12px 14px}
+}
+@media(prefers-reduced-motion:reduce){.banner-slides *{animation:none!important;transition:none!important}}

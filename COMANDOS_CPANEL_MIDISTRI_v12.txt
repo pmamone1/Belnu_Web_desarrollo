@@ -1,0 +1,4 @@
+MiDistri-Pedidos v12
+Subir sólo midistri_pedidos_v12_banners_panorama.zip a /home/mcollini. Verificar SHA256 informado en la entrega.
+Extraer en staging nuevo; ejecutar instalar.py --root /home/mcollini/belnuweb y luego el mismo comando --apply con /home/mcollini/virtualenv/belnuweb/3.7/bin/python.
+Respaldo y reinicio sólo belnuweb; sin variables ni cron nuevos, sin sincronización ni publicación de borradores al instalar. Campaña sin enviar.

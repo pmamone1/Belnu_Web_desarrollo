@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v12
+
+Banners de ancho completo, fotos más grandes y fundido accesible. Conserva cuatro diseños/temas, la página anterior y la sesión por pestaña. Sin cambios de catálogo, precios ni permisos; producción pendiente.
+
+Guía vigente: [BANNERS_v12.md](BANNERS_v12.md). Validación: [evidencia](VALIDACION_v12.md).
+
+- [x] Verificar paquete, hashes, instalador y manual PDF.
+- [ ] Instalar en su aplicación y comprobar impresión/vista previa sin operaciones económicas.
+- [ ] Mantener campaña sin enviar; no contar instalación sin recibo.
+
 ## MiDistri v11 — Tienda con borrador y referencias
 
 Cuatro diseños, mensajes y banners de productos con previa PC/celular y publicación completa. Referencia breve de Urban, conservando UUID y originales. Migración0009 preserva página vigente. Requiere Urban591; instalación productiva pendiente; sin campaña ni cambios SMTP.

@@ -184,7 +184,7 @@ class PaginaTests(TestCase):
         from .models import BloquePromocional
         BloquePromocional.objects.create(tienda=self.t,titulo='Oferta anterior',texto='Texto vigente',tipo='texto',activo=True)
         response=self.client.get('/portal/?distribuidora=20')
-        self.assertContains(response,'promociones-rail')
+        self.assertContains(response,'data-banner')  # v12 changes presentation; legacy source/promotions remain.
         self.assertContains(response,'Oferta anterior')
 
 from django.test import TransactionTestCase
