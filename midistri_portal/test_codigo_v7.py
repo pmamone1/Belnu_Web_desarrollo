@@ -19,7 +19,7 @@ class CodigoPortalTests(TestCase):
         self.patch.start();self.addCleanup(self.patch.stop)
 
     def response(self,action,**kwargs):
-        if action=='capabilities':return {'login_codigo':1,'sesion_pestana':1,'login_codigo_habilitado':True}
+        if action=='capabilities':return {'login_codigo':1,'sesion_pestana':1,'login_codigo_tienda':1,'login_codigo_habilitado':True}
         if action=='login-code-request':return {'version':1,'solicitud':str(uuid4()),'mensaje':'Si ese Email está habilitado, recibirás un código para ingresar.'}
         if action=='login-code-verify':return {'version':1,'ticket':'t'*43,'identidades':[{'seleccion':'s'*32,'nombre':self.profile['nombre'],'distribuidora':self.d.nombre}]}
         if action=='login-code-select':return {'perfil':self.profile,'session_token':'SECRET_URBAN_TOKEN_'+'x'*40}

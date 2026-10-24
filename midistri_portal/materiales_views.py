@@ -1,3 +1,4 @@
+from .sesiones_operador import token_operador
 from django.views.decorators.http import require_http_methods
 from django.shortcuts import render,redirect
 from .operadores_views import contexto_panel,fallo
@@ -7,7 +8,7 @@ from .client import api,ApiError
 def panel(request,producto):
     try:
         ctx=contexto_panel(request,'midistri.catalogo_gestionar');did=ctx['tienda']['id']
-        token=request.session['midistri_operador_token'];review=None;error=''
+        token=token_operador(request);review=None;error=''
         current=api('operator-media-products',method='POST',operator_token=token,data={'distribuidora':did,'producto':producto})
         if request.method=='POST':
             if request.POST.get('revision'):

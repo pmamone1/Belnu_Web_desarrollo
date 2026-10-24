@@ -1,0 +1,14 @@
+Instalar primero Urban594 y después MiDistri13. Subir este ZIP a /home/mcollini. Verificar el SHA256 publicado en el chat antes de aplicar; no reutilizar el hash de otra compilación. Los instaladores verifican además cada archivo del inventario. No cambiar variables ni enviar campañas con estos pasos.
+(
+set -e
+umask 077
+cd /home/mcollini
+PAQUETE_M="/home/mcollini/midistri_pedidos_v13_midistri_guia.zip"
+unzip -t "$PAQUETE_M"
+STAGING_M=$(mktemp -d /home/mcollini/staging_midistri_v13_XXXXXX)
+unzip -oq "$PAQUETE_M" -d "$STAGING_M"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_M/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_M/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+Después de ambos: abrir un acceso NUEVO desde MiDistri → Configurar mi sitio. No reutilizar enlaces con desafío antiguos. Confirmar alcance y permisos de cada distribuidora en su guía. La instalación no habilita nuevas distribuidoras, remitentes, números ni campañas por sí sola.

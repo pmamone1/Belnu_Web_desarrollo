@@ -61,10 +61,13 @@ def activar(request,token):
             from .sesion_pestana import crear_sesion_pestana
             ident,proof=datos_prueba(request)
             return JsonResponse(crear_sesion_pestana(request,result['perfil'],result['session_token'],ident,proof))
-        operator=None if getattr(request,'midistri_codigo_enabled',False) else request.session.pop('midistri_operador_token',None)
-        if operator:
+        from .sesiones_operador import tokens_operador
+        operators=[] if getattr(request,'midistri_codigo_enabled',False) else tokens_operador(request)
+        for operator in operators:
             try:api('operator-logout',method='POST',operator_token=operator)
             except ApiError:pass
+        if operators:
+            for key in ('midistri_operador_token','midistri_operador_sesiones','midistri_operador_id'):request.session.pop(key,None)
         request.session.cycle_key()
         request.session['midistri_token']=result['session_token']
         request.session['midistri_cart']={};request.session.pop('midistri_cart_id',None)

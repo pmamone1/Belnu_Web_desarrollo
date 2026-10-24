@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.views.decorators.http import require_GET,require_POST
 from django.utils.crypto import salted_hmac
 from .client import api,ApiError
+from .models import Distribuidora
 from .sesion_pestana import datos_prueba,navegador,crear_sesion_pestana
 
 
@@ -20,12 +21,16 @@ def habilitado():
     caps=api('capabilities')
     if (caps.get('login_codigo')!=1 or caps.get('sesion_pestana')!=1
         or caps.get('login_codigo_habilitado') is not True):raise ApiError('Ingreso con código todavía no disponible.',503)
+    return caps
 
 
 @require_GET
 def pantalla(request):
     if not getattr(settings,'MIDISTRI_LOGIN_CODIGO_ENABLED',False):return HttpResponse('Ingreso con código no disponible.',status=503)
-    return render(request,'midistri_portal/acceso_codigo.html',{'titulo':'Entrar a MiDistri-Pedidos'})
+    ds=Distribuidora.objects.filter(activa=True).order_by('nombre')
+    selected=request.GET.get('distribuidora','')
+    return render(request,'midistri_portal/acceso_codigo.html',{'titulo':'Entrar a MiDistri-Pedidos',
+        'distribuidoras':ds,'seleccionada':int(selected) if selected.isdecimal() else None})
 
 
 def _pendientes(request):
@@ -36,11 +41,19 @@ def _pendientes(request):
 @require_POST
 def iniciar(request):
     try:
-        habilitado();ident,proof=datos_prueba(request)
+        caps=habilitado();ident,proof=datos_prueba(request)
+        ds=Distribuidora.objects.filter(activa=True)
+        selected=request.POST.get('distribuidora','')
+        if not selected and ds.count()==1:selected=str(ds.first().pk)
+        if not selected.isdecimal() or not ds.filter(pk=int(selected)).exists():
+            raise ApiError('Elegí tu distribuidora antes de solicitar el código.',400)
+        if caps.get('login_codigo_tienda')!=1:
+            raise ApiError('Falta actualizar Urban Soft para ingresar por tienda. No se envió un código.',503)
+        did=int(selected)
         email=forms.EmailField(max_length=254).clean(request.POST.get('email',''))
         navegador(request,True)
         ip=salted_hmac('midistri.login.ip',request.META.get('REMOTE_ADDR',''),algorithm='sha256').hexdigest()
-        result=api('login-code-request',method='POST',data={'email':email,'desafio':sha256(proof.encode()).hexdigest(),'ip':ip})
+        result=api('login-code-request',method='POST',data={'email':email,'distribuidora':did,'desafio':sha256(proof.encode()).hexdigest(),'ip':ip})
         if result.get('version')!=1 or not isinstance(result.get('solicitud'),str) or len(result['solicitud'])>100:raise ApiError('Respuesta de ingreso inválida.')
         pending=_pendientes(request)
         if ident not in pending and len(pending)>=10:raise ApiError('Demasiadas pestañas de ingreso. Cerrá las anteriores.',429)

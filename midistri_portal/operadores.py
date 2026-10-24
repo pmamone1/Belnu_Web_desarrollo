@@ -4,6 +4,7 @@ from datetime import datetime
 from django.conf import settings
 from django.http import HttpResponse
 from .client import api,ApiError
+from .sesiones_operador import token_operador,borrar_token
 
 PERMISOS={'pedidos.gestionar','pedidos.remitos','pedidos.remitos_ver',
           'midistri.catalogo_gestionar','midistri.tienda_configurar'}
@@ -39,13 +40,14 @@ def perfil_valido(data):
 
 def perfil_operador(request,permiso=None):
     if not habilitado():raise ApiError('La administración de MiDistri está desactivada.')
-    token=request.session.get('midistri_operador_token')
+    token=token_operador(request)
     if not token:raise ApiError('Ingrese desde Urban Soft.',401)
     try:perfil=perfil_valido(api('operator-profile',operator_token=token))
     except ApiError as e:
-        if e.status in (401,403):request.session.pop('midistri_operador_token',None)
+        if e.status in (401,403):borrar_token(request,token)
         raise
     if permiso and permiso not in perfil['permisos']:raise ApiError('No tiene permiso para esta operación.',403)
+    request.midistri_operador_token=token
     request.midistri_operador=perfil
     return perfil
 

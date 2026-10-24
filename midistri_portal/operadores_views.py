@@ -1,3 +1,4 @@
+from .sesiones_operador import token_operador
 """Distributor pages use delegated identities, never Django staff elevation."""
 import secrets
 import hashlib
@@ -13,7 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 from . import operadores as op
 from .client import ApiError
 def limpiar_autenticacion_heredada(request):
-    keep={key:request.session[key] for key in ('midistri_browser','midistri_login_pending','midistri_destino_admin') if key in request.session}
+    keep={key:request.session[key] for key in ('midistri_browser','midistri_login_pending','midistri_destino_admin','midistri_admin_browser') if key in request.session}
     logout(request)
     request.session.update(keep)
     request.session.set_expiry(0)
@@ -40,6 +41,7 @@ def clasificar_desafio(request):
     try:nonce=signing.loads(cookie,salt=SALT,max_age=120 if legacy else 600)
     except signing.SignatureExpired:return None,'challenge_expired'
     except signing.BadSignature:return None,'signature_invalid'
+    if isinstance(nonce,dict):nonce=nonce.get('nonce')
     if not isinstance(nonce,str) or not secrets.compare_digest(nonce,sent):return None,'challenge_mismatch'
     if not 20<=len(request.POST.get('codigo',''))<=100:return None,'challenge_mismatch'
     return nonce,None
@@ -65,15 +67,21 @@ def fallo(request,error):
 @require_GET
 def entrada(request):
     if not op.habilitado():return HttpResponse('Administración de MiDistri desactivada.',status=503)
-    if request.GET.get('destino')=='banners':request.session['midistri_destino_admin']='banners'
+    destino=request.GET.get('destino','tienda')
+    if destino not in ('tienda','banners','panel'):destino='tienda'
+    did=request.GET.get('distribuidora','')
+    if did and (not did.isdecimal() or int(did)<1 or len(did)>10):
+        return HttpResponse('Tienda no válida.',status=400)
+    request.session.setdefault('midistri_admin_browser',secrets.token_urlsafe(32))
     nonce=secrets.token_urlsafe(32)
-    try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce})
+    contexto={'nonce':nonce,'destino':destino,'distribuidora':int(did) if did else None}
+    try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce,'distribuidora':did,'destino':destino})
     except ApiError as e:return fallo(request,e)
     response=redirect(url)
     old=[name for name in request.COOKIES if name.startswith(HANDOFF_COOKIE_PREFIX)]
     for name in old[:-9]:
         response.delete_cookie(name,path='/portal/administrar/',samesite='None')
-    response.set_cookie(nombre_cookie_desafio(nonce),signing.dumps(nonce,salt=SALT),max_age=600,
+    response.set_cookie(nombre_cookie_desafio(nonce),signing.dumps(contexto,salt=SALT),max_age=600,
         secure=True,httponly=True,samesite='None',path='/portal/administrar/')
     return response
 
@@ -92,13 +100,23 @@ def completar(request):
         if not isinstance(token,str) or not 20<=len(token)<=100:raise ApiError('Respuesta de acceso inválida.')
     except (KeyError,TypeError):return fallo(request,ApiError('Respuesta de acceso inválida.'))
     except ApiError as e:return fallo(request,e)
-    limpiar_autenticacion_heredada(request)
-    request.session.cycle_key()
-    request.session['midistri_operador_token']=token
-    # The delegated token expires server-side; the browser cookie must not expire seller tabs.
-    request.session.set_expiry(0)
-    target=request.session.pop('midistri_destino_admin',None)
-    response=redirect('/portal/administrar/pagina/?distribuidora='+str(result['perfil']['distribuidoras'][0]['id']) if target=='banners' else 'midistri_operador_panel')
+    cookie=request.COOKIES.get(nombre_cookie_desafio(sent))
+    contexto=signing.loads(cookie,salt=SALT,max_age=600) if cookie else {}
+    contexto=contexto if isinstance(contexto,dict) else {}
+    ids=[d['id'] for d in result['perfil']['distribuidoras']]
+    selected=request.POST.get('distribuidora','')
+    if selected and (not selected.isdecimal() or len(selected)>10):
+        return HttpResponse('Tienda no válida.',status=403)
+    did=int(selected) if selected else contexto.get('distribuidora') or ids[0]
+    if did not in ids:
+        return HttpResponse('La tienda solicitada no está autorizada. Volvé a entrar desde Urban Soft.',status=403)
+    destino=contexto.get('destino','panel')
+    permiso='midistri.tienda_configurar' in result['perfil']['permisos']
+    from .sesiones_operador import guardar_operador
+    guardar_operador(request,result['perfil'],token,limpiar_autenticacion_heredada)
+    request.session.pop('midistri_destino_admin',None)
+    response=redirect(('/portal/administrar/pagina/' if destino in ('tienda','banners') and permiso else '/portal/administrar/')+'?distribuidora='+str(did))
+    if not contexto:response=redirect('midistri_operador_panel')
     response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')
     return response
@@ -114,8 +132,8 @@ def panel(request):
 
 @require_POST
 def salir(request):
-    token=request.session.get('midistri_operador_token')
-    if token:
+    from .sesiones_operador import tokens_operador
+    for token in tokens_operador(request):
         try:op.api('operator-logout',method='POST',operator_token=token)
         except ApiError:pass
     limpiar_autenticacion_heredada(request)
@@ -138,7 +156,7 @@ def contexto_panel(request,permiso):
 def productos(request):
     try:
         ctx=contexto_panel(request,'midistri.catalogo_gestionar')
-        data=api('operator-products',method='POST',operator_token=request.session['midistri_operador_token'],
+        data=api('operator-products',method='POST',operator_token=token_operador(request),
                  data={'distribuidora':ctx['tienda']['id'],'q':request.GET.get('q','')[:100],'pagina':request.GET.get('pagina',1)})
         data=catalogo_valido(data,ctx['tienda']['id'])
         ctx.update(catalogo=data,q=request.GET.get('q','')[:100],sync_pendiente=request.session.get('midistri_sync_pendiente'),
@@ -151,7 +169,7 @@ def productos(request):
 def publicar(request):
     try:
         ctx=contexto_panel(request,'midistri.catalogo_gestionar');did=ctx['tienda']['id']
-        token=request.session['midistri_operador_token']
+        token=token_operador(request)
         if request.POST.get('accion')=='confirmar':
             result=api('operator-publication-confirm',method='POST',operator_token=token,
                        data={'operacion':request.POST.get('operacion','')})
@@ -196,7 +214,7 @@ def pedidos_panel(request):
     try:
         ctx=contexto_panel(request,'pedidos.gestionar');did=ctx['tienda']['id']
         estado=request.GET.get('estado','pendientes')
-        result=api('operator-orders',method='POST',operator_token=request.session['midistri_operador_token'],
+        result=api('operator-orders',method='POST',operator_token=token_operador(request),
             data={'distribuidora':did,'estado':estado,'pagina':request.GET.get('pagina',1)})
         if result.get('version')!=1 or not isinstance(result.get('pedidos'),list) or len(result['pedidos'])>50:
             raise ApiError('Bandeja de pedidos inválida.')
@@ -242,7 +260,7 @@ def pedido_panel(request,ident):
                     qty=int(request.POST[key])
                     cantidades.append({'producto_id':int(pid),'cantidad_preparada':qty if pid in selected else 0})
             data['cantidades']=cantidades
-        result=api('operator-order',method='POST',operator_token=request.session['midistri_operador_token'],data=data)
+        result=api('operator-order',method='POST',operator_token=token_operador(request),data=data)
         pedido=pedido_admin_valido(result['pedido'],did,str(ident))
         preview=None
         if result.get('revision') and partial:
@@ -267,7 +285,7 @@ def pedido_panel(request,ident):
 def excel_panel(request):
     try:
         contexto_panel(request,'pedidos.gestionar')
-        data=api('operator-order-excel',method='POST',operator_token=request.session['midistri_operador_token'],
+        data=api('operator-order-excel',method='POST',operator_token=token_operador(request),
             data={'pedidos':request.POST.getlist('pedidos')},
             binary_mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response=HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
@@ -280,7 +298,7 @@ def abastecimiento_panel(request):
     try:
         ctx=contexto_panel(request,'pedidos.gestionar')
         if request.method=='POST':
-            data=api('operator-order-supply',method='POST',operator_token=request.session['midistri_operador_token'],
+            data=api('operator-order-supply',method='POST',operator_token=token_operador(request),
                 data={'distribuidora':ctx['tienda']['id'],'desde':request.POST.get('desde',''),
                     'hasta':request.POST.get('hasta',''),'estado':request.POST.get('estado','pendientes')},
                 binary_mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
@@ -299,7 +317,7 @@ def abastecimiento_panel(request):
 def remito_panel(request,ident):
     try:
         contexto_panel(request,'pedidos.remitos_ver')
-        data=api('operator-order-document',method='POST',operator_token=request.session['midistri_operador_token'],
+        data=api('operator-order-document',method='POST',operator_token=token_operador(request),
             data={'pedido':str(ident)},binary=True)
         response=HttpResponse(data,content_type='application/pdf')
         response['Content-Disposition']='attachment; filename="MiDistri_remito.pdf"';return response
