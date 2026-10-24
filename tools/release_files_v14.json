@@ -12,6 +12,7 @@
   "docs/19_PRUEBAS_MANUALES_CRITICAS.md",
   "docs/ACCESO_EMAIL_v14.md",
   "docs/MANUAL_USUARIO.md",
+  "docs/REVISION_FINAL_v598_v14.md",
   "docs/VALIDACION_v14.md",
   "docs/superpowers/plans/2026-10-24-midistri-acceso-email-perfiles.md",
   "docs/superpowers/specs/2026-10-24-midistri-acceso-email-perfiles-design.md",
@@ -26,6 +27,7 @@
   "tools/actualizar_manual_v14.py",
   "tools/instalar_release_midistri_v14.py",
   "tools/paquete_integracion_v14.py",
+  "tools/qa_acceso_v14.py",
   "tools/release_files_v14.json",
   "tools/test_instalar_release_midistri_v14.py",
   "tools/test_paquete_v14.py"

@@ -4,7 +4,8 @@ Email y código30min, selección de perfil sólo después de verificar. Remitent
 
 Guía vigente: [ACCESO_EMAIL_v14.md](ACCESO_EMAIL_v14.md). Prevalece para este flujo. Requiere Urban598 + MiDistri14; instalar en ese orden. Producción pendiente; sin campañas.
 
-- [ ] Verificar pruebas, revisión independiente, PDF y paquetes antes de publicar.
+- [x] Pruebas dirigidas, revisión independiente y PDF verificados localmente.
+- [ ] Cotejar ZIP definitivo con commit publicado y copiar a Downloads.
 - [ ] Confirmar instalación y aceptación real del ingreso sin enviar campañas.
 
 ## MiDistri-Pedidos v13
