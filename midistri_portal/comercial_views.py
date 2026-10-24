@@ -1,3 +1,4 @@
+from .sesiones_operador import token_operador
 from uuid import uuid4
 from django import forms
 from django.contrib import messages
@@ -33,7 +34,7 @@ def guardar_configuracion_urban(perfil,token,datos,revision,operacion_id):
 def configuracion(request):
     try:
         ctx=contexto_panel(request,'midistri.tienda_configurar');did=ctx['tienda']['id']
-        token=request.session['midistri_operador_token'];current={};form=None
+        token=token_operador(request);current={};form=None
         if request.method=='POST':
             form=ComercialForm(request.POST)
             if form.is_valid():

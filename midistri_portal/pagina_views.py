@@ -1,3 +1,4 @@
+from .sesiones_operador import token_operador
 from copy import deepcopy
 from uuid import uuid4
 from django.core.exceptions import ValidationError
@@ -104,7 +105,7 @@ def guardar_accion(request,page,ctx,token):
 def editor(request):
     try:
         ctx=contexto_panel(request,'midistri.tienda_configurar')
-        did=ctx['tienda']['id'];token=request.session['midistri_operador_token'];perfil=ctx['operador']
+        did=ctx['tienda']['id'];token=token_operador(request);perfil=ctx['operador']
         page=p.borrador_tienda(perfil,did,token);error=''
         if request.method=='POST':
             try:
@@ -137,7 +138,7 @@ def editor(request):
 def preview(request):
     try:
         ctx=contexto_panel(request,'midistri.tienda_configurar')
-        did=ctx['tienda']['id'];token=request.session['midistri_operador_token'];perfil=ctx['operador']
+        did=ctx['tienda']['id'];token=token_operador(request);perfil=ctx['operador']
         page=p.borrador_tienda(perfil,did,token)
         firma=p.revisar_borrador(perfil,did,token)
         d=page.tienda.distribuidora

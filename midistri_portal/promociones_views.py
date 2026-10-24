@@ -1,3 +1,4 @@
+from .sesiones_operador import token_operador
 from uuid import uuid4
 from django.core import signing
 from django.core.exceptions import ValidationError
@@ -17,7 +18,7 @@ def archivo_previo(request,distribuidora,material):
         perfil=op.perfil_operador(request,'midistri.tienda_configurar')
         did=op.tienda_permitida(perfil,distribuidora)
         # Only a fixed server-to-server operation can read an inactive private upload.
-        result=api('operator-promotion-preview',method='POST',operator_token=request.session['midistri_operador_token'],
+        result=api('operator-promotion-preview',method='POST',operator_token=token_operador(request),
             data={'distribuidora':did,'material':str(material)},binary_media=True)
         response=HttpResponse(result[0],content_type=result[1])
         response['Cache-Control']='private, no-store';response['X-Content-Type-Options']='nosniff'
