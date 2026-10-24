@@ -40,6 +40,7 @@ def clasificar_desafio(request):
     try:nonce=signing.loads(cookie,salt=SALT,max_age=120 if legacy else 600)
     except signing.SignatureExpired:return None,'challenge_expired'
     except signing.BadSignature:return None,'signature_invalid'
+    if isinstance(nonce,dict):nonce=nonce.get('nonce')
     if not isinstance(nonce,str) or not secrets.compare_digest(nonce,sent):return None,'challenge_mismatch'
     if not 20<=len(request.POST.get('codigo',''))<=100:return None,'challenge_mismatch'
     return nonce,None
@@ -65,15 +66,20 @@ def fallo(request,error):
 @require_GET
 def entrada(request):
     if not op.habilitado():return HttpResponse('Administración de MiDistri desactivada.',status=503)
-    if request.GET.get('destino')=='banners':request.session['midistri_destino_admin']='banners'
+    destino=request.GET.get('destino','tienda')
+    if destino not in ('tienda','banners','panel'):destino='tienda'
+    did=request.GET.get('distribuidora','')
+    if did and (not did.isdecimal() or int(did)<1 or len(did)>10):
+        return HttpResponse('Tienda no válida.',status=400)
     nonce=secrets.token_urlsafe(32)
-    try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce})
+    contexto={'nonce':nonce,'destino':destino,'distribuidora':int(did) if did else None}
+    try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce,'distribuidora':did,'destino':destino})
     except ApiError as e:return fallo(request,e)
     response=redirect(url)
     old=[name for name in request.COOKIES if name.startswith(HANDOFF_COOKIE_PREFIX)]
     for name in old[:-9]:
         response.delete_cookie(name,path='/portal/administrar/',samesite='None')
-    response.set_cookie(nombre_cookie_desafio(nonce),signing.dumps(nonce,salt=SALT),max_age=600,
+    response.set_cookie(nombre_cookie_desafio(nonce),signing.dumps(contexto,salt=SALT),max_age=600,
         secure=True,httponly=True,samesite='None',path='/portal/administrar/')
     return response
 
@@ -92,13 +98,23 @@ def completar(request):
         if not isinstance(token,str) or not 20<=len(token)<=100:raise ApiError('Respuesta de acceso inválida.')
     except (KeyError,TypeError):return fallo(request,ApiError('Respuesta de acceso inválida.'))
     except ApiError as e:return fallo(request,e)
+    cookie=request.COOKIES.get(nombre_cookie_desafio(sent))
+    contexto=signing.loads(cookie,salt=SALT,max_age=600) if cookie else {}
+    contexto=contexto if isinstance(contexto,dict) else {}
+    ids=[d['id'] for d in result['perfil']['distribuidoras']]
+    did=contexto.get('distribuidora') or ids[0]
+    if did not in ids:
+        return HttpResponse('La tienda solicitada no está autorizada. Volvé a entrar desde Urban Soft.',status=403)
+    destino=contexto.get('destino','panel')
+    permiso='midistri.tienda_configurar' in result['perfil']['permisos']
     limpiar_autenticacion_heredada(request)
     request.session.cycle_key()
     request.session['midistri_operador_token']=token
     # The delegated token expires server-side; the browser cookie must not expire seller tabs.
     request.session.set_expiry(0)
-    target=request.session.pop('midistri_destino_admin',None)
-    response=redirect('/portal/administrar/pagina/?distribuidora='+str(result['perfil']['distribuidoras'][0]['id']) if target=='banners' else 'midistri_operador_panel')
+    request.session.pop('midistri_destino_admin',None)
+    response=redirect(('/portal/administrar/pagina/' if destino in ('tienda','banners') and permiso else '/portal/administrar/')+'?distribuidora='+str(did))
+    if not contexto:response=redirect('midistri_operador_panel')
     response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')
     return response

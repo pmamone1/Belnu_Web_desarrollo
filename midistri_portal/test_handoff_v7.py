@@ -21,7 +21,7 @@ class HandoffV7Tests(TestCase):
                 {'codigo': 'c' * 43, 'desafio': nonce},
                 HTTP_ORIGIN='https://sistema7000.belnu.com.ar')
             self.assertEqual(r.status_code, 302)
-            self.assertEqual(r['Location'], '/portal/administrar/')
+            self.assertEqual(r['Location'], '/portal/administrar/?distribuidora=20')
 
     def test_expirado_missing_cookie_origin_y_nonce_no_se_confunden(self):
         from . import operadores_views as views

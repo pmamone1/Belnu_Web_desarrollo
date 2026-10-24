@@ -3,6 +3,7 @@
 <p>El código vale <strong>30 minutos</strong> y se utiliza una sola vez. Una vez adentro podés seguir usando el portal. Para cerrar el acceso de forma segura, tocá Salir.</p>
 <p id="acceso-mensaje" role="status" aria-live="polite"></p>
 <form data-codigo="iniciar" method="post" action="{% url 'midistri_codigo_iniciar' %}">{% csrf_token %}
+<label>Elegí tu distribuidora <select name="distribuidora" required><option value="">Seleccionar distribuidora</option>{% for d in distribuidoras %}<option value="{{ d.pk }}"{% if seleccionada == d.pk %} selected{% endif %}>{{ d.nombre_comercial|default:d.nombre }}</option>{% endfor %}</select></label>
 <label>Email <input type="email" name="email" autocomplete="email" required maxlength="254"></label><button>Recibir código</button></form>
 <form data-codigo="verificar" method="post" action="{% url 'midistri_codigo_verificar' %}" hidden>{% csrf_token %}
 <label>Código de seis números <input name="codigo" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button>Entrar</button></form>

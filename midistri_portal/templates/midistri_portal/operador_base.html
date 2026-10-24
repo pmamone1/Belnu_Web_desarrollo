@@ -4,7 +4,9 @@
 {% else %}<section><h2>Administrar MiDistri-Pedidos</h2><p>{{ operador.nombre }} · Perfil Distribuidor</p>
 <p>Trabajás únicamente con las distribuidoras autorizadas por Urban Soft.</p>
 <nav>{% for d in operador.distribuidoras %}<a href="{% url 'midistri_operador_panel' %}?distribuidora={{ d.id }}">{{ d.nombre }}</a>{% endfor %}</nav>
-<nav>{% if 'midistri.catalogo_gestionar' in operador.permisos %}<a href="{% url 'midistri_operador_productos' %}?distribuidora={{ tienda.id }}">Productos</a>{% endif %}{% if 'pedidos.gestionar' in operador.permisos %}<a href="{% url 'midistri_operador_pedidos' %}?distribuidora={{ tienda.id }}">Pedidos</a>{% endif %}{% if 'midistri.tienda_configurar' in operador.permisos %}<a href="{% url 'midistri_operador_tienda' %}?distribuidora={{ tienda.id }}">Mi tienda · banners y mensajes</a>{% endif %}</nav>
-{% block panel %}<p>Productos, pedidos y presentación de tu tienda.</p>{% endblock %}
+<nav>{% if 'midistri.catalogo_gestionar' in operador.permisos %}<a href="{% url 'midistri_operador_productos' %}?distribuidora={{ tienda.id }}">Productos</a>{% endif %}{% if 'pedidos.gestionar' in operador.permisos %}<a href="{% url 'midistri_operador_pedidos' %}?distribuidora={{ tienda.id }}">Pedidos</a>{% endif %}{% if 'midistri.tienda_configurar' in operador.permisos %}<a href="{% url 'midistri_operador_tienda' %}?distribuidora={{ tienda.id }}">Banners y promociones</a><a class="button" href="{% url 'midistri_pagina_editor' %}?distribuidora={{ tienda.id }}">Configurar MiDistri</a>{% endif %}</nav>
+<p><a class="button secondary" href="{% url 'midistri_catalogo' %}?distribuidora={{ tienda.id }}" target="_blank" rel="noopener">Ver mi sitio</a></p>
+{% if 'midistri.tienda_configurar' not in operador.permisos %}<p role="status">No tenés habilitado el permiso para configurar el sitio. Pedile al responsable de tu distribuidora que revise «Configurar logo, contacto y mensajes de su tienda» en Urban Soft. El permiso de pedidos permite gestionar pedidos únicamente.</p>{% endif %}
+{% block panel %}<p>Elegí Configurar MiDistri para editar diseño, mensajes y banners. Pedidos abre la gestión de pedidos.</p>{% endblock %}
 <form method="post" action="{% url 'midistri_operador_salir' %}">{% csrf_token %}<button>Salir de administración</button></form></section>{% endif %}
 {% endblock %}
