@@ -5,7 +5,7 @@ Email y código30min, selección de perfil sólo después de verificar. Remitent
 Guía vigente: [ACCESO_EMAIL_v14.md](ACCESO_EMAIL_v14.md). Prevalece para este flujo. Requiere Urban598 + MiDistri14; instalar en ese orden. Producción pendiente; sin campañas.
 
 - [x] Pruebas dirigidas, revisión independiente y PDF verificados localmente.
-- [ ] Cotejar ZIP definitivo con commit publicado y copiar a Downloads.
+- [ ] En cPanel, cotejar el SHA256 del ZIP subido con el informado en la entrega antes de instalar.
 - [x] Suite histórica general comparada contra597: mismas732incidencias, documentadas sin afirmar aprobación global.
 - [ ] Confirmar instalación y aceptación real del ingreso sin enviar campañas.
 
