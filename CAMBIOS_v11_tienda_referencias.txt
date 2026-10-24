@@ -1,0 +1,2 @@
+MiDistri-Pedidos v11
+Cuatro diseños con bloques, mensajes, banners y carruseles editables; borrador privado, previa PC/celular y publicación de versión completa. Referencia canónica de Urban, sin renumerar UUID. Migration0009 preserva presentación anterior. RequiereUrban591. Instalación pendiente; sin campaña ni cambios SMTP.

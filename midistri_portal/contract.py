@@ -16,7 +16,7 @@ def perfil_valido(data):
         raise ApiError('No se pudo validar tu acceso. Conservamos la sesión para reintentar.') from None
     return data
 
-def pedido_valido(data,perfil,ident=None):
+def pedido_valido(data,perfil,ident=None,anterior=None):
     try:
         if not isinstance(data,dict):raise ValueError
         UUID(data['id'])
@@ -47,6 +47,8 @@ def pedido_valido(data,perfil,ident=None):
     if 'email_estado' in data:
         if not isinstance(data['email_estado'],str) or len(data['email_estado'])>30:raise ApiError('Estado de Email inválido.')
         result['email_estado']=data['email_estado']
+    from .referencias import validar_referencia
+    result.update(validar_referencia(data,anterior))
     result.update(items=clean)
     for key in ('distribuidora','linea','lin','vv','creado','pedidos'):
         if key in data:result[key]=data[key]

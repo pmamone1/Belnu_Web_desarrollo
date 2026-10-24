@@ -32,11 +32,17 @@ def identificar(request):
 
 
 def base(request,perfil=None,distribuidora=None):
+    from .pagina import pagina_publica,MENSAJES
+    from .pagina_views import contenido_contexto
+    if distribuidora is None and perfil:
+        distribuidora=Distribuidora.objects.filter(pk=perfil['distribuidora_id'],activa=True).first()
     saved=request.session.get('midistri_catalogo_filtros',{})
-    return {'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
+    context={'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
         (' - '+perfil['distribuidora'] if perfil else (' - '+(distribuidora.nombre_comercial or distribuidora.nombre) if distribuidora else '')),
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
+    if distribuidora:context.update(contenido_contexto(pagina_publica(distribuidora),distribuidora))
+    return context
 
 
 def error_page(request,e):
@@ -96,7 +102,13 @@ def catalogo(request):
     from .presentacion import presentacion_publica,TEMAS
     from .promociones import promociones_publicas
     context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
-    return render(request,'midistri_portal/catalogo.html',context)
+    from .pagina import pagina_publica,MENSAJES
+    from .pagina_views import contenido_contexto
+    context.update(contenido_contexto(pagina_publica(d),d) if d else {
+        'pagina':{'diseno':'compacto'},'pagina_mensajes':MENSAJES,
+        'bloques':[{'tipo':'catalogo','activo':True}]})
+    template='midistri_portal/catalogo_inicial.html' if context.get('pagina',{}).get('inicial_anterior') else 'midistri_portal/catalogo.html'
+    return render(request,template,context)
 
 
 def foto_producto(producto):
@@ -164,9 +176,11 @@ def carrito(request):
 def transmitir(request,pedido):
     try:
         result=api('orders',method='POST',data=pedido.datos,token=request.session['midistri_token'])
-        result=pedido_valido(result,request.midistri_perfil,ident=pedido.pk)
+        result=pedido_valido(result,request.midistri_perfil,ident=pedido.pk,anterior=pedido.respuesta)
         pedido.respuesta=result;pedido.estado=result['estado'];pedido.error=''
-        messages.success(request,'Recibimos tu pedido N.º '+str(pedido.pk)+' — '+result['vendedor'])
+        from .pagina import pagina_publica,MENSAJES
+        titulo=pagina_publica(pedido.distribuidora)['mensajes'].get('recibido') or MENSAJES['recibido']
+        messages.success(request,titulo+' · '+pedido.referencia_publica+' — '+result['vendedor'])
     except ApiError as e:
         pedido.error=str(e)[:300]
         pedido.estado='revisar' if e.status==409 else 'pendiente'
@@ -219,7 +233,7 @@ def pedidos(request):
         if not perfil:return redirect('midistri_catalogo')
         data=api('orders',token=request.session['midistri_token'])
         if not isinstance(data.get('pedidos'),list) or len(data['pedidos'])>100:raise ApiError('Respuesta de pedidos inválida.')
-        validos=[pedido_valido(row,perfil) for row in data['pedidos']]
+        validos=[pedido_valido(row,perfil,anterior=(PedidoLocal.objects.filter(pk=row.get('id'),vendedor_id=perfil['id'],distribuidora_id=perfil['distribuidora_id']).values_list('respuesta',flat=True).first() or {})) for row in data['pedidos']]
         for row in validos:
             defaults={'respuesta':row,'estado':row['estado'],'error':''}
             old=PedidoLocal.objects.filter(pk=row['id']).first()
@@ -247,7 +261,7 @@ def detalle(request,ident):
                 listing=api('orders',token=request.session['midistri_token'])
                 data=next((x for x in listing.get('pedidos',[]) if x.get('id')==str(ident)),None)
                 if data is None:raise ApiError('El pedido no está disponible para actualizar.',404)
-            result=pedido_valido(data,perfil,ident)
+            result=pedido_valido(data,perfil,ident,anterior=pedido.respuesta)
             from django.utils import timezone
             result['_consultado_en']=timezone.now().isoformat()
             pedido.respuesta=result;pedido.estado=result['estado'];pedido.error=''

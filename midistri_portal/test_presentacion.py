@@ -58,19 +58,11 @@ class PresentacionTests(TestCase):
             with self.assertRaises(ValidationError):
                 m.guardar_tienda(self.perfil,20,{'bienvenida':'Diferente'},revision=0,operacion_id=ident,token='x'*43)
 
-    def test_subida_http_guarda_png_en_tienda_con_historial(self):
-        from tempfile import TemporaryDirectory
+    def test_pantalla_antigua_no_publica_archivo_sin_revision(self):
         from .models import Tienda
-        self.modulo()
-        out=BytesIO();Image.new('RGB',(50,50),'blue').save(out,format='JPEG')
         session=self.client.session;session['midistri_operador_token']='x'*43;session.save()
-        with TemporaryDirectory() as tmp,override_settings(MEDIA_ROOT=tmp):
-            with patch('midistri_portal.operadores.api',return_value=self.perfil),patch('midistri_portal.presentacion.api',return_value=self.perfil):
-                response=self.client.post('/portal/administrar/tienda/',{
-                    'distribuidora':20,'revision':0,'operacion':'00000000-0000-4000-8000-000000000006',
-                    'bienvenida':'Tienda','logo':SimpleUploadedFile('logo.jpg',out.getvalue(),content_type='image/jpeg')})
-            self.assertEqual(response.status_code,302)
-            tienda=Tienda.objects.get(distribuidora=self.d)
-            self.assertEqual(tienda.cambios.count(),1)
-            self.assertTrue(tienda.logo.name.endswith('.png'))
-            with tienda.logo.open('rb') as image:self.assertTrue(image.read().startswith(b'\x89PNG'))
+        with patch('midistri_portal.operadores.api',return_value=self.perfil):
+            response=self.client.post('/portal/administrar/tienda/',{'distribuidora':20,'bienvenida':'No publicar'})
+        self.assertEqual(response.status_code,302)
+        self.assertIn('/administrar/pagina/',response['Location'])
+        self.assertFalse(Tienda.objects.exists())

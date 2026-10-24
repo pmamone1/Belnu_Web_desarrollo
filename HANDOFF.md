@@ -1,3 +1,9 @@
+## MiDistri v11 — Tienda con borrador y referencias
+
+Cuatro diseños, mensajes y banners de productos con previa PC/celular y publicación completa. Referencia breve de Urban, conservando UUID y originales. Migración0009 preserva página vigente. Requiere Urban591; instalación productiva pendiente; sin campaña ni cambios SMTP.
+
+Guía: [TIENDA_REFERENCIAS_v11.md](docs/TIENDA_REFERENCIAS_v11.md). Evidencia: [VALIDACION_v11.md](docs/VALIDACION_v11.md).
+
 ## MiDistri-Pedidos v10 - Catálogo coordinado
 
 Operación cada cinco minutos con Urban v588: altas autorizadas, cambios y bajas, conservando exclusiones, ocultos y pedidos anteriores. Mantiene sincronizador/API y galería v9; acumulativo v8/v9, sin migraciones nuevas. Instalación v10 y cron productivos pendientes. El video Alma Chocolate141 ya fue publicado/sincronizado para20/65 según confirmación del usuario y lectura del portal23/10/2026. SMTP y campaña sin cambios.

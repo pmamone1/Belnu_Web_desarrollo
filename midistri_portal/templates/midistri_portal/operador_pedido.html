@@ -1,5 +1,5 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
-<h3>Pedido {{ pedido.id }}</h3><p>{{ pedido.vendedor }} · LIN {{ pedido.lin|default_if_none:"—" }} · VV {{ pedido.vv|default_if_none:"—" }} · {{ pedido.estado }}</p>
+<h3>Pedido de MiDistri-Pedidos · {{ pedido.referencia|default:pedido.id }}</h3><p>{{ pedido.vendedor }} · LIN {{ pedido.lin|default_if_none:"—" }} · VV {{ pedido.vv|default_if_none:"—" }} · {{ pedido.estado }}</p>
 {% if not parciales %}<p>Urban Soft todavía permite únicamente la preparación completa. Para cantidades parciales, actualice Urban Soft.</p>{% endif %}
 <form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 <table><thead><tr><th>Producto</th><th>Solicitadas</th><th>Precio vendedor</th><th>Preparadas / a preparar</th><th>Canceladas por falta de stock</th></tr></thead><tbody>

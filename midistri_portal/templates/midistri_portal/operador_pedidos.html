@@ -4,7 +4,7 @@
 <form method="get"><input type="hidden" name="distribuidora" value="{{ tienda.id }}"><label>Estado <select name="estado">{% for value,label in estados %}<option value="{{ value }}" {% if estado == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label><button>Consultar</button></form>
 <form method="post" action="{% url 'midistri_operador_excel' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 {% for p in pedidos %}<article class="card"><p><strong>{{ p.vendedor }}</strong> · LIN {{ p.lin|default_if_none:"—" }} · VV {{ p.vv|default_if_none:"—" }}</p>
-<p>Pedido {{ p.id }} · {{ p.estado }} · {{ p.creado }}</p>{% if p.estado == "ok" %}<label><input name="pedidos" value="{{ p.id }}" type="checkbox"> Incluir en Excel de depósito</label>{% endif %}
+<p>{{ p.referencia|default:p.id }} · {{ p.estado }} · {{ p.creado }}</p>{% if p.estado == "ok" %}<label><input name="pedidos" value="{{ p.id }}" type="checkbox"> Incluir en Excel de depósito</label>{% endif %}
 <a class="button" href="{% url 'midistri_operador_pedido' ident=p.id %}?distribuidora={{ tienda.id }}">Ver y gestionar</a></article>{% empty %}<p>Sin pedidos para este filtro.</p>{% endfor %}
 <button>Descargar Excel de pedidos OK seleccionados</button></form>
 <p>{{ total }} pedidos · Página {{ pagina }} de {{ paginas }}</p>

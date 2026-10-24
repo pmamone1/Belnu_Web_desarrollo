@@ -1,0 +1,14 @@
+# MiDistri11; requiere Urban591 instalado. Verificar SHA256 con el valor publicado en el chat.
+(
+set -e
+umask 077
+cd /home/mcollini
+PAQUETE_MIDISTRI="/home/mcollini/midistri_pedidos_v11_tienda_referencias.zip"
+unzip -t "$PAQUETE_MIDISTRI"
+STAGING_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri_v11_XXXXXX)
+unzip -oq "$PAQUETE_MIDISTRI" -d "$STAGING_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)
+# Mantener banderas existentes. Abrir Mi tienda, revisar PC/celular y publicar cuando se decida.
