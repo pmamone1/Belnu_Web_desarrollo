@@ -1,5 +1,5 @@
 # Banners panorámicos y remitos identificados
-Fecha: 24/10/2026. Estado: propuesta para revisión; NO implementada ni instalada.
+Fecha: 24/10/2026. Estado: diseño aprobado e implementado localmente; instalación productiva pendiente.
 
 ## MiDistri
 - Los bloques de promoción tipo banner ocupan el ancho de la ventana, sin provocar desplazamiento horizontal. Carruseles y vídeos de otros bloques conservan su función.

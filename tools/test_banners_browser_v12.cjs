@@ -23,6 +23,10 @@ let browser;
   }
  }
  await page.setViewportSize({width:1440,height:1000});await page.goto(file('preview'));
+ await page.evaluate(()=>{var e=document.createElement('div');e.id='qa-sticky';e.style.cssText='position:fixed;bottom:0;height:40px;width:100%;background:red';document.body.append(e);});
+ const sticky=await page.locator('#qa-sticky').boundingBox();
+ assert(Math.abs(sticky.y+sticky.height-1000)<=1,'order cart stays fixed at viewport bottom');
+ await page.locator('#qa-sticky').evaluate(e=>e.remove());
  const preview=await page.locator('[data-banner]').first().boundingBox();
  assert(preview.width<=430,'preview stays mobile width');
  assert.equal(await page.locator('[data-banner]').nth(1).locator('button').count(),0,'single photo no navigation');
