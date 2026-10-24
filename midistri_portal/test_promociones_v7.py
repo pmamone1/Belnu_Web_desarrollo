@@ -90,31 +90,15 @@ class PromocionesTests(TestCase):
         product.activa=True;product.multimedia=[];product.save()
         self.assertFalse(self.s.promociones_publicas(self.d))
 
-    def test_vista_previa_privada_no_guarda_ni_publica(self):
+    def test_promociones_antiguas_redirigen_al_editor_unico(self):
         from .models import BloquePromocional
         session=self.client.session;session['midistri_operador_token']='op'*22;session.save()
         with patch('midistri_portal.operadores.api',return_value=self.profile):
-            r=self.client.post('/portal/administrar/promociones/',dict(self.data,distribuidora=20,accion='revisar',
-                operacion=str(uuid4()),nuevo_bloque=str(uuid4()),revision='0'))
-        self.assertContains(r,'Confirmar promoción revisada')
-        self.assertContains(r,'name="accion" value="revisar"')
-        self.assertContains(r,'Oferta &lt;script&gt;')
+            for action in ('revisar','confirmar'):
+                response=self.client.post('/portal/administrar/promociones/',dict(self.data,distribuidora=20,accion=action))
+                self.assertEqual(response.status_code,302)
+                self.assertIn('/administrar/pagina/',response['Location'])
         self.assertFalse(BloquePromocional.objects.exists())
-
-    def test_previa_firmada_no_admite_modificacion_y_confirma_una_vez(self):
-        from .models import BloquePromocional
-        session=self.client.session;session['midistri_operador_token']='op'*22;session.save()
-        with patch('midistri_portal.operadores.api',return_value=self.profile):
-            r=self.client.post('/portal/administrar/promociones/',dict(self.data,distribuidora=20,accion='revisar',
-                operacion=str(uuid4()),nuevo_bloque=str(uuid4()),revision='0'))
-            signed=r.context['firma_previa']
-            with patch('midistri_portal.promociones.api') as remote:
-                remote.side_effect=lambda action,**kwargs:self.profile if action=='operator-profile' else {'ok':True,'revision':1}
-                for _ in range(2):
-                    r=self.client.post('/portal/administrar/promociones/',dict(distribuidora=20,accion='confirmar',previa=signed,titulo='Inyectado'))
-                    self.assertEqual(r.status_code,302)
-        self.assertEqual(BloquePromocional.objects.count(),1)
-        self.assertEqual(BloquePromocional.objects.get().titulo,self.data['titulo'])
 
     def test_transporte_previa_solo_acepta_archivo_y_operacion_fijos(self):
         from unittest.mock import MagicMock

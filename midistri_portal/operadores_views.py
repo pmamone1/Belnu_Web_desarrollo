@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_exempt
 from . import operadores as op
 from .client import ApiError
 def limpiar_autenticacion_heredada(request):
-    keep={key:request.session[key] for key in ('midistri_browser','midistri_login_pending') if key in request.session}
+    keep={key:request.session[key] for key in ('midistri_browser','midistri_login_pending','midistri_destino_admin') if key in request.session}
     logout(request)
     request.session.update(keep)
     request.session.set_expiry(0)
@@ -65,6 +65,7 @@ def fallo(request,error):
 @require_GET
 def entrada(request):
     if not op.habilitado():return HttpResponse('Administración de MiDistri desactivada.',status=503)
+    if request.GET.get('destino')=='banners':request.session['midistri_destino_admin']='banners'
     nonce=secrets.token_urlsafe(32)
     try:url=op.origen_urban()+'/midistri/administrar/?'+urlencode({'desafio':nonce})
     except ApiError as e:return fallo(request,e)
@@ -96,7 +97,8 @@ def completar(request):
     request.session['midistri_operador_token']=token
     # The delegated token expires server-side; the browser cookie must not expire seller tabs.
     request.session.set_expiry(0)
-    response=redirect('midistri_operador_panel')
+    target=request.session.pop('midistri_destino_admin',None)
+    response=redirect('/portal/administrar/pagina/?distribuidora='+str(result['perfil']['distribuidoras'][0]['id']) if target=='banners' else 'midistri_operador_panel')
     response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')
     return response
@@ -306,29 +308,9 @@ def remito_panel(request,ident):
 
 @require_http_methods(['GET','POST'])
 def tienda_panel(request):
-    from uuid import uuid4
-    from django.core.exceptions import ValidationError
-    from .presentacion import TiendaForm,guardar_tienda,_confirmar
-    from .models import Tienda,CambioTienda
     try:
+        from .operadores_views import contexto_panel
+        from .pagina_views import url
         ctx=contexto_panel(request,'midistri.tienda_configurar')
-        did=ctx['tienda']['id'];token=request.session['midistri_operador_token']
-        error=None
-        if request.method=='POST':
-            try:
-                guardar_tienda(ctx['operador'],did,request.POST,request.FILES.get('logo'),
-                    revision=int(request.POST.get('revision',0)),operacion_id=request.POST.get('operacion'),
-                    token=token,quitar_logo=request.POST.get('quitar_logo')=='si')
-                messages.success(request,'Presentación guardada para esta tienda.')
-                return redirect('/portal/administrar/tienda/?'+urlencode({'distribuidora':did}))
-            except (ValidationError,ValueError,TypeError) as e:error=str(e)
-        current=Tienda.objects.filter(distribuidora_id=did).first()
-        if current:
-            for cambio in current.cambios.filter(confirmado_urban=False,operador_id=ctx['operador']['operador_id']).order_by('creado')[:10]:
-                _confirmar(cambio,token)
-        form=TiendaForm(request.POST if request.method=='POST' else None,
-            initial={k:getattr(current,k) for k in ('tema','email','telefono','bienvenida','instrucciones')} if current else {})
-        ctx.update(form=form,presentacion=current,error_form=error,operacion=str(uuid4()),
-            auditoria_pendiente=bool(current and current.cambios.filter(confirmado_urban=False).exists()))
-        return render(request,'midistri_portal/operador_tienda.html',ctx)
+        return redirect(url(ctx['tienda']['id']))
     except ApiError as e:return fallo(request,e)

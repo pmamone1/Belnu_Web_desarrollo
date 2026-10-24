@@ -99,4 +99,7 @@ def guardar_tienda(perfil,dist_id,datos,logo=None,*,revision,operacion_id,token,
     return tienda
 
 def presentacion_publica(distribuidora):
-    return Tienda.objects.filter(distribuidora=distribuidora).first() if distribuidora else None
+    if not distribuidora:return None
+    from .pagina import pagina_publica
+    from .pagina_views import contenido_contexto
+    return contenido_contexto(pagina_publica(distribuidora),distribuidora)['presentacion']

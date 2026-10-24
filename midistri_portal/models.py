@@ -41,6 +41,11 @@ class PedidoLocal(models.Model):
     creado=models.DateTimeField(default=timezone.now)
 
 
+    @property
+    def referencia_publica(self):
+        from .referencias import referencia_pedido
+        return referencia_pedido(self)
+
 class Tienda(models.Model):
     tema=models.CharField(max_length=20,default='claro')
     distribuidora=models.OneToOneField(Distribuidora,on_delete=models.PROTECT)
@@ -97,3 +102,5 @@ class CambioPromocional(models.Model):
     despues=models.JSONField(default=dict)
     huella=models.CharField(max_length=64)
     creado=models.DateTimeField(default=timezone.now)
+
+from .pagina_models import PaginaTienda,VersionPagina,EdicionPagina
