@@ -1,0 +1,6 @@
+MiDistri-Pedidos v16
+
+Editor visual de bloques, alturas y capas con borrador AJAX; encabezado de tienda configurable y saludo con nombre/LIN/VV. Catálogo exige activo, foto pública y precio vendedor/PVP positivos. Bandeja Urban permite reducir/quitar productos con motivo y aviso; faltantes Excel y mensaje interno explícito. MiDistri-Puntos permanece sólo en análisis.
+
+Guía técnica, manual, compatibilidad y recuperación: docs/EDITOR_VISUAL_v16.md
+Instalación y aceptación en cPanel pendientes; no se ejecutaron operaciones productivas ni envíos reales.

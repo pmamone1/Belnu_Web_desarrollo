@@ -11,6 +11,7 @@ from django.shortcuts import redirect,render
 from django.views.decorators.http import require_GET,require_POST,require_http_methods
 from .client import api,ApiError
 from .contract import perfil_valido, pedido_valido
+from .catalogo_elegible import elegibles
 from .models import Distribuidora,Publicacion,PedidoLocal,Sincronizacion
 from .services import sincronizar
 
@@ -84,7 +85,7 @@ def catalogo(request):
     ds=Distribuidora.objects.filter(activa=True).order_by('nombre')
     selected=perfil['distribuidora_id'] if perfil else request.GET.get('distribuidora')
     d=ds.filter(pk=selected).first() if str(selected or '').isdigit() else None
-    products=Publicacion.objects.filter(activa=True,distribuidora=d,distribuidora__activa=True)
+    products=elegibles(Publicacion.objects.filter(distribuidora=d))
     saved=request.session.get('midistri_catalogo_filtros',{})
     if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
     q=request.GET.get('q',saved.get('q',''))[:100]
@@ -124,7 +125,7 @@ def foto_producto(producto):
 
 def productos_carrito(request,perfil):
     cart=request.session.get('midistri_cart',{})
-    products={str(p.producto_id):p for p in Publicacion.objects.filter(activa=True,distribuidora_id=perfil['distribuidora_id'],distribuidora__activa=True,producto_id__in=cart)}
+    products={str(p.producto_id):p for p in elegibles(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'],producto_id__in=cart))}
     rows=[]
     for pid,qty in cart.items():
         if pid in products:
@@ -141,7 +142,7 @@ def cantidad(request):
         pid=int(request.POST['producto']);qty=int(request.POST['cantidad'])
         if not 0<=qty<=9999:raise ValueError
         if qty:
-            Publicacion.objects.get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'],activa=True,distribuidora__activa=True)
+            elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
     except (ValueError,KeyError,Publicacion.DoesNotExist):
         messages.error(request,'Producto o cantidad no válidos.');return redirect('midistri_catalogo')
     cart=request.session.get('midistri_cart',{})
@@ -277,12 +278,15 @@ def detalle(request,ident):
     # Photos are display-only catalog data; quantities and prices keep their order snapshot.
     photos={p.producto_id:foto_producto(p) for p in Publicacion.objects.filter(
         distribuidora_id=perfil['distribuidora_id'],producto_id__in=[i['producto_id'] for i in items])}
+    review=pedido.respuesta.get('revision_comercial')
+    accepted={r['producto_id']:r['cantidad_preparada'] for r in review['cantidades']} if review else {}
     for item in items:
         row=dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'})
         row['foto']=photos.get(item['producto_id'],'')
+        if review:row['cantidad_aceptada']=accepted[item['producto_id']]
         shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
-    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
+    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,revision_comercial=review,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
 
 
@@ -296,7 +300,7 @@ def repetir(request,ident):
         messages.warning(request,'Primero reintentá el envío para confirmar si la distribuidora ya lo recibió.')
         return redirect('midistri_detalle',ident=pedido.pk)
     items=pedido.respuesta.get('items',pedido.datos.get('items',[]))
-    available=set(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'],activa=True,distribuidora__activa=True).values_list('producto_id',flat=True))
+    available=set(elegibles(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'])).values_list('producto_id',flat=True))
     request.session['midistri_cart']={str(i['producto_id']):i['cantidad'] for i in items if i['producto_id'] in available}
     request.session['midistri_cart_id']=str(uuid4())
     messages.info(request,'Revisá cantidades y precios actuales. Los productos retirados ya no se incluyen. Todavía no enviamos el nuevo pedido.')

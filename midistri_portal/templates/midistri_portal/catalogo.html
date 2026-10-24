@@ -1,5 +1,5 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
 {% if preview %}<aside class="preview-aviso"><strong>Vista previa privada · todavía no publicado</strong><p>Revisión {{ revision }}. Revisá contenido, diseño y materiales antes de publicar.</p><form method="post" action="{% url 'midistri_pagina_editor' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ distribuidora.pk }}"><input type="hidden" name="firma" value="{{ firma }}"><button name="accion" value="publicar">Publicar esta versión completa</button></form><p><a href="{% url 'midistri_pagina_editor' %}?distribuidora={{ distribuidora.pk }}">Volver al borrador</a></p></aside>{% endif %}
-{% if distribuidora %}<label class="tema-selector">Apariencia <select data-tema-tienda="{{ distribuidora.pk }}">{% for clave,nombre in temas %}<option value="{{ clave }}" {% if presentacion.tema == clave %}selected{% endif %}>{{ nombre }}</option>{% endfor %}</select></label>{% endif %}
+
 <div {% if preview_movil %}class="preview-movil"{% endif %}>{% include 'midistri_portal/pagina_bloques.html' %}</div>
 {% endblock %}

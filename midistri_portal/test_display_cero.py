@@ -39,7 +39,7 @@ class DisplayCeroTests(TestCase):
 
     def test_booleanos_texto_negativos_y_fracciones_siguen_rechazados(self):
         d=Distribuidora.objects.create(pk=61,nombre='Catálogo anterior')
-        anterior=Publicacion.objects.create(distribuidora=d,producto_id=1,nombre='Anterior',precio=10,pvp=20)
+        anterior=Publicacion.objects.create(distribuidora=d,producto_id=1,nombre='Anterior',precio=10,pvp=20,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         for value in (False,True,'0',-1,0.5,[],{}):
             with self.subTest(display=value):
                 with self.assertRaises(ValueError):aplicar_snapshot(self.datos(value))

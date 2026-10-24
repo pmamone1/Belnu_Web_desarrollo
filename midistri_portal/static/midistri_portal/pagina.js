@@ -25,8 +25,8 @@ function init(){
    var outgoing=slides[old],incoming=slides[index],token=generation;
    outgoing.hidden=false; // inert and aria-hidden: outgoing links never remain interactive.
    animations=[
-    outgoing.animate([{opacity:1},{opacity:0}],{duration:600,easing:'cubic-bezier(.22,.61,.36,1)'}),
-    incoming.animate([{opacity:0},{opacity:1}],{duration:600,easing:'cubic-bezier(.22,.61,.36,1)'})
+    outgoing.animate(root.dataset.transicion==='deslizamiento'?[{opacity:1,transform:'translateX(0)'},{opacity:0,transform:'translateX(-24px)'}]:[{opacity:1},{opacity:0}],{duration:600,easing:'cubic-bezier(.22,.61,.36,1)'}),
+    incoming.animate(root.dataset.transicion==='deslizamiento'?[{opacity:0,transform:'translateX(24px)'},{opacity:1,transform:'translateX(0)'}]:[{opacity:0},{opacity:1}],{duration:600,easing:'cubic-bezier(.22,.61,.36,1)'})
    ];
    Promise.all(animations.map(function(a){return a.finished.catch(function(){});})).then(function(){if(token===generation){settle();animations=[];}});
   }

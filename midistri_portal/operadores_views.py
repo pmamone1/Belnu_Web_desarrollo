@@ -145,10 +145,10 @@ from .client import api
 from .services import sincronizar
 from .administracion_contract import catalogo_valido,pedido_admin_valido
 
-def contexto_panel(request,permiso):
+def contexto_panel(request,permiso,distribuidora=None):
     perfil=op.perfil_operador(request,permiso)
-    did=op.tienda_permitida(perfil,request.POST.get('distribuidora') if request.method=='POST'
-                           else request.GET.get('distribuidora',perfil['distribuidoras'][0]['id']))
+    did=op.tienda_permitida(perfil,distribuidora if distribuidora is not None else (request.POST.get('distribuidora') if request.method=='POST'
+                           else request.GET.get('distribuidora',perfil['distribuidoras'][0]['id'])))
     tienda=next(d for d in perfil['distribuidoras'] if d['id']==did)
     return {'operador':perfil,'tienda':tienda,'titulo':'Administrar MiDistri-Pedidos · '+tienda['nombre']}
 

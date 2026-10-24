@@ -6,8 +6,8 @@ class CatalogoTests(TestCase):
     def setUp(self):
         self.d=Distribuidora.objects.create(id=20,nombre='Belgrano')
         self.other=Distribuidora.objects.create(id=65,nombre='Barracas')
-        self.p=Publicacion.objects.create(distribuidora=self.d,producto_id=1,nombre='Termo',categoria='Bazar',precio=25000,pvp=30000)
-        Publicacion.objects.create(distribuidora=self.other,producto_id=2,nombre='Otro',categoria='Solo otra',precio=1,pvp=1)
+        self.p=Publicacion.objects.create(distribuidora=self.d,producto_id=1,nombre='Termo',categoria='Bazar',precio=25000,pvp=30000,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
+        Publicacion.objects.create(distribuidora=self.other,producto_id=2,nombre='Otro',categoria='Solo otra',precio=1,pvp=1,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
     def test_publico_ve_ambos_precios_pero_no_puede_pedir(self):
         r=self.client.get('/portal/',{'distribuidora':20})
         self.assertContains(r,'Precio vendedor:');self.assertContains(r,'25000')
@@ -16,7 +16,7 @@ class CatalogoTests(TestCase):
         self.assertFalse(self.client.session.get('midistri_cart'))
         self.client.post('/portal/enviar/');self.assertFalse(PedidoLocal.objects.exists())
     def test_categoria_y_busqueda_combinadas_solo_tienda_actual(self):
-        Publicacion.objects.create(distribuidora=self.d,producto_id=3,nombre='Termo inactivo',categoria='Retirado',precio=1,pvp=1,activa=False)
+        Publicacion.objects.create(distribuidora=self.d,producto_id=3,nombre='Termo inactivo',categoria='Retirado',precio=1,pvp=1,activa=False,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         r=self.client.get('/portal/',{'distribuidora':20,'categoria':'Bazar','q':'Termo'})
         self.assertEqual(r.context['categoria'],'Bazar')
         self.assertEqual(list(r.context['categorias']),['Bazar'])

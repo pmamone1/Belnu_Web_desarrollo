@@ -8,7 +8,7 @@ from midistri_portal.client import api, ApiError
 class ContractTests(TestCase):
     def setUp(self):
         self.d=Distribuidora.objects.create(id=20,nombre='20 - Belgrano')
-        self.p=Publicacion.objects.create(producto_id=5,distribuidora=self.d,nombre='Pilas',precio=123.45,pvp=456.78)
+        self.p=Publicacion.objects.create(producto_id=5,distribuidora=self.d,nombre='Pilas',precio=123.45,pvp=456.78,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         self.perfil={'id':7,'nombre':'Vendedor','linea':'Ruta','lin':112,'vv':5,
             'distribuidora_id':20,'distribuidora':'20 - Belgrano'}
         session=self.client.session;session['midistri_token']='a'*43;session.save()

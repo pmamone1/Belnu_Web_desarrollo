@@ -1,5 +1,5 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
-{% if distribuidora %}<label class="tema-selector">Apariencia <select data-tema-tienda="{{ distribuidora.pk }}">{% for clave,nombre in temas %}<option value="{{ clave }}" {% if presentacion.tema == clave %}selected{% endif %}>{{ nombre }}</option>{% endfor %}</select></label>{% endif %}
+{% if distribuidora %}{% endif %}
 {% include 'midistri_portal/promociones.html' %}
 
 {% if presentacion %}<section>{% if presentacion.logo %}<img src="{{ presentacion.logo.url }}" alt="Logo de {{ distribuidora.nombre }}" style="max-width:180px;max-height:140px">{% endif %}

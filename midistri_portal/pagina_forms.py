@@ -3,6 +3,7 @@ from .pagina import DISENOS,MENSAJES
 from .presentacion import TEMAS
 
 class PaginaForm(forms.Form):
+    encabezado=forms.CharField(max_length=150,required=False,label='Nombre / encabezado de la tienda')
     diseno=forms.ChoiceField(choices=DISENOS,label='Diseño de la página')
     tema=forms.ChoiceField(choices=TEMAS,label='Color predeterminado')
     email=forms.EmailField(required=False,label='Email de contacto')
