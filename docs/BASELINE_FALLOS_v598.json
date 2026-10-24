@@ -1,0 +1,3672 @@
+{
+  "fuente_actual": "Urban598; suite general3294 en SQLite local",
+  "base_commit": "6f7b71ca3393501f837fea6922af8235f91f3d2d",
+  "comparacion": "697 casos distintos reevaluados en fuente597 exportada con cwd y base propios",
+  "fallos": 271,
+  "errores": 461,
+  "ocurrencias": 732,
+  "cabeceras_y_repeticiones_identicas": true,
+  "casos": [
+    {
+      "tipo": "ERROR",
+      "test": "test_20_65_conserva_solo_destino_vigente (consignaciones.tests_distribucion_vigentes.DistribucionVigentesTests.test_20_65_conserva_solo_destino_vigente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_20_65_solo_con_asignacion_real_y_alcance (consignaciones.tests_comunicaciones_portal_v560.GrupoMovilV560Tests.test_20_65_solo_con_asignacion_real_y_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_acciones_solo_post_y_csrf (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_acciones_solo_post_y_csrf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_aceptado_no_se_repite_y_error_incierto_no_reintenta (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_aceptado_no_se_repite_y_error_incierto_no_reintenta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_activa_limita_seleccion_y_documentos (consignaciones.tests_lotes_gestion.GestionLotesTests.test_activa_limita_seleccion_y_documentos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_activaciones_paralelas_de_dos_contactos_no_se_revocan (consignaciones.tests_midistri_concurrencia_v584.ConcurrenciaTests.test_activaciones_paralelas_de_dos_contactos_no_se_revocan)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_activar_correo_despues_no_encola_avisos_vencidos (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_activar_correo_despues_no_encola_avisos_vencidos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_actualizacion_posterior_no_cambia_version_anterior (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_actualizacion_posterior_no_cambia_version_anterior)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_adjunto_invalido_y_edicion_del_pago_conservan_historia (consignaciones.tests_lotes_pagos.PagosLoteTests.test_adjunto_invalido_y_edicion_del_pago_conservan_historia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_admin_vigentes_y_filtro_historico (consignaciones.tests_distribucion_vigentes.DistribucionVigentesTests.test_admin_vigentes_y_filtro_historico)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_agregados_no_multiplican_ampliaciones (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_agregados_no_multiplican_ampliaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_agregados_no_multiplican_ampliaciones (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_agregados_no_multiplican_ampliaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_agregados_no_multiplican_ampliaciones (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_agregados_no_multiplican_ampliaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_agregados_no_multiplican_ampliaciones (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_agregados_no_multiplican_ampliaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no (consignaciones.tests_colocacion_devoluciones_v586.PlantillaExcelTests.test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no (consignaciones.tests_colocacion_unica_v573.ColocacionUnicaTests.test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no (consignaciones.tests_devolucion_rendimiento_v587.RendimientoProductosTests.test_amba_20_65_conserva_el_grupo_y_otra_distribuidora_no)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_amba_importa_solo_20_65_autorizadas (consignaciones.tests_colocacion_devoluciones_v586.PlantillaExcelTests.test_amba_importa_solo_20_65_autorizadas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ambas_familias_urban (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_ambas_familias_urban) (familia='urban_origen')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ambas_familias_urban (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_ambas_familias_urban) (familia='urban_sin_compra')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ampliacion_faltante_y_devolucion_no_fabrican_stock (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_ampliacion_faltante_y_devolucion_no_fabrican_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ampliacion_invalida_confirmacion (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_ampliacion_invalida_confirmacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ampliacion_pedido_y_salida_se_intersectan (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_ampliacion_pedido_y_salida_se_intersectan)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_antiguedad_no_usa_fecha_de_carga_y_limite_72h (consignaciones.tests_control_salidas_pendientes.PendientesControlTests.test_antiguedad_no_usa_fecha_de_carga_y_limite_72h)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulacion_exige_revertir_vencimiento_manual_explicito (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_anulacion_exige_revertir_vencimiento_manual_explicito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulacion_no_reabre (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_anulacion_no_reabre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulacion_vendida_y_reapertura_legacy_rechazadas (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_anulacion_vendida_y_reapertura_legacy_rechazadas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulada_antigua_no_repite (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_anulada_antigua_no_repite)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulada_no_aparece_como_cerrada_pagada (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_anulada_no_aparece_como_cerrada_pagada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anulada_no_aparece_como_pendiente_y_consulta_no_modifica_datos (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_anulada_no_aparece_como_pendiente_y_consulta_no_modifica_datos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anular_impactada_rechazada (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_anular_impactada_rechazada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anular_no_retorna_stock (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_anular_no_retorna_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anular_recolocacion_operada_no_deja_retornos_disponibles (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_anular_recolocacion_operada_no_deja_retornos_disponibles)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anular_recolocacion_restituye_el_mismo_retorno_una_vez (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_anular_recolocacion_restituye_el_mismo_retorno_una_vez)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anular_y_repreparar_conserva_cierre_stock_y_deuda (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_anular_y_repreparar_conserva_cierre_stock_y_deuda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_anuncio_y_notificaciones_separan_destino_anulado (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_anuncio_y_notificaciones_separan_destino_anulado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_archivo_retirado_no_revive_desde_version (consignaciones.tests_midistri_pagina_v591.PaginaTests.test_archivo_retirado_no_revive_desde_version)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_atomica_solo_resta_importe_documentado_y_preserva_fuentes (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_atomica_solo_resta_importe_documentado_y_preserva_fuentes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_auditoria_fallida_revierte_documento_stock_y_saldo (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_auditoria_fallida_revierte_documento_stock_y_saldo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_auditoria_fallida_revierte_plan_cuotas_y_vinculos (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_auditoria_fallida_revierte_plan_cuotas_y_vinculos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_autorizacion_no_exceptua_conteo_origen_o_precio (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_autorizacion_no_exceptua_conteo_origen_o_precio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_baja_o_fecha_cambiada_bloquea_antes_de_smtp (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_baja_o_fecha_cambiada_bloquea_antes_de_smtp)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_bandeja_alcance_y_leer_no_resuelve (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_bandeja_alcance_y_leer_no_resuelve)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_base_pactada_fecha_efectiva_y_sin_fecha (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_base_pactada_fecha_efectiva_y_sin_fecha)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_borrador_vacio_no_depende_de_cierres_ajenos (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_borrador_vacio_no_depende_de_cierres_ajenos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_bulk_create_pago_proveedor_rechazado (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_bulk_create_pago_proveedor_rechazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_bulk_create_pago_vendedor_rechazado (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_bulk_create_pago_vendedor_rechazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambiar_proveedor_desde_salida_no_restaura_filtro_anterior (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_cambiar_proveedor_desde_salida_no_restaura_filtro_anterior)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_de_fuentes_invalida_previa (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_cambio_de_fuentes_invalida_previa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_participantes_exige_revisar_sin_romper_reintento_exitoso (consignaciones.tests_conversaciones_revision.RevisionConversacionesTests.test_cambio_participantes_exige_revisar_sin_romper_reintento_exitoso)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_saldo_requiere_actualizar_y_otro_alcance_no_paga (consignaciones.tests_lotes_pagos.PagosLoteTests.test_cambio_saldo_requiere_actualizar_y_otro_alcance_no_paga)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_seleccion_no_revoca_alcance_del_correo_ya_autorizado (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_cambio_seleccion_no_revoca_alcance_del_correo_ya_autorizado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_stock_invalida_previa (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_cambio_stock_invalida_previa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cambio_tras_vista_previa_exige_volver_a_revisar_y_no_borra_historia (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_cambio_tras_vista_previa_exige_volver_a_revisar_y_no_borra_historia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_campos_y_pdf_obligatorios (consignaciones.tests_devolucion_proveedor_recepcion.RecepcionTests.test_campos_y_pdf_obligatorios)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_carga_crea_transferencia_y_documento_real (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_carga_crea_transferencia_y_documento_real)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_carga_no_consume_reserva_de_pedido (consignaciones.tests_operativa_reservas.ReservasOperativasTests.test_carga_no_consume_reserva_de_pedido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_carga_trazable_tambien_queda_guardada (consignaciones.tests_comunicaciones_captura_carga.CapturaCargaTrazableTests.test_carga_trazable_tambien_queda_guardada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cargo_ajeno_permanece (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_cargo_ajeno_permanece)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cargo_sin_pago (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_cargo_sin_pago)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cero_congelado_no_hace_fallback (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_cero_congelado_no_hace_fallback)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cero_explicito_no_equivale_a_vacio (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_cero_explicito_no_equivale_a_vacio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cerrada_envio_parcial_conserva_economia_y_pdf_original (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_cerrada_envio_parcial_conserva_economia_y_pdf_original)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ciclo_20_12_5_7_y_pedido_3 (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_ciclo_20_12_5_7_y_pedido_3)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ciclo_concilia_venta_y_recolocacion_con_retorno_explicito (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_ciclo_concilia_venta_y_recolocacion_con_retorno_explicito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cierra_lote_con_vendedor_pendiente_solo_tras_excepcion_firmada (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_cierra_lote_con_vendedor_pendiente_solo_tras_excepcion_firmada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cierre_actualiza_vendedores_en_lotes_sin_cambiar_saldos (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_cierre_actualiza_vendedores_en_lotes_sin_cambiar_saldos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cierre_bloquea_solo_salida_con_distribuidora_opcional (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_cierre_bloquea_solo_salida_con_distribuidora_opcional)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cierre_mixto_unico_debito_y_remitos (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_cierre_mixto_unico_debito_y_remitos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cierre_sin_evidencia_bloquea (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_cierre_sin_evidencia_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_clave_payload_distinto (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_clave_payload_distinto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobertura_ajena_al_filtro_no_duplica (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_cobertura_ajena_al_filtro_no_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobertura_no_acepta_resto_sin_producto_del_documento (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_cobertura_no_acepta_resto_sin_producto_del_documento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobertura_previa_anulada_exige_nueva_previa (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_cobertura_previa_anulada_exige_nueva_previa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobranza_exige_reconfirmar_solo_importe_vigente (consignaciones.tests_anulaciones_concurrencia.EscritoresAnulacionTests.test_cobranza_exige_reconfirmar_solo_importe_vigente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobranza_no_acepta_omitir_una_fuente_cerrada (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_cobranza_no_acepta_omitir_una_fuente_cerrada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cobranza_vigente_firma_cambia_sin_reescribir (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_cobranza_vigente_firma_cambia_sin_reescribir)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_colision_de_sku_normalizado_bloquea (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_colision_de_sku_normalizado_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_colocacion_admin_y_bulk_no_supera_recibido (consignaciones.tests_entregas_urban.EntregasUrbanTests.test_colocacion_admin_y_bulk_no_supera_recibido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_colocacion_aplicada_sin_producto_sigue_bloqueada (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_colocacion_aplicada_sin_producto_sigue_bloqueada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_colocacion_borrador_sin_productos_no_bloquea_anulacion (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_colocacion_borrador_sin_productos_no_bloquea_anulacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_colocacion_includes_last_15_reference_salidas_and_vendor_load_marks (consignaciones.tests.ColocacionReferenciaSalidaTests.test_colocacion_includes_last_15_reference_salidas_and_vendor_load_marks)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_combina_consulta_nombre_estado_y_paginacion (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_combina_consulta_nombre_estado_y_paginacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compilan_todas_las_plantillas_del_alcance (consignaciones.tests_formatos_monetarios.PlantillasMonetariasTests.test_compilan_todas_las_plantillas_del_alcance) (template='liquidacion_cobro_detalle.xhtml')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compilan_todas_las_plantillas_del_alcance (consignaciones.tests_formatos_monetarios.PlantillasMonetariasTests.test_compilan_todas_las_plantillas_del_alcance) (template='remitos_carga.xhtml')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compilan_todas_las_plantillas_del_alcance (consignaciones.tests_formatos_monetarios.PlantillasMonetariasTests.test_compilan_todas_las_plantillas_del_alcance) (template='remitos_carga_lote.xhtml')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compilan_todas_las_plantillas_del_alcance (consignaciones.tests_formatos_monetarios.PlantillasMonetariasTests.test_compilan_todas_las_plantillas_del_alcance) (template='remitos_venta.xhtml')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compilan_todas_las_plantillas_del_alcance (consignaciones.tests_formatos_monetarios.PlantillasMonetariasTests.test_compilan_todas_las_plantillas_del_alcance) (template='salida_detalle.xhtml')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_compra_firme_y_legacy_no_liquidan_con_iva_supuesto (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_compra_firme_y_legacy_no_liquidan_con_iva_supuesto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_con_productos_no_omite_conciliacion_global (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_con_productos_no_omite_conciliacion_global)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_conciliacion_detecta_asignacion_sin_reserva (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_conciliacion_detecta_asignacion_sin_reserva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirma_repeticion_y_no_duplica_cuotas (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_confirma_repeticion_y_no_duplica_cuotas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmacion_completa_tres_familias (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_confirmacion_completa_tres_familias) (familia='historica')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmacion_completa_tres_familias (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_confirmacion_completa_tres_familias) (familia='urban_origen')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmacion_completa_tres_familias (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_confirmacion_completa_tres_familias) (familia='urban_sin_compra')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmar_carga_revalida_vendedor_tras_cambio_de_distribuidora (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_confirmar_carga_revalida_vendedor_tras_cambio_de_distribuidora)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmar_cobranza_no_reaplica_consignacion_ni_pedido (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_confirmar_cobranza_no_reaplica_consignacion_ni_pedido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmar_recolocacion_creates_new_salida_from_returned_stock (consignaciones.tests.SalidaRecolocacionTests.test_confirmar_recolocacion_creates_new_salida_from_returned_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_confirmar_repetir_y_constancia (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_confirmar_repetir_y_constancia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consignacion_pendiente_ajena_no_desaparece (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_consignacion_pendiente_ajena_no_desaparece)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consulta_cerrada_documentos_metodos_y_original_privado (consignaciones.tests_devolucion_proveedor_views.VistasTests.test_consulta_cerrada_documentos_metodos_y_original_privado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consulta_cien_salidas_sin_n_mas_uno (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_consulta_cien_salidas_sin_n_mas_uno)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consulta_exporte_y_sivendia_no_filtran_finanzas (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_consulta_exporte_y_sivendia_no_filtran_finanzas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consulta_por_salida_incluye_pago_respaldo_remito (consignaciones.tests_conversaciones_revision.RevisionConversacionesTests.test_consulta_por_salida_incluye_pago_respaldo_remito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consultas_sin_escrituras (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_consultas_sin_escrituras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_consumir_retorno_reciente_no_rejuvenece_stock_anterior (consignaciones.tests_control_salidas_visual.ControlRetornoTests.test_consumir_retorno_reciente_no_rejuvenece_stock_anterior)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_conteo_diferente_no_se_convierte_en_venta (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_conteo_diferente_no_se_convierte_en_venta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_can_hide_real_closed_salidas (consignaciones.tests.SalidasControlEstadoTests.test_control_can_hide_real_closed_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_closes_legacy_salida_when_debit_and_supplier_payment_are_complete (consignaciones.tests.SalidasControlEstadoTests.test_control_closes_legacy_salida_when_debit_and_supplier_payment_are_complete)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_congelado_sin_item (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_control_congelado_sin_item)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_consulta_sin_destino_filtra_salidas_con_mercaderia_pendiente (consignaciones.tests.SalidasControlEstadoTests.test_control_consulta_sin_destino_filtra_salidas_con_mercaderia_pendiente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_does_not_close_legacy_salida_without_vendor_debit (consignaciones.tests.SalidasControlEstadoTests.test_control_does_not_close_legacy_salida_without_vendor_debit)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_marks_devolution_started_salida_date_as_not_editable (consignaciones.tests.SalidasControlEstadoTests.test_control_marks_devolution_started_salida_date_as_not_editable)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_marks_open_salida_with_most_returns_recorded_as_in_devolution (consignaciones.tests.SalidasControlEstadoTests.test_control_marks_open_salida_with_most_returns_recorded_as_in_devolution)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_control_marks_real_closed_salida_as_closed_not_overdue (consignaciones.tests.SalidasControlEstadoTests.test_control_marks_real_closed_salida_as_closed_not_overdue)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_correo_worker_ignores_whatsapp_pending (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_correo_worker_ignores_whatsapp_pending)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_creacion_compartida_revalida_cantidades_despues_del_armado (consignaciones.tests_reemplazo_cierre.ReemplazoCierreTests.test_creacion_compartida_revalida_cantidades_despues_del_armado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_credito_externo_anterior_no_se_duplica (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_credito_externo_anterior_no_se_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_credito_externo_idempotente_y_limitado (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_credito_externo_idempotente_y_limitado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_credito_externo_se_consume_una_vez (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_credito_externo_se_consume_una_vez)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_credito_proveedor_conciliado_no_persiste (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_credito_proveedor_conciliado_no_persiste)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_credito_vendedor_no_cancela_deuda_proveedor (consignaciones.tests_control_salidas_pendientes.PendientesControlTests.test_credito_vendedor_no_cancela_deuda_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cruzamiento_viejo_no_habilita_debito_si_cambiaron_cantidades (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_cruzamiento_viejo_no_habilita_debito_si_cambiaron_cantidades)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cuatro_hojas_y_totales_exactos (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_cuatro_hojas_y_totales_exactos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cuenta_urban_conserva_credito (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_cuenta_urban_conserva_credito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_cursor_rechaza_cambio_de_filtro_o_alcance (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_cursor_rechaza_cambio_de_filtro_o_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_database_disables_server_cursors_for_transaction_pooler (consignaciones.tests_catalogo_api_sync.CatalogoSyncTests.test_database_disables_server_cursors_for_transaction_pooler)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_debito_intermedio_impide_segundo_pago (consignaciones.tests_lotes_gestion.GestionLotesTests.test_debito_intermedio_impide_segundo_pago)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_default_email_and_amba_choice (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_default_email_and_amba_choice)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_delta_cero_cubre_ventas_sin_deuda_artificial_y_exporta (consignaciones.tests_urban_rendiciones.RendicionesSinDeudaTests.test_delta_cero_cubre_ventas_sin_deuda_artificial_y_exporta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_deposito_no_es_debito (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_deposito_no_es_debito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_despacho_carga_y_pedido_preparado_no_son_ventas (consignaciones.tests_urban_ventas.VentasAbastecedoresTests.test_despacho_carga_y_pedido_preparado_no_son_ventas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_destino_ajeno_sigue_vigente (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_destino_ajeno_sigue_vigente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_detalle_corrupto_se_informa_sin_error_500 (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_detalle_corrupto_se_informa_sin_error_500)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_detalle_historico_conserva_originales (consignaciones.tests_distribucion_vigentes.DistribucionVigentesTests.test_detalle_historico_conserva_originales)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devolucion_anterior_imprimible_guarda_pdf (consignaciones.tests_comunicaciones_resguardo_anteriores.ResguardoAnteriorCargaTests.test_devolucion_anterior_imprimible_guarda_pdf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devolucion_impide_via_sin_entrega (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_devolucion_impide_via_sin_entrega)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devolucion_iniciada_no_habilita_debito_hasta_confirmar_cruzamiento (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_devolucion_iniciada_no_habilita_debito_hasta_confirmar_cruzamiento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devolucion_sin_recolocar_no_depende_del_pago (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_devolucion_sin_recolocar_no_depende_del_pago)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devolucion_y_recolocacion_no_ofrecen_anulada (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_devolucion_y_recolocacion_no_ofrecen_anulada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devoluciones_consulta_hides_anulled_historical_salida (consignaciones.tests.DevolucionesConsultaTests.test_devoluciones_consulta_hides_anulled_historical_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_devoluciones_consulta_hides_anulled_salida_inside_lote (consignaciones.tests.DevolucionesConsultaTests.test_devoluciones_consulta_hides_anulled_salida_inside_lote)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_disponible_comun_respeta_fisico_congelado_y_consumo_posterior (consignaciones.tests_devolucion_proveedor_envios.FisicoAcreditadoTests.test_disponible_comun_respeta_fisico_congelado_y_consumo_posterior)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_distribuidor_no_ve_su_destino_anulado_ni_en_excel (consignaciones.tests_distribucion_vigentes.DistribucionVigentesTests.test_distribuidor_no_ve_su_destino_anulado_ni_en_excel)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_distribuidora_y_vendedor_fuera_de_alcance (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_distribuidora_y_vendedor_fuera_de_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_distributor_selector_has_separator_before_last_two_options (consignaciones.tests_productos_paginacion.ProductoListPaginationTests.test_distributor_selector_has_separator_before_last_two_options)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_doble_click (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_doble_click)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_documento_guardado_se_resuelve_solo_con_liquidacion_impactada (consignaciones.tests_comunicaciones_captura_venta.CapturaVentaTests.test_documento_guardado_se_resuelve_solo_con_liquidacion_impactada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_altas_simultaneas_no_500_ni_duplicados (consignaciones.tests_midistri_canal_pg_v594.CanalConcurrenteTests.test_dos_altas_simultaneas_no_500_ni_duplicados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_coincidencias_exactas_requieren_seleccion (consignaciones.tests.AjustesCargaLoteTests.test_dos_coincidencias_exactas_requieren_seleccion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_confirmaciones_no_duplican_la_deuda (consignaciones.tests_urban_rendiciones_concurrencia.ConcurrenciaRendicionesTests.test_dos_confirmaciones_no_duplican_la_deuda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_confirmaciones_no_superan_10000_publicaciones (consignaciones.tests_midistri_catalogo_pg_v583.CatalogoConcurrenteTests.test_dos_confirmaciones_no_superan_10000_publicaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_confirmaciones_un_solo_cargo_pdf_y_aviso (consignaciones.tests_midistri_concurrencia_v584.ConcurrenciaTests.test_dos_confirmaciones_un_solo_cargo_pdf_y_aviso)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_corridas_no_duplican_y_un_destinatario (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_dos_corridas_no_duplican_y_un_destinatario)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_procesos_no_duplican_altas_ni_auditoria (consignaciones.tests_midistri_catalogo_automatico_v588.CatalogoAutomaticoConcurrenteTests.test_dos_procesos_no_duplican_altas_ni_auditoria)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_recepciones_no_comparten_folio (consignaciones.tests_midistri_folios_v591.ConcurrenciaFoliosTests.test_dos_recepciones_no_comparten_folio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_dos_regularizaciones_simultaneas_no_duplican_stock (consignaciones.tests_ajustes_destino_concurrencia_v590.ConcurrenciaDestinoTests.test_dos_regularizaciones_simultaneas_no_duplican_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_edicion_producto_historico_por_http_rechazada (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_edicion_producto_historico_por_http_rechazada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_emision_trazable_guarda_original_con_usuario_real (consignaciones.tests_comunicaciones_captura_pedidos.CapturaPedidoOrigenTests.test_emision_trazable_guarda_original_con_usuario_real)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_emitir_no_repite_cargo (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_emitir_no_repite_cargo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_endpoints_solo_consultan_y_respetan_alcance (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_endpoints_solo_consultan_y_respetan_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_envio_bloquea_anulacion_para_no_inventar_custodia (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_envio_bloquea_anulacion_para_no_inventar_custodia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_envio_proveedor_no_duplica_descuento (consignaciones.tests_control_salidas_visual.ControlRetornoTests.test_envio_proveedor_no_duplica_descuento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_error_final_revierte_recepcion_mixta_completa (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_error_final_revierte_recepcion_mixta_completa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_error_guarda_motivo_sin_cerrar (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_error_guarda_motivo_sin_cerrar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_estado_cuenta_proveedor_hides_anulled_salidas (consignaciones.tests.EstadoCuentaProveedorTests.test_estado_cuenta_proveedor_hides_anulled_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_estado_y_excel_incluyen_lote_sin_mutaciones (consignaciones.tests_lotes_pagos.PagosLoteTests.test_estado_y_excel_incluyen_lote_sin_mutaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_evidencia_compartida_y_archivo_ajeno_no_revela_dni (consignaciones.tests_devolucion_proveedor_views.VistasTests.test_evidencia_compartida_y_archivo_ajeno_no_revela_dni)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_excel_contiene_detalle_y_texto_no_formulas (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_excel_contiene_detalle_y_texto_no_formulas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_excel_devolucion_un_total_por_vendedor (consignaciones.tests_lotes_gestion.GestionLotesTests.test_excel_devolucion_un_total_por_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_excel_distribuidoras_cero_monetario_conserva_tipo (consignaciones.tests_formatos_monetarios.RutasMonetariasTests.test_excel_distribuidoras_cero_monetario_conserva_tipo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_excel_explica_cuotas_reemplazadas_y_sus_sucesoras (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_excel_explica_cuotas_reemplazadas_y_sus_sucesoras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_excel_lote_abre_debito_y_proveedor_por_salida (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_excel_lote_abre_debito_y_proveedor_por_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_exige_declaracion_y_firma_del_modo (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_exige_declaracion_y_firma_del_modo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_explorador_tiene_filtros_y_enlace_a_pagina_siguiente (consignaciones.tests_operativa_api_admin.ExploradorOperativoTests.test_explorador_tiene_filtros_y_enlace_a_pagina_siguiente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_exportacion_conserva_ajuste_y_declaracion (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_exportacion_conserva_ajuste_y_declaracion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_exportar_no_crea_nuevos_historicos (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_exportar_no_crea_nuevos_historicos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_exporte_no_truncado_por_pagina (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_exporte_no_truncado_por_pagina)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fallo_archivo_no_descuenta_y_anulada_no_envia (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_fallo_archivo_no_descuenta_y_anulada_no_envia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fallo_auditoria_revierte_stock_y_archivos (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_fallo_auditoria_revierte_stock_y_archivos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fallo_auditoria_y_fecha_invalida_no_acreditan (consignaciones.tests_devolucion_proveedor_recepcion.RecepcionTests.test_fallo_auditoria_y_fecha_invalida_no_acreditan)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fallo_despues_de_detalles_rollback (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_fallo_despues_de_detalles_rollback)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fallo_remito_revierte_cierre (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_fallo_remito_revierte_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_filtrar_lotes_por_distribuidora_y_estado (consignaciones.tests_estado_proveedor_filtros.AccionesLoteEstadoTests.test_filtrar_lotes_por_distribuidora_y_estado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_filtrar_proveedor_y_actualizacion_refleja_nuevo_pago (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_filtrar_proveedor_y_actualizacion_refleja_nuevo_pago)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_filtro_historico_muestra_anulada (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_filtro_historico_muestra_anulada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_filtros_fechas_y_origenes_invalidos (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_filtros_fechas_y_origenes_invalidos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_firma_estable (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_firma_estable)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_firma_malformada_se_rechaza (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_firma_malformada_se_rechaza)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_firma_obsoleta (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_firma_obsoleta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_firma_obsoleta_y_auditoria_atomica (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_firma_obsoleta_y_auditoria_atomica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fiscal_cuotas_y_cuenta_sin_nuevo_debito_vendedor (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_fiscal_cuotas_y_cuenta_sin_nuevo_debito_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fuente_ajena_y_anulada_no_es_enviable (consignaciones.tests_comunicaciones_bandeja_unificada.BandejaUnificadaTests.test_fuente_ajena_y_anulada_no_es_enviable)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_fuente_ajena_y_anulada_no_es_enviable (consignaciones.tests_comunicaciones_catalogo_remitos.CatalogoRemitosTests.test_fuente_ajena_y_anulada_no_es_enviable)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_gestion_lotes_esta_dentro_del_menu_salidas (consignaciones.tests_navbar_lotes.NavbarLotesTests.test_gestion_lotes_esta_dentro_del_menu_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_get_existente_carga_correo_hora_y_pausa_reales (consignaciones.tests_avisos_defaults.AvisosDefaultsPantallasTests.test_get_existente_carga_correo_hora_y_pausa_reales)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_get_previa_no_escribe (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_get_previa_no_escribe)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_get_previa_no_escribe_y_no_autoriza_pendientes (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_get_previa_no_escribe_y_no_autoriza_pendientes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_grilla_atomica_varios_vendedores_reintento_y_sobreconsumo (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_grilla_atomica_varios_vendedores_reintento_y_sobreconsumo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_grilla_devolucion_cero_y_apagar_switch_no_desactiva_piloto (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_grilla_devolucion_cero_y_apagar_switch_no_desactiva_piloto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_grupo_no_inventa_asignacion_a_vendedor (consignaciones.tests_comunicaciones_portal_v560.GrupoMovilV560Tests.test_grupo_no_inventa_asignacion_a_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_guarda_cubre_modelo_queryset_bulk_y_documentos (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_guarda_cubre_modelo_queryset_bulk_y_documentos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_guardado_acumulado_y_reintento (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_guardado_acumulado_y_reintento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_guardas_legacy_y_cancelacion_emitido (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_guardas_legacy_y_cancelacion_emitido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_guia_de_preparacion_devolucion_incluye_deposito_y_no_lo_debita (consignaciones.tests_remitos_deposito.RemitosDepositoTests.test_guia_de_preparacion_devolucion_incluye_deposito_y_no_lo_debita)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_guia_mixta_solo_archiva_pdf_comercial (consignaciones.tests_remitos_deposito.RemitosDepositoTests.test_guia_mixta_solo_archiva_pdf_comercial)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_historial_de_reprogramacion_no_se_elimina_por_queryset (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_historial_de_reprogramacion_no_se_elimina_por_queryset)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_historico_dos_origenes_no_se_promedian_y_devolucion_conserva_eleccion (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_historico_dos_origenes_no_se_promedian_y_devolucion_conserva_eleccion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_html_paginacion_y_cursor_ligado_al_filtro (consignaciones.tests_operativa_api_admin.FiltroFotosProductosTests.test_html_paginacion_y_cursor_ligado_al_filtro)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_html_y_json_mismo_dato (consignaciones.tests_operativa_api_admin.ExploradorOperativoTests.test_html_y_json_mismo_dato)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_idempotencia_solapamiento_y_snapshot (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_idempotencia_solapamiento_y_snapshot)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_idempotencia_y_limite (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_idempotencia_y_limite)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_identidad_simultanea_en_dos_distribuidoras_se_rechaza (consignaciones.tests_midistri_canal_pg_v594.CanalConcurrenteTests.test_identidad_simultanea_en_dos_distribuidoras_se_rechaza)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_impactar_liquidacion_lote_genera_un_pago_por_vendedor (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_impactar_liquidacion_lote_genera_un_pago_por_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_impacto_consolidado_una_vez_y_excel_lectura (consignaciones.tests_lotes_gestion.GestionLotesTests.test_impacto_consolidado_una_vez_y_excel_lectura)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_impacto_lote_reutiliza_administracion_para_remitos (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_impacto_lote_reutiliza_administracion_para_remitos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_impacto_rechaza_cantidad_cambiada_despues_de_preparar (consignaciones.tests_lotes_gestion.GestionLotesTests.test_impacto_rechaza_cantidad_cambiada_despues_de_preparar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_inactivo_no_desaparece (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_inactivo_no_desaparece)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_incidencia_no_cierra_y_respaldo_no_sobrescribe (consignaciones.tests_devolucion_proveedor_recepcion.RecepcionTests.test_incidencia_no_cierra_y_respaldo_no_sobrescribe)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_inicial_sin_recepcion_no_inventa_antiguedad (consignaciones.tests_control_salidas_pendientes.PendientesControlTests.test_inicial_sin_recepcion_no_inventa_antiguedad)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_inventario_no_escribe_y_tanda_guarda_trece_sin_cambiar_saldos (consignaciones.tests_comunicaciones_resguardo_anteriores.ResguardoAnteriorCargaTests.test_inventario_no_escribe_y_tanda_guarda_trece_sin_cambiar_saldos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_las_tres_vias_financieras_rechazan_una_salida_sin_control (consignaciones.tests_circuito_financiero.CircuitoFinancieroIntegracionTests.test_las_tres_vias_financieras_rechazan_una_salida_sin_control)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lease_vencido_con_transporte_es_incierto (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_lease_vencido_con_transporte_es_incierto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lector_fuera_alcance_y_csrf (consignaciones.tests_devolucion_proveedor_views.VistasTests.test_lector_fuera_alcance_y_csrf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lecturas_no_escriben (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_lecturas_no_escriben)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_legacy_confirmed_20_audience_is_not_expanded (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_legacy_confirmed_20_audience_is_not_expanded)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_limites_vendedor_y_origen_ajeno (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_limites_vendedor_y_origen_ajeno)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_linea_anulada_no_aparece_en_bandeja (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_linea_anulada_no_aparece_en_bandeja)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lineas_con_igual_orden_no_mezclan_vendedores (consignaciones.tests_remitos_orden_v566.OrdenRemitosTests.test_lineas_con_igual_orden_no_mezclan_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lineas_multiples_lin_y_seleccion_individual (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_lineas_multiples_lin_y_seleccion_individual)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_liquidacion_anterior_al_control_nuevo_no_cierra_ni_debita (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_liquidacion_anterior_al_control_nuevo_no_cierra_ni_debita)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_liquidacion_parcial_anterior_no_oculta_producto_restante (consignaciones.tests_lotes_gestion.GestionLotesTests.test_liquidacion_parcial_anterior_no_oculta_producto_restante)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_liquidacion_pendiente_impide_via_sin_entrega (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_liquidacion_pendiente_impide_via_sin_entrega)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_liquidacion_pendiente_y_debito_impactado (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_liquidacion_pendiente_y_debito_impactado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_listado_y_excel_respetan_distribuidora_autorizada (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_listado_y_excel_respetan_distribuidora_autorizada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_con_archivada_bloquea_sin_reescribir (consignaciones.tests_archivo_anulaciones.ArchivoConfirmacionTests.test_lote_con_archivada_bloquea_sin_reescribir)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_devoluciones_legacy_ofrece_formulario_origen (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_lote_devoluciones_legacy_ofrece_formulario_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_fuera_de_activa_rechazado (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_lote_fuera_de_activa_rechazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_impactado_enlaza_liquidacion_y_pago_sin_pagarlos (consignaciones.tests_estado_proveedor_filtros.AccionesLoteEstadoTests.test_lote_impactado_enlaza_liquidacion_y_pago_sin_pagarlos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_mixto_historica_sin_distribuidora (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_lote_mixto_historica_sin_distribuidora)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_lote_original_se_conserva (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_lote_original_se_conserva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_maestros_no_recalculan_documento (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_maestros_no_recalculan_documento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_manual_seleccion_completa_valida_backend_y_no_confia_navegador (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_manual_seleccion_completa_valida_backend_y_no_confia_navegador)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_marcador_historico_de_pago_no_reabre_pedido (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_marcador_historico_de_pago_no_reabre_pedido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_material_endpoint_lists_scoped_salida_and_never_recipients_or_costs (consignaciones.tests_material_campanas_v555.MaterialCampanasTests.test_material_endpoint_lists_scoped_salida_and_never_recipients_or_costs)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_material_scope_amba_and_denied_other_salida_or_role (consignaciones.tests_material_campanas_v555.MaterialCampanasTests.test_material_scope_amba_and_denied_other_salida_or_role)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_menu_no_ofrece_banners_sin_permiso_tienda (consignaciones.tests_midistri_pagina_v591.PaginaTests.test_menu_no_ofrece_banners_sin_permiso_tienda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_migracion_backfill_conserva_documentos_y_uuid (consignaciones.tests_midistri_folios_v591.ConcurrenciaFoliosTests.test_migracion_backfill_conserva_documentos_y_uuid)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_migracion_no_convierte_historicos (consignaciones.tests_operativa_migraciones.OperativaMigracionesTests.test_migracion_no_convierte_historicos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_misma_clave_concurrente_descuenta_y_reintegra_una_vez (consignaciones.tests_ajustes_destino_concurrencia_v590.ConcurrenciaDestinoTests.test_misma_clave_concurrente_descuenta_y_reintegra_una_vez)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_missing_barracas_sender_explains_exclusion_and_permissions_revalidated (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_missing_barracas_sender_explains_exclusion_and_permissions_revalidated)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_mixto_conserva_confirmacion_parcial_legada (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_mixto_conserva_confirmacion_parcial_legada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_mixto_ultimo_item_invalido_revierte_todo (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_mixto_ultimo_item_invalido_revierte_todo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_modelo_y_admin_no_reescriben_pago_de_lote (consignaciones.tests_lotes_pagos.PagosLoteTests.test_modelo_y_admin_no_reescriben_pago_de_lote)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_motivo_confirmacion_obligatorios (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_motivo_confirmacion_obligatorios)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_movimientos_no_comerciales_posteriores_no_bloquean_reemplazo (consignaciones.tests_reemplazo_cierre.ReemplazoCierreTests.test_movimientos_no_comerciales_posteriores_no_bloquean_reemplazo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_movimientos_y_comando_preservan_credito (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_movimientos_y_comando_preservan_credito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_navbar_y_acceso_directo_solo_superusuario (consignaciones.tests_operativa_api_admin.ExploradorOperativoTests.test_navbar_y_acceso_directo_solo_superusuario)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_navegacion_recepcion_y_bloqueo_de_edicion_legacy (consignaciones.tests_entregas_urban.EntregasUrbanTests.test_navegacion_recepcion_y_bloqueo_de_edicion_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_negativos_visibles_y_anuladas_ocultas (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_negativos_visibles_y_anuladas_ocultas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_negativos_visibles_y_anuladas_ocultas (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_negativos_visibles_y_anuladas_ocultas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_negativos_visibles_y_anuladas_ocultas (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_negativos_visibles_y_anuladas_ocultas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_negativos_visibles_y_anuladas_ocultas (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_negativos_visibles_y_anuladas_ocultas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_no_delete_ni_snapshot_update (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_no_delete_ni_snapshot_update)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_no_pierde_saldo_no_atribuido (consignaciones.tests_anulaciones_comando.AnulacionComandoTests.test_no_pierde_saldo_no_atribuido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_no_reabre_ni_modifica_carga (consignaciones.tests_anulaciones_concurrencia.EscritoresAnulacionTests.test_no_reabre_ni_modifica_carga)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_no_rinde_ventas_anuladas (consignaciones.tests_anulaciones_concurrencia.RendicionAnuladaTests.test_no_rinde_ventas_anuladas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_nombre_actual_distinto_conserva_precio_y_remito_historico (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_nombre_actual_distinto_conserva_precio_y_remito_historico)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_nombre_ambiguo_y_matricula_duplicada (consignaciones.tests_comunicaciones_agenda.AgendaImportacionTests.test_nombre_ambiguo_y_matricula_duplicada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_nombre_sin_sku_con_parentesis_no_es_codigo (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_nombre_sin_sku_con_parentesis_no_es_codigo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_normal_sigue_bloqueada_y_modo_explicito_usa_documento (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_normal_sigue_bloqueada_y_modo_explicito_usa_documento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_obligacion_proveedor_pedido_separado (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_obligacion_proveedor_pedido_separado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_openapi_respuestas_y_ejemplos (consignaciones.tests_catalogo_api_contrato.CatalogoContratoTests.test_openapi_respuestas_y_ejemplos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_origen_ajeno_no_aceptado (consignaciones.tests_devolucion_proveedor_trazable.TrazableTests.test_origen_ajeno_no_aceptado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_origen_entrega_y_trazabilidad_se_rechazan (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_origen_entrega_y_trazabilidad_se_rechazan)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_origen_incorrecto_no_aplica_nada (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_origen_incorrecto_no_aplica_nada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_origen_retorno_recepcion_sin_doble_descuento_y_economia_intacta (consignaciones.tests_devolucion_proveedor_trazable.TrazableTests.test_origen_retorno_recepcion_sin_doble_descuento_y_economia_intacta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_otro_destino_notificacion_intacta (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_otro_destino_notificacion_intacta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_otro_distribuidor_no_puede_ver_ni_retirar (consignaciones.tests_colocacion_revision.ResumenTrazableTests.test_otro_distribuidor_no_puede_ver_ni_retirar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pagina_limita_resultados_y_excluye_anuladas_y_ajenas (consignaciones.tests_circuito_rendimiento.CircuitoFiltroRendimientoTests.test_pagina_limita_resultados_y_excluye_anuladas_y_ajenas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_paginacion_vendedores_consultas_acotadas (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_paginacion_vendedores_consultas_acotadas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_compartido_con_imputacion_exacta (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_pago_compartido_con_imputacion_exacta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_compartido_sin_imputacion_bloquea (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_pago_compartido_sin_imputacion_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_de_otra_salida_conserva_credito (consignaciones.tests_anulaciones_concurrencia.EscritoresAnulacionTests.test_pago_de_otra_salida_conserva_credito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_distribuido_por_pedido_y_proveedor (consignaciones.tests_lotes_pagos.PagosLoteTests.test_pago_distribuido_por_pedido_y_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_fc_credito_y_recalculo_repetido (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_pago_fc_credito_y_recalculo_repetido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_legacy_y_anulado_en_estado_proveedor (consignaciones.tests_lotes_pagos.PagosLoteTests.test_pago_legacy_y_anulado_en_estado_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_no_permite_esta_via (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_pago_no_permite_esta_via)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_nuevo_no_se_imputa_a_anulada (consignaciones.tests_anulaciones_concurrencia.EscritoresAnulacionTests.test_pago_nuevo_no_se_imputa_a_anulada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_original_no_se_reasigna_ni_borra (consignaciones.tests_anulaciones_concurrencia.EscritoresAnulacionTests.test_pago_original_no_se_reasigna_ni_borra)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_parcial_comprobante_reintento_y_cierre (consignaciones.tests_lotes_pagos.PagosLoteTests.test_pago_parcial_comprobante_reintento_y_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_parcial_conservado (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_pago_parcial_conservado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_parcial_sigue_pendiente_y_pago_completo_sale_del_filtro (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_pago_parcial_sigue_pendiente_y_pago_completo_sale_del_filtro)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_proveedor_bloquea_y_no_se_modifica (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_pago_proveedor_bloquea_y_no_se_modifica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_proveedor_lote_crea_un_pago_por_salida (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_pago_proveedor_lote_crea_un_pago_por_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_proveedor_parcial_dos_lotes_sin_duplicar (consignaciones.tests_lotes_gestion.GestionLotesTests.test_pago_proveedor_parcial_dos_lotes_sin_duplicar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_proveedor_rechaza_pago_anterior_sin_imputacion (consignaciones.tests_lotes_gestion.GestionLotesTests.test_pago_proveedor_rechaza_pago_anterior_sin_imputacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pago_sin_formulario_no_registra_transferencia (consignaciones.tests_lotes_pagos.PagosLoteTests.test_pago_sin_formulario_no_registra_transferencia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pantalla_excel_y_pdf_consistentes_sin_mutar (consignaciones.tests_urban_ventas.VentasAbastecedoresTests.test_pantalla_excel_y_pdf_consistentes_sin_mutar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_partes_mime_limite_y_archivo_grande (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_partes_mime_limite_y_archivo_grande)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pdf_contiene_total_visible (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_pdf_contiene_total_visible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pdf_faltante_identifica_vendedor_y_preparacion (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_pdf_faltante_identifica_vendedor_y_preparacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pdf_proveedor_lote_y_acceso_solo_contexto_completo (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_pdf_proveedor_lote_y_acceso_solo_contexto_completo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_anulado_no_catalogable (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_pedido_anulado_no_catalogable)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_cerrada_conserva_control (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_pedido_cerrada_conserva_control)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_de_origen_ajeno_no_cruza_distribuidoras (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_pedido_de_origen_ajeno_no_cruza_distribuidoras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_debitado_no_promete_stock (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_pedido_debitado_no_promete_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_doble_fuente_una_vez (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_pedido_doble_fuente_una_vez)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_emitido_una_vez_y_filtros (consignaciones.tests_urban_ventas.VentasAbastecedoresTests.test_pedido_emitido_una_vez_y_filtros)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_incluido_no_duplica_pago_proveedor (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_pedido_incluido_no_duplica_pago_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_integrado_no_se_reserva_en_otro_documento (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_pedido_integrado_no_se_reserva_en_otro_documento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_mixto_consignacion_no_recrea_deuda_proveedor (consignaciones.tests_lotes_gestion.GestionLotesTests.test_pedido_mixto_consignacion_no_recrea_deuda_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_posterior_no_altera_deuda_del_cierre (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_pedido_posterior_no_altera_deuda_del_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_preparacion_vista_y_acciones_get (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_pedido_preparacion_vista_y_acciones_get)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_preparado_no_se_paga_a_proveedor (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_pedido_preparado_no_se_paga_a_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedido_proveedor_aplicado_sin_desglose_bloquea (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_pedido_proveedor_aplicado_sin_desglose_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pedidos_trazados_se_identifican_en_lineas (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_pedidos_trazados_se_identifican_en_lineas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pendiente_autorizado_conserva_estado (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_pendiente_autorizado_conserva_estado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pendiente_preaplicado_es_cargo_real (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_pendiente_preaplicado_es_cargo_real)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pendientes_exigen_permiso_casilla_y_motivo (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_pendientes_exigen_permiso_casilla_y_motivo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_pendientes_independientes_incluye_ambos_y_costo_desconocido (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_pendientes_independientes_incluye_ambos_y_costo_desconocido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_permiso_directo_csrf_y_autorizacion_expresa (consignaciones.tests_urban_rendiciones_vistas.RendicionesVistasTests.test_permiso_directo_csrf_y_autorizacion_expresa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_permiso_revocado_y_sivendia_denegados (consignaciones.tests_operativa_vistas.OperativaVistasTests.test_permiso_revocado_y_sivendia_denegados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_permisos_ocultan_cantidades_y_derivados_en_todos_los_formatos (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_permisos_ocultan_cantidades_y_derivados_en_todos_los_formatos) (permiso='devoluciones.ver')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_permisos_ocultan_cantidades_y_derivados_en_todos_los_formatos (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_permisos_ocultan_cantidades_y_derivados_en_todos_los_formatos) (permiso='salidas.ver')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_permisos_servicio (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_permisos_servicio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_plan_vinculos_y_cuotas_reemplazadas_no_aceptan_queryset_update (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_plan_vinculos_y_cuotas_reemplazadas_no_aceptan_queryset_update)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_post_cierre_lote_redirige_a_liquidacion (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_post_cierre_lote_redirige_a_liquidacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_post_configuracion_y_contactos_habilitado (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_post_configuracion_y_contactos_habilitado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_post_sin_csrf (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_post_sin_csrf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_post_sin_firma_rechazado (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_post_sin_firma_rechazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_precio_actual_no_cambia_importe (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_precio_actual_no_cambia_importe)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_precio_congelado_no_usa_maestro (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_precio_congelado_no_usa_maestro)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_precio_de_catalogo_posterior_no_cambia_importes_guardados (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_precio_de_catalogo_posterior_no_cambia_importes_guardados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_preparado_muestra_importe_y_acceso_a_confirmacion_sin_impactar (consignaciones.tests_estado_proveedor_filtros.AccionesLoteEstadoTests.test_preparado_muestra_importe_y_acceso_a_confirmacion_sin_impactar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_preparar_editar_cancelar_sin_deuda (consignaciones.tests_operativa_pedidos.PedidosOperativosTests.test_preparar_editar_cancelar_sin_deuda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_presupuesto_consultas (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_presupuesto_consultas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_previa_compartir_y_doble_confirmacion_no_envian_red (consignaciones.tests_avisos_envios.AvisosEnviosTests.test_previa_compartir_y_doble_confirmacion_no_envian_red)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_previa_http_confirmacion_repetida_y_exportes (consignaciones.tests_urban_rendiciones_vistas.RendicionesVistasTests.test_previa_http_confirmacion_repetida_y_exportes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_previa_no_escribe (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_previa_no_escribe)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_previa_pendiente_10_menos_2 (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_previa_pendiente_10_menos_2)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_preview_obsoleto_o_ausente_no_confirma (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_preview_obsoleto_o_ausente_no_confirma)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_producto_editado_no_cambia_snapshot_publicado (consignaciones.tests_distribucion_stock.DistribucionMaestroTests.test_producto_editado_no_cambia_snapshot_publicado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_producto_historico_protegido_orm (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_producto_historico_protegido_orm)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_producto_pedido_emitido_excluye_anulados_borradores_y_cero (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_producto_pedido_emitido_excluye_anulados_borradores_y_cero)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_proveedor_detecta_marcador_largo_sin_snapshot (consignaciones.tests_lotes_gestion.GestionLotesTests.test_proveedor_detecta_marcador_largo_sin_snapshot)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_publicar_historico_dos_origenes_conserva_costos_y_reserva (consignaciones.tests_distribucion_stock.DistribucionMaestroTests.test_publicar_historico_dos_origenes_conserva_costos_y_reserva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_publicar_repetido_no_reserva_dos_veces_y_stock_insuficiente_falla (consignaciones.tests_distribucion_stock.DistribucionMaestroTests.test_publicar_repetido_no_reserva_dos_veces_y_stock_insuficiente_falla)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reasignar_origen_acumulado_rechazado (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_reasignar_origen_acumulado_rechazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recalculo_estado_no_reabre (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_recalculo_estado_no_reabre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_despues_de_carga_conserva_saldo_y_remito (consignaciones.tests_entregas_urban.EntregasUrbanTests.test_recepcion_despues_de_carga_conserva_saldo_y_remito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_legacy_con_evidencia_previa_queda_confirmada (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_recepcion_legacy_con_evidencia_previa_queda_confirmada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_parcial_conserva_transito (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_recepcion_parcial_conserva_transito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_posterior_no_activa_hija_preexistente (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_recepcion_posterior_no_activa_hija_preexistente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_unica_sin_segundo_descuento (consignaciones.tests_devolucion_proveedor_recepcion.RecepcionTests.test_recepcion_unica_sin_segundo_descuento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recepcion_visible_en_tablero_antes_de_emitir_carga (consignaciones.tests_entregas_urban.EntregasUrbanTests.test_recepcion_visible_en_tablero_antes_de_emitir_carga)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_rechaza_seleccion_en_consigna (consignaciones.tests_lotes_gestion.GestionLotesTests.test_rechaza_seleccion_en_consigna)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recolocacion_bloquea (consignaciones.tests_anulaciones_previa.PreviaAnulacionTests.test_recolocacion_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recolocacion_no_duplica_custodia (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_recolocacion_no_duplica_custodia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recolocacion_no_pierde_custodia_del_origen (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_recolocacion_no_pierde_custodia_del_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_recuperado_en_deposito_no_se_libera (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_recuperado_en_deposito_no_se_libera)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reemplazo_no_recalcula_precio_comercial_cerrado (consignaciones.tests_reemplazo_cierre.ReemplazoCierreTests.test_reemplazo_no_recalcula_precio_comercial_cerrado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reemplazo_no_recalcula_ri_catalogo (consignaciones.tests_reemplazo_cierre.ReemplazoCierreTests.test_reemplazo_no_recalcula_ri_catalogo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_registrar_credito_requiere_evidencia (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_registrar_credito_requiere_evidencia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reimpresion_carga_guardada_ordena_sin_reescribir_documentos (consignaciones.tests_remitos_orden_v566.OrdenRemitosTests.test_reimpresion_carga_guardada_ordena_sin_reescribir_documentos) (function='remitos_carga_lote')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reimpresion_carga_guardada_ordena_sin_reescribir_documentos (consignaciones.tests_remitos_orden_v566.OrdenRemitosTests.test_reimpresion_carga_guardada_ordena_sin_reescribir_documentos) (function='remitos_carga_lote_imprimir')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reintento_colision_y_anulacion_no_duplican (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_reintento_colision_y_anulacion_no_duplican)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reintento_concurrente_conserva_un_solo_folio (consignaciones.tests_midistri_folios_v591.ConcurrenciaFoliosTests.test_reintento_concurrente_conserva_un_solo_folio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reintento_no_duplica_ajuste (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_reintento_no_duplica_ajuste)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_remitos_de_liquidacion_lote_reconstruyen_detalle_por_salida (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_remitos_de_liquidacion_lote_reconstruyen_detalle_por_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_rendicion_incidente_visible (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_rendicion_incidente_visible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_rendicion_y_cobertura_inmutables (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_rendicion_y_cobertura_inmutables)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_rendiciones_sucesivas_prorratean_sin_perder_impuestos (consignaciones.tests_urban_rendiciones.RendicionesUrbanTests.test_rendiciones_sucesivas_prorratean_sin_perder_impuestos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reporte_lote_incluye_pedido_directo_en_ambos_importes (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_reporte_lote_incluye_pedido_directo_en_ambos_importes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_repreparacion_acepta_snapshot_legacy_sin_campos_nuevos (consignaciones.tests_operativa_recorridos.RecorridosOperativosTests.test_repreparacion_acepta_snapshot_legacy_sin_campos_nuevos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_repreparacion_no_lee_fecha_ni_nombre_del_pedido_actual (consignaciones.tests_operativa_recorridos.RecorridosOperativosTests.test_repreparacion_no_lee_fecha_ni_nombre_del_pedido_actual)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reprograma_solo_saldo_y_conserva_pago_e_historia (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_reprograma_solo_saldo_y_conserva_pago_e_historia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reserva_conserva_fisico_y_separa_libre (consignaciones.tests_control_salidas_visual.ControlReservasTests.test_reserva_conserva_fisico_y_separa_libre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reserva_exacta_y_no_repetible (consignaciones.tests_lotes_gestion.GestionLotesTests.test_reserva_exacta_y_no_repetible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reserva_no_cambia_fisico_ni_saldos (consignaciones.tests_operativa_reservas.ReservasOperativasTests.test_reserva_no_cambia_fisico_ni_saldos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reserva_pedido_no_se_consume_en_envio (consignaciones.tests_devolucion_proveedor_trazable.TrazableTests.test_reserva_pedido_no_se_consume_en_envio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reserva_preparada_bloquea_control (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_reserva_preparada_bloquea_control)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reservas_distinguen_retorno (consignaciones.tests_operativa_reservas.ReservasOperativasTests.test_reservas_distinguen_retorno)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_resumen_lote_proveedor_no_cobra_anulado (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_resumen_lote_proveedor_no_cobra_anulado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_resumen_trazable_lee_deposito_fisico_por_origen (consignaciones.tests_colocacion_revision.ResumenTrazableTests.test_resumen_trazable_lee_deposito_fisico_por_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retirar_carga_legada_mueve_todos_los_productos_al_deposito (consignaciones.tests_colocacion_revision.ResumenColocacionTests.test_retirar_carga_legada_mueve_todos_los_productos_al_deposito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retirar_carga_legada_rechaza_despues_de_confirmar (consignaciones.tests_colocacion_revision.ResumenColocacionTests.test_retirar_carga_legada_rechaza_despues_de_confirmar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retirar_carga_trazable_devuelve_origen_sin_credito_de_retorno (consignaciones.tests_colocacion_revision.ResumenTrazableTests.test_retirar_carga_trazable_devuelve_origen_sin_credito_de_retorno)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retirar_trazable_bloqueado_tras_confirmar (consignaciones.tests_colocacion_revision.ResumenTrazableTests.test_retirar_trazable_bloqueado_tras_confirmar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retiro_detecta_carga_cambiada_desde_revision (consignaciones.tests_colocacion_revision.ResumenColocacionTests.test_retiro_detecta_carga_cambiada_desde_revision)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_retorno_parcial_idempotente (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_retorno_parcial_idempotente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_reversion_pedido_no_modifica_deuda_ajena (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_reversion_pedido_no_modifica_deuda_ajena)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_revisar_confirmar_exige_aceptacion_y_reintenta (consignaciones.tests_devolucion_proveedor_views.VistasTests.test_revisar_confirmar_exige_aceptacion_y_reintenta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_revocacion_bloquea_reintento_y_consulta (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_revocacion_bloquea_reintento_y_consulta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ri_actual_no_cambia_control_trazado (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_ri_actual_no_cambia_control_trazado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_rollback_si_falla_aplicacion_no_deja_anulacion (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_rollback_si_falla_aplicacion_no_deja_anulacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ruta_actual_impacta_cobranza_nueva (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_ruta_actual_impacta_cobranza_nueva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_saldo_insuficiente_no_se_recorta_a_cero (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_saldo_insuficiente_no_se_recorta_a_cero)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_saldos_confirmados_sin_anuladas_ni_dar_cero_a_desconocido (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_saldos_confirmados_sin_anuladas_ni_dar_cero_a_desconocido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_salida_carga_positiva_filtros_combinados_y_no_ajenos (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_salida_carga_positiva_filtros_combinados_y_no_ajenos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_salida_con_producto_sigue_conciliando_colocaciones (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_salida_con_producto_sigue_conciliando_colocaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_salida_motivo_corto_y_eleccion_visibilidad (consignaciones.tests_archivo_anulaciones.ArchivoConfirmacionTests.test_salida_motivo_corto_y_eleccion_visibilidad)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_seleccionar_original_y_excluir_borradores_y_ajenos (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_seleccionar_original_y_excluir_borradores_y_ajenos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_servicios_legacy_confirman_una_vez_y_conservan_remito (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_servicios_legacy_confirman_una_vez_y_conservan_remito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_simular_aplicar_auditar_y_migrar (consignaciones.tests_catalogo_sku.ReparacionMigracionTests.test_simular_aplicar_auditar_y_migrar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_compra_conserva_transito_y_permite_conciliar (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_sin_compra_conserva_transito_y_permite_conciliar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_compra_no_crea_origen (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_sin_compra_no_crea_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_consultas_por_pedido_en_el_listado (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_sin_consultas_por_pedido_en_el_listado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_control_fisico_o_anulada_bloquea (consignaciones.tests_devolucion_proveedor_envios.EnviosTests.test_sin_control_fisico_o_anulada_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_documento_o_con_documento_inconsistente_bloquea (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sin_documento_o_con_documento_inconsistente_bloquea)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_obligacion_no_inventa_cierre (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_sin_obligacion_no_inventa_cierre) (familia='urban_origen')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_obligacion_no_inventa_cierre (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_sin_obligacion_no_inventa_cierre) (familia='urban_sin_compra')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sin_sku_exige_nombre_exacto (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sin_sku_exige_nombre_exacto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sivendia_no_confirma (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_sivendia_no_confirma)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sivendia_no_consulta_finanzas_por_servicio (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_sivendia_no_consulta_finanzas_por_servicio)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sivendia_no_exporta_finanzas (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_sivendia_no_exporta_finanzas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_ambiguo_no_se_resuelve_por_nombre (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_ambiguo_no_se_resuelve_por_nombre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_con_espacios_de_formato (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_con_espacios_de_formato)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_con_parentesis_conserva_identidad (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_con_parentesis_conserva_identidad)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_distinto_no_coincide_por_prefijo_o_nombre (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_distinto_no_coincide_por_prefijo_o_nombre) (sku='AJENO')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_distinto_no_coincide_por_prefijo_o_nombre (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_distinto_no_coincide_por_prefijo_o_nombre) (sku='QA1')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_distinto_no_coincide_por_prefijo_o_nombre (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_sku_distinto_no_coincide_por_prefijo_o_nombre) (sku='qa')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_formula_en_excel_es_texto (consignaciones.tests_urban_ventas.VentasAbastecedoresTests.test_sku_formula_en_excel_es_texto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sku_repetido_y_varios_origenes_no_fusionan_productos (consignaciones.tests_operativa_documentos.OperativaDocumentosTests.test_sku_repetido_y_varios_origenes_no_fusionan_productos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sobrepago_no_compensa_deuda_de_otra_salida (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_sobrepago_no_compensa_deuda_de_otra_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_sobrepago_y_confirmacion_alterada_no_aplican (consignaciones.tests_lotes_pagos.PagosLoteTests.test_sobrepago_y_confirmacion_alterada_no_aplican)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_solo_libera_reserva_sin_despacho (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_solo_libera_reserva_sin_despacho)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_stock_coincide_con_tablero_y_separa_deposito (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_stock_coincide_con_tablero_y_separa_deposito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_tablero_conserva_credito (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_tablero_conserva_credito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_tarea_debitar_excluye_carga_que_aun_esta_en_calle (consignaciones.tests_control_salidas_pendientes.PendientesControlTests.test_tarea_debitar_excluye_carga_que_aun_esta_en_calle)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_tarea_liquidar_ignora_consulta_vencidas_y_exige_debito (consignaciones.tests_control_salidas_pendientes.PendientesControlTests.test_tarea_liquidar_ignora_consulta_vencidas_y_exige_debito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_timeout_reintento_mismo_resultado (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_timeout_reintento_mismo_resultado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_todos_20_incluye_65_y_congela_remitentes_propios (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_todos_20_incluye_65_y_congela_remitentes_propios)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_todos_incluye_resultados_fuera_de_pagina_y_mas_de_200 (consignaciones.tests_campanas_correo_v546.CampanasCorreo546Tests.test_todos_incluye_resultados_fuera_de_pagina_y_mas_de_200)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_todos_los_cierres_impactados_guardan_venta (consignaciones.tests_comunicaciones_captura_venta.CierresVentaTests.test_todos_los_cierres_impactados_guardan_venta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_totales_lote_original_y_vigente (consignaciones.tests_anulaciones_consultas.ConsultasAnulacionTests.test_totales_lote_original_y_vigente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_traslado_distribuidora_y_vendedor_inactivo (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_traslado_distribuidora_y_vendedor_inactivo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_trazada_cero_confirma_sin_transferir_mercaderia (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_trazada_cero_confirma_sin_transferir_mercaderia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_trazada_respeta_origen_y_no_genera_venta (consignaciones.tests_comunicaciones_movil_origen.MovilOrigenTests.test_trazada_respeta_origen_y_no_genera_venta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_ultima_salida_falla_sin_cierre_parcial (consignaciones.tests_operativa_cierre.CierreOperativoTests.test_ultima_salida_falla_sin_cierre_parcial)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_un_producto_no_confirma_todo_vendedor (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_un_producto_no_confirma_todo_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_update_pago_proveedor_valida_pedido_destino (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_update_pago_proveedor_valida_pedido_destino)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_update_pago_valida_destino (consignaciones.tests_anulaciones_revision.RevisionAnulacionTests.test_update_pago_valida_destino)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_update_que_espera_regularizacion_no_modifica_historico (consignaciones.tests_ajustes_destino_concurrencia_v590.ConcurrenciaDestinoTests.test_update_que_espera_regularizacion_no_modifica_historico)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_urban_conserva_pago_y_credito (consignaciones.tests_anulaciones_saldos.SaldosAnulacionTests.test_urban_conserva_pago_y_credito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_validar_no_publica_confirmar_idempotente (consignaciones.tests_midistri_pagina_v591.PaginaTests.test_validar_no_publica_confirmar_idempotente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_valores_none_se_rechazan_sin_escrituras_y_excel_moneda (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_valores_none_se_rechazan_sin_escrituras_y_excel_moneda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vencimiento_manual_cierre_y_anulacion (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_vencimiento_manual_cierre_y_anulacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vencimiento_manual_piloto_no_se_crea_despues_de_anular (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_vencimiento_manual_piloto_no_se_crea_despues_de_anular)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vencimiento_manual_piloto_recalcula_importe_bajo_bloqueo (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_vencimiento_manual_piloto_recalcula_importe_bajo_bloqueo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vencimiento_manual_piloto_requiere_carga_confirmada (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_vencimiento_manual_piloto_requiere_carga_confirmada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vencimiento_no_libera_consignacion_y_pedido_mixto (consignaciones.tests_lotes_gestion.GestionLotesTests.test_vencimiento_no_libera_consignacion_y_pedido_mixto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_anulada_no_reaparece_disponible (consignaciones.tests_anulaciones_stock.CustodiaAnulacionTests.test_venta_anulada_no_reaparece_disponible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_consolidada_respeta_linea_y_orden_en_vez_de_nombre_o_vv (consignaciones.tests_remitos_orden_v566.OrdenRemitosTests.test_venta_consolidada_respeta_linea_y_orden_en_vez_de_nombre_o_vv)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_desde_snapshot_y_origen_incluye_foto_sin_cambiar_importes (consignaciones.tests_remitos_fotos.FotosRemitosTests.test_venta_desde_snapshot_y_origen_incluye_foto_sin_cambiar_importes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_filtrada_no_agrega_vendedores_ni_cambia_snapshots (consignaciones.tests_remitos_orden_v566.OrdenRemitosTests.test_venta_filtrada_no_agrega_vendedores_ni_cambia_snapshots)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_neta_conserva_costo_y_nombre_historicos (consignaciones.tests_urban_ventas.VentasAbastecedoresTests.test_venta_neta_conserva_costo_y_nombre_historicos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_revalida_vendedor_tras_cambio_de_distribuidora (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_venta_revalida_vendedor_tras_cambio_de_distribuidora)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_venta_sin_cobertura_bloquea_lote (consignaciones.tests_operativa_previa.PreviaOperativaTests.test_venta_sin_cobertura_bloquea_lote)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_visibilidad_salida_preserva_credito_cuenta_y_tablero (consignaciones.tests_archivo_anulaciones.ArchivoAnulacionesTests.test_visibilidad_salida_preserva_credito_cuenta_y_tablero)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "ERROR",
+      "test": "test_vista_lote_ofrece_formulario_acumulado (consignaciones.tests_operativa_devoluciones.DevolucionesOperativasTests.test_vista_lote_ofrece_formulario_acumulado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_abm_valida_duplicados_y_audita (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_abm_valida_duplicados_y_audita)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_admin_documento_propio_y_archivo_activo_attachment (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_admin_documento_propio_y_archivo_activo_attachment)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_admin_no_bloquea_devolucion_de_cohorte_legada (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_admin_no_bloquea_devolucion_de_cohorte_legada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_admindb_auditoria_no_expone_proveedores_privados (consignaciones.tests_catalogo_revision.RevisionCatalogoTests.test_admindb_auditoria_no_expone_proveedores_privados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_administracion_ajax_informa_bloqueo_de_devolucion_cerrada (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_administracion_ajax_informa_bloqueo_de_devolucion_cerrada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_administracion_cerrada_muestra_motivo_y_accion_segura (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_administracion_cerrada_muestra_motivo_y_accion_segura)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_administracion_no_modifica_devolucion_con_estado_cerrado (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_administracion_no_modifica_devolucion_con_estado_cerrado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_administracion_vendedor_no_muestra_salidas_anuladas (consignaciones.tests.AdministracionVendedorTests.test_administracion_vendedor_no_muestra_salidas_anuladas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ajuste_carga_descuenta_saldo_consignado_y_carga_operativa (consignaciones.tests.AjustesCargaLoteTests.test_ajuste_carga_descuenta_saldo_consignado_y_carga_operativa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ajuste_devolucion_y_ampliacion (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_ajuste_devolucion_y_ampliacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_alcance_20_65_y_enlaces_segun_permiso (consignaciones.tests_avisos_bandeja_hitos.BandejaHitosTests.test_alcance_20_65_y_enlaces_segun_permiso)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_alias_no_copia_campos_financieros (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_alias_no_copia_campos_financieros)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_amba_lote_conserva_excluidos_20_y_65 (consignaciones.tests_comunicaciones_lotes.ResumenLotesTests.test_amba_lote_conserva_excluidos_20_y_65)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_amba_y_perfil_global_conservan_alcance_activo (consignaciones.tests_circuito_rendimiento.CircuitoFiltroRendimientoTests.test_amba_y_perfil_global_conservan_alcance_activo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ambito_asignado_no_se_reclasifica (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_ambito_asignado_no_se_reclasifica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ampliacion_muestra_deposito_historico_separado_del_vendedor (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_ampliacion_muestra_deposito_historico_separado_del_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ampliacion_no_se_guarda_despues_del_cierre (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_ampliacion_no_se_guarda_despues_del_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ampliacion_post_bloquea_salida_antes_de_validar_y_guardar (consignaciones.tests_mutaciones_cierre.MutacionesSalidaCerradaTests.test_ampliacion_post_bloquea_salida_antes_de_validar_y_guardar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ampliacion_y_pedido_directo_no_se_suman_como_stock (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_ampliacion_y_pedido_directo_no_se_suman_como_stock)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_anula_pedido_con_remito_historico_y_conserva_su_evidencia (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_anula_pedido_con_remito_historico_y_conserva_su_evidencia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_anuladas_ocultas_y_consultables_incluso_legacy (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_anuladas_ocultas_y_consultables_incluso_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_asignacion_multiple_preserva_texto_y_permisos (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_asignacion_multiple_preserva_texto_y_permisos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_atajo_banners_aplica_politica_y_destino_fijo (consignaciones.tests_midistri_pagina_v591.PaginaTests.test_atajo_banners_aplica_politica_y_destino_fijo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_auditoria_fallida_revierte_asignacion (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_auditoria_fallida_revierte_asignacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_auditoria_privada_no_se_filtra_en_html_csv (consignaciones.tests_catalogo_revision.RevisionCatalogoTests.test_auditoria_privada_no_se_filtra_en_html_csv)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_bandeja_distingue_espera_de_primer_cron_y_pausa (consignaciones.tests_avisos_defaults.AvisosDefaultsPantallasTests.test_bandeja_distingue_espera_de_primer_cron_y_pausa)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_base_incluye_indicador_accesible (consignaciones.tests_progreso_consultas.ProgresoIntegracionTests.test_base_incluye_indicador_accesible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_bloque20_activo_incluye65_y_seleccion_invalida_no_expone (consignaciones.tests_utilidad_salidas_v567.UtilidadSalidasTests.test_bloque20_activo_incluye65_y_seleccion_invalida_no_expone)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_bloque20_activo_incluye65_y_seleccion_invalida_no_expone (consignaciones.tests_utilidad_v571.Utilidad571Tests.test_bloque20_activo_incluye65_y_seleccion_invalida_no_expone)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_borrar_seleccion_es_explicito_y_recupera_descripcion_conservada (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_borrar_seleccion_es_explicito_y_recupera_descripcion_conservada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_bulk_date_change_skips_devolution_started_salidas (consignaciones.tests.SalidasControlEstadoTests.test_bulk_date_change_skips_devolution_started_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_bulk_date_change_skips_salida_with_most_returns_recorded (consignaciones.tests.SalidasControlEstadoTests.test_bulk_date_change_skips_salida_with_most_returns_recorded)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_busqueda_nombre_numero_proveedor_distribuidora (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_busqueda_nombre_numero_proveedor_distribuidora)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cambio_config_durante_verificacion_no_afirma_exito_obsoleto (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_cambio_config_durante_verificacion_no_afirma_exito_obsoleto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cambio_de_activa_y_global_no_deja_datos_de_otra_seleccion (consignaciones.tests_inicio.InicioTests.test_cambio_de_activa_y_global_no_deja_datos_de_otra_seleccion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_carga_emitida_no_se_modifica (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_carga_emitida_no_se_modifica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_catalogo_inicial_separado (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_catalogo_inicial_separado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cerrada_muestra_guardado_sin_recalcular_ni_escribir (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_cerrada_muestra_guardado_sin_recalcular_ni_escribir)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_certificado_hostname_vencido_y_redirect (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_certificado_hostname_vencido_y_redirect)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_certificado_hostname_vencido_y_redirect (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_certificado_hostname_vencido_y_redirect) (params={'expired': True})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_certificado_hostname_vencido_y_redirect (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_certificado_hostname_vencido_y_redirect) (params={'host': 'otro.example.test'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cientos_de_lineas_debitadas_no_ocultan_una_salida_vigente (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_cientos_de_lineas_debitadas_no_ocultan_una_salida_vigente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cierre_con_control_vigente_exige_permiso_financiero_y_no_paga_proveedor (consignaciones.tests_circuito.CircuitoMutationPermissionTests.test_cierre_con_control_vigente_exige_permiso_financiero_y_no_paga_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cierre_individual_es_post_y_congela_debito_comercial_y_faltante_proveedor (consignaciones.tests_circuito_financiero.CircuitoFinancieroIntegracionTests.test_cierre_individual_es_post_y_congela_debito_comercial_y_faltante_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_circuito_y_estado_proveedor_reflejan_ajuste (consignaciones.tests_rectificacion_proveedor.RectificacionProveedorTests.test_circuito_y_estado_proveedor_reflejan_ajuste)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cohorte_anterior_sigue_legado_sin_atribuir_origen (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_cohorte_anterior_sigue_legado_sin_atribuir_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cohorte_off_conserva_prohibicion_anular_y_borrar_v440_http (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_cohorte_off_conserva_prohibicion_anular_y_borrar_v440_http)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_confirmacion_http_mixta_crea_remitos_y_reintento_no_duplica (consignaciones.tests_remitos_deposito.RemitosDepositoTests.test_confirmacion_http_mixta_crea_remitos_y_reintento_no_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_confirmar_con_total_vigente_deriva_a_firma_final (consignaciones.tests_control_legacy.ControlLegacyTests.test_confirmar_con_total_vigente_deriva_a_firma_final)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_confirmar_conteo_obsoleto_no_marca_devolucion_generada (consignaciones.tests_control_legacy.ControlLegacyTests.test_confirmar_conteo_obsoleto_no_marca_devolucion_generada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_confirmar_sin_total_deposito_guarda_devolucion_y_envia_a_control (consignaciones.tests_control_legacy.ControlLegacyTests.test_confirmar_sin_total_deposito_guarda_devolucion_y_envia_a_control)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consulta_consignaciones_muestra_titulo_actualizado (consignaciones.tests_navbar_lotes.NavbarLotesTests.test_consulta_consignaciones_muestra_titulo_actualizado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consulta_pendiente_excluye_cierre_integrado_historico (consignaciones.tests_lotes_gestion.GestionLotesTests.test_consulta_pendiente_excluye_cierre_integrado_historico)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consulta_pendiente_excluye_linea_reservada_y_consigna_anulada (consignaciones.tests_lotes_gestion.GestionLotesTests.test_consulta_pendiente_excluye_linea_reservada_y_consigna_anulada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consulta_y_excel_usaran_detalle_rectificado_no_precios_actuales (consignaciones.tests_rectificacion_proveedor.RectificacionProveedorTests.test_consulta_y_excel_usaran_detalle_rectificado_no_precios_actuales)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultar_carga_no_aplica_saldos (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_consultar_carga_no_aplica_saldos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultar_venta_no_cierra_ni_genera_deuda (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_consultar_venta_no_cierra_ni_genera_deuda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultas_acotadas_y_sin_escrituras (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_consultas_acotadas_y_sin_escrituras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultas_acotadas_y_sin_escrituras (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_consultas_acotadas_y_sin_escrituras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultas_acotadas_y_sin_escrituras (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_consultas_acotadas_y_sin_escrituras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_consultas_acotadas_y_sin_escrituras (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_consultas_acotadas_y_sin_escrituras)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_contacto_muestra_areas_sin_cambiar_funcion_propia (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_contacto_muestra_areas_sin_cambiar_funcion_propia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_control_legacy_no_sobrescribe_conteo_cerrado (consignaciones.tests_control_legacy.ControlLegacyTests.test_control_legacy_no_sobrescribe_conteo_cerrado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_control_muestra_fisico_rectificado_sin_nuevo_cierre (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_control_muestra_fisico_rectificado_sin_nuevo_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_control_rectificacion_desactualizada_no_muestra_valores_como_vigentes (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_control_rectificacion_desactualizada_no_muestra_valores_como_vigentes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_copia_rechazada_conserva_destino_y_copia_amba_valida (consignaciones.tests_colocacion_unica_v573.ColocacionExistenteRegresion.test_copia_rechazada_conserva_destino_y_copia_amba_valida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_copia_rechazada_conserva_destino_y_copia_amba_valida (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_copia_rechazada_conserva_destino_y_copia_amba_valida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_costo_sin_conteo_es_pendiente_y_con_conteo_sin_firma_es_estimado (consignaciones.tests_circuito.CircuitoPanelTests.test_costo_sin_conteo_es_pendiente_y_con_conteo_sin_firma_es_estimado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_cruzamiento_legacy_no_reabre_salida_cerrada (consignaciones.tests_control_legacy.ControlLegacyTests.test_cruzamiento_legacy_no_reabre_salida_cerrada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_deadline_dns_y_goteo_reales (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_deadline_dns_y_goteo_reales) (mode='dns_lento')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_deadline_dns_y_goteo_reales (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_deadline_dns_y_goteo_reales) (mode='headers_lentos')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_debito_por_linea_dos_vendedores (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_debito_por_linea_dos_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_debito_real_fecha_enlace_y_sin_duplicados (consignaciones.tests_pedidos_resumen_vendedor.ResumenPedidosTests.test_debito_real_fecha_enlace_y_sin_duplicados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_desactivar_conserva_asignados_y_no_admite_nuevos (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_desactivar_conserva_asignados_y_no_admite_nuevos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_descargas_lote_no_aparecen_en_liquidacion_individual (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_descargas_lote_no_aparecen_en_liquidacion_individual)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_despues_del_descuento_limpia_seleccion_y_conserva_historial (consignaciones.tests.AjustesCargaLoteTests.test_despues_del_descuento_limpia_seleccion_y_conserva_historial)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_destino_20_guarda_20_y_65_y_reintento_no_duplica (consignaciones.tests_colocacion_unica_v573.ColocacionExistenteRegresion.test_destino_20_guarda_20_y_65_y_reintento_no_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_destino_20_guarda_20_y_65_y_reintento_no_duplica (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_destino_20_guarda_20_y_65_y_reintento_no_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_destino_65_tambien_admite_vendedor_20 (consignaciones.tests_colocacion_unica_v573.ColocacionExistenteRegresion.test_destino_65_tambien_admite_vendedor_20)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_destino_65_tambien_admite_vendedor_20 (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_destino_65_tambien_admite_vendedor_20)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_con_todos_los_permisos_renderiza_opciones_por_paso (consignaciones.tests_circuito.CircuitoPanelTests.test_detalle_con_todos_los_permisos_renderiza_opciones_por_paso)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace) (cambio={'cantidad': 1.5})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace) (cambio={'importe': 'NaN'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace) (cambio={'pedido_id': 'mal'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace) (cambio={'precio': '1'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_detalle_invalido_o_de_otro_vendedor_no_habilita_enlace) (cambio={'vendedor_id': 2})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_detalle_vendedor_respeta_alcance (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_detalle_vendedor_respeta_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_distribuidor_recibe_atajos_operativos_no_catalogo_urban (consignaciones.tests_inicio.InicioTests.test_distribuidor_recibe_atajos_operativos_no_catalogo_urban)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_distribuidor_sin_permiso_proveedor_no_ve_nombre_ni_montos (consignaciones.tests_circuito.CircuitoPanelTests.test_distribuidor_sin_permiso_proveedor_no_ve_nombre_ni_montos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_distribuidor_solo_consulta (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_distribuidor_solo_consulta)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_distribuidora_activa_y_permiso_se_validan_en_servidor (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_distribuidora_activa_y_permiso_se_validan_en_servidor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_documento_imprimible_conserva_snapshot (consignaciones.tests_formatos_monetarios.RutasMonetariasTests.test_documento_imprimible_conserva_snapshot)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_entrada_anterior_cerrada_dirige_a_historial (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_entrada_anterior_cerrada_dirige_a_historial)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_entrega_de_otro_contexto_ofrece_cambio_explicito_no_enlace_inaccesible (consignaciones.tests_circuito_entregas.CircuitoEntregasTests.test_entrega_de_otro_contexto_ofrece_cambio_explicito_no_enlace_inaccesible)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_error_cierre_lote_guarda_diagnostico_sin_cerrar_salidas (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_error_cierre_lote_guarda_diagnostico_sin_cerrar_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_error_remoto_no_expone_secretos (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_error_remoto_no_expone_secretos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_estado_cuenta_proveedor_exporta_excel_con_mismos_filtros (consignaciones.tests.EstadoCuentaProveedorTests.test_estado_cuenta_proveedor_exporta_excel_con_mismos_filtros)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_estado_parcial_y_enlaces_sin_mutaciones (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_estado_parcial_y_enlaces_sin_mutaciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excel_aplica_los_mismos_filtros (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_excel_aplica_los_mismos_filtros)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excel_lote_importes_numericos_y_columnas_no_monetarias (consignaciones.tests_formatos_monetarios.RutasMonetariasTests.test_excel_lote_importes_numericos_y_columnas_no_monetarias)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excel_recolocaciones_no_agrega_consultas_por_fila (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_excel_recolocaciones_no_agrega_consultas_por_fila)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excel_respeta_filtros_y_exporta_todas_las_paginas (consignaciones.tests_control_salidas_filtros.FiltrosControlSalidasTests.test_excel_respeta_filtros_y_exporta_todas_las_paginas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excel_textos_no_formulas_y_consistente (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_excel_textos_no_formulas_y_consistente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_excepcion_marca_error (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_excepcion_marca_error)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_fecha_elegida_en_previa_se_congela_en_la_guia (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_fecha_elegida_en_previa_se_congela_en_la_guia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_desconocido_y_limite_excesivo (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_filtro_desconocido_y_limite_excesivo) (query='cursor=roto')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_desconocido_y_limite_excesivo (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_filtro_desconocido_y_limite_excesivo) (query='limit=0')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_desconocido_y_limite_excesivo (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_filtro_desconocido_y_limite_excesivo) (query='limit=201')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_desconocido_y_limite_excesivo (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_filtro_desconocido_y_limite_excesivo) (query='q=Ana&q=Beto')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_desconocido_y_limite_excesivo (consignaciones.tests_operativa_api_basicos.RecursosBasicosOperativosTests.test_filtro_desconocido_y_limite_excesivo) (query='secreto=si')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtro_pendiente_salta_lotes_debitados (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_filtro_pendiente_salta_lotes_debitados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_invalidos_y_vista_prohibida_error_generico (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_filtros_invalidos_y_vista_prohibida_error_generico)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_no_amplian_y_revocacion (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_filtros_no_amplian_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_no_amplian_y_revocacion (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_filtros_no_amplian_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_no_amplian_y_revocacion (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_filtros_no_amplian_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_no_amplian_y_revocacion (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_filtros_no_amplian_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_por_nombre_matricula_y_sku (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_filtros_por_nombre_matricula_y_sku)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_filtros_por_vendedor_y_producto (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_filtros_por_vendedor_y_producto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_foto_visible_en_consulta_producto (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_foto_visible_en_consulta_producto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_foto_y_head_revocados (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_foto_y_head_revocados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_fotos_pedido_y_salida_sin_colocacion_en_alcance (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_fotos_pedido_y_salida_sin_colocacion_en_alcance) (origen='pedido')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_fuera_alcance_404 (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_fuera_alcance_404)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_get_nueva_configuracion_muestra_internos_activos_sin_crear_fila (consignaciones.tests_avisos_defaults.AvisosDefaultsPantallasTests.test_get_nueva_configuracion_muestra_internos_activos_sin_crear_fila)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_get_previsualiza_sin_guardar (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_get_previsualiza_sin_guardar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_get_solo_muestra_confirmacion_y_no_aplica_deuda (consignaciones.tests_circuito_financiero.RemitoPedidoMutationTests.test_get_solo_muestra_confirmacion_y_no_aplica_deuda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_get_venta_no_muestra_snapshot_pendiente (consignaciones.tests_comunicaciones_captura_venta.CapturaVentaTests.test_get_venta_no_muestra_snapshot_pendiente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_grilla_web_origen_firmado_y_remito_legacy (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_grilla_web_origen_firmado_y_remito_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_guardar_area_auditada_sin_cambiar_permisos (consignaciones.tests_mensajes_identidad.IdentidadMensajesTests.test_guardar_area_auditada_sin_cambiar_permisos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_guardar_requiere_post (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_guardar_requiere_post)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_hija_urban_ve_previa_no_409 (consignaciones.tests_anulaciones_vistas.VistasAnulacionTests.test_hija_urban_ve_previa_no_409)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historico_no_se_reconstruye (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_historico_no_se_reconstruye)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historico_sin_origen_no_se_infiere_al_consultar (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_historico_sin_origen_no_se_infiere_al_consultar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historicos_individuales_revalidan_vendedor_y_revocacion (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_historicos_individuales_revalidan_vendedor_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historicos_individuales_revalidan_vendedor_y_revocacion (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_historicos_individuales_revalidan_vendedor_y_revocacion) (tipo='carga')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historicos_individuales_revalidan_vendedor_y_revocacion (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_historicos_individuales_revalidan_vendedor_y_revocacion) (tipo='devolucion')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_historicos_individuales_revalidan_vendedor_y_revocacion (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_historicos_individuales_revalidan_vendedor_y_revocacion) (tipo='venta')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_http_inseguro_y_host_ajeno_no_salen_a_red (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_http_inseguro_y_host_ajeno_no_salen_a_red)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_http_previa_sin_escrituras_y_confirmacion (consignaciones.tests_anulacion_carga_erronea.CargaErroneaTests.test_http_previa_sin_escrituras_y_confirmacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_id_invalido_no_cambia_asignacion (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_id_invalido_no_cambia_asignacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_ids_ajenos_404_y_filtros_invalidos_400 (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_ids_ajenos_404_y_filtros_invalidos_400)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_importe_de_pedidos_debe_conciliar_con_item (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_importe_de_pedidos_debe_conciliar_con_item)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_imprimir_lote_sin_snapshot_no_reconstruye_historia (consignaciones.tests_seguridad_revision.SeguridadRevisionTests.test_imprimir_lote_sin_snapshot_no_reconstruye_historia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lector_puede_consultar_pero_no_otro_alcance (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_lector_puede_consultar_pero_no_otro_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_legacy_compartida_no_mezcla_vendedores (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_legacy_compartida_no_mezcla_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_legacy_compartida_no_mezcla_vendedores (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_legacy_compartida_no_mezcla_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_legacy_compartida_no_mezcla_vendedores (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_legacy_compartida_no_mezcla_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_legacy_compartida_no_mezcla_vendedores (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_legacy_compartida_no_mezcla_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_limite_total_conjunto_se_conserva (consignaciones.tests_colocacion_unica_v573.ColocacionExistenteRegresion.test_limite_total_conjunto_se_conserva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_limite_total_conjunto_se_conserva (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_limite_total_conjunto_se_conserva)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_link_visible_en_salida_cerrada (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_link_visible_en_salida_cerrada)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_liquidacion_lote_incompleta_no_se_puede_impactar (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_liquidacion_lote_incompleta_no_se_puede_impactar)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_liquidacion_proveedor_includes_direct_orders_debited_with_salida (consignaciones.tests.LiquidacionProveedorSalidaTests.test_liquidacion_proveedor_includes_direct_orders_debited_with_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_listado_legacy_ofrece_remitos_de_los_dos_pedidos_sin_duplicar_total (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_listado_legacy_ofrece_remitos_de_los_dos_pedidos_sin_duplicar_total)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_listado_muestra_total_separado_del_debito_y_respeta_alcance (consignaciones.tests_circuito_mercaderia.CircuitoMercaderiaTests.test_listado_muestra_total_separado_del_debito_y_respeta_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_listados_y_pedido (consignaciones.tests_formatos_monetarios.RutasMonetariasTests.test_listados_y_pedido) (route='pedido_venta_producto_libre')",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_listo_y_revocacion (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_listo_y_revocacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lote_conserva_sus_documentos_sin_duplicar_individuales (consignaciones.tests_comunicaciones_captura_carga.CapturaCargaTests.test_lote_conserva_sus_documentos_sin_duplicar_individuales)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lote_de_remitos_omite_pedido_anulado_en_servidor (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_lote_de_remitos_omite_pedido_anulado_en_servidor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lote_incompleto_no_suprime_captura (consignaciones.tests_comunicaciones_captura_carga.CapturaCargaTests.test_lote_incompleto_no_suprime_captura)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lote_rechaza_salida_con_proveedor_y_sin_debitos (consignaciones.tests.CierreLoteDevolucionLiquidacionTests.test_lote_rechaza_salida_con_proveedor_y_sin_debitos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lote_salida_sin_distribuidora_no_expone_otro_contexto (consignaciones.tests_lotes_gestion.GestionLotesTests.test_lote_salida_sin_distribuidora_no_expone_otro_contexto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_lotes_muestra_devolucion_y_acceso_al_cierre (consignaciones.tests_lotes_gestion.GestionLotesTests.test_lotes_muestra_devolucion_y_acceso_al_cierre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_menu_pages_search_and_missing_files (consignaciones.tests_ayuda_curso.AyudaCursoIntegracionTests.test_menu_pages_search_and_missing_files)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_message_errors_preserve_rejection_versus_uncertainty (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_message_errors_preserve_rejection_versus_uncertainty) (response=(302, {}))",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_message_errors_preserve_rejection_versus_uncertainty (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_message_errors_preserve_rejection_versus_uncertainty) (response=(401, {'error': 'synthetic-secret-key'}))",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_message_errors_preserve_rejection_versus_uncertainty (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_message_errors_preserve_rejection_versus_uncertainty) (response=(500, {}))",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_message_errors_preserve_rejection_versus_uncertainty (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_message_errors_preserve_rejection_versus_uncertainty) (response={'messages': [{'id': ''}]})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_message_errors_preserve_rejection_versus_uncertainty (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_message_errors_preserve_rejection_versus_uncertainty) (response={'meta': {'success': False, 'http_code': 500}})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_misma_clave_exige_el_mismo_conjunto_de_vendedores (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_misma_clave_exige_el_mismo_conjunto_de_vendedores)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_misma_clave_no_puede_ampliar_una_seleccion (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_misma_clave_no_puede_ampliar_una_seleccion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_misma_clave_rechaza_fecha_distinta_sin_cambiar_documentos (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_misma_clave_rechaza_fecha_distinta_sin_cambiar_documentos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_motivo_es_obligatorio_y_no_muta_pedido (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_motivo_es_obligatorio_y_no_muta_pedido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_movimientos_y_documentos_con_cero_no_son_vacios (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_movimientos_y_documentos_con_cero_no_son_vacios)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_no_registra_plantilla_no_aprobada_o_incompatible (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_no_registra_plantilla_no_aprobada_o_incompatible) (cambio={'components': []})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_no_registra_plantilla_no_aprobada_o_incompatible (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_no_registra_plantilla_no_aprobada_o_incompatible) (cambio={'components': [{'type': 'HEADER', 'format': 'DOCUMENT'}, {'type': 'BODY', 'text': 'Hola {{1}}, documento de {{2}}.'}, {'type': 'BUTTONS', 'buttons': []}]})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_no_registra_plantilla_no_aprobada_o_incompatible (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_no_registra_plantilla_no_aprobada_o_incompatible) (cambio={'language': 'en'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_no_registra_plantilla_no_aprobada_o_incompatible (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_no_registra_plantilla_no_aprobada_o_incompatible) (cambio={'status': 'PENDING'})",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_no_reutiliza_token_ni_ejecuta_dos_veces (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_no_reutiliza_token_ni_ejecuta_dos_veces)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_nueva_guia_guarda_foto_en_html_y_pdf (consignaciones.tests_remitos_fotos.CapturaFotoDevolucionTests.test_nueva_guia_guarda_foto_en_html_y_pdf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_nueva_previa_muestra_pendiente_actual_y_get_normal_sigue_congelado (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_nueva_previa_muestra_pendiente_actual_y_get_normal_sigue_congelado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pagina_salta_pares_debitados_sin_quedar_vacia (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_pagina_salta_pares_debitados_sin_quedar_vacia)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_paginacion_sin_repetir_ni_saltar_lineas (consignaciones.tests_operativa_api_consignaciones.ConsignacionesOperativasTests.test_paginacion_sin_repetir_ni_saltar_lineas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_paginacion_viva_filtros_y_cursores_aislados (consignaciones.tests_catalogo_api_http.CatalogoHttpTests.test_paginacion_viva_filtros_y_cursores_aislados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pago_a_proveedor_bloquea_anulacion_y_conserva_saldos (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_pago_a_proveedor_bloquea_anulacion_y_conserva_saldos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pago_http_legacy (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_pago_http_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pago_http_v412_conservado (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_pago_http_v412_conservado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pago_lote_http_legacy (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_pago_lote_http_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pago_proveedor_usa_importe_firmado_aunque_cambie_el_costo (consignaciones.tests_circuito_financiero.CircuitoFinancieroIntegracionTests.test_pago_proveedor_usa_importe_firmado_aunque_cambie_el_costo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pantalla_exige_revision_previa_y_confirma_solo_con_firma (consignaciones.tests_urban_reprogramaciones.ReprogramacionesCuotasTests.test_pantalla_exige_revision_previa_y_confirma_solo_con_firma)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pantalla_y_excel_explican_credito_externo (consignaciones.tests_rectificacion_proveedor_historica.RectificacionHistoricaTests.test_pantalla_y_excel_explican_credito_externo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pantalla_y_resumen_mismas_cantidades (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_pantalla_y_resumen_mismas_cantidades)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pantallas_y_previsualizacion_sin_movimientos (consignaciones.tests_lotes_gestion.GestionLotesTests.test_pantallas_y_previsualizacion_sin_movimientos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pausar_con_correo_precargado_no_exige_smtp_ni_contactos (consignaciones.tests_avisos_defaults.AvisosDefaultsPantallasTests.test_pausar_con_correo_precargado_no_exige_smtp_ni_contactos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pdf_y_impresion_sin_finanzas (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_pdf_y_impresion_sin_finanzas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pedido_anulado_no_se_mezcla_en_listado_activo (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_pedido_anulado_no_se_mezcla_en_listado_activo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pedido_anulado_se_consulta_en_filtro_historico_y_no_como_pendiente (consignaciones.tests_pedido_borrado_atomico.PedidoBorradoAtomicoTests.test_pedido_anulado_se_consulta_en_filtro_historico_y_no_como_pendiente)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pedido_o_item_de_otra_liquidacion_no_autoriza (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_pedido_o_item_de_otra_liquidacion_no_autoriza)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pedido_opcion_ocultar_y_documentos_superusuario (consignaciones.tests_archivo_anulaciones.ArchivoConfirmacionTests.test_pedido_opcion_ocultar_y_documentos_superusuario)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_pedido_previo_no_oculta_consignacion_del_mismo_vendedor (consignaciones.tests.LiquidacionCobroPerformanceTests.test_pedido_previo_no_oculta_consignacion_del_mismo_vendedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_permiso_backend_y_csrf (consignaciones.tests_areas_usuarios.AreasUsuariosTests.test_permiso_backend_y_csrf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_permiso_y_alcance_amba (consignaciones.tests_avisos_campanas.AvisosCampanasTests.test_permiso_y_alcance_amba)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_permisos_revocados_ocultan_atajos_y_ultimas_salidas (consignaciones.tests_inicio.InicioTests.test_permisos_revocados_ocultan_atajos_y_ultimas_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_plantilla_todos_destinos_activos_y_seleccion_restringida (consignaciones.tests_distribucion_revision.RevisionImportacionTests.test_plantilla_todos_destinos_activos_y_seleccion_restringida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_auditoria_no_copia_contactos (consignaciones.tests_comunicaciones_agenda.AgendaVistasTests.test_post_auditoria_no_copia_contactos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_bloquea_pedido_aplica_una_vez_y_renderiza_remito (consignaciones.tests_circuito_financiero.RemitoPedidoMutationTests.test_post_bloquea_pedido_aplica_una_vez_y_renderiza_remito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_con_csrf_reintento_y_redireccion_legacy (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_post_con_csrf_reintento_y_redireccion_legacy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_guarda_solo_vendedores_seleccionados (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_post_guarda_solo_vendedores_seleccionados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_no_incorpora_vendedor_fuera_de_alcance (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_post_no_incorpora_vendedor_fuera_de_alcance)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_no_permitido_y_anonimo_no_accede (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_post_no_permitido_y_anonimo_no_accede)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_post_requiere_permiso_de_emision (consignaciones.tests_circuito_financiero.RemitoPedidoMutationTests.test_post_requiere_permiso_de_emision)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_preliquidacion_salida_precalcula_consignaciones_ya_liquidadas (consignaciones.tests.LiquidacionCobroPerformanceTests.test_preliquidacion_salida_precalcula_consignaciones_ya_liquidadas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_preparacion_es_post_registra_identidad_y_get_no_escribe (consignaciones.tests_circuito.CircuitoMutationPermissionTests.test_preparacion_es_post_registra_identidad_y_get_no_escribe)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_proximo_paso_y_escape_nombre (consignaciones.tests_control_salidas_visual.ControlVisualTests.test_proximo_paso_y_escape_nombre)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_qr_y_foto_ajena (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_qr_y_foto_ajena)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_recolocacion_allows_already_returned_stock_before_all_returns_are_closed (consignaciones.tests.SalidaRecolocacionTests.test_recolocacion_allows_already_returned_stock_before_all_returns_are_closed)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_recolocacion_sin_lineas_conserva_origen (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_recolocacion_sin_lineas_conserva_origen)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_reenviar_remito_no_duplica_descuento (consignaciones.tests.AjustesCargaLoteTests.test_reenviar_remito_no_duplica_descuento)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_registro_rechazado_no_afirma_exito_ni_expone_secreto (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_registro_rechazado_no_afirma_exito_ni_expone_secreto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_reimpresion_de_carga_no_recupera_faltantes_antiguos (consignaciones.tests_comunicaciones_captura_venta.CapturaVentaTests.test_reimpresion_de_carga_no_recupera_faltantes_antiguos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_reintento_clave_no_duplica (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_reintento_clave_no_duplica)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_ajax_descuenta_varios_productos_y_conserva_historial (consignaciones.tests.AjustesCargaLoteTests.test_remito_ajax_descuenta_varios_productos_y_conserva_historial)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_carga_muestra_foto_solo_si_se_solicita (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_remito_carga_muestra_foto_solo_si_se_solicita)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_congelado_de_un_pedido_y_vendedor_sin_emision_ni_datos_vivos (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_remito_congelado_de_un_pedido_y_vendedor_sin_emision_ni_datos_vivos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_devolucion_muestra_foto_solo_si_se_solicita (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_remito_devolucion_muestra_foto_solo_si_se_solicita)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_revierte_todo_si_falla_recalculo (consignaciones.tests.AjustesCargaLoteTests.test_remito_revierte_todo_si_falla_recalculo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_sin_javascript_guarda_y_redirige (consignaciones.tests.AjustesCargaLoteTests.test_remito_sin_javascript_guarda_y_redirige)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_remito_uses_distributor_key_and_individual_document_payload (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_remito_uses_distributor_key_and_individual_document_payload)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_repetir_impacto_no_duplica_pago_ni_documentos (consignaciones.tests_circuito_financiero.CircuitoFinancieroIntegracionTests.test_repetir_impacto_no_duplica_pago_ni_documentos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_colocacion_descarga_pdf (consignaciones.tests.RemitosCargaLoteResumenTests.test_resumen_colocacion_descarga_pdf)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_colocacion_muestra_matriz_productos_por_linea_desde_snapshot_congelado (consignaciones.tests.RemitosCargaLoteResumenTests.test_resumen_colocacion_muestra_matriz_productos_por_linea_desde_snapshot_congelado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_mismas_filas_sin_sql (consignaciones.tests_archivos_privados.ArchivosPrivadosTests.test_resumen_mismas_filas_sin_sql)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_mismas_filas_sin_sql (consignaciones.tests_consultas_operativas.ConsultasOperativasTests.test_resumen_mismas_filas_sin_sql)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_mismas_filas_sin_sql (consignaciones.tests_consultas_operativas.ConsultasOperativasVistasTests.test_resumen_mismas_filas_sin_sql)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_resumen_mismas_filas_sin_sql (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_resumen_mismas_filas_sin_sql)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_return_completo_y_pago_resuelven_logistica_y_salida (consignaciones.tests_control_salidas_visual.ControlRetornoCompletoTests.test_return_completo_y_pago_resuelven_logistica_y_salida)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_revision_faltante_alterada_o_vieja_no_contacta_proveedor (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_revision_faltante_alterada_o_vieja_no_contacta_proveedor)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_revision_y_post_retiro_devuelven_resumen_actualizado (consignaciones.tests_colocacion_revision.ResumenColocacionTests.test_revision_y_post_retiro_devuelven_resumen_actualizado)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_rutas_legacy_conservan_alcance_distribuidora (consignaciones.tests_control_legacy.ControlLegacyTests.test_rutas_legacy_conservan_alcance_distribuidora)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_salida_congelada_sin_relacion_conserva_pedido_del_item_mixto (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_salida_congelada_sin_relacion_conserva_pedido_del_item_mixto)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_salidas_agrupa_operacion_en_submenus (consignaciones.tests_navbar_lotes.NavbarLotesTests.test_salidas_agrupa_operacion_en_submenus)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_seleccion_activa_restringe_html_ajax_y_excel (consignaciones.tests_urban_distribuidoras.TableroDistribuidorasTests.test_seleccion_activa_restringe_html_ajax_y_excel)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_seleccion_con_vendedor_sin_pendiente_revierte_toda_la_emision (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_seleccion_con_vendedor_sin_pendiente_revierte_toda_la_emision)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_selector_liquidacion_cobro_usa_filtro_liviano_de_salidas (consignaciones.tests.LiquidacionCobroPerformanceTests.test_selector_liquidacion_cobro_usa_filtro_liviano_de_salidas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_send_timeout_is_uncertain_and_not_retried (consignaciones.tests_360dialog_transportes.Transporte360Tests.test_send_timeout_is_uncertain_and_not_retried)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sin_cantidad_pendiente_no_emite (consignaciones.tests_comunicaciones_captura_devolucion.CapturaDevolucionTests.test_sin_cantidad_pendiente_no_emite)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sin_desglose_no_enlaza_pedido_actual_ni_inventa_remito (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_sin_desglose_no_enlaza_pedido_actual_ni_inventa_remito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sin_historico_no_inventa_ni_crea_borrador (consignaciones.tests_cruzamiento_historial.HistorialCruzamientoTests.test_sin_historico_no_inventa_ni_crea_borrador)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sivendia_puede_consultar_devoluciones_sin_modificarlas (consignaciones.tests.SivendiaPermissionsTests.test_sivendia_puede_consultar_devoluciones_sin_modificarlas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sivendia_sin_permiso_cargas_puede_abrir_inicio_de_productos (consignaciones.tests_inicio.InicioTests.test_sivendia_sin_permiso_cargas_puede_abrir_inicio_de_productos)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_sivendia_tiene_inicio_consulta_sin_proveedor_ni_finanzas (consignaciones.tests_inicio.InicioTests.test_sivendia_tiene_inicio_consulta_sin_proveedor_ni_finanzas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_snapshot_congela_detalle_consignacion (consignaciones.tests_integracion_circuito.CircuitoIntegracionTests.test_snapshot_congela_detalle_consignacion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_solo_exporte_get_y_token_valido (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_solo_exporte_get_y_token_valido)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_stream_preparado_no_promete_guardado_local (consignaciones.tests_progreso_consultas.ExportacionEstadoTests.test_stream_preparado_no_promete_guardado_local)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_superusuario_tiene_ambos_ambitos_y_administracion (consignaciones.tests_inicio.InicioTests.test_superusuario_tiene_ambos_ambitos_y_administracion)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_switch_apagado_conserva_grilla_legada_en_nuevas_recepciones (consignaciones.tests_distribucion_integracion.OperacionesHijasUrbanTests.test_switch_apagado_conserva_grilla_legada_en_nuevas_recepciones)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_tarjetas_limpian_consulta_y_preservan_busqueda (consignaciones.tests_control_salidas_visual.ControlVisualTests.test_tarjetas_limpian_consulta_y_preservan_busqueda)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_titulo_abre_el_detalle_de_cada_salida_del_ambito (consignaciones.tests_circuito.CircuitoPanelTests.test_titulo_abre_el_detalle_de_cada_salida_del_ambito)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_titulo_abre_el_detalle_de_cada_salida_del_ambito (consignaciones.tests_circuito.CircuitoPanelTests.test_titulo_abre_el_detalle_de_cada_salida_del_ambito) (salida=1)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_titulo_abre_el_detalle_de_cada_salida_del_ambito (consignaciones.tests_circuito.CircuitoPanelTests.test_titulo_abre_el_detalle_de_cada_salida_del_ambito) (salida=3)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_tls_pin_y_2xx_no_espera_cuerpo_y_no_proxy (consignaciones.tests_catalogo_api_transporte.CatalogoTransporteTlsTests.test_tls_pin_y_2xx_no_espera_cuerpo_y_no_proxy)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_todos_los_atajos_autorizados_y_resuelven_rutas_existentes (consignaciones.tests_inicio.InicioTests.test_todos_los_atajos_autorizados_y_resuelven_rutas_existentes)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_token_solo_hash_revocacion_y_cupo (consignaciones.tests_catalogo_api_auth.CatalogoAuthTests.test_token_solo_hash_revocacion_y_cupo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_un_cierre_invalido_revierte_todo_el_post_del_lote (consignaciones.tests_mutaciones_cierre.LoteDevolucionRollbackTests.test_un_cierre_invalido_revierte_todo_el_post_del_lote)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_urban_no_puede_elevarse_ni_entrar_por_ser_admin (consignaciones.tests_areas_finanzas.AreasFinanzasTests.test_urban_no_puede_elevarse_ni_entrar_por_ser_admin)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_urban_prioriza_distribucion_abastecimiento_y_catalogo (consignaciones.tests_inicio.InicioTests.test_urban_prioriza_distribucion_abastecimiento_y_catalogo)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_vacia_oculta_y_recuperable_sin_borrarla (consignaciones.tests_estado_proveedor_filtros.EstadoProveedorFiltrosTests.test_vacia_oculta_y_recuperable_sin_borrarla)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_validacion_revierte_creacion_y_actualizacion_y_muestra_mensaje (consignaciones.tests_colocacion_urban_amba.ColocacionUrbanAmbaTests.test_validacion_revierte_creacion_y_actualizacion_y_muestra_mensaje)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_varios_pedidos_en_un_item_se_abren_separados (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_varios_pedidos_en_un_item_se_abren_separados)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_varios_productos_del_mismo_pedido_un_solo_enlace_y_total (consignaciones.tests_pedidos_vinculados.PedidosVinculadosTests.test_varios_productos_del_mismo_pedido_un_solo_enlace_y_total)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_vendedor_ajeno_404_y_paginas_completas (consignaciones.tests_operativa_api_pedidos.PedidosOperativosTests.test_vendedor_ajeno_404_y_paginas_completas)",
+      "repeticiones": 1
+    },
+    {
+      "tipo": "FAIL",
+      "test": "test_verificar_registra_url_y_header_sin_activar_canal (consignaciones.tests_360dialog_webhooks.Verificar360Tests.test_verificar_registra_url_y_header_sin_activar_canal)",
+      "repeticiones": 1
+    }
+  ],
+  "cabeceras_bytes_identicas": true
+}

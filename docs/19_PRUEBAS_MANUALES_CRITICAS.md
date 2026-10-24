@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v14 · Ingreso por Email
+
+Email y código30min, selección de perfil sólo después de verificar. Remitentes propios por tienda; administración autenticada en Urban Soft con alcance puntual. Conserva el contrato anterior y configuraciones existentes.
+
+Guía vigente: [ACCESO_EMAIL_v14.md](ACCESO_EMAIL_v14.md). Prevalece para este flujo. Requiere Urban598 + MiDistri14; instalar en ese orden. Producción pendiente; sin campañas.
+
+En datos sintéticos: Email desconocido; un perfil; varios kioscos; tiendas con remitentes distintos; uno apagado; cuenta administrativa equivocada; código vencido/reutilizado y contacto revocado. No conceder administración al contacto vendedor. Conservar la configuración WhatsApp.
+
 ## MiDistri-Pedidos v13
 
 Acceso único de Distribuidor, menú MiDistri y guía por tienda con remitentes propios; excepción20/65. Pedidos separados y código30min ligado a tienda. Instalación productiva pendiente; campaña sin enviar.

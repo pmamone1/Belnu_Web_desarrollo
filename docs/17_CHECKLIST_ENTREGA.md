@@ -1,3 +1,14 @@
+## MiDistri-Pedidos v14 · Ingreso por Email
+
+Email y código30min, selección de perfil sólo después de verificar. Remitentes propios por tienda; administración autenticada en Urban Soft con alcance puntual. Conserva el contrato anterior y configuraciones existentes.
+
+Guía vigente: [ACCESO_EMAIL_v14.md](ACCESO_EMAIL_v14.md). Prevalece para este flujo. Requiere Urban598 + MiDistri14; instalar en ese orden. Producción pendiente; sin campañas.
+
+- [x] Pruebas dirigidas, revisión independiente y PDF verificados localmente.
+- [ ] En cPanel, cotejar el SHA256 del ZIP subido con el informado en la entrega antes de instalar.
+- [x] Suite histórica general comparada contra597: mismas732incidencias, documentadas sin afirmar aprobación global.
+- [ ] Confirmar instalación y aceptación real del ingreso sin enviar campañas.
+
 ## MiDistri-Pedidos v13
 
 Acceso único de Distribuidor, menú MiDistri y guía por tienda con remitentes propios; excepción20/65. Pedidos separados y código30min ligado a tienda. Instalación productiva pendiente; campaña sin enviar.

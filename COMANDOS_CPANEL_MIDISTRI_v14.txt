@@ -1,0 +1,12 @@
+# Instalar primero Urban598 y después MiDistri14. No ejecutar tareas de envío.
+(
+set -e
+umask 077
+cd /home/mcollini
+unzip -t /home/mcollini/midistri_pedidos_v14_acceso_email.zip
+STAGING_ACCESO_MIDISTRI=$(mktemp -d /home/mcollini/staging_midistri14_XXXXXX)
+unzip -oq /home/mcollini/midistri_pedidos_v14_acceso_email.zip -d "$STAGING_ACCESO_MIDISTRI"
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_ACCESO_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb
+/home/mcollini/virtualenv/belnuweb/3.7/bin/python "$STAGING_ACCESO_MIDISTRI/instalar.py" --root /home/mcollini/belnuweb --apply
+head -n 3 /home/mcollini/belnuweb/VERSION_DOCUMENTADA.txt
+)

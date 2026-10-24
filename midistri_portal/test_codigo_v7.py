@@ -19,10 +19,12 @@ class CodigoPortalTests(TestCase):
         self.patch.start();self.addCleanup(self.patch.stop)
 
     def response(self,action,**kwargs):
-        if action=='capabilities':return {'login_codigo':1,'sesion_pestana':1,'login_codigo_tienda':1,'login_codigo_habilitado':True}
-        if action=='login-code-request':return {'version':1,'solicitud':str(uuid4()),'mensaje':'Si ese Email está habilitado, recibirás un código para ingresar.'}
-        if action=='login-code-verify':return {'version':1,'ticket':'t'*43,'identidades':[{'seleccion':'s'*32,'nombre':self.profile['nombre'],'distribuidora':self.d.nombre}]}
-        if action=='login-code-select':return {'perfil':self.profile,'session_token':'SECRET_URBAN_TOKEN_'+'x'*40}
+        unified=action.startswith('login-code-email-')
+        action=action.replace('login-code-email-','login-code-')
+        if action=='capabilities':return {'login_codigo':1,'sesion_pestana':1,'login_codigo_tienda':1,'login_codigo_habilitado':True,'login_email_perfiles':1}
+        if action=='login-code-request':return {'version':2 if unified else 1,'solicitud':str(uuid4()),'mensaje':'Si ese Email está habilitado, recibirás un código para ingresar.'}
+        if action=='login-code-verify':return {'version':2 if unified else 1,'ticket':'t'*43,'identidades':[{'seleccion':'s'*32,'nombre':self.profile['nombre'],'distribuidora':self.d.nombre,'distribuidora_id':self.d.pk,'tipo':'vendedor'}]}
+        if action=='login-code-select':return {'tipo':'vendedor','perfil':self.profile,'session_token':'SECRET_URBAN_TOKEN_'+'x'*40}
         raise AssertionError(action)
 
     def login(self):
@@ -70,7 +72,7 @@ class CodigoPortalTests(TestCase):
         original=self.response
         def response(action,**kwargs):
             result=original(action,**kwargs)
-            if action=='login-code-verify':
+            if action in ('login-code-verify','login-code-email-verify'):
                 result['identidades'].append(dict(result['identidades'][0],seleccion='z'*32,nombre='Otro'))
             return result
         with patch('midistri_portal.acceso_views.api',side_effect=response):
