@@ -23,7 +23,8 @@ def url(did):return '/portal/administrar/pagina/?distribuidora='+str(did)
 
 def recursos(did):
     result=[]
-    for product in Publicacion.objects.filter(distribuidora_id=did,activa=True).order_by('nombre'):
+    from .catalogo_elegible import elegibles
+    for product in elegibles(Publicacion.objects.filter(distribuidora_id=did)).order_by('nombre'):
         media=product.multimedia or [dict(tipo='foto',url=i['url'] if isinstance(i,dict) else i) for i in product.imagenes]
         for index,m in enumerate(media[:30]):
             result.append(dict(clave=str(product.pk)+':'+str(index),producto=product.nombre,
@@ -41,7 +42,7 @@ def contenido_contexto(page,d,preview=False):
     return dict(pagina=data,pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
         bloques=p.bloques_vigentes(data,d.pk,preview),presentacion=SimpleNamespace(**presentation))
 
-def guardar_accion(request,page,ctx,token):
+def guardar_accion(request,page,ctx,token,subida=None,metadata=None):
     data=deepcopy(page.datos);did=ctx['tienda']['id'];accion=request.POST.get('accion')
     if accion=='general':
         form=PaginaForm(request.POST)
@@ -90,7 +91,7 @@ def guardar_accion(request,page,ctx,token):
             else:slide.update(titulo=request.POST.get('titulo',''),texto=request.POST.get('texto',''),enlace=request.POST.get('enlace',''),boton=request.POST.get('boton',''))
         else:block['activo']=accion=='mostrar'
     elif accion=='archivo':
-        result=subir_material_tienda(request.FILES.get('archivo'),did,token,request.POST['operacion'])
+        result=subida if subida is not None else subir_material_tienda(request.FILES.get('archivo'),did,token,request.POST['operacion'])
         if request.POST.get('como_logo')=='si':
             if result['tipo']!='foto':raise ValidationError('El logo debe ser una imagen.')
             data['presentacion']['logo']=result['url']
@@ -99,7 +100,7 @@ def guardar_accion(request,page,ctx,token):
             if block is None:raise ValidationError('Elegí un bloque para el archivo.')
             block['diapositivas'].append(dict(material_id=result['id'],tipo=result['tipo'],url=result['url'],titulo='',texto='',enlace='',boton=''))
     else:raise ValidationError('Acción inválida.')
-    return p.guardar_borrador(ctx['operador'],did,data,int(request.POST['revision']),request.POST['operacion'],token)
+    return p.guardar_borrador(ctx['operador'],did,data,int(request.POST['revision']),request.POST['operacion'],token,metadata=metadata)
 
 @require_http_methods(['GET','POST'])
 def editor(request):
@@ -127,6 +128,9 @@ def editor(request):
             page.refresh_from_db()
         initial=dict(page.datos['mensajes'],**{k:page.datos['presentacion'].get(k,'') for k in ('email','telefono')})
         initial.update(diseno=page.datos['diseno'],tema=page.datos['tema'])
+        if request.GET.get('clasico')!='1':
+            ctx.update(titulo='Mi tienda · Editor visual',page=page,recursos=recursos(did),temas=TEMAS)
+            return privada(render(request,'midistri_portal/editor_visual.html',ctx))
         ctx.update(titulo='Mi tienda · editor de página',page=page,form=PaginaForm(initial=initial),
             recursos=recursos(did),operacion=str(uuid4()),error_form=error,
             advertencias=['Bloque '+b.get('titulo',b['tipo'])+', diapositiva '+str(i+1)+': producto o material retirado. Reemplazala u ocultá el bloque.' for b in page.datos['bloques'] for i,slide in enumerate(b.get('diapositivas',[])) if slide.get('publicacion') and not p.vigente_slide(slide,did)],
@@ -142,7 +146,8 @@ def preview(request):
         page=p.borrador_tienda(perfil,did,token)
         firma=p.revisar_borrador(perfil,did,token)
         d=page.tienda.distribuidora
-        products=Paginator(Publicacion.objects.filter(distribuidora=d,activa=True),24).get_page(request.GET.get('page'))
+        from .catalogo_elegible import elegibles
+        products=Paginator(elegibles(Publicacion.objects.filter(distribuidora=d)),24).get_page(request.GET.get('page'))
         for product in products:
             product.galeria=product.multimedia;product.foto_card=next((m['url'] for m in product.galeria if m['tipo']=='foto'),None)
             product.galeria_dom_id='galeria-'+str(product.producto_id);product.galeria_datos={'nombre':product.nombre,'items':product.galeria}

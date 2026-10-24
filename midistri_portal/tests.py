@@ -12,8 +12,8 @@ class PortalTests(TestCase):
     def setUp(self):
         self.d=Distribuidora.objects.create(id=20,nombre='20 - Belgrano')
         self.otra=Distribuidora.objects.create(id=61,nombre='61 Recova')
-        self.p=Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas Urban',precio=100,pvp=150)
-        Publicacion.objects.create(producto_id=2,distribuidora=self.otra,nombre='Solo Recova',precio=100,pvp=150)
+        self.p=Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas Urban',precio=100,pvp=150,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
+        Publicacion.objects.create(producto_id=2,distribuidora=self.otra,nombre='Solo Recova',precio=100,pvp=150,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         self.perfil={'id':7,'nombre':'Pablo','distribuidora_id':20,'distribuidora':'20 - Belgrano','linea':'12'}
         session=self.client.session;session['midistri_token']='a'*43;session.save()
     @patch('midistri_portal.views.api')

@@ -11,7 +11,7 @@ class CodigoPortalTests(TestCase):
     def setUp(self):
         self.assertIsNotNone(find_spec('midistri_portal.acceso_views'),'Falta ingreso con código')
         self.d=Distribuidora.objects.create(id=20,nombre='20 - Belgrano')
-        Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas',precio=100,pvp=150)
+        Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas',precio=100,pvp=150,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         self.profile={'id':7,'nombre':'Vendedor personal','distribuidora_id':20,'distribuidora':self.d.nombre,'linea':'12','lin':12,'vv':98}
         self.tab=str(uuid4());self.proof='a'*64
         self.headers={'HTTP_X_MIDISTRI_TAB':self.tab,'HTTP_X_MIDISTRI_TAB_PROOF':self.proof}

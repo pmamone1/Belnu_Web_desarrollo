@@ -49,6 +49,19 @@ def pedido_valido(data,perfil,ident=None,anterior=None):
         result['email_estado']=data['email_estado']
     from .referencias import validar_referencia
     result.update(validar_referencia(data,anterior))
+    if data.get('revision_comercial') is not None:
+        try:
+            rev=data['revision_comercial'];rows=rev['cantidades'];limits={i['producto_id']:i['cantidad'] for i in clean}
+            if type(rev['numero']) is not int or rev['numero']<1 or not isinstance(rev['motivo'],str) or len(rev['motivo'])>500:raise ValueError
+            if not isinstance(rows,list) or len(rows)!=len(clean):raise ValueError
+            seen=set()
+            for row in rows:
+                if set(row)!={'producto_id','cantidad_preparada'}:raise ValueError
+                pid=row['producto_id'];qty=row['cantidad_preparada']
+                if type(pid) is not int or pid not in limits or pid in seen or type(qty) is not int or not 0<=qty<=limits[pid]:raise ValueError
+                seen.add(pid)
+            result['revision_comercial']={'numero':rev['numero'],'motivo':rev['motivo'],'cantidades':[dict(r) for r in rows]}
+        except (ValueError,KeyError,TypeError):raise ApiError('Revisión comercial inválida.') from None
     result.update(items=clean)
     for key in ('distribuidora','linea','lin','vv','creado','pedidos'):
         if key in data:result[key]=data[key]

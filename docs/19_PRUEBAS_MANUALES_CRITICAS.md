@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v16
+
+Editor visual de bloques, alturas y capas con borrador AJAX; encabezado de tienda configurable y saludo con nombre/LIN/VV. Catálogo exige activo, foto pública y precio vendedor/PVP positivos. Bandeja Urban permite reducir/quitar productos con motivo y aviso; faltantes Excel y mensaje interno explícito. MiDistri-Puntos permanece sólo en análisis.
+
+Guía vigente: [EDITOR_VISUAL_v16.md](EDITOR_VISUAL_v16.md). Paquetes coordinados600/16, bases599/15. Instalación productiva pendiente.
+
+Casos críticos: guardado AJAX sin navegar; perder respuesta y reintentar; no editar durante subida/revisión; copy sin precios congelados; publicar sólo revisión confirmada; cruce de tenant rechazado; productos sinfoto/PVP0 ocultos; reducir/cancelar/reintentar pedido sin duplicar; avisar después del commit; faltantes sin doble cómputo; Excel interno sin vendedores/precios; encabezado editable y LIN/VV conservados.
+
 ## MiDistri-Pedidos v15 — Acceso y código
 
 Pegar o completar los seis números verifica el código automáticamente una sola vez. Hay botón Pegar código y alternativa Entrar. Se conserva la elección entre perfiles.

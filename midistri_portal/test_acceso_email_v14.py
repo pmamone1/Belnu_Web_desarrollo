@@ -8,7 +8,7 @@ class AccesoEmailPortalTests(TestCase):
     def setUp(self):
         self.d=Distribuidora.objects.create(id=20,nombre='20 - Belgrano')
         Distribuidora.objects.create(id=61,nombre='61 - Recova')
-        Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas',precio=100,pvp=150)
+        Publicacion.objects.create(producto_id=1,distribuidora=self.d,nombre='Pilas',precio=100,pvp=150,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
         self.headers={'HTTP_X_MIDISTRI_TAB':str(uuid4()),'HTTP_X_MIDISTRI_TAB_PROOF':'a'*64}
         self.profile={'id':7,'nombre':'Kiosco','distribuidora_id':20,'distribuidora':self.d.nombre,'linea':'Línea12','lin':12,'vv':98}
         self.options=[{'seleccion':'s'*32,'nombre':'Kiosco · LIN12 · VV98','distribuidora':self.d.nombre,'tipo':'vendedor','distribuidora_id':20}]

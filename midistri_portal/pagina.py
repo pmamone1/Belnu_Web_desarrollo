@@ -15,6 +15,7 @@ from .promociones import enlace_https
 SALT='midistri.pagina.v1'
 DISENOS=[('compacto','Catálogo compacto'),('fotos','Fotos grandes'),('promociones','Promociones'),('lista','Lista rápida')]
 MENSAJES={
+ 'encabezado':'',
  'titulo':'Elegí los productos para tu Kiosco!',
  'subtitulo':'Portal para realizar pedidos. La distribuidora confirma disponibilidad.',
  'bienvenida':'','instrucciones':'','carrito':'Este pedido queda sujeto a disponibilidad y aceptación por parte de la distribuidora.',
@@ -44,7 +45,8 @@ def inicial(tienda):
 def vigente_slide(slide,did):
     if slide.get('publicacion'):
         product=Publicacion.objects.filter(pk=slide['publicacion'],distribuidora_id=did,activa=True,distribuidora__activa=True).first()
-        if not product:return None
+        from .catalogo_elegible import disponible
+        if not product or not disponible(product):return None
         options=product.multimedia+[{ 'tipo':'foto','url':i['url'] if isinstance(i,dict) else i} for i in product.imagenes]
         if not any(m.get('tipo')==slide['tipo'] and m.get('url')==slide['url'] for m in options):return None
         return dict(slide,producto_id=product.producto_id,producto=product)
@@ -58,7 +60,7 @@ def validar_pagina(data,did,fuentes=True):
     try:
         if not isinstance(data,dict) or data.get('version')!=1:raise ValueError
         if data['diseno'] not in dict(DISENOS) or data['tema'] not in ('claro','nocturno','azul','verde'):raise ValueError
-        messages={k:texto(data.get('mensajes',{}).get(k,'')) for k in MENSAJES}
+        messages={k:texto(data.get('mensajes',{}).get(k,''),150 if k=='encabezado' else 1000) for k in MENSAJES}
         presentation=data.get('presentacion',{})
         presentation={k:texto(presentation.get(k,''),500) for k in ('logo','email','telefono')}
         if presentation['logo']:
@@ -81,6 +83,10 @@ def validar_pagina(data,did,fuentes=True):
                 'formato':b.get('formato','horizontal'),'ajuste':b.get('ajuste','contain')}
             if type(x['automatico']) is not bool or type(x['segundos']) is not int or not 3<=x['segundos']<=15:raise ValueError
             if x['formato'] not in ('horizontal','cuadrado') or x['ajuste'] not in ('contain','cover'):raise ValueError
+            if 'estilo' in b:
+                from .editor_estilos import validar_estilo
+                x['estilo']=validar_estilo(b['estilo'])
+                if b['tipo'] in ('catalogo','contacto'):x['estilo']['zona']='centro'
             if b.get('mensaje'):
                 if b['mensaje'] not in ('bienvenida','instrucciones'):raise ValueError
                 x['mensaje']=b['mensaje']
@@ -138,7 +144,7 @@ def borrador_tienda(perfil,did,token):
     _,did=autorizar(perfil,did,token)
     with transaction.atomic():return _pagina(did)
 
-def guardar_borrador(perfil,did,data,revision,operacion,token):
+def guardar_borrador(perfil,did,data,revision,operacion,token,metadata=None):
     fresh,did=autorizar(perfil,did,token)
     if type(revision) is not int or revision<0:raise ValidationError('Revisión inválida.')
     clean=validar_pagina(data,did);fp=huella(clean);oid=UUID(str(operacion))
@@ -151,7 +157,7 @@ def guardar_borrador(perfil,did,data,revision,operacion,token):
         if page.pendiente_id:raise ValidationError('Hay una publicación por confirmar. Reintentá antes de editar.')
         if page.revision!=revision:raise ValidationError('El borrador cambió. Recargá para no perder cambios.')
         page.datos=clean;page.revision+=1;page.save(update_fields=['datos','revision'])
-        EdicionPagina.objects.create(id=oid,pagina=page,operador_id=fresh['operador_id'],revision=page.revision,huella=fp,datos=clean)
+        EdicionPagina.objects.create(id=oid,pagina=page,operador_id=fresh['operador_id'],revision=page.revision,huella=fp,datos=dict(clean,_subida=metadata) if metadata else clean)
         return page
 
 def payload_remoto(page,oid):
@@ -234,6 +240,8 @@ def bloques_vigentes(data,did,preview=False):
         if not b.get('activo'):continue
         if not preview and not getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) and b['tipo'] not in ('catalogo','contacto') and not b.get('mensaje'):continue
         x=deepcopy(b);slides=[]
+        from .editor_estilos import validar_estilo,estilo_css
+        x['estilo']=validar_estilo(b.get('estilo',{}));x['css']=estilo_css(x['estilo'])
         for s in b.get('diapositivas',[]):
             item=vigente_slide(s,did)
             if not item:continue
