@@ -5,5 +5,5 @@
 {% block content %}{% endblock %}
 </main>{% if perfil %}<div class="sticky"><a class="button" href="{% url 'midistri_carrito' %}">{{ pagina_mensajes.boton_pedido|default:"Ver mi pedido" }} · {{ cart_count }} unidades</a></div>{% endif %}
 <script>document.addEventListener('click',function(e){var b=e.target.closest('[data-step]');if(!b)return;var input=b.parentElement.querySelector('input[type=number]');input.value=Math.min(9999,Math.max(0,(parseInt(input.value,10)||0)+parseInt(b.dataset.step,10)));});</script>
- {% if request.midistri_codigo_enabled %}<script src="{% static 'midistri_portal/sesion.js' %}" defer></script><script src="{% static 'midistri_portal/acceso.js' %}" defer></script>{% endif %}
+ {% if request.midistri_codigo_enabled %}<script src="{% static 'midistri_portal/sesion.js' %}" defer></script><script src="{% static 'midistri_portal/acceso.js' %}?v=15" defer></script>{% endif %}
 </body></html>

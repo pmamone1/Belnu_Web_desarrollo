@@ -5,7 +5,8 @@
 <form data-codigo="iniciar" method="post" action="{% url 'midistri_codigo_iniciar' %}">{% csrf_token %}
 <label>Email <input type="email" name="email" autocomplete="email" required maxlength="254"></label><button>Recibir código</button></form>
 <form data-codigo="verificar" method="post" action="{% url 'midistri_codigo_verificar' %}" hidden>{% csrf_token %}
-<label>Código de seis números <input name="codigo" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" required></label><button>Entrar</button></form>
+<label>Código de seis números <input name="codigo" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" aria-describedby="codigo-ayuda" style="font-size:1.6rem;font-weight:700;letter-spacing:.25em;max-width:12rem" required></label><button>Entrar</button> <button type="button" data-acceso-pegar>Pegar código</button>
+<p id="codigo-ayuda">Al pegar o completar los seis números, comprobaremos el código automáticamente. También podés tocar Entrar.</p></form>
 <form data-codigo="seleccionar" method="post" action="{% url 'midistri_codigo_seleccionar' %}" hidden>{% csrf_token %}
 <label>Elegí con qué perfil entrar <select name="seleccion" required></select></label><button>Continuar</button></form>
 <p id="acceso-opciones" hidden><button type="button" data-acceso-reenviar>Reenviar código</button> <button type="button" data-acceso-cambiar>Cambiar Email</button></p>

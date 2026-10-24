@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v15 — Acceso y código
+
+Pegar o completar los seis números verifica el código automáticamente una sola vez. Hay botón Pegar código y alternativa Entrar. Se conserva la elección entre perfiles.
+
+Guía vigente: [CODIGO_AGIL_v15.md](CODIGO_AGIL_v15.md). Requiere Urban599 + MiDistri15 sobre bases598/14, sin migraciones nuevas. Instalación productiva pendiente.
+
+Pruebas críticas: confirmación HTTPS mismo origen con CSRF válido; rechazar origen null/ajeno/token ausente y replay; Email HTML y texto con casilla propia; pegado, autocompletado, doble clic, código incorrecto, reenvío, clipboard denegado y selector de perfiles. Usar datos sintéticos locales.
+
 ## MiDistri-Pedidos v14 · Ingreso por Email
 
 Email y código30min, selección de perfil sólo después de verificar. Remitentes propios por tienda; administración autenticada en Urban Soft con alcance puntual. Conserva el contrato anterior y configuraciones existentes.
