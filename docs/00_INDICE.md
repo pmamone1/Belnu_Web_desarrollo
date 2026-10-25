@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v18
+
+Flechas laterales, navegación de bloques y cabezal/página completa, accesos a banners laterales y elección aleatoria del catálogo en borrador. Precio por unidad y pedidos en múltiplos del display; historial de anulación. Guía: [EDITOR_PEDIDOS_v18.md](EDITOR_PEDIDOS_v18.md). Requiere Urban601; paquete acumulativo16/17. Producción pendiente; sin campaña.
+
 ## MiDistri-Pedidos v17 · Fotos completas en banners
 
 Las fotos de productos del catálogo se ajustan completas y centradas dentro del banner, sin deformar ni recortar, incluso si la página conserva el modo «rellenar». La altura elegida se conserva; puede quedar espacio libre a los lados. El material promocional propio conserva su ajuste configurado.

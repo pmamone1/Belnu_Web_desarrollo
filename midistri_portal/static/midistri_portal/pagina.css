@@ -46,3 +46,8 @@ header .tienda-apariencia{color:inherit}
 
 /* Product photos keep their whole frame even in an older cover banner. */
 .banner-visual .banner-media.producto-completo img{object-fit:contain;object-position:center}
+
+/* Only lateral arrows are visible. Reserve their own gutter around content. */
+.banner-visual{position:relative}.banner-visual:has(.banner-controles){padding-inline:max(var(--promo-espacio,16px),52px)}.banner-visual .banner-controles{position:absolute;top:50%;left:6px;right:6px;transform:translateY(-50%);display:flex;justify-content:space-between;gap:0;margin:0;pointer-events:none}.banner-visual .banner-controles button{pointer-events:auto;width:44px;min-width:44px;height:44px;min-height:44px;padding:0;border-radius:50%;background:#fff;color:#173e31;border:1px solid #a7bdb0;box-shadow:0 2px 7px #173e3126;font-size:34px;line-height:1;display:grid;place-items:center}.banner-visual .banner-controles button:hover{background:#e3eee8}.banner-visual .banner-controles button:focus-visible{outline:3px solid #c47f12;outline-offset:1px}.banner-solo-lectores{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.precio-unidad{font-size:max(12px,.65em);font-weight:400;white-space:nowrap;color:inherit}
