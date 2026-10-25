@@ -46,11 +46,11 @@ class ContractTests(TestCase):
         self.assertEqual(response.status_code,302)
         self.assertEqual(PedidoLocal.objects.get().estado,'pendiente')
     @patch('midistri_portal.views.api')
-    def test_oculta_lin_y_conserva_vv_en_cabecera_personal(self,server):
+    def test_cabecera_personal_solo_nombre_sin_lin_ni_vv(self,server):
         server.return_value=self.perfil
         response=self.client.get('/portal/')
         self.assertNotContains(response,'LIN 112')
-        self.assertContains(response,'VV 5')
+        self.assertNotContains(response,'VV 5')
     def test_cabeceras_privadas(self):
         response=self.client.get('/portal/activar/'+'a'*43+'/')
         self.assertEqual(response['Cache-Control'],'private, no-store')
