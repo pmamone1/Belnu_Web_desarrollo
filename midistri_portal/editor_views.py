@@ -20,7 +20,7 @@ def html_pagina(data,d):
     from django.conf import settings
     from types import SimpleNamespace
     ctx['request']=SimpleNamespace(user=SimpleNamespace(is_staff=False),midistri_codigo_enabled=getattr(settings,'MIDISTRI_LOGIN_CODIGO_ENABLED',False))
-    ctx.update(titulo=data['mensajes'].get('titulo') or p.MENSAJES['titulo'],distribuidora=d,
+    ctx.update(titulo='MiDistri - Pedidos Online - '+(d.nombre_comercial or d.nombre),distribuidora=d,
         productos=Paginator(elegibles(Publicacion.objects.filter(distribuidora=d)),24).get_page(1),temas=TEMAS)
     return render_to_string('midistri_portal/catalogo.html',ctx)
 
@@ -33,6 +33,15 @@ def dinamica(request):
         ctx=contexto_panel(request,'midistri.tienda_configurar',distribuidora=request.GET.get('distribuidora'));did=ctx['tienda']['id'];token=token_operador(request)
         page=p.borrador_tienda(ctx['operador'],did,token);d=Distribuidora.objects.get(pk=did,activa=True)
         action=data.get('accion','cargar');result={}
+        if action=='aleatorio':
+            from random import SystemRandom
+            amount=data.get('cantidad')
+            if type(amount) is not int or not 1<=amount<=20:raise ValidationError('Elegí entre1 y20 productos.')
+            photos={}
+            for asset in recursos(did):
+                if asset['tipo']=='foto' and asset['publicacion'] not in photos:photos[asset['publicacion']]=asset
+            chosen=SystemRandom().sample(list(photos.values()),min(amount,len(photos)))
+            return privada(JsonResponse({'diapositivas':[dict(publicacion=a['publicacion'],tipo='foto',url=a['url'],titulo=a['producto'],texto='',enlace='',boton='') for a in chosen]}))
         if action=='guardar':page=p.guardar_borrador(ctx['operador'],did,data['datos'],data['revision'],data['operacion'],token)
         elif action=='render':
             clean=p.validar_pagina(data['datos'],did)

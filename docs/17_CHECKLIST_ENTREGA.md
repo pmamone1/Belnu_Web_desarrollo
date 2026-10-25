@@ -1,3 +1,14 @@
+## MiDistri-Pedidos v18
+
+Flechas laterales, navegación de bloques y cabezal/página completa, accesos a banners laterales y elección aleatoria del catálogo en borrador. Precio por unidad y pedidos en múltiplos del display; historial de anulación. Guía: [EDITOR_PEDIDOS_v18.md](EDITOR_PEDIDOS_v18.md). Requiere Urban601; paquete acumulativo16/17. Producción pendiente; sin campaña.
+
+- [x] Pruebas locales dirigidas, concurrencia y revisión independiente cerradas.
+- [x] Manual/PDF actualizado y unión con páginas previas revisada.
+- [x] Instalador y recuperación probados contra base admitida.
+- [ ] Cotejar SHA256 en cPanel e instalar en orden Urban601, portal18.
+- [ ] AceptaciónHTTPS y correo real sólo con destinatarios/operaciones autorizados.
+- [ ] No enviar campaña ni activar MiDistri-Puntos.
+
 ## MiDistri-Pedidos v17 · Fotos completas en banners
 
 Las fotos de productos del catálogo se ajustan completas y centradas dentro del banner, sin deformar ni recortar, incluso si la página conserva el modo «rellenar». La altura elegida se conserva; puede quedar espacio libre a los lados. El material promocional propio conserva su ajuste configurado.

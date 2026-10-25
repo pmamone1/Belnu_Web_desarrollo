@@ -123,13 +123,18 @@ def foto_producto(producto):
     return producto.imagenes[0] if producto.imagenes else ''
 
 
+def multiplo_valido(producto,cantidad):
+    paso=producto.display or 1
+    return type(cantidad) is int and 0<=cantidad<=9999 and cantidad%paso==0
+
+
 def productos_carrito(request,perfil):
     cart=request.session.get('midistri_cart',{})
     products={str(p.producto_id):p for p in elegibles(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'],producto_id__in=cart))}
     rows=[]
     for pid,qty in cart.items():
         if pid in products:
-            p=products[pid];rows.append({'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p)})
+            p=products[pid];rows.append({'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p),'error_display':not multiplo_valido(p,qty)})
     return rows,len(rows)!=len(cart)
 
 
@@ -142,7 +147,10 @@ def cantidad(request):
         pid=int(request.POST['producto']);qty=int(request.POST['cantidad'])
         if not 0<=qty<=9999:raise ValueError
         if qty:
-            elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
+            product=elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
+            if not multiplo_valido(product,qty):
+                messages.error(request,'Pedí '+product.nombre+' en múltiplos de '+str(product.display or 1)+' unidades.')
+                return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
     except (ValueError,KeyError,Publicacion.DoesNotExist):
         messages.error(request,'Producto o cantidad no válidos.');return redirect('midistri_catalogo')
     cart=request.session.get('midistri_cart',{})
@@ -157,7 +165,7 @@ def cantidad(request):
 
 
 def firma_revision(rows,perfil):
-    data=[perfil['id'],perfil['distribuidora_id'],sorted((r['producto'].producto_id,r['cantidad'],str(r['producto'].precio),str(r['producto'].pvp)) for r in rows)]
+    data=[perfil['id'],perfil['distribuidora_id'],sorted((r['producto'].producto_id,r['cantidad'],str(r['producto'].precio),str(r['producto'].pvp),r['producto'].display or 1) for r in rows)]
     return sha256(json.dumps(data,sort_keys=True).encode()).hexdigest()
 
 
@@ -173,7 +181,7 @@ def carrito(request):
     request.session['midistri_revision']=revision
     present={str(r['producto'].producto_id) for r in rows}
     retirados=[pid for pid in request.session.get('midistri_cart',{}) if pid not in present]
-    ctx=base(request,perfil);ctx.update(rows=rows,missing=missing,retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
+    ctx=base(request,perfil);ctx.update(rows=rows,missing=missing,invalidas=any(r['error_display'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
     return render(request,'midistri_portal/carrito.html',ctx)
 
 
@@ -205,7 +213,7 @@ def enviar(request):
         if existing.estado=='pendiente':transmitir(request,existing)
         return redirect('midistri_detalle',ident=existing.pk)
     rows,missing=productos_carrito(request,perfil)
-    if not rows or missing:
+    if not rows or missing or any(r['error_display'] for r in rows):
         messages.error(request,'Revisá el carrito antes de enviar.');return redirect('midistri_carrito')
     revision=firma_revision(rows,perfil)
     if revision!=request.session.get('midistri_revision') or revision!=request.POST.get('revision'):
@@ -286,7 +294,7 @@ def detalle(request,ident):
         if review:row['cantidad_aceptada']=accepted[item['producto_id']]
         shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
-    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,revision_comercial=review,atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
+    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,revision_comercial=review,anulacion=pedido.respuesta.get('anulacion'),atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
 
 

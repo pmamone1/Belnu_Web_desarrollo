@@ -62,6 +62,16 @@ def pedido_valido(data,perfil,ident=None,anterior=None):
                 seen.add(pid)
             result['revision_comercial']={'numero':rev['numero'],'motivo':rev['motivo'],'cantidades':[dict(r) for r in rows]}
         except (ValueError,KeyError,TypeError):raise ApiError('Revisión comercial inválida.') from None
+    if data.get('anulacion') is not None:
+        try:
+            from datetime import datetime
+            row=data['anulacion']
+            if not isinstance(row,dict) or set(row)!={'completa','motivo','fecha'}:raise ValueError
+            if type(row['completa']) is not bool or row['completa']!=(data['estado']=='cancelado'):raise ValueError
+            if data['estado'] not in ('emitido','cancelado') or not isinstance(row['motivo'],str) or not 5<=len(row['motivo'])<=2000:raise ValueError
+            if not isinstance(row['fecha'],str) or len(row['fecha'])>50 or datetime.fromisoformat(row['fecha']).tzinfo is None:raise ValueError
+            result['anulacion']=dict(row)
+        except (KeyError,ValueError,TypeError):raise ApiError('Anulación de pedido inválida.') from None
     result.update(items=clean)
     for key in ('distribuidora','linea','lin','vv','creado','pedidos'):
         if key in data:result[key]=data[key]

@@ -25,8 +25,12 @@ def recursos(did):
     result=[]
     from .catalogo_elegible import elegibles
     for product in elegibles(Publicacion.objects.filter(distribuidora_id=did)).order_by('nombre'):
-        media=product.multimedia or [dict(tipo='foto',url=i['url'] if isinstance(i,dict) else i) for i in product.imagenes]
-        for index,m in enumerate(media[:30]):
+        combined=product.multimedia+[dict(tipo='foto',url=i['url'] if isinstance(i,dict) else i) for i in product.imagenes]
+        media=[];seen=set()
+        for item in combined:
+            key=(item['tipo'],item['url'])
+            if key not in seen:media.append(item);seen.add(key)
+        for index,m in enumerate(media[:60]):
             result.append(dict(clave=str(product.pk)+':'+str(index),producto=product.nombre,
                 tipo=m['tipo'],url=m['url'],publicacion=product.pk))
     return result
