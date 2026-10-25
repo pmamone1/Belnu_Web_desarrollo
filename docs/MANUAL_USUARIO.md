@@ -1,3 +1,12 @@
+## MiDistri-Pedidos v21
+
+1. Urban Soft mantiene una categoría principal para Analítica y categorías adicionales para encontrar el mismo producto. En MiDistri el filtro Categoría incluye ambas. No aparecen copias del producto ni se multiplica el importe del pedido.
+2. Buscar por nombre, código, categoría o subcategoría. Reconoce acentos, plurales y errores leves en palabras: alfajor y alfajro encuentran productos en Alfajores aunque su nombre no contenga esa palabra. Todos los términos se deben encontrar. Los números no se aproximan a otros códigos.
+3. La tarjeta muestra las categorías y, si existe, la subcategoría pública. Sólo se sincronizan clasificaciones activas; costos privados no se publican. Filtros, conteo, orden de precios/ventas y paginación se conservan.
+4. Las altas, bajas y cambios públicos se actualizan con la sincronización actual cada5min, después de guardar Urban Soft. No modificar el cron ni volver a enviar campañas. Producto inactivo, sin foto pública o sin precios válidos no aparece.
+5. Precio vendedor y PVP siguen visibles. El importe se calcula al precio vendedor; se mantienen múltiplos de display, controles móviles, historial y referencia del pedido.
+
+
 ## MiDistri-Pedidos v20
 
 1. En el catálogo, el nombre y los precios tienen una letra más pequeña. En celular la foto ocupa 150px y la tarjeta crece para contener toda la información. Los botones − y +, la cantidad y Agregar / actualizar quedan completos, sin recortes ni desbordes. Los botones conservan un área de 44px y el campo numérico una letra de 16px.

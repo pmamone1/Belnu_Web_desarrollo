@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v21
+
+- [x] Contrato anterior/nuevo, aislamiento, búsqueda y suite completa.
+- [x] Manual PDF y unión comprobados.
+- [ ] ZIP cotejado con commit publicado.
+- [ ] Instalación y aceptación HTTPS. Sin campaña.
+
 ## MiDistri-Pedidos v20
 
 - [x] Pruebas, revisión y QA visual local cerrados.

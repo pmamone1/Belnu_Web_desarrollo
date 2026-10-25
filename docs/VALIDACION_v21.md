@@ -1,0 +1,6 @@
+# Validación MiDistri21
+
+Suite completa del portal ejecutada:188 pruebas,187 correctas y1skip existente. Contrato anterior y nuevo, categorías adicionales, subcategoría, clasificación privada/incorrecta rechazada conservando copia, búsqueda con acentos/plurales/errores leves y aislamiento por tienda. Números usan prefijo literal, sin similitud difusa.
+Instalador e inventario sobre bytes reales de base20:25 pruebas correctas; preflight sin escritura, discrepancia rechazada, aplicación/reintento y rollback protegido tras0011. Python fuente compatible con3.7 verificado por el constructor; Django check y makemigrations --check sin problemas/cambios.
+Manual principal23 páginas,22 anteriores preservadas en su contenido; se revisaron visualmente portada y unión. QA local con catálogo sintético: búsqueda alfajro encuentra el producto por Alfajores y muestra Alimentos/Golosinas/Alfajores. No se enviaron correos ni pedidos reales.
+El ZIP final se coteja contra commit publicado. Instalación y aceptación productiva pendientes de confirmación; no se afirma que estas pruebas locales validen Gmail, WhatsApp o cPanel. No hay cambios de cron, remitentes o venv. Cambio preexistente forgotPassword.html excluido.

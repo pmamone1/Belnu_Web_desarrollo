@@ -15,6 +15,7 @@ class Publicacion(models.Model):
     nombre=models.CharField(max_length=200)
     codigo=models.CharField(max_length=80,blank=True)
     categoria=models.CharField(max_length=100,blank=True)
+    clasificacion=models.JSONField(default=dict,blank=True)
     precio=models.DecimalField(max_digits=12,decimal_places=2)
     pvp=models.DecimalField(max_digits=12,decimal_places=2)
     imagenes=models.JSONField(default=list)
