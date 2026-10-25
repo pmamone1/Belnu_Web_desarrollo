@@ -1,0 +1,3 @@
+MiDistri-Pedidos v22
+Ranking por importe desde fuente compartida de Analitica. Confirmados/debitados, historicos y alcance propios; sin fallback alfabetico ni productos sin ventas en Mas vendidos.
+Sin migraciones ni cambios de remitentes, WhatsApp, cron o venv. Sin campana. Instalacion productiva pendiente.
