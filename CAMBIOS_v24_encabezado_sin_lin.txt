@@ -1,0 +1,3 @@
+MiDistri-Pedidos v24
+El encabezado compartido del vendedor omite LIN también en catálogo y carrito; conserva nombre, VV, nombre comercial y logo. Presentación únicamente, sin migraciones ni cambios de permisos, pedidos, ranking, precios, remitentes, WhatsApp o cron.
+Instalación productiva pendiente.

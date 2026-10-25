@@ -1,3 +1,3 @@
-MiDistri-Pedidos v23
-Candidato documentado: v23 (base22; instalación productiva pendiente).
-Cambio: Historial/detalle del vendedor muestra Entregado al recibir remito emitido, Entregado parcialmente según atención, cancelaciones conservadas. Oculta LIN y línea en historial/detalle; nombre y VV siguen visibles. Catálogo aclara ranking por consignación. Sin migraciones nuevas, cambios económicos, remitentes, WhatsApp, cron o envíos.
+MiDistri-Pedidos v24
+Candidato documentado: v24 (base23; instalación productiva pendiente).
+Cambio: El encabezado compartido del vendedor omite LIN también en catálogo y carrito; conserva nombre, VV, nombre comercial y logo. Presentación únicamente, sin migraciones ni cambios de permisos, pedidos, ranking, precios, remitentes, WhatsApp o cron. Sin campaña.

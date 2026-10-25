@@ -70,7 +70,7 @@ class EditorTests(TestCase):
         clean=p.validar_pagina(data,20)
         self.assertEqual(clean['mensajes']['encabezado'],'Mi tienda de kioscos')
         html=render_to_string('midistri_portal/base.html',{'titulo':'Predeterminado','pagina_mensajes':clean['mensajes'],'perfil':{'nombre':'Cerrutti','lin':121,'vv':194,'linea':'1126 - Saavedra'},'cart_count':0})
-        self.assertIn('Mi tienda de kioscos',html);self.assertIn('LIN 121',html);self.assertIn('VV 194',html);self.assertNotIn('1126 - Saavedra',html)
+        self.assertIn('Mi tienda de kioscos',html);self.assertNotIn('LIN 121',html);self.assertIn('VV 194',html);self.assertNotIn('1126 - Saavedra',html)
 
     def test_revision_comercial_valida_cantidades_sin_tocar_pedido_original(self):
         from .contract import pedido_valido
