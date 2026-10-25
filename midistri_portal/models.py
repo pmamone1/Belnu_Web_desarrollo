@@ -20,6 +20,7 @@ class Publicacion(models.Model):
     imagenes=models.JSONField(default=list)
     multimedia=models.JSONField(default=list)
     display=models.PositiveIntegerField(null=True)
+    indicadores=models.JSONField(default=dict,blank=True)
     activa=models.BooleanField(default=True)
     class Meta:
         unique_together=[('producto_id','distribuidora')]

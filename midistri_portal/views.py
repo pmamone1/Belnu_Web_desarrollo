@@ -90,11 +90,17 @@ def catalogo(request):
     if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
     q=request.GET.get('q',saved.get('q',''))[:100]
     categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
+    orden=request.GET.get('orden',saved.get('orden','nombre'))
+    ordenes={'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk')}
+    if orden not in ordenes:orden='nombre'
     categorias=list(products.exclude(categoria='').order_by('categoria').values_list('categoria',flat=True).distinct())
     if categoria=='__sin_categoria__':products=products.filter(categoria='')
     elif categoria:products=products.filter(categoria=categoria)
-    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria}
-    if q:products=products.filter(nombre__icontains=q)
+    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria,'orden':orden}
+    if q:
+        from .busqueda import buscar
+        products=buscar(products,q)
+    products=products.order_by(*ordenes[orden])
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
@@ -105,7 +111,14 @@ def catalogo(request):
         product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
     from .presentacion import presentacion_publica,TEMAS
     from .promociones import promociones_publicas
-    context=base(request,perfil,d);context.update(distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
+    destacados=[]
+    if d:
+        for product in elegibles(Publicacion.objects.filter(distribuidora=d)):
+            position=product.indicadores.get('ranking')
+            if type(position) is int and 1<=position<=10:
+                product.foto_destacada=foto_producto(product);destacados.append(product)
+        destacados.sort(key=lambda x:x.indicadores['ranking'])
+    context=base(request,perfil,d);context.update(destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     from .pagina import pagina_publica,MENSAJES
     from .pagina_views import contenido_contexto
     context.update(contenido_contexto(pagina_publica(d),d) if d else {

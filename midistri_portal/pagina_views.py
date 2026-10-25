@@ -41,7 +41,10 @@ def contenido_contexto(page,d,preview=False):
     logo=presentation.get('logo')
     if preview and logo and '/midistri-media/' in logo:
         logo='/portal/administrar/promociones/material/'+str(d.pk)+'/'+logo.rstrip('/').rsplit('/',1)[-1]+'/'
-    presentation['logo']=SimpleNamespace(url=logo) if logo else None
+    from .marcas import url_marca
+    logo=logo or url_marca(presentation.get('marca','bolsa'))
+    presentation['favicon']=url_marca(presentation['favicon_marca']) if presentation.get('favicon_marca') else logo
+    presentation['logo']=SimpleNamespace(url=logo)
     presentation.update(tema=data['tema'],bienvenida=data['mensajes'].get('bienvenida',''),instrucciones=data['mensajes'].get('instrucciones',''))
     return dict(pagina=data,pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
         bloques=p.bloques_vigentes(data,d.pk,preview),presentacion=SimpleNamespace(**presentation))
@@ -133,7 +136,8 @@ def editor(request):
         initial=dict(page.datos['mensajes'],**{k:page.datos['presentacion'].get(k,'') for k in ('email','telefono')})
         initial.update(diseno=page.datos['diseno'],tema=page.datos['tema'])
         if request.GET.get('clasico')!='1':
-            ctx.update(titulo='Mi tienda · Editor visual',page=page,recursos=recursos(did),temas=TEMAS)
+            from .marcas import opciones
+            ctx.update(titulo='Mi tienda · Editor visual',page=page,recursos=recursos(did),temas=TEMAS,marcas=opciones())
             return privada(render(request,'midistri_portal/editor_visual.html',ctx))
         ctx.update(titulo='Mi tienda · editor de página',page=page,form=PaginaForm(initial=initial),
             recursos=recursos(did),operacion=str(uuid4()),error_form=error,

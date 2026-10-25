@@ -35,7 +35,15 @@ def validar_snapshot(data):
             if display is not None and (type(display) is not int or display<1):raise ValueError
             from .multimedia_contract import validar_multimedia
             multimedia=validar_multimedia(p.get('multimedia',[]),settings.URBAN_API_BASE)
-            rows.append((did,pid,{'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
+            indicators=p.get('indicadores',{})
+            if indicators:
+                if not isinstance(indicators,dict) or set(indicators)!={'ranking','entrega','ultimas_unidades'}:raise ValueError
+                rank=indicators['ranking']
+                if rank is not None and (type(rank) is not int or not 1<=rank<=10):raise ValueError
+                if indicators['entrega'] not in ('24/48','96') or type(indicators['ultimas_unidades']) is not bool:raise ValueError
+                if indicators['ultimas_unidades'] and indicators['entrega']!='24/48':raise ValueError
+            elif not isinstance(indicators,dict):raise ValueError
+            rows.append((did,pid,{'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ValueError('Catálogo incompleto o inválido. Se conserva la última copia válida.') from None

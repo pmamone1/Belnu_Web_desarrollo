@@ -16,6 +16,7 @@ SALT='midistri.pagina.v1'
 DISENOS=[('compacto','Catálogo compacto'),('fotos','Fotos grandes'),('promociones','Promociones'),('lista','Lista rápida')]
 MENSAJES={
  'encabezado':'',
+ 'nav_catalogo':'Catálogo','nav_distribuidor':'Acceso Distribuidor',
  'titulo':'Elegí los productos para tu Kiosco!',
  'subtitulo':'Portal para realizar pedidos. La distribuidora confirma disponibilidad.',
  'bienvenida':'','instrucciones':'','carrito':'Este pedido queda sujeto a disponibilidad y aceptación por parte de la distribuidora.',
@@ -60,9 +61,14 @@ def validar_pagina(data,did,fuentes=True):
     try:
         if not isinstance(data,dict) or data.get('version')!=1:raise ValueError
         if data['diseno'] not in dict(DISENOS) or data['tema'] not in ('claro','nocturno','azul','verde'):raise ValueError
-        messages={k:texto(data.get('mensajes',{}).get(k,''),150 if k=='encabezado' else 1000) for k in MENSAJES}
+        messages={k:texto(data.get('mensajes',{}).get(k,''),150 if k=='encabezado' else 80 if k.startswith('nav_') else 1000) for k in MENSAJES}
         presentation=data.get('presentacion',{})
         presentation={k:texto(presentation.get(k,''),500) for k in ('logo','email','telefono')}
+        from .marcas import MARCAS
+        for key in ('marca','favicon_marca'):
+            value=data.get('presentacion',{}).get(key,'bolsa' if key=='marca' else '')
+            if not isinstance(value,str) or value not in dict(MARCAS) and not (key=='favicon_marca' and value==''):raise ValueError
+            presentation[key]=value
         if presentation['logo']:
             existing=Tienda.objects.filter(distribuidora_id=did).first()
             legacy=existing.logo.url if existing and existing.logo else ''
