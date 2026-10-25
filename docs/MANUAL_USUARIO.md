@@ -1,3 +1,18 @@
+## MiDistri-Pedidos v19
+
+Encabezado y botones editables, nueve logos/favicon de comercio y transporte, progreso de publicación, búsqueda flexible/conteo/orden, ranking Urban y marcas de entrega/últimas unidades. Acumulativo16/17/18; portal0010 aditiva. Requiere Urban602 primero; producción pendiente. Sin campaña.
+
+Guía vigente: [Identidad y catálogo](CATALOGO_IDENTIDAD_v19.md).
+
+1. Abrí Configurar MiDistri desde Urban Soft. Si la tienda ya está elegida, aguardá el spinner de ingreso: no necesitás pulsar otro botón para entrar. Los permisos y la validación de la cuenta se conservan.
+2. En Encabezado y logo cambiá el nombre de la tienda y los textos de los botones Catálogo/Acceso Distribuidor. Su función no cambia. Elegí un logo de comercio (bolsa, carrito, tienda, paquete, ofertas, kiosco) o transporte (camión, furgón, ruta logística), o subí tu imagen propia. El favicon puede usar el mismo logo u otro ícono de la galería.
+3. Los cambios se guardan como borrador y se ven en la vista previa. Revisar y publicar muestra progreso con spinner; Publicar esta versión conserva confirmación. Mientras está procesando no se permiten clics repetidos ni cerrar el diálogo. Ante un error podés reintentar sin crear otra publicación.
+4. Buscá por nombre, código o categoría: termos encuentra termo; se toleran acentos y errores leves. La cantidad de resultados aparece en letra pequeña. Ordená por nombre, precio vendedor o PVP, de menor a mayor o al revés. Se conservan selección, categoría, búsqueda y orden al cambiar de página.
+5. El trofeo y Más vendidos en tu distribuidora usan el ranking por unidades confirmadas y debitadas de todo Urban Soft: consignación y pedidos, no sólo MiDistri. No se muestran cifras comerciales ni datos de otros vendedores. No se cuentan abiertas o anuladas ni se duplican ventas al registrar su cobro.
+6. Con stock libre en depósito verás Entrega en24/48hs; sin disponibilidad, Entrega en96hs. Entre1y9 unidades disponibles aparece ¡Últimas unidades! en rojo con letras blancas. Son estimaciones sujetas a aceptación; la página no reserva stock.
+7. En el Email de pedido preparado se informa la entrega estimada por producto aceptado. Ese dato queda guardado al confirmar; el correo no lo recalcula según movimientos posteriores.
+8. La sincronización de cada5min trae catálogo e indicadores. Si la copia de Urban falta o tiene más de10min, no promete disponibilidad rápida ni inventa ranking. Las tiendas antiguas conservan su presentación pero utilizan el mismo catálogo actualizado.
+
 ## MiDistri-Pedidos v18
 
 Flechas laterales, navegación de bloques y cabezal/página completa, accesos a banners laterales y elección aleatoria del catálogo en borrador. Precio por unidad y pedidos en múltiplos del display; historial de anulación. Guía: [EDITOR_PEDIDOS_v18.md](EDITOR_PEDIDOS_v18.md). Requiere Urban601; paquete acumulativo16/17. Producción pendiente; sin campaña.
