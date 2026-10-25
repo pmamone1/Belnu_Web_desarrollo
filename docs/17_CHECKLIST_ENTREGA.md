@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v26
+
+- [x] Regresión y revisión final.
+- [x] QA visual escritorio/móvil y manual PDF/unión.
+- [ ] ZIP cotejado contra commit publicado.
+- [ ] Instalación y aceptación HTTPS. Sin campaña.
+
 ## MiDistri-Pedidos v25
 
 - [x] Regresión y revisión final.

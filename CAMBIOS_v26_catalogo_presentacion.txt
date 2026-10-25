@@ -1,0 +1,3 @@
+MiDistri-Pedidos v26
+Selector Más vendidos sin aclaración entre paréntesis; botones de promociones laterales Ver; cantidad y Agregar / actualizar alineados al pie de cada fila de tarjetas. Conserva saludo sólo nombre y criterio de ranking consignado.
+Cambio de presentación; Urban606 se conserva. Instalación productiva pendiente. Sin campaña.

@@ -1,3 +1,3 @@
-MiDistri-Pedidos v25
-Candidato documentado: v25 (acumulativo sobre23/24; instalación productiva pendiente).
-Cambio: El saludo del encabezado muestra sólo el nombre del vendedor, sin LIN ni VV, en todo el portal. Los números se conservan en perfil, datos operativos y documentos; no se modifica Urban606. Sin migraciones nuevas ni cambios económicos, de canales o cron. Sin campaña.
+MiDistri-Pedidos v26
+Candidato documentado: v26 (acumulativo sobre23/24/25; instalación productiva pendiente).
+Cambio: Selector Más vendidos sin aclaración entre paréntesis; botones de promociones laterales Ver; cantidad y Agregar / actualizar alineados al pie de cada fila de tarjetas. Conserva saludo sólo nombre y criterio de ranking consignado. Sin migraciones nuevas, datos económicos, canales o cron. Sin campaña.

@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v26
+
+Selector Más vendidos sin aclaración entre paréntesis; botones de promociones laterales Ver; cantidad y Agregar / actualizar alineados al pie de cada fila de tarjetas. Conserva saludo sólo nombre y criterio de ranking consignado. Sólo presentación, sin cambios de pedidos, precios o permisos. Instalación productiva pendiente; sin campaña.
+
+Guía: [Presentación del catálogo](CATALOGO_PRESENTACION_v26.md).
+
+Revisar catálogo con títulos de diferente longitud, display, varias fotos y etiquetas: cantidad y agregar alineados al pie por fila. Probar diseños compacto/fotos/promociones/lista a1440/390px; controles dentro de tarjeta y sin scroll horizontal. Selector Más vendidos; CTA Ver en ambos laterales y enlaces conservados; centro conserva texto configurado.
+
 ## MiDistri-Pedidos v25
 
 El saludo del encabezado muestra sólo el nombre del vendedor, sin LIN ni VV, en todo el portal. Los números se conservan en perfil, datos operativos y documentos; no se modifica Urban606. Instalación productiva pendiente; sin campaña.

@@ -68,3 +68,9 @@ header .tienda-apariencia{color:inherit}
  .producto-compra .quantity{grid-template-columns:44px minmax(0,88px) 44px;max-width:100%}
  .producto-compra button{scroll-margin-bottom:110px}
 }
+
+/* Keep purchase actions at the same bottom edge within each catalogue row. */
+.pagina-catalogo>.grid>.card>.producto-compra{margin-top:auto}
+.pagina-catalogo .producto-compra form{margin:0}
+.pagina-catalogo .producto-compra form>p{margin:8px 0 0}
+.diseno-lista.pagina-catalogo .producto-compra{align-self:end}
