@@ -91,7 +91,7 @@ def catalogo(request):
     q=request.GET.get('q',saved.get('q',''))[:100]
     categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
     orden=request.GET.get('orden',saved.get('orden','nombre'))
-    ordenes={'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk')}
+    ordenes={'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk'),'ventas':('nombre','pk')}
     if orden not in ordenes:orden='nombre'
     categorias=list(products.exclude(categoria='').order_by('categoria').values_list('categoria',flat=True).distinct())
     if categoria=='__sin_categoria__':products=products.filter(categoria='')
@@ -101,6 +101,13 @@ def catalogo(request):
         from .busqueda import buscar
         products=buscar(products,q)
     products=products.order_by(*ordenes[orden])
+    ranking_disponible=True
+    if orden=='ventas':
+        def sales_position(product):
+            value=product.indicadores.get('orden_ventas',product.indicadores.get('ranking'))
+            return value if type(value) is int and value>0 else None
+        products=sorted(products,key=lambda p:(sales_position(p) is None,sales_position(p) or 0,p.nombre.casefold(),p.pk))
+        ranking_disponible=any(sales_position(p) is not None for p in products)
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
@@ -118,7 +125,7 @@ def catalogo(request):
             if type(position) is int and 1<=position<=10:
                 product.foto_destacada=foto_producto(product);destacados.append(product)
         destacados.sort(key=lambda x:x.indicadores['ranking'])
-    context=base(request,perfil,d);context.update(destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
+    context=base(request,perfil,d);context.update(ranking_disponible=ranking_disponible,destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     from .pagina import pagina_publica,MENSAJES
     from .pagina_views import contenido_contexto
     context.update(contenido_contexto(pagina_publica(d),d) if d else {

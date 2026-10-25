@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v20
+
+1. En catálogo móvil y PC, título largo y selectores −/cantidad/+ alineados; foco visible, aumento/disminución por display y mínimo cero. El precio se mantiene.
+2. Ordenar por Más vendidos, combinar categoría/búsqueda y paginar. Comprobar posición más allá del top10 y que no aparezcan productos de otra tienda.
+3. Sin ranking completo, aviso honesto y orden alfabético. Verificar recepción de snapshot anterior sin orden_ventas y nuevo con posición; rechazar bool y negativos. No enviar campaña.
+
 ## MiDistri-Pedidos v19
 
 Encabezado y botones editables, nueve logos/favicon de comercio y transporte, progreso de publicación, búsqueda flexible/conteo/orden, ranking Urban y marcas de entrega/últimas unidades. Acumulativo16/17/18; portal0010 aditiva. Requiere Urban602 primero; producción pendiente. Sin campaña.

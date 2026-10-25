@@ -1,3 +1,12 @@
+## MiDistri-Pedidos v20
+
+1. En el catálogo, el nombre y los precios tienen una letra más pequeña. En celular la foto ocupa 150px y la tarjeta crece para contener toda la información. Los botones − y +, la cantidad y Agregar / actualizar quedan completos, sin recortes ni desbordes. Los botones conservan un área de 44px y el campo numérico una letra de 16px.
+2. El selector conserva los múltiplos del display y los límites que valida Urban Soft. Este ajuste visual no modifica precios, cantidades ni pedidos existentes.
+3. En «Ordenar» elegí «Más vendidos» para ver primero los productos con más unidades confirmadas y debitadas en todo Urban Soft de tu distribuidora. No se limita a los pedidos hechos desde MiDistri ni a los diez productos destacados.
+4. Se conservan la búsqueda, categoría y paginación. Los productos sin ventas documentadas quedan después de los que tienen posición; el desempate es por nombre. Si Urban Soft informa que falta evidencia para un ranking completo, no se muestran posiciones inventadas y el catálogo avisa que se ordena por nombre.
+5. Urban603 corrige la omisión de ventas históricas con líneas vacías en liquidaciones cuando sus remitos guardados permiten conciliar el detalle. No cambia saldos ni documentos antiguos. Instalar ambos paquetes y esperar el cron habitual de cinco minutos.
+
+
 ## MiDistri-Pedidos v19
 
 Encabezado y botones editables, nueve logos/favicon de comercio y transporte, progreso de publicación, búsqueda flexible/conteo/orden, ranking Urban y marcas de entrega/últimas unidades. Acumulativo16/17/18; portal0010 aditiva. Requiere Urban602 primero; producción pendiente. Sin campaña.

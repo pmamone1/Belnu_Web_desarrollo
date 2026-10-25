@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v20
+
+Catálogo más compacto, controles de cantidad alineados y orden Más vendidos con la posición completa de ventas de Urban Soft. Sin nuevas migraciones ni cambios de precios, remitentes, WhatsApp, cron o venv. Sin campaña.
+
+Guía vigente: [Cantidades y ventas](docs/CANTIDADES_VENTAS_v20.md).
+
 ## MiDistri-Pedidos v19
 
 Encabezado y botones editables, nueve logos/favicon de comercio y transporte, progreso de publicación, búsqueda flexible/conteo/orden, ranking Urban y marcas de entrega/últimas unidades. Acumulativo16/17/18; portal0010 aditiva. Requiere Urban602 primero; producción pendiente. Sin campaña.

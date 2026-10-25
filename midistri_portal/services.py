@@ -43,6 +43,10 @@ def validar_snapshot(data):
                 if indicators['entrega'] not in ('24/48','96') or type(indicators['ultimas_unidades']) is not bool:raise ValueError
                 if indicators['ultimas_unidades'] and indicators['entrega']!='24/48':raise ValueError
             elif not isinstance(indicators,dict):raise ValueError
+            order=p.get('orden_ventas')
+            if order is not None and (type(order) is not int or not 1<=order<=1000000):raise ValueError
+            indicators=dict(indicators)
+            if order is not None:indicators['orden_ventas']=order
             rows.append((did,pid,{'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
