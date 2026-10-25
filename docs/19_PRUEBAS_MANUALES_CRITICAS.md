@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v23
+
+Historial/detalle del vendedor muestra Entregado al recibir remito emitido, Entregado parcialmente según atención, cancelaciones conservadas. Oculta LIN y línea en historial/detalle; nombre y VV siguen visibles. Catálogo aclara ranking por consignación. Sin cambios de precios, saldos, históricos, permisos o comunicaciones. Instalación productiva pendiente; sin campaña.
+
+Guía vigente: [Historial y ranking](HISTORIAL_CONSIGNACION_v23.md).
+
+Comprobar ranking con consignación neta y pedido firme del mismo producto: sólo suma la primera; verificar distribución activa, ausencia de ventas y exclusiones. En portal, refrescar historial tras remito, parcial, cancelación y error de red; no mostrar LIN en historial/detalle ni alterar el catálogo.
+
 ## MiDistri-Pedidos v22
 
 1. Comparar importe de Analítica y ranking del portal con mismo alcance/período; portal histórico total.

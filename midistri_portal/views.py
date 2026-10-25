@@ -277,7 +277,7 @@ def pedidos(request):
     except ApiError as e:
         if not locals().get('perfil'):return error_page(request,e)
         messages.warning(request,'No pudimos actualizar los estados. Mostramos la última información guardada.')
-    ctx=base(request,perfil);ctx['pedidos']=PedidoLocal.objects.filter(vendedor_id=perfil['id'],distribuidora_id=perfil['distribuidora_id']).order_by('-creado')[:100]
+    ctx=base(request,perfil);ctx['ocultar_lin']=True;ctx['pedidos']=PedidoLocal.objects.filter(vendedor_id=perfil['id'],distribuidora_id=perfil['distribuidora_id']).order_by('-creado')[:100]
     return render(request,'midistri_portal/pedidos.html',ctx)
 
 
@@ -317,7 +317,7 @@ def detalle(request,ident):
         if review:row['cantidad_aceptada']=accepted[item['producto_id']]
         shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
-    ctx=base(request,perfil);ctx.update(pedido=pedido,items=shown,total=total,revision_comercial=review,anulacion=pedido.respuesta.get('anulacion'),atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
+    ctx=base(request,perfil);ctx.update(ocultar_lin=True,pedido=pedido,items=shown,total=total,revision_comercial=review,anulacion=pedido.respuesta.get('anulacion'),atencion=attention,stale=stale,consultado_en=pedido.respuesta.get('_consultado_en'))
     return render(request,'midistri_portal/detalle.html',ctx)
 
 
