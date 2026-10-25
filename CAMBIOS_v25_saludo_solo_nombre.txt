@@ -1,0 +1,3 @@
+MiDistri-Pedidos v25
+El saludo del encabezado muestra sólo el nombre del vendedor, sin LIN ni VV, en todo el portal. Los números se conservan en perfil, datos operativos y documentos; no se modifica Urban606.
+Base23/24; instalación productiva pendiente. Sin campaña.

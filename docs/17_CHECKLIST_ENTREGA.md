@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v25
+
+- [x] Regresión y revisión final.
+- [x] PDF y unión revisados.
+- [ ] ZIP cotejado con commit publicado.
+- [ ] Instalación y aceptación HTTPS. Sin campaña.
+
 ## MiDistri-Pedidos v24
 
 - [x] Regresión y revisión final.

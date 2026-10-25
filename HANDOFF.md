@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v25
+
+El saludo del encabezado muestra sólo el nombre del vendedor, sin LIN ni VV, en todo el portal. Los números se conservan en perfil, datos operativos y documentos; no se modifica Urban606. Instalación productiva pendiente; sin campaña.
+
+Guía: [Saludo sólo con nombre](docs/ENCABEZADO_v25.md).
+
 ## MiDistri-Pedidos v24
 
 El encabezado compartido del vendedor omite LIN también en catálogo y carrito; conserva nombre, VV, nombre comercial y logo. Presentación únicamente, sin migraciones ni cambios de permisos, pedidos, ranking, precios, remitentes, WhatsApp o cron. Instalación productiva pendiente; sin campaña.
