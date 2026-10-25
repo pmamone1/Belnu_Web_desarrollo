@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v22
+
+Ranking por importe desde Analítica compartida. Sólo confirmados/debitados, identidad y precios históricos propios; los productos sin ventas no se muestran como Más vendidos. Sin migraciones nuevas ni cambios de remitentes, WhatsApp, cron o venv. Base21; instalación productiva pendiente, sin campaña.
+
+Guía vigente: [Ranking de Analítica](docs/RANKING_ANALITICA_v22.md).
+
 ## MiDistri-Pedidos v21
 
 Clasificación pública principal/adicional y subcategoría; búsqueda por parecido y clasificación, filtros por tienda sin duplicar producto. Base20, migración0011; Urban604 primero. Sin cambios económicos, de remitentes, WhatsApp o cron. Instalación productiva pendiente, sin campaña.

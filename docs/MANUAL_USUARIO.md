@@ -1,3 +1,15 @@
+## MiDistri-Pedidos v22
+
+1. Más vendidos se ordena por importe vendido, con unidades como desempate. Usa la misma fuente que Analítica de Urban Soft: consignación y todos los pedidos, incluidos los ajenos al portal. No es un ranking de cargas ni del precio actual del catálogo.
+2. MiDistri utiliza el histórico total de cada distribuidora hasta hoy. Analítica conserva las fechas y categoría principal elegidas en sus filtros: para comparar posiciones deben coincidir alcance y período. La posición se calcula antes de limitar a los productos publicados.
+3. Sólo suman operaciones confirmadas y debitadas: cierre aplicado, pedido debitado o liquidación impactada verificable. Se excluyen anulaciones, operaciones ocultas y vendedores depósito, incluidos depósitos antiguos identificados por sus datos.
+4. Se descuentan devoluciones y ajustes en menos; se suman ampliaciones válidas. Los controles, remitos de emisión y detalles de liquidación congelados conservan cantidad, distribuidora e importe históricos. Trasladar un vendedor o cambiar el precio maestro no traslada ni revaloriza esas ventas.
+5. Al ordenar por Más vendidos sólo aparecen productos con ventas e importe positivos y posición disponible. Los productos nuevos o sin ventas siguen en el catálogo por Nombre o Precio. Si el filtro no tiene ranking, se ofrece Ver todos los productos; no se presenta orden alfabético como Más vendidos.
+6. Se mantienen las fotos, categorías, precios del catálogo, display y pedidos. En la sección de destacados se aclara que el orden es por importe histórico. No se muestran al vendedor ingresos, costos ni datos de otras distribuidoras.
+7. Después de instalar ambas actualizaciones, actualizar indicadores y sincronizar con los comandos de entrega. El cron existente cada5min ya hace esos pasos; no cambiarlo. El cache viejo de unidades no se reutiliza como ranking monetario.
+8. No se reescriben documentos ni se generan débitos, créditos o correos durante instalación. Los documentos no soportados requieren revisión: se omite esa operación y se conservan las demás ventas verificables. Sin campaña.
+
+
 ## MiDistri-Pedidos v21
 
 1. Urban Soft mantiene una categoría principal para Analítica y categorías adicionales para encontrar el mismo producto. En MiDistri el filtro Categoría incluye ambas. No aparecen copias del producto ni se multiplica el importe del pedido.

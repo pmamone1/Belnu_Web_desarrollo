@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v22
+
+1. Comparar importe de Analítica y ranking del portal con mismo alcance/período; portal histórico total.
+2. Retirada total/ampliación/devolución, pedido anulado/no debitado y depósito legacy no generan posición falsa.
+3. Vendedor trasladado y precio maestro modificado conservan dueño e importe del remito; cobro parcial no reemplaza documento íntegro.
+4. Más vendidos sin datos queda vacío con acceso al catálogo por nombre. Nombre/precio conservan productos nuevos.
+5. Recalcular y sincronizar tras ambas instalaciones. Cron sin cambios; no enviar campaña.
+
 ## MiDistri-Pedidos v21
 
 1. Tras instalar Urban604 y portal21, sincronizar. Buscar alfajor/alfajro y filtrar categoría adicional: el mismo producto aparece una vez.

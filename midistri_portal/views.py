@@ -108,8 +108,8 @@ def catalogo(request):
         def sales_position(product):
             value=product.indicadores.get('orden_ventas',product.indicadores.get('ranking'))
             return value if type(value) is int and value>0 else None
-        products=sorted(products,key=lambda p:(sales_position(p) is None,sales_position(p) or 0,p.nombre.casefold(),p.pk))
-        ranking_disponible=any(sales_position(p) is not None for p in products)
+        products=sorted((p for p in products if sales_position(p) is not None),key=lambda p:(sales_position(p),p.pk))
+        ranking_disponible=bool(products)
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:

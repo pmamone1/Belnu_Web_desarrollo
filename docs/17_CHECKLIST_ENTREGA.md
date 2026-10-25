@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v22
+
+- [x] Pruebas y revisión independiente final.
+- [x] Manual PDF y unión verificados.
+- [ ] Paquete cotejado con commit publicado.
+- [ ] Instalación cPanel y aceptación. Sin campaña.
+
 ## MiDistri-Pedidos v21
 
 - [x] Contrato anterior/nuevo, aislamiento, búsqueda y suite completa.
