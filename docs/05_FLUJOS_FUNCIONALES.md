@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v21
+
+Clasificación pública principal/adicional y subcategoría; búsqueda por parecido y clasificación, filtros por tienda sin duplicar producto. Base20, migración0011; Urban604 primero. Sin cambios económicos, de remitentes, WhatsApp o cron. Instalación productiva pendiente, sin campaña.
+
+Guía vigente: [Clasificación](CLASIFICACION_v21.md).
+
 ## MiDistri-Pedidos v20
 
 Catálogo más compacto, controles de cantidad alineados y orden Más vendidos con la posición completa de ventas de Urban Soft. Sin nuevas migraciones ni cambios de precios, remitentes, WhatsApp, cron o venv. Sin campaña.

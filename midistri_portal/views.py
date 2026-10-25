@@ -93,9 +93,11 @@ def catalogo(request):
     orden=request.GET.get('orden',saved.get('orden','nombre'))
     ordenes={'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk'),'ventas':('nombre','pk')}
     if orden not in ordenes:orden='nombre'
-    categorias=list(products.exclude(categoria='').order_by('categoria').values_list('categoria',flat=True).distinct())
-    if categoria=='__sin_categoria__':products=products.filter(categoria='')
-    elif categoria:products=products.filter(categoria=categoria)
+    from .busqueda import clasificar
+    classification={p.pk:clasificar(p) for p in products}
+    categorias=sorted({c for cats,sub in classification.values() for c in cats},key=str.casefold)
+    if categoria=='__sin_categoria__':products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if not cats])
+    elif categoria:products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if categoria in cats])
     request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria,'orden':orden}
     if q:
         from .busqueda import buscar
@@ -111,6 +113,7 @@ def catalogo(request):
     from django.core.paginator import Paginator
     page=Paginator(products,24).get_page(request.GET.get('page'))
     for product in page:
+        product.categorias_catalogo,product.subcategoria_catalogo=clasificar(product)
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
         product.galeria=product.multimedia if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) else []
         product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)

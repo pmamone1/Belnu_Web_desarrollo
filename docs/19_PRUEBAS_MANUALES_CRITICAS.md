@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v21
+
+1. Tras instalar Urban604 y portal21, sincronizar. Buscar alfajor/alfajro y filtrar categoría adicional: el mismo producto aparece una vez.
+2. Cambiar tienda o sesión: ni resultados ni categorías de otra distribuidora. Repetir orden por precios, ventas y navegación.
+3. Ver clasificaciones activas en tarjeta; ocultas/inactivas no se publican. Comprobar carrito, múltiplos de display e imágenes sin enviar un pedido real.
+
 ## MiDistri-Pedidos v20
 
 1. En catálogo móvil y PC, título largo y selectores −/cantidad/+ alineados; foco visible, aumento/disminución por display y mínimo cero. El precio se mantiene.

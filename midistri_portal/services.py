@@ -22,6 +22,12 @@ def validar_snapshot(data):
             seen.add((did,pid))
             for k,limit in [('nombre',200),('codigo',80),('categoria',100)]:
                 if not isinstance(p[k],str) or len(p[k])>limit:raise ValueError
+            classification=p.get('clasificacion',{'categorias':[p['categoria']] if p['categoria'] else [],'subcategoria':''})
+            if not isinstance(classification,dict) or set(classification)!={'categorias','subcategoria'}:raise ValueError
+            categories=classification['categorias'];sub=classification['subcategoria']
+            if not isinstance(categories,list) or len(categories)>1000 or any(not isinstance(x,str) or not x.strip() or len(x)>100 for x in categories):raise ValueError
+            if len(set(categories))!=len(categories) or (p['categoria'] and p['categoria'] not in categories):raise ValueError
+            if not isinstance(sub,str) or len(sub)>100:raise ValueError
             price=Decimal(str(p['precio']));pvp=Decimal(str(p['pvp']))
             if not all(x.is_finite() and 0<=x<Decimal('10000000000') and x==x.quantize(Decimal('.01')) for x in (price,pvp)):raise ValueError
             images=[]
@@ -47,7 +53,7 @@ def validar_snapshot(data):
             if order is not None and (type(order) is not int or not 1<=order<=1000000):raise ValueError
             indicators=dict(indicators)
             if order is not None:indicators['orden_ventas']=order
-            rows.append((did,pid,{'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
+            rows.append((did,pid,{'clasificacion':classification,'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ValueError('Catálogo incompleto o inválido. Se conserva la última copia válida.') from None
