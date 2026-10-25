@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v24
+
+El encabezado compartido del vendedor omite LIN también en catálogo y carrito; conserva nombre, VV, nombre comercial y logo. Presentación únicamente, sin migraciones ni cambios de permisos, pedidos, ranking, precios, remitentes, WhatsApp o cron. Instalación productiva pendiente; sin campaña.
+
+Guía: [Encabezado sin LIN](ENCABEZADO_v24.md).
+
+Verificar saludo sin LIN en catálogo, carrito, historial y detalle con vendedor identificado. Conservar nombre/VV, tienda/logo, título configurable y acceso por perfil. Sin cambios de estado, importes ni ranking.
+
 ## MiDistri-Pedidos v23
 
 Historial/detalle del vendedor muestra Entregado al recibir remito emitido, Entregado parcialmente según atención, cancelaciones conservadas. Oculta LIN y línea en historial/detalle; nombre y VV siguen visibles. Catálogo aclara ranking por consignación. Sin cambios de precios, saldos, históricos, permisos o comunicaciones. Instalación productiva pendiente; sin campaña.

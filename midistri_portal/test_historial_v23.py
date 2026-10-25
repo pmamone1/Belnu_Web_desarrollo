@@ -37,6 +37,6 @@ class HistorialEntregadoTests(TestCase):
                 self.data['estado']=state
                 r=self.response('/portal/pedidos/')
                 self.assertContains(r,label);self.assertNotContains(r,'Entregado')
-    def test_catalogo_conserva_identidad_original(self):
+    def test_catalogo_sin_lin_conserva_nombre_y_numero_vendedor(self):
         r=self.response('/portal/')
-        self.assertContains(r,'LIN 121');self.assertContains(r,'VV 194')
+        self.assertNotContains(r,'LIN 121');self.assertContains(r,'VV 194');self.assertContains(r,self.profile['nombre'])
