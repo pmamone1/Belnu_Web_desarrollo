@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v23
+
+- [x] Regresión y revisión independiente final.
+- [x] Manual principal y unión revisados.
+- [ ] ZIP cotejado con commit publicado.
+- [ ] Instalación cPanel y aceptación HTTPS. Sin campaña.
+
 ## MiDistri-Pedidos v22
 
 - [x] Pruebas y revisión independiente final.

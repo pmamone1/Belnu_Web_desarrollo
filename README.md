@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v23
+
+Historial/detalle del vendedor muestra Entregado al recibir remito emitido, Entregado parcialmente según atención, cancelaciones conservadas. Oculta LIN y línea en historial/detalle; nombre y VV siguen visibles. Catálogo aclara ranking por consignación. Sin cambios de precios, saldos, históricos, permisos o comunicaciones. Instalación productiva pendiente; sin campaña.
+
+Guía vigente: [Historial y ranking](docs/HISTORIAL_CONSIGNACION_v23.md).
+
 ## MiDistri-Pedidos v22
 
 Ranking por importe desde Analítica compartida. Sólo confirmados/debitados, identidad y precios históricos propios; los productos sin ventas no se muestran como Más vendidos. Sin migraciones nuevas ni cambios de remitentes, WhatsApp, cron o venv. Base21; instalación productiva pendiente, sin campaña.

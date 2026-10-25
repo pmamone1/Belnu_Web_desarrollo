@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v23
+
+Historial/detalle del vendedor muestra Entregado al recibir remito emitido, Entregado parcialmente según atención, cancelaciones conservadas. Oculta LIN y línea en historial/detalle; nombre y VV siguen visibles. Catálogo aclara ranking por consignación. Sin cambios de precios, saldos, históricos, permisos o comunicaciones. Instalación productiva pendiente; sin campaña.
+
+Guía vigente: [Historial y ranking](HISTORIAL_CONSIGNACION_v23.md).
+
 ## MiDistri-Pedidos v22
 
 1. Más vendidos se ordena por importe vendido, con unidades como desempate. Usa la misma fuente que Analítica de Urban Soft: consignación y todos los pedidos, incluidos los ajenos al portal. No es un ranking de cargas ni del precio actual del catálogo.
