@@ -1,3 +1,10 @@
+## MiDistri-Pedidos v20
+
+- [x] Pruebas, revisión y QA visual local cerrados.
+- [x] Manual PDF y unión revisados.
+- [ ] ZIP cotejado contra commit publicado.
+- [ ] Instalación cPanel y aceptación HTTPS, sin campaña.
+
 ## MiDistri-Pedidos v19
 
 Encabezado y botones editables, nueve logos/favicon de comercio y transporte, progreso de publicación, búsqueda flexible/conteo/orden, ranking Urban y marcas de entrega/últimas unidades. Acumulativo16/17/18; portal0010 aditiva. Requiere Urban602 primero; producción pendiente. Sin campaña.
