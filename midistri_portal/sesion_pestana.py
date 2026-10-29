@@ -38,10 +38,15 @@ def crear_sesion_pestana(request,perfil,token_urban,tab_id,prueba):
     browser=navegador(request,True)
     old=SesionVendedorPortal.objects.filter(pk=ident).first()
     if old and (old.navegador_hash!=browser or old.prueba_hash!=hash_texto(proof)):raise PermissionDenied
+    if old:
+        from .analitica_cobertura import acreditar
+        acreditar(old.vendedor_id,old.distribuidora_id)
     SesionVendedorPortal.objects.update_or_create(pk=ident,defaults={'navegador_hash':browser,
         'prueba_hash':hash_texto(proof),'token_urban':token_urban,'vendedor_id':perfil['id'],
         'distribuidora_id':perfil['distribuidora_id'],'datos':{},'revocado':False,'actividad':timezone.now()})
     request.session.cycle_key()
+    from .analitica_captura import registrar_ingreso
+    registrar_ingreso(request,perfil,token_urban,ident)
     return {'fase':'dentro','url':'/portal/'}
 
 

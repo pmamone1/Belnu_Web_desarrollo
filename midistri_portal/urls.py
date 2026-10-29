@@ -1,6 +1,13 @@
 from django.urls import path
-from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views, pagina_views, editor_views
+from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views, pagina_views, editor_views, analitica_views
 urlpatterns=[
+path('administrar/estadisticas/',analitica_views.panel,name='midistri_analitica_panel'),
+path('administrar/estadisticas/iniciar/',analitica_views.iniciar,name='midistri_analitica_iniciar'),
+path('administrar/estadisticas/<uuid:ident>/paso/',analitica_views.paso,name='midistri_analitica_paso'),
+path('administrar/estadisticas/<uuid:ident>/excel/',analitica_views.exportar,name='midistri_analitica_excel'),
+path('administrar/estadisticas/<uuid:ident>/',analitica_views.panel,name='midistri_analitica_resultado'),
+path('actividad/eventos/',analitica_views.eventos,name='midistri_analitica_eventos'),
+path('actividad/contexto/',analitica_views.renovar_contexto,name='midistri_analitica_contexto'),
 path('administrar/pagina/subir/',editor_views.subir,name='midistri_editor_subir'),
 path('administrar/pagina/dinamica/',editor_views.dinamica,name='midistri_editor_dinamico'),
 path('administrar/pagina/',pagina_views.editor,name='midistri_pagina_editor'),

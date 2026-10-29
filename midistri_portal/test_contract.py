@@ -17,8 +17,8 @@ class ContractTests(TestCase):
         response=self.client.get('/portal/?distribuidora=20')
         self.assertEqual(response.status_code,200)
         self.assertNotContains(response,'Tu precio')
-        self.assertContains(response,'123.45')
-        self.assertContains(response,'456.78')
+        self.assertContains(response,'123,45')
+        self.assertContains(response,'456,78')
     @patch('midistri_portal.views.api')
     def test_perfil_malformado_no_produce_500(self,server):
         server.return_value={'id':7,'nombre':None,'linea':'Ruta','distribuidora_id':20,'distribuidora':'Belgrano'}
