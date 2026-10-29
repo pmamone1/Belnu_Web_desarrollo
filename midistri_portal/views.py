@@ -14,6 +14,8 @@ from .contract import perfil_valido, pedido_valido
 from .catalogo_elegible import elegibles
 from .models import Distribuidora,Publicacion,PedidoLocal,Sincronizacion
 from .services import sincronizar
+from .analitica_captura import registrar,registrar_ingreso
+from uuid import uuid5,NAMESPACE_URL
 
 
 def identificar(request):
@@ -43,6 +45,12 @@ def base(request,perfil=None,distribuidora=None):
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
     if distribuidora:context.update(contenido_contexto(pagina_publica(distribuidora),distribuidora))
+    try:
+        from .analitica_contexto import contexto as contexto_analitico
+        context['analitica_contexto']=contexto_analitico(request,perfil)
+        kind='carrito_visto' if request.path=='/portal/carrito/' else 'pedidos_vistos' if request.path=='/portal/pedidos/' else 'pedido_visto' if request.path.startswith('/portal/pedido/') else None
+        if kind:registrar(request,perfil,kind)
+    except Exception:context['analitica_contexto']=None
     return context
 
 
@@ -73,6 +81,7 @@ def activar(request,token):
         request.session['midistri_token']=result['session_token']
         request.session['midistri_cart']={};request.session.pop('midistri_cart_id',None)
         request.session.set_expiry(90*24*60*60)
+        registrar_ingreso(request,result['perfil'],result['session_token'])
         messages.success(request,'Hola, '+result['perfil']['nombre']+'. Ya podés hacer tu pedido.')
         return redirect('midistri_catalogo')
     return render(request,'midistri_portal/activar.html',base(request))
@@ -102,7 +111,7 @@ def catalogo(request):
     if q:
         from .busqueda import buscar
         products=buscar(products,q)
-    products=products.order_by(*ordenes[orden])
+    products=products.order_by(*((('-_similitud',)+ordenes[orden]) if q and orden=='nombre' else ordenes[orden]))
     ranking_disponible=True
     if orden=='ventas':
         def sales_position(product):
@@ -135,6 +144,7 @@ def catalogo(request):
         'pagina':{'diseno':'compacto'},'pagina_mensajes':MENSAJES,
         'bloques':[{'tipo':'catalogo','activo':True}]})
     template='midistri_portal/catalogo_inicial.html' if context.get('pagina',{}).get('inicial_anterior') else 'midistri_portal/catalogo.html'
+    registrar(request,perfil,'catalogo')
     return render(request,template,context)
 
 
@@ -177,12 +187,14 @@ def cantidad(request):
     except (ValueError,KeyError,Publicacion.DoesNotExist):
         messages.error(request,'Producto o cantidad no válidos.');return redirect('midistri_catalogo')
     cart=request.session.get('midistri_cart',{})
+    anterior=cart.get(str(pid),0)
     if qty:cart[str(pid)]=qty
     else:cart.pop(str(pid),None)
     if len(cart)>200:messages.error(request,'Máximo 200 productos por pedido.');return redirect('midistri_carrito')
     request.session['midistri_cart']=cart
     request.session.pop('midistri_revision',None)
     request.session['midistri_cart_id']=str(uuid4())
+    if anterior!=qty:registrar(request,perfil,'carrito',producto=pid,cantidad=qty)
     messages.success(request,'Pedido actualizado.')
     return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
 
@@ -221,6 +233,8 @@ def transmitir(request,pedido):
         pedido.estado='revisar' if e.status==409 else 'pendiente'
         messages.warning(request,pedido.error)
     pedido.save(update_fields=['respuesta','estado','error'])
+    if not pedido.error and pedido.estado in ('recibido','ok','emitido','cancelado'):
+        registrar(request,getattr(request,'midistri_perfil',None),'pedido',pedido=pedido.pk,event_id=uuid5(NAMESPACE_URL,'midistri-pedido:'+str(pedido.pk)))
 
 
 @require_POST

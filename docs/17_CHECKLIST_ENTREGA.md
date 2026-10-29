@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v28
+
+Analítica privada de vendedores: resumen, grupos sin ingreso/pedidos, ficha, acciones y Excel; precios argentinos inseparables y búsqueda por similitud. Portal0012 aditiva, captura apagada hasta activación coordinada con Urban621. Sin campañas, cambios económicos, remitentes, WhatsApp, cron o venv.
+
+Guía vigente: [Analítica de vendedores](ANALITICA_v28.md).
+
+- [ ] Instalar Urban621 y portal28; confirmar0012 y contrato sin enviar mensajes.
+- [ ] Activar medición; probar vendedor, fotos, carrito/pedido y consulta con permisos propios; probar aislamiento, grupos, Excel y móvil. No usar producción como base de prueba.
+- [ ] Confirmar precios con miles y $ inseparable, búsqueda coni/koni y ausencia de productos inactivos.
+
 ## MiDistri-Pedidos v27
 
 SKU pequeño debajo del nombre, también en destacados; códigos largos ajustados a la tarjeta, controles alineados conservados. Guía: [SKU e ingreso por Email](CATALOGO_SKU_v27.md). Se verificó el ingreso automático existente de vendedores activos de tiendas conectadas; no se activaron otras tiendas ni se modificó autenticación. Acumulativo23/24/25/26, sin migraciones, precios, envíos o cambios de canales/cron. Instalación productiva pendiente.

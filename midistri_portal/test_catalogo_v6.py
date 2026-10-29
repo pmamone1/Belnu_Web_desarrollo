@@ -10,8 +10,8 @@ class CatalogoTests(TestCase):
         Publicacion.objects.create(distribuidora=self.other,producto_id=2,nombre='Otro',categoria='Solo otra',precio=1,pvp=1,imagenes=['https://sistema7000.belnu.com.ar/catalogo-imagenes/fixture.jpg'])
     def test_publico_ve_ambos_precios_pero_no_puede_pedir(self):
         r=self.client.get('/portal/',{'distribuidora':20})
-        self.assertContains(r,'Precio vendedor:');self.assertContains(r,'25000')
-        self.assertContains(r,'30000')
+        self.assertContains(r,'Precio vendedor:');self.assertContains(r,'25.000,00')
+        self.assertContains(r,'30.000,00')
         self.client.post('/portal/cantidad/',{'producto':1,'cantidad':2})
         self.assertFalse(self.client.session.get('midistri_cart'))
         self.client.post('/portal/enviar/');self.assertFalse(PedidoLocal.objects.exists())

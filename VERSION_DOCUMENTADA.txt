@@ -1,3 +1,3 @@
-MiDistri-Pedidos v27
-Paquete27 acumulativo sobre23/24/25/26; código preparado. La instalación en producción se acredita con CÓDIGO INSTALADO y controles del instalador.
-Cambio: SKU pequeño en tarjetas y destacados, códigos largos dentro del contenedor. Auditoría del ingreso porEmail existente, sin cambios de autenticación ni activación productiva. Sin migraciones nuevas, precios, pedidos, remitentes, WhatsApp, cron o envíos.
+MiDistri-Pedidos v28
+Candidato documentado: v28 (base27; código preparado; instalación productiva pendiente).
+Cambio: Analítica privada de vendedores: resumen, grupos sin ingreso/pedidos, ficha, acciones y Excel; precios argentinos inseparables y búsqueda por similitud. Portal0012 aditiva, captura apagada hasta activación coordinada con Urban621. Sin campañas, cambios económicos, remitentes, WhatsApp, cron o venv.

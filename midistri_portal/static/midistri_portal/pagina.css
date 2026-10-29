@@ -77,3 +77,5 @@ header .tienda-apariencia{color:inherit}
 
 /* Public catalog identity remains secondary and never clips purchase controls. */
 .producto-sku{display:block;font-size:.75rem;line-height:1.35;overflow-wrap:anywhere;word-break:normal;margin:.15rem 0 .35rem;color:var(--muted,#586b67)}
+
+.importe-moneda{display:inline-block;white-space:nowrap;font-variant-numeric:tabular-nums}

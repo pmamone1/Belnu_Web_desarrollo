@@ -68,7 +68,7 @@ def fallo(request,error):
 def entrada(request):
     if not op.habilitado():return HttpResponse('Administración de MiDistri desactivada.',status=503)
     destino=request.GET.get('destino','tienda')
-    if destino not in ('tienda','banners','panel'):destino='tienda'
+    if destino not in ('tienda','banners','panel','estadisticas'):destino='tienda'
     did=request.GET.get('distribuidora','')
     if did and (not did.isdecimal() or int(did)<1 or len(did)>10):
         return HttpResponse('Tienda no válida.',status=400)
@@ -115,7 +115,7 @@ def completar(request):
     from .sesiones_operador import guardar_operador
     guardar_operador(request,result['perfil'],token,limpiar_autenticacion_heredada)
     request.session.pop('midistri_destino_admin',None)
-    response=redirect(('/portal/administrar/pagina/' if destino in ('tienda','banners') and permiso else '/portal/administrar/')+'?distribuidora='+str(did))
+    response=redirect(('/portal/administrar/estadisticas/' if destino=='estadisticas' and permiso and 'pedidos.gestionar' in result['perfil']['permisos'] else '/portal/administrar/pagina/' if destino in ('tienda','banners') and permiso else '/portal/administrar/')+'?distribuidora='+str(did))
     if not contexto:response=redirect('midistri_operador_panel')
     response.delete_cookie(nombre_cookie_desafio(sent),path='/portal/administrar/',samesite='None')
     response.delete_cookie('midistri_desafio',path='/portal/administrar/',samesite='None')

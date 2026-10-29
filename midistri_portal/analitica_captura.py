@@ -2,7 +2,8 @@
 from datetime import timedelta
 from hashlib import sha256
 import json,logging
-from uuid import UUID,uuid4
+from uuid import UUID,uuid4,uuid5,NAMESPACE_URL
+from types import SimpleNamespace
 from django.core.exceptions import ValidationError
 from django.db import transaction
 from django.utils import timezone
@@ -10,7 +11,7 @@ from .models import ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAn
 from .catalogo_elegible import elegibles
 
 CLIENTE={'producto_consulta','foto_ampliada','video_mp4','video_enlace'}
-TIPOS=CLIENTE|{'ingreso','catalogo','carrito','pedido'}
+TIPOS=CLIENTE|{'ingreso','catalogo','carrito','pedido','carrito_visto','pedidos_vistos','pedido_visto'}
 
 def activa():return ControlAnalitica.objects.filter(pk=1,activa=True).exists()
 
@@ -75,6 +76,10 @@ def _registrar(request,perfil,tipo,producto=None,recurso=None,cantidad=None,pedi
     # A unique cursor serializes one tab+actor without holding a global lock.
     SesionAnalitica.objects.get_or_create(clave=clave,defaults={'vendedor_id':perfil['id'],'distribuidora_id':perfil['distribuidora_id'],'ultima':now,'cupo_inicio':now})
     ses=SesionAnalitica.objects.select_for_update().get(pk=clave)
+    old=EventoAnalitico.objects.filter(pk=ident).first()
+    if old:
+        if old.huella!=huella:raise ValidationError('La acción ya existe con otros datos.')
+        return old
     if now-ses.ultima>=timedelta(minutes=30):ses.visita=uuid4()
     if now-ses.cupo_inicio>=timedelta(minutes=1):ses.cupo=0;ses.cupo_inicio=now
     if ses.cupo>=100:raise ValidationError('Demasiadas acciones; reintente más tarde.')
@@ -97,3 +102,8 @@ def recibir_lote(request,perfil,events):
             raise ValidationError('Datos de acción inválidos.')
     rows=[_registrar(request,perfil,e['tipo'],producto=e['producto'],recurso=e.get('recurso'),event_id=e['id']) for e in events]
     return {'aceptados':sum(r is not None for r in rows),'activa':activa()}
+
+def registrar_ingreso(request,perfil,token,tab=None):
+    context=SimpleNamespace(path='/portal/',session={'midistri_token':token},midistri_perfil=perfil,midistri_tab=SimpleNamespace(pk=tab) if tab else None)
+    ident=uuid5(NAMESPACE_URL,'midistri-ingreso:'+sha256(token.encode()).hexdigest())
+    return registrar(context,perfil,'ingreso',event_id=ident)
