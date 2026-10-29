@@ -1,3 +1,18 @@
+## MiDistri-Pedidos v27
+
+SKU pequeño debajo del nombre, también en destacados; códigos largos ajustados a la tarjeta, controles alineados conservados. Guía: [SKU e ingreso por Email](CATALOGO_SKU_v27.md). Se verificó el ingreso automático existente de vendedores activos de tiendas conectadas; no se activaron otras tiendas ni se modificó autenticación. Acumulativo23/24/25/26, sin migraciones, precios, envíos o cambios de canales/cron. Instalación productiva pendiente.
+
+- [x] Cinco regresiones SKU observadas RED→GREEN; suite202 ejecutadas,201 aprobadas y1omisión heredada.
+- [x] Ingreso existente Urban:33 pruebas aprobadas conSMTP simulado, sin envíos reales.
+- [x] Instalador/paquete:25pruebas correctas sobre23/24/25/26; faltantes/alteraciones rechazados.
+- [x] Cuatro diseños en1440/390px,56SKU visibles,48controles alineados y sin desbordes.
+- [x] Manual29páginas, capítulo y unión revisados visualmente;28páginas anteriores conservadas.
+- [x] Instrucciones completasv27 en inventario; cambio ajeno forgotPassword excluido.
+- [ ] Cotejo ZIP definitivo contra commit y copiaDownloads: se acredita al entregar.
+- [ ] Publicación commit/PR: se acredita al entregar.
+- [ ] Instalación y comprobaciónHTTPS en producción: pendiente.
+- [ ] Activar distribuidoras aún no configuradas: requiere la aclaración pendiente; no se ejecuta con este ZIP.
+
 ## MiDistri-Pedidos v26
 
 - [x] Regresión y revisión final.

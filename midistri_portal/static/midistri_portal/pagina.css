@@ -74,3 +74,6 @@ header .tienda-apariencia{color:inherit}
 .pagina-catalogo .producto-compra form{margin:0}
 .pagina-catalogo .producto-compra form>p{margin:8px 0 0}
 .diseno-lista.pagina-catalogo .producto-compra{align-self:end}
+
+/* Public catalog identity remains secondary and never clips purchase controls. */
+.producto-sku{display:block;font-size:.75rem;line-height:1.35;overflow-wrap:anywhere;word-break:normal;margin:.15rem 0 .35rem;color:var(--muted,#586b67)}
