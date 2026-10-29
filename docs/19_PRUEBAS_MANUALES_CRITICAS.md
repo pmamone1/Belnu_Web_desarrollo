@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v27
+
+SKU pequeño debajo del nombre, también en destacados; códigos largos ajustados a la tarjeta, controles alineados conservados. Guía: [SKU e ingreso por Email](CATALOGO_SKU_v27.md). Se verificó el ingreso automático existente de vendedores activos de tiendas conectadas; no se activaron otras tiendas ni se modificó autenticación. Acumulativo23/24/25/26, sin migraciones, precios, envíos o cambios de canales/cron. Instalación productiva pendiente.
+
 ## MiDistri-Pedidos v26
 
 Selector Más vendidos sin aclaración entre paréntesis; botones de promociones laterales Ver; cantidad y Agregar / actualizar alineados al pie de cada fila de tarjetas. Conserva saludo sólo nombre y criterio de ranking consignado. Sólo presentación, sin cambios de pedidos, precios o permisos. Instalación productiva pendiente; sin campaña.
@@ -233,3 +237,6 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 Caso de regresión: abrir vendedor y administración en el mismo navegador; el carrito sigue vigente. Validar código a1799s y elegir después: ticket120s. Perder respuesta al publicar, recargar y reintentar la misma operación. Revisar material propio sin acceso público, confirmar, retirar producto/sincronizar y comprobar retiro de promoción. Cambiar sólo título en campaña20/65 y conservar nombre/Reply-To de cada una. Salir sin red y comprobar revocación al recuperar conexión.
 
 Regresión r2: importar belnuweb/settings.py con valores ficticios; reconocer sólo la huella v7 defectuosa; comprobar sin escritura; retomar archivos v7 exactos; rechazar un cambio desconocido; luego aplicar, cargar configuración instalada real y completar migraciones/estáticos/arranque. No usar producción como banco de pruebas.
+
+## Comprobación27
+Ver SKU junto al nombre y en destacados, vacío sin etiqueta y símbolo HTML escapado. Revisar código80caracteres en celular, sin tapar cantidades/precios y con alineación porfila. Ingreso de vendedor nuevoactivo conEmail en tienda conectada, mismoEmail en dosperfiles y vendedor deotra tiendaaislado. Tienda sinremitente no debe usarotro remitente. No enviar pruebasavendedores sin instrucción.
