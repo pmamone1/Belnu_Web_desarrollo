@@ -106,3 +106,5 @@ class CambioPromocional(models.Model):
     creado=models.DateTimeField(default=timezone.now)
 
 from .pagina_models import PaginaTienda,VersionPagina,EdicionPagina
+
+from .analitica_models import ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAnalitico,ConsultaAnalitica
