@@ -22,6 +22,8 @@ def cambiar_estado(valor):
     control=ControlAnalitica.objects.select_for_update().get(pk=1)
     now=timezone.now()
     if valor:
+        from .analitica_cobertura import guardar_previos
+        guardar_previos()
         for did in Distribuidora.objects.filter(activa=True).values_list('pk',flat=True):
             IntervaloAnalitico.objects.get_or_create(distribuidora_id=did,hasta__isnull=True,defaults={'desde':now})
     else:IntervaloAnalitico.objects.filter(hasta__isnull=True).update(hasta=now)
@@ -63,6 +65,8 @@ def _datos(perfil,tipo,producto,recurso,cantidad,pedido):
 def _registrar(request,perfil,tipo,producto=None,recurso=None,cantidad=None,pedido=None,event_id=None):
     clave=_actor(request,perfil)
     if not clave or not activa():return None
+    from .analitica_cobertura import conciliar_fallo
+    conciliar_fallo()
     p,pedido=_datos(perfil,tipo,producto,recurso,cantidad,pedido)
     try:ident=UUID(str(event_id)) if event_id else uuid4()
     except (ValueError,TypeError):raise ValidationError('Identificador de acción inválido.') from None
@@ -92,6 +96,8 @@ def registrar(request,perfil,tipo,**kwargs):
     try:return _registrar(request,perfil,tipo,**kwargs)
     except Exception:
         logging.getLogger('midistri.analytics').warning('capture_failed; activity may be incomplete')
+        from .analitica_cobertura import marcar_fallo
+        if perfil and type(perfil.get('distribuidora_id')) is int:marcar_fallo(perfil['distribuidora_id'])
         return None
 
 @transaction.atomic
@@ -104,6 +110,8 @@ def recibir_lote(request,perfil,events):
     return {'aceptados':sum(r is not None for r in rows),'activa':activa()}
 
 def registrar_ingreso(request,perfil,token,tab=None):
+    from .analitica_cobertura import acreditar
+    acreditar(perfil['id'],perfil['distribuidora_id'])
     context=SimpleNamespace(path='/portal/',session={'midistri_token':token},midistri_perfil=perfil,midistri_tab=SimpleNamespace(pk=tab) if tab else None)
     ident=uuid5(NAMESPACE_URL,'midistri-ingreso:'+sha256(token.encode()).hexdigest())
     return registrar(context,perfil,'ingreso',event_id=ident)

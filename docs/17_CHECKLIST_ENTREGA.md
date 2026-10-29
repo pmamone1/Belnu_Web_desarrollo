@@ -1,3 +1,5 @@
+Validación adicional v28: comprobar filtros HTTP repetidos y selección actual; foto tardía excluida; consulta previa a activación y durante pausa sin falsos ceros; sesión reutilizada y consulta/Excel congelados; contactos inválidos y páginas densas por bytes; encabezado ajeno rechazado salvo bloque20/65.
+
 ## MiDistri-Pedidos v28
 
 Analítica privada de vendedores: resumen, grupos sin ingreso/pedidos, ficha, acciones y Excel; precios argentinos inseparables y búsqueda por similitud. Portal0012 aditiva, captura apagada hasta activación coordinada con Urban621. Sin campañas, cambios económicos, remitentes, WhatsApp, cron o venv.

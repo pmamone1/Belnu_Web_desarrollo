@@ -71,3 +71,18 @@ class CapturaAnaliticaTests(TestCase):
         bad=dict(id=str(uuid4()),tipo='foto_ampliada',producto=11,recurso=99)
         with self.assertRaises(ValidationError):s.recibir_lote(self.r,self.perfil,[good,bad])
         self.assertFalse(s.EventoAnalitico.objects.exists())
+
+    def test_fallo_total_de_base_conserva_marca_privada_hasta_conciliar(self):
+        from tempfile import TemporaryDirectory
+        from django.test import override_settings
+        from django.db import DatabaseError,transaction
+        from .analitica_cobertura import marcar_fallo,marcador,congelar,conciliar_fallo
+        with TemporaryDirectory() as folder,override_settings(BASE_DIR=folder):
+            with patch('midistri_portal.analitica_cobertura.IncidenciaAnalitica.objects.create',side_effect=DatabaseError('offline')):marcar_fallo(20)
+            self.assertTrue(marcador().exists())
+            data=congelar([20],timezone.now());self.assertEqual(data['incidencias'][0]['distribuidora_id'],20)
+            self.assertNotIn('vendedor',marcador().read_text())
+            with self.captureOnCommitCallbacks(execute=True):
+                with transaction.atomic():conciliar_fallo()
+            self.assertFalse(marcador().exists())
+            self.assertTrue(self.servicio().EventoAnalitico.objects.count()==0)

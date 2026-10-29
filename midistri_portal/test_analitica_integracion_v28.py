@@ -60,3 +60,14 @@ class IntegracionAnaliticaTests(TestCase):
             with patch('midistri_portal.views.api',return_value=self.profile):
                 self.assertEqual(self.client.post('/portal/cantidad/',{'producto':1,'cantidad':2},**self.headers).status_code,302)
         self.assertEqual(SesionVendedorPortal.objects.get(pk=self.tab).datos['midistri_cart'],{'1':2})
+
+    def test_fallo_db_de_lote_informa_incidencia_y_no_rompe_negocio(self):
+        from django.db import DatabaseError
+        from .models import IncidenciaAnalitica
+        self.preparar()
+        with patch('midistri_portal.views.api',return_value=self.profile):r=self.client.get('/portal/',**self.headers)
+        payload={'firma':r.context['analitica_contexto']['firma'],'eventos':[{'id':str(uuid4()),'tipo':'foto_ampliada','producto':1,'recurso':0}]}
+        with patch('midistri_portal.analitica_views.recibir_lote',side_effect=DatabaseError('db offline')):
+            r=self.client.post('/portal/actividad/eventos/',json.dumps(payload),content_type='application/json',**self.headers)
+        self.assertEqual(r.status_code,503);self.assertTrue(IncidenciaAnalitica.objects.filter(distribuidora_id=20).exists())
+        self.assertFalse(PedidoLocal.objects.exists())

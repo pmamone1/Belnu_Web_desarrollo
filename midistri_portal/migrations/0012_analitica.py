@@ -13,6 +13,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.CreateModel(name='EvidenciaAnalitica',fields=[('id',models.BigAutoField(auto_created=True,primary_key=True,serialize=False,verbose_name='ID')),('distribuidora_id',models.PositiveIntegerField()),('vendedor_id',models.PositiveIntegerField()),('acreditada',models.DateTimeField(default=django.utils.timezone.now)),('origen',models.CharField(default='sesion_existente',max_length=30))],options={'constraints':[models.UniqueConstraint(fields=('distribuidora_id','vendedor_id'),name='analitica_identidad_acreditada')]}),
+        migrations.CreateModel(name='IncidenciaAnalitica',fields=[('id',models.BigAutoField(auto_created=True,primary_key=True,serialize=False,verbose_name='ID')),('distribuidora_id',models.PositiveIntegerField()),('desde',models.DateTimeField(default=django.utils.timezone.now)),('hasta',models.DateTimeField(default=django.utils.timezone.now))],options={'indexes':[models.Index(fields=['distribuidora_id','desde'],name='analitica_inc_dist_fecha')]}),
+
         migrations.CreateModel(
             name='ConsultaAnalitica',
             fields=[

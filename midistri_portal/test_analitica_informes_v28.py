@@ -87,3 +87,57 @@ class InformesAnaliticaTests(TestCase):
         self.assertEqual(i.resultado(q,{})['resumen']['vendedores_activos'],1)
         self.assertEqual(i.resultado(q,{'vendedor':'7','tienda':'20'})['ficha']['nombre'],'Visita sin pedido')
         with self.assertRaises(ApiError):i.resultado(q,{'vendedor':'7','tienda':'61'})
+
+    def test_querydict_filtros_http_no_son_listas(self):
+        from django.http import QueryDict
+        q=self.consulta();f,i=self.modulos();data=i.resultado(q,QueryDict('q=Nunca&grupo=nunca_pedido'))
+        self.assertEqual(data['filtros']['q'],'Nunca');self.assertEqual(data['filtros']['grupo'],'nunca_pedido')
+        with patch('midistri_portal.operadores.perfil_operador',return_value=PROFILE):
+            response=self.client.get('/portal/administrar/estadisticas/'+str(q.pk)+'/',{'distribuidora':20,'q':'Nunca','grupo':'nunca_pedido'})
+            self.assertContains(response,'value="Nunca"');self.assertContains(response,'value="nunca_pedido" selected')
+    def test_periodo_no_medido_y_pausa_no_son_actividad_cero(self):
+        from .models import IntervaloAnalitico
+        self.actividad();q=self.consulta();f,i=self.modulos()
+        # Force the reported window entirely before activation; immutable local snapshot must retain this fact.
+        q.desde=self.today-timedelta(days=2);q.hasta=self.today-timedelta(days=1)
+        data=i.resultado(q,{'grupo':'sin_actividad'});self.assertEqual(data['vendedores'],[])
+        self.assertEqual({v['cobertura_periodo'] for v in i.resultado(q,{'grupo':'medicion_incompleta'})['vendedores']},{'sin_medicion'})
+        # An intentional pause crossing the requested window remains partial, not full coverage.
+        q.desde=self.today;q.hasta=self.today
+        q.meta['local']['intervalos']=[dict(distribuidora_id=20,desde=(self.cut-timedelta(days=1)).isoformat(),hasta=(self.cut-timedelta(hours=1)).isoformat())]
+        self.assertEqual(i.resultado(q,{'grupo':'sin_actividad'})['vendedores'],[])
+    def test_evidencia_positiva_resiste_reuso_y_consulta_congelada(self):
+        from .models import SesionVendedorPortal
+        from .analitica_captura import cambiar_estado
+        tab=SesionVendedorPortal.objects.create(vendedor_id=9,distribuidora_id=20,prueba_hash='a'*64,navegador_hash='b'*64,token_urban='secret',actividad=timezone.now()-timedelta(days=1))
+        self.actividad();cambiar_estado(False)
+        SesionVendedorPortal.objects.filter(pk=tab.pk).update(vendedor_id=999,actividad=timezone.now())
+        q=self.consulta();f,i=self.modulos();before=i.resultado(q,{'grupo':'sin_ingresos'})
+        self.assertNotIn(9,[v['id'] for v in before['vendedores']])
+        cambiar_estado(True)
+        after=i.resultado(q,{'grupo':'sin_ingresos'});self.assertEqual(before['intervalos'],after['intervalos'])
+        self.assertEqual([v['id'] for v in before['vendedores']],[v['id'] for v in after['vendedores']])
+    def test_fallo_captura_conocido_marca_cobertura_incompleta(self):
+        self.actividad()
+        from .analitica_captura import registrar
+        perfil=dict(id=7,nombre='Visita sin pedido',distribuidora_id=20)
+        r=RequestFactory().get('/portal/');r.session={'midistri_token':'x'*43};r.midistri_perfil=perfil
+        with patch('midistri_portal.analitica_captura._registrar',side_effect=RuntimeError('storage failed')):registrar(r,perfil,'catalogo')
+        q=self.consulta();f,i=self.modulos();data=i.resultado(q,{'grupo':'medicion_incompleta'})
+        self.assertTrue(data['incidencias']);self.assertEqual(len(data['vendedores']),3)
+    def test_metricas_productos_y_estados_solicitado_confirmado(self):
+        from .models import EventoAnalitico
+        self.actividad();e=EventoAnalitico.objects.first()
+        EventoAnalitico.objects.create(fecha=e.fecha,distribuidora_id=20,vendedor_id=7,vendedor='Visita sin pedido',visita=e.visita,tipo='producto_consulta',producto_id=5,producto='Pilas',sku='P5',huella='a'*64)
+        q=self.consulta();f,i=self.modulos();data=i.resultado(q,{})
+        v=next(v for v in data['vendedores'] if v['id']==7)
+        self.assertEqual(v['productos_consultados'],1);self.assertEqual(data['resumen']['consultas_productos'],1)
+        self.assertEqual(data['estados'][0]['unidades_solicitadas'],1);self.assertEqual(data['estados'][0]['unidades_confirmadas'],0)
+        self.assertEqual(data['estados'][0]['total_solicitado'],100)
+        with patch('midistri_portal.operadores.perfil_operador',return_value=PROFILE):
+            r=self.client.get('/portal/administrar/estadisticas/'+str(q.pk)+'/',{'distribuidora':20,'tienda':20,'vendedor':8})
+            self.assertContains(r,'/portal/administrar/pedido/'+self.orders[0]['id']+'/')
+
+    def test_grupo_predeterminado_muestra_la_seleccion_real(self):
+        q=self.consulta();f,i=self.modulos();data=i.resultado(q,{})
+        self.assertEqual(data['filtros']['grupo'],'activos')

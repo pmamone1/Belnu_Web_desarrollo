@@ -19,3 +19,20 @@ class PanelAnaliticaTests(TestCase):
         with patch('midistri_portal.operadores.perfil_operador',return_value=dict(PROFILE,operador_id=99)):
             self.assertEqual(self.client.get('/portal/administrar/estadisticas/'+ident+'/').status_code,403)
             self.assertEqual(self.client.get('/portal/administrar/estadisticas/'+ident+'/excel/').status_code,403)
+
+    def test_consulta_no_se_muestra_bajo_cabezal_de_otra_tienda(self):
+        from .analitica_fuentes import iniciar_consulta
+        from django.test import RequestFactory
+        profile=dict(PROFILE,distribuidoras=PROFILE['distribuidoras']+[dict(id=61,nombre='61 - Recova')])
+        q=iniciar_consulta(RequestFactory().post('/'),profile,dict(distribuidora=20,desde='2026-10-01',hasta='2026-10-29'))
+        with patch('midistri_portal.operadores.perfil_operador',return_value=profile):
+            self.assertEqual(self.client.get('/portal/administrar/estadisticas/'+str(q.pk)+'/',{'distribuidora':61}).status_code,403)
+            self.assertEqual(self.client.get('/portal/administrar/estadisticas/'+str(q.pk)+'/excel/',{'distribuidora':61}).status_code,403)
+
+    def test_consulta_20_65_permite_ambos_cabezales_del_mismo_bloque(self):
+        from .analitica_fuentes import iniciar_consulta
+        from .analitica_views import _consulta
+        from django.test import RequestFactory
+        profile=dict(PROFILE,distribuidoras=PROFILE['distribuidoras']+[dict(id=65,nombre='65 - Barracas')])
+        q=iniciar_consulta(RequestFactory().post('/'),profile,dict(distribuidora=20,desde='2026-10-01',hasta='2026-10-29'))
+        self.assertEqual(_consulta(q.pk,dict(operador=profile,tienda=dict(id=65,nombre='65 - Barracas'))).pk,q.pk)

@@ -58,3 +58,18 @@ class ConsultaAnalitica(models.Model):
     completa=models.BooleanField(default=False)
     creado=models.DateTimeField(default=timezone.now)
     vence=models.DateTimeField()
+
+class EvidenciaAnalitica(models.Model):
+    distribuidora_id=models.PositiveIntegerField()
+    vendedor_id=models.PositiveIntegerField()
+    acreditada=models.DateTimeField(default=timezone.now)
+    origen=models.CharField(max_length=30,default='sesion_existente')
+    class Meta:
+        constraints=[models.UniqueConstraint(fields=['distribuidora_id','vendedor_id'],name='analitica_identidad_acreditada')]
+
+class IncidenciaAnalitica(models.Model):
+    distribuidora_id=models.PositiveIntegerField()
+    desde=models.DateTimeField(default=timezone.now)
+    hasta=models.DateTimeField(default=timezone.now)
+    class Meta:
+        indexes=[models.Index(fields=['distribuidora_id','desde'],name='analitica_inc_dist_fecha')]

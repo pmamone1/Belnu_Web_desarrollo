@@ -107,4 +107,4 @@ class CambioPromocional(models.Model):
 
 from .pagina_models import PaginaTienda,VersionPagina,EdicionPagina
 
-from .analitica_models import ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAnalitico,ConsultaAnalitica
+from .analitica_models import EvidenciaAnalitica,IncidenciaAnalitica,ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAnalitico,ConsultaAnalitica

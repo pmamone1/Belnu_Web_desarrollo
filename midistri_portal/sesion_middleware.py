@@ -38,6 +38,12 @@ class SesionPestanaMiddleware(MiddlewareMixin):
         except Exception as exc:
             ctx.__exit__(type(exc),exc,exc.__traceback__);raise
         ctx.__exit__(type(error) if error else None,error,error.__traceback__ if error else None)
+        # Persist telemetry gaps after the failed event request rolled back.
+        # This callback never grants access or participates in an order mutation.
+        did=getattr(request,'_midistri_analitica_fallo',None)
+        if did:
+            from .analitica_cobertura import marcar_fallo
+            marcar_fallo(did)
 
     def process_response(self,request,response):
         self._finish(request,RuntimeError('response_failed') if response.status_code>=500 else None)

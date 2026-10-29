@@ -112,16 +112,18 @@ def avanzar_consulta(request,ident,revision,perfil):
         if set(totals)!={'vendedores','pedidos'} or any(type(n) is not int or not 0<=n<=20000 for n in totals.values()):raise ValueError
         if q.fuente and (q.fuente!=snap or data['corte']!=q.meta['corte'] or totals!=q.meta['totales']):raise ValueError
         raw=data['filas'];nxt=data['siguiente']
-        if not isinstance(raw,list) or len(raw)>500 or (nxt is not None and (type(nxt) is not int or nxt!=q.cursor+500)):raise ValueError
+        if not isinstance(raw,list) or len(raw)>500 or (nxt is not None and (type(nxt) is not int or nxt!=q.cursor+len(raw))):raise ValueError
         rows=[_vendedor(r,q.distribuidoras) for r in raw] if q.fase=='vendedores' else [_pedido(r,q.distribuidoras,cut) for r in raw]
         complete=q.cursor+len(rows)
-        if complete>totals[q.fase] or (nxt is None and complete!=totals[q.fase]) or (nxt is not None and (len(rows)!=500 or complete>=totals[q.fase])):raise ValueError
+        if complete>totals[q.fase] or (nxt is None and complete!=totals[q.fase]) or (nxt is not None and (not rows or complete>=totals[q.fase])):raise ValueError
         existing=q.datos[q.fase]
         key=lambda r:(r['distribuidora_id'],r['id'])
         keys=[key(r) for r in existing+rows]
         if len(keys)!=len(set(keys)):raise ValueError
     except (ValueError,KeyError,TypeError,InvalidOperation,AttributeError):raise ApiError('La fuente está incompleta o cambió; vuelva a consultar. No se mostraron ceros como resultados.',503) from None
-    q.fuente=snap;q.meta={k:data[k] for k in ('version','corte','distribuidoras','totales')};q.vence=min(q.vence,expires)
+    from .analitica_cobertura import congelar
+    local=q.meta.get('local') if q.fuente else congelar(q.distribuidoras,cut)
+    q.fuente=snap;q.meta={k:data[k] for k in ('version','corte','distribuidoras','totales')};q.vence=min(q.vence,expires);q.meta['local']=local
     q.datos[q.fase].extend(rows);q.revision+=1
     if nxt is not None:q.cursor=nxt
     elif q.fase=='vendedores':q.fase='pedidos';q.cursor=0

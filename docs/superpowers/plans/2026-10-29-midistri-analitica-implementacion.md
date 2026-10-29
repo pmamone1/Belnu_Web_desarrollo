@@ -24,7 +24,7 @@
 
 ### Task1 · Fuente privada Urban
 Files: midistri_bridge/analitica.py, operadores_api.py, api.py; consignaciones/tests_midistri_analitica_v621.py.
-Interface fuente(acceso,ctx,data)->JSON version1. Entrada distribuidora,desde,hasta; continuación snapshot(UUID),fase(vendedores/pedidos),cursor entero. Primera lectura crea caché técnica15min en OperacionAdministrativa tipo analitica, propietario/conexión/alcance. Cada página500 filas con total, siguiente, corte. Máximo20000 vendedores/20000 pedidos por consulta: rechazo explícito antes de crear informe incompleto.
+Interface fuente(acceso,ctx,data)->JSON version1. Entrada distribuidora,desde,hasta; continuación snapshot(UUID),fase(vendedores/pedidos),cursor entero. Primera lectura crea caché técnica15min en OperacionAdministrativa tipo analitica, propietario/conexión/alcance. Cada página hasta500 filas/8MiB con total, siguiente, corte. Máximo20000 vendedores/20000 pedidos por consulta: rechazo explícito antes de crear informe incompleto.
 Padrón activo/no depósito más identidades históricas: id,distribuidora,nombre,lin,vv,activo,actual,contacto bool,pedidos_historicos. Pedidos: id,vendedor,distribuidora,referencia,creado,estado,items públicos,atencion actual; sin costo/contactos/tokens.
 - [ ] RED: API ausente, padrón/estados/cancelaciones/precios, página>100, snapshots inmutables, permisos y20/65.
 - [ ] Implementar proyección agrupada con prefetched pedidos/folio y resumir_atencion; no N+1 por vendedor ni s.serializar por cada fila.

@@ -2,6 +2,7 @@ import json
 from django.core import signing
 from django.core.exceptions import PermissionDenied,ValidationError
 from django.http import JsonResponse
+from django.db import DatabaseError
 from django.views.decorators.http import require_GET,require_POST
 from .client import ApiError
 from .analitica_captura import recibir_lote
@@ -16,7 +17,12 @@ def eventos(request):
         data=json.loads(request.body)
         if not isinstance(data,dict) or set(data)!={'firma','eventos'}:raise ValidationError('Datos inválidos.')
         perfil=perfil_firmado(request,data['firma'])
-        return privada(JsonResponse(recibir_lote(request,perfil,data['eventos'])))
+        try:return privada(JsonResponse(recibir_lote(request,perfil,data['eventos'])))
+        except DatabaseError:
+            from .analitica_cobertura import marcar_fallo
+            if getattr(request,'_midistri_atomic',None) is not None:request._midistri_analitica_fallo=perfil['distribuidora_id']
+            else:marcar_fallo(perfil['distribuidora_id'])
+            return privada(JsonResponse({'error':'No se pudo registrar la actividad; la cobertura se informa incompleta.'},status=503))
     except signing.SignatureExpired:return privada(JsonResponse({'renovar':True},status=409))
     except (PermissionDenied,signing.BadSignature,ApiError):return privada(JsonResponse({'error':'Contexto no autorizado.'},status=403))
     except (ValueError,TypeError,KeyError,ValidationError):return privada(JsonResponse({'error':'Acción inválida.'},status=400))
@@ -43,6 +49,11 @@ def _operador(request):
     fuentes.alcance(ctx['operador'],ctx['tienda']['id'])
     return ctx
 
+def _consulta(ident,ctx):
+    q=fuentes.cargar_consulta(ident,ctx['operador'])
+    if ctx['tienda']['id'] not in q.distribuidoras:raise ApiError('La consulta pertenece a otra tienda. Volvé a consultar desde esta tienda.',403)
+    return q
+
 def _error(request,error,ajax=False):
     if ajax:return privada(JsonResponse({'error':str(error)},status=error.status if error.status in (400,401,403,409,503) else 503))
     return privada(ov.fallo(request,error))
@@ -53,8 +64,8 @@ def panel(request,ident=None):
         ctx=_operador(request);today=timezone.localtime(timezone.now(),informes.AR).date()
         ctx.update(titulo='Estadísticas de vendedores',desde=(today-timedelta(days=29)).isoformat(),hasta=today.isoformat())
         if ident:
-            q=fuentes.cargar_consulta(ident,ctx['operador']);data=informes.resultado(q,request.GET)
-            params=request.GET.copy();params.pop('pagina',None);params.pop('pagina_pedidos',None)
+            q=_consulta(ident,ctx);data=informes.resultado(q,request.GET)
+            params=request.GET.copy();params.pop('pagina',None);params.pop('pagina_pedidos',None);params.pop('pagina_vendedores',None);params.pop('pagina_productos',None)
             params['distribuidora']=q.distribuidora_id
             ctx.update(data,desde=q.desde.isoformat(),hasta=q.hasta.isoformat(),acciones=Paginator(data['eventos'],50).get_page(request.GET.get('pagina',1)),ordenes=Paginator(data['pedidos'],50).get_page(request.GET.get('pagina_pedidos',1)),vendedores_pagina=Paginator(data['vendedores'],50).get_page(request.GET.get('pagina_vendedores',1)),productos_pagina=Paginator(data['productos'],50).get_page(request.GET.get('pagina_productos',1)),params=params.urlencode(),excel_url=reverse('midistri_analitica_excel',args=[ident])+'?'+params.urlencode())
         return privada(render(request,'midistri_portal/analitica_panel.html',ctx))
@@ -73,6 +84,7 @@ def paso(request,ident):
         ctx=_operador(request)
         try:revision=int(request.POST.get('revision',''))
         except (ValueError,TypeError):raise ApiError('Revisión inválida.',400)
+        _consulta(ident,ctx)
         data=fuentes.avanzar_consulta(request,ident,revision,ctx['operador'])
         data['url']=reverse('midistri_analitica_resultado',args=[ident])+'?distribuidora='+str(ctx['tienda']['id'])
         return privada(JsonResponse(data))
@@ -81,7 +93,7 @@ def paso(request,ident):
 @require_GET
 def exportar(request,ident):
     try:
-        ctx=_operador(request);q=fuentes.cargar_consulta(ident,ctx['operador'])
+        ctx=_operador(request);q=_consulta(ident,ctx)
         data=informes.resultado(q,request.GET);response=HttpResponse(informes.excel(data),content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
         response['Content-Disposition']='attachment; filename="midistri_estadisticas.xlsx"'
         return privada(response)

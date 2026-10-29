@@ -1,3 +1,5 @@
+Estado vigente: diseño aprobado por el usuario e implementado en Urban621/MiDistri28; instalación productiva pendiente. El texto de la fase de diseño se conserva debajo como antecedente.
+
 # MiDistri · Analítica de vendedores, productos y pedidos
 
 Fecha: 29/10/2026. Estado: diseño revisado para construcción, pendiente de aprobación del usuario. No implementado ni instalado. Fuentes inspeccionadas: Urban Soft v1.18.620 y MiDistri v27; la instalación productiva de esas versiones no se presume. Sin envíos ni campañas.
