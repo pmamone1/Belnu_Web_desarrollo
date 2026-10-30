@@ -1,3 +1,12 @@
+## MiDistri-Pedidos v29
+
+Corrige la unicidad de intervalos en MariaDB mediante índice ordinario y coherencia de estado. Sólo nueva 0013; conserva 0012, fechas, eventos y captura activa. Urban 621 se mantiene. No cambia SQLMode, credenciales, remitentes, WhatsApp, cron, catálogo o venv. Sin envíos.
+
+Guía vigente: [Intervalos MariaDB](INTERVALOS_MARIADB_v29.md).
+
+- [ ] Confirmar base 28/0012 y preflight sin cambios; comprobar índice único real y ausencia de W036.
+- [ ] Conservar contador/captura y fechas antes/después; duplicados deben detener antes de DDL, sin fusiones.
+
 Validación adicional v28: comprobar filtros HTTP repetidos y selección actual; foto tardía excluida; consulta previa a activación y durante pausa sin falsos ceros; sesión reutilizada y consulta/Excel congelados; contactos inválidos y páginas densas por bytes; encabezado ajeno rechazado salvo bloque20/65.
 
 ## MiDistri-Pedidos v28

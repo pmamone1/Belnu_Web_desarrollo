@@ -9,11 +9,19 @@ class ControlAnalitica(models.Model):
     cambiado=models.DateTimeField(default=timezone.now)
 
 class IntervaloAnalitico(models.Model):
+    abierto_unico=models.PositiveSmallIntegerField(null=True,default=1,editable=False)
     distribuidora=models.ForeignKey('Distribuidora',on_delete=models.PROTECT)
     desde=models.DateTimeField(default=timezone.now)
     hasta=models.DateTimeField(null=True)
     class Meta:
-        constraints=[models.UniqueConstraint(fields=['distribuidora'],condition=models.Q(hasta__isnull=True),name='analitica_intervalo_abierto')]
+        constraints=[models.UniqueConstraint(fields=['distribuidora','abierto_unico'],name='analitica_un_abierto_tienda'),
+            models.CheckConstraint(check=(models.Q(hasta__isnull=True,abierto_unico=1)&models.Q(abierto_unico__isnull=False))|models.Q(hasta__isnull=False,abierto_unico__isnull=True),name='analitica_intervalo_estado')]
+
+    def save(self,*args,**kwargs):
+        self.abierto_unico=1 if self.hasta is None else None
+        fields=kwargs.get('update_fields')
+        if fields and 'hasta' in fields:kwargs['update_fields']=set(fields)|{'abierto_unico'}
+        return super().save(*args,**kwargs)
 
 class SesionAnalitica(models.Model):
     clave=models.CharField(primary_key=True,max_length=64)

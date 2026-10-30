@@ -26,7 +26,7 @@ def cambiar_estado(valor):
         guardar_previos()
         for did in Distribuidora.objects.filter(activa=True).values_list('pk',flat=True):
             IntervaloAnalitico.objects.get_or_create(distribuidora_id=did,hasta__isnull=True,defaults={'desde':now})
-    else:IntervaloAnalitico.objects.filter(hasta__isnull=True).update(hasta=now)
+    else:IntervaloAnalitico.objects.filter(hasta__isnull=True).update(hasta=now,abierto_unico=None)
     if control.activa!=valor:control.activa=valor;control.cambiado=now;control.save(update_fields=['activa','cambiado'])
     return {'activa':valor,'intervalos_abiertos':IntervaloAnalitico.objects.filter(hasta__isnull=True).count()}
 
