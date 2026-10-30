@@ -12,21 +12,22 @@ function retryNotice(){notice('Cerraste el acceso en esta pestaña. Falta confir
 async function retryLogout(){const item=pending();if(!item||closing)return;closing=true;try{
 const data=new FormData();const cookie=document.cookie.split('; ').find(x=>x.startsWith('csrftoken='));data.set('csrfmiddlewaretoken',cookie?decodeURIComponent(cookie.slice(10)):item.csrf);
 const r=await raw('/portal/salir/',{method:'POST',body:data,headers:{Accept:'application/json'}},item.proof);
-if(!r.ok)throw Error('pending');sessionStorage.removeItem(PENDING);notice('Cierre remoto confirmado.');
+if(!r.ok)throw Error('pending');sessionStorage.removeItem(PENDING);if(window.MidistriRecordado)MidistriRecordado.completeLogout();notice('Cierre remoto confirmado.');
 }catch(e){retryNotice();}finally{closing=false;}}
 async function navigate(url,options,logout,replace){const p=proof(false);if(busy)return;busy=true;if(logout){
+if(window.MidistriRecordado)MidistriRecordado.markLogout();
 sessionStorage.setItem(PENDING,JSON.stringify({proof:p,csrf:options.body.get?options.body.get('csrfmiddlewaretoken'):''}));
 sessionStorage.removeItem(KEY);cleared();options=Object.assign({},options,{headers:{'Accept':'application/json'}});}
 try{const r=await raw(url,options,p);const type=r.headers.get('Content-Type')||'';
-if(type.includes('application/json')){const data=await r.json();if(logout&&r.ok){sessionStorage.removeItem(PENDING);location.replace('/portal/');return;}if(logout&&!r.ok){retryNotice();return;}if(!r.ok){if(r.status===403)sessionStorage.removeItem(KEY);notice(data.error||'No pudimos completar la operación.');return;}return;}
+if(type.includes('application/json')){const data=await r.json();if(logout&&r.ok){sessionStorage.removeItem(PENDING);if(window.MidistriRecordado)MidistriRecordado.completeLogout();location.replace('/portal/');return;}if(logout&&!r.ok){retryNotice();return;}if(!r.ok){if(r.status===403)sessionStorage.removeItem(KEY);notice(data.error||'No pudimos completar la operación.');return;}return;}
 if(type.includes('application/pdf')){if(!r.ok){notice('No pudimos abrir el remito.');return;}const blob=URL.createObjectURL(await r.blob());const a=document.createElement('a');a.href=blob;a.download='remitos_pedido.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(blob),60000);return;}
 const html=await r.text();const page=new DOMParser().parseFromString(html,'text/html');page.querySelectorAll('script:not([type="application/json"])').forEach(x=>x.remove());document.title=page.title;document.body.replaceChildren(...page.body.childNodes);history[replace?'replaceState':'pushState']({},'',r.url);document.dispatchEvent(new CustomEvent('midistri:render'));if(r.status>=500)notice('No pudimos conectar. Tu pedido se conserva para reintentar.');
 }catch(e){if(logout){retryNotice();return;}notice(logout?'Cerramos el acceso en esta pestaña. No pudimos confirmar el cierre remoto por falta de conexión.':'No pudimos conectar. Conservamos tu pedido; podés reintentar.');}
 finally{busy=false;}}
 addEventListener('online',retryLogout);if(pending())retryLogout();
-window.MidistriTab={proof:proof,request:(url,options)=>raw(url,options,proof(true))};
+window.MidistriTab={proof:proof,request:(url,options)=>raw(url,options,proof(true)),load:url=>navigate(url,undefined,false,true),clear:()=>{sessionStorage.removeItem(KEY);sessionStorage.removeItem(PENDING);cleared();}};
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(!a||a.target==='_blank'||a.download||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;const url=new URL(a.href,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/portal/')||url.pathname.startsWith('/portal/administrar/')||url.pathname.startsWith('/portal/acceso/')||url.hash)return;if(!proof(false))return;e.preventDefault();navigate(url.href);});
 document.addEventListener('submit',e=>{const f=e.target;if(f.dataset.codigo||!f.action)return;const url=new URL(f.action,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/portal/')||url.pathname.startsWith('/portal/administrar/')||url.pathname.startsWith('/portal/acceso/')||!proof(false))return;e.preventDefault();if(f.method.toLowerCase()==='get'){const u=new URL(f.action);u.search=new URLSearchParams(new FormData(f));navigate(u.href);}else navigate(f.action,{method:'POST',body:new FormData(f)},url.pathname==='/portal/salir/');});
 addEventListener('popstate',()=>{if(proof(false))navigate(location.href,undefined,false,true);});
-if(!location.pathname.startsWith('/portal/acceso/')&&!location.pathname.startsWith('/portal/activar/')&&proof(false))navigate(location.href,undefined,false,true);
+if(!(document.body.dataset&&document.body.dataset.recordar==='1')&&!location.pathname.startsWith('/portal/acceso/')&&!location.pathname.startsWith('/portal/activar/')&&proof(false))navigate(location.href,undefined,false,true);
 })();

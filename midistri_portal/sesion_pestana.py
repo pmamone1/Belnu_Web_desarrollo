@@ -30,23 +30,28 @@ def navegador(request,crear=False):
     return hash_texto(value) if value else None
 
 
-def crear_sesion_pestana(request,perfil,token_urban,tab_id,prueba):
+def crear_sesion_pestana(request,perfil,token_urban,tab_id,prueba,dispositivo=None,conservar=False):
     perfil=perfil_valido(perfil)
     ident,proof=datos_prueba(request)
     if ident!=str(tab_id) or not secrets.compare_digest(proof,prueba):raise PermissionDenied
     if not isinstance(token_urban,str) or not 20<=len(token_urban)<=100:raise PermissionDenied
     browser=navegador(request,True)
     old=SesionVendedorPortal.objects.filter(pk=ident).first()
-    if old and (old.navegador_hash!=browser or old.prueba_hash!=hash_texto(proof)):raise PermissionDenied
+    if old and old.prueba_hash!=hash_texto(proof):raise PermissionDenied
+    trusted=bool(dispositivo and old and old.dispositivo_id==dispositivo.pk and not old.revocado)
+    if old and old.navegador_hash!=browser and not trusted:raise PermissionDenied
+    if conservar and old and old.revocado:raise PermissionDenied
     if old:
         from .analitica_cobertura import acreditar
         acreditar(old.vendedor_id,old.distribuidora_id)
-    SesionVendedorPortal.objects.update_or_create(pk=ident,defaults={'navegador_hash':browser,
+    preserve=bool(conservar and trusted and old.vendedor_id==perfil['id'] and old.distribuidora_id==perfil['distribuidora_id'])
+    row,_=SesionVendedorPortal.objects.update_or_create(pk=ident,defaults={'navegador_hash':browser,
         'prueba_hash':hash_texto(proof),'token_urban':token_urban,'vendedor_id':perfil['id'],
-        'distribuidora_id':perfil['distribuidora_id'],'datos':{},'revocado':False,'actividad':timezone.now()})
+        'distribuidora_id':perfil['distribuidora_id'],'datos':old.datos if preserve else {},'dispositivo':dispositivo,'revocado':False,'actividad':timezone.now()})
     request.session.cycle_key()
     from .analitica_captura import registrar_ingreso
-    registrar_ingreso(request,perfil,token_urban,ident)
+    request.midistri_tab=row
+    if not preserve:registrar_ingreso(request,perfil,token_urban,ident,recordado=bool(dispositivo))
     return {'fase':'dentro','url':'/portal/'}
 
 
@@ -56,6 +61,7 @@ def resolver_sesion_pestana(request):
     rows=SesionVendedorPortal.objects.select_for_update().filter(pk=ident)
     if request.path!='/portal/salir/':rows=rows.filter(revocado=False)
     row=rows.first()
+    if row and row.dispositivo_id and row.dispositivo.revocado:raise PermissionDenied('El dispositivo fue olvidado.')
     if row is None or not browser or not secrets.compare_digest(row.navegador_hash,browser) or not secrets.compare_digest(row.prueba_hash,hash_texto(proof)):
         raise PermissionDenied('Tu acceso no está disponible en esta pestaña. Ingresá con tu Email.')
     return row

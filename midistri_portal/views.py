@@ -375,6 +375,11 @@ def documento(request,ident):
 
 @require_POST
 def salir(request):
+    from .dispositivos import COOKIE,olvidar
+    if request.COOKIES.get(COOKIE):
+        response=olvidar(request,JsonResponse({'ok':True,'url':'/portal/'}))
+        if 'application/json' in request.headers.get('Accept',''):return response
+        response.status_code=302;response['Location']='/portal/';return response
     token=request.session.get('midistri_token')
     if token:
         try:api('logout',method='POST',token=token)

@@ -10,8 +10,13 @@ from .sesion_pestana import TabSession,resolver_sesion_pestana
 
 class SesionPestanaMiddleware(MiddlewareMixin):
     def process_request(self,request):
+        from .dispositivos import activo,COOKIE,OLVIDO
+        request.midistri_recordar_enabled=activo()
+        request.midistri_recordar_presente=bool(request.COOKIES.get(COOKIE))
         request.midistri_codigo_enabled=bool(getattr(settings,'MIDISTRI_LOGIN_CODIGO_ENABLED',False))
         if not request.midistri_codigo_enabled or not request.path.startswith('/portal/') or request.path.startswith(('/portal/administrar/','/portal/gestion/')):return None
+        if request.COOKIES.get(OLVIDO)=='1' and request.headers.get('X-Midistri-Tab') and not request.path.startswith('/portal/acceso/') and request.path!='/portal/salir/':
+            return JsonResponse({'error':'El cierre del dispositivo esta pendiente.'},status=403)
         public=request.path=='/portal/' or request.path.startswith(('/portal/acceso/','/portal/activar/'))
         row=None
         if not request.path.startswith(('/portal/acceso/','/portal/activar/')) and request.headers.get('X-Midistri-Tab'):

@@ -11,7 +11,7 @@ from .models import ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAn
 from .catalogo_elegible import elegibles
 
 CLIENTE={'producto_consulta','foto_ampliada','video_mp4','video_enlace'}
-TIPOS=CLIENTE|{'ingreso','catalogo','carrito','pedido','carrito_visto','pedidos_vistos','pedido_visto'}
+TIPOS=CLIENTE|{'ingreso','ingreso_recordado','catalogo','carrito','pedido','carrito_visto','pedidos_vistos','pedido_visto'}
 
 def activa():return ControlAnalitica.objects.filter(pk=1,activa=True).exists()
 
@@ -109,9 +109,10 @@ def recibir_lote(request,perfil,events):
     rows=[_registrar(request,perfil,e['tipo'],producto=e['producto'],recurso=e.get('recurso'),event_id=e['id']) for e in events]
     return {'aceptados':sum(r is not None for r in rows),'activa':activa()}
 
-def registrar_ingreso(request,perfil,token,tab=None):
+def registrar_ingreso(request,perfil,token,tab=None,recordado=False):
     from .analitica_cobertura import acreditar
     acreditar(perfil['id'],perfil['distribuidora_id'])
     context=SimpleNamespace(path='/portal/',session={'midistri_token':token},midistri_perfil=perfil,midistri_tab=SimpleNamespace(pk=tab) if tab else None)
-    ident=uuid5(NAMESPACE_URL,'midistri-ingreso:'+sha256(token.encode()).hexdigest())
-    return registrar(context,perfil,'ingreso',event_id=ident)
+    tipo='ingreso_recordado' if recordado else 'ingreso'
+    ident=uuid5(NAMESPACE_URL,'midistri-'+tipo+':'+sha256(token.encode()).hexdigest())
+    return registrar(context,perfil,tipo,event_id=ident)
