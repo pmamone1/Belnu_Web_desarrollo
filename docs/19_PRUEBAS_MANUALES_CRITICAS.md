@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v30
+
+Acceso de vendedor recordado automáticamente tras el primer código, sin vencimiento propio. Olvido revocable por dispositivo, perfiles acreditados y carritos por pestaña. Sólo portal0014 aditiva; requiere Urban622. Conserva captura e intervalos de analítica. Sin campañas, cambios económicos, históricos, remitentes, WhatsApp, cron o venv.
+
+Guía vigente: [Acceso recordado](ACCESO_RECORDADO_v30.md).
+
+- [ ] En el sitio instalado: primer código, reabrir navegador sin código, perfiles múltiples y carritos separados.
+- [ ] Probar baja de contacto, cierre en otra pestaña y olvido sin conexión; ninguna sesión administrativa debe restaurarse como vendedor.
+- [ ] Confirmar bases, migración aditiva, estados y dos banderas; conservar analítica activa y canales. No enviar campaña.
+
 ## MiDistri-Pedidos v29
 
 Corrige la unicidad de intervalos en MariaDB mediante índice ordinario y coherencia de estado. Sólo nueva 0013; conserva 0012, fechas, eventos y captura activa. Urban 621 se mantiene. No cambia SQLMode, credenciales, remitentes, WhatsApp, cron, catálogo o venv. Sin envíos.
