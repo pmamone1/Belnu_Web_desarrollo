@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v29
+
+Corrige la unicidad de intervalos en MariaDB mediante índice ordinario y coherencia de estado. Sólo nueva0013; conserva0012, fechas, eventos y captura activa. Urban621 se mantiene. No cambia SQLMode, credenciales, remitentes, WhatsApp, cron, catálogo o venv. Sin envíos.
+
+Guía vigente: [Intervalos MariaDB](docs/INTERVALOS_MARIADB_v29.md).
+
 ## MiDistri-Pedidos v28
 
 Analítica privada de vendedores: resumen, grupos sin ingreso/pedidos, ficha, acciones y Excel; precios argentinos inseparables y búsqueda por similitud. Portal0012 aditiva, captura apagada hasta activación coordinada con Urban621. Sin campañas, cambios económicos, remitentes, WhatsApp, cron o venv.

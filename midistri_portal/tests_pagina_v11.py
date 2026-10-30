@@ -211,6 +211,7 @@ class MigracionPaginaTests(TransactionTestCase):
 
     def test_migracion_real_conserva_tienda_y_promociones(self):
         from django.db import connection
+        if not connection.features.can_rollback_ddl:self.skipTest('Este fixture antiguo rebobina el esquema y requiere rollback de DDL. MariaDB se verifica con migración hacia adelante sobre base sintética.')
         from django.db.migrations.executor import MigrationExecutor
         old=('midistri_portal','0008_recuperacion_promociones')
         new=('midistri_portal','0009_pagina_tienda')
