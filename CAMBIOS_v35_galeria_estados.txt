@@ -1,0 +1,4 @@
+MiDistri-Pedidos v35
+Visor amplía imágenes pequeñas conservando proporción. Mis pedidos: ámbar pendientes, azul preparación, verde entregados, rojo cancelados y texto visible.
+Exclusiva del portal sobre34; Urban626 intacto. Sin migraciones ni cambios de datos/envíos/cron. Producción pendiente.
+Guía: docs/GALERIA_ESTADOS_v35.md

@@ -22,7 +22,7 @@ class HistorialEntregadoTests(TestCase):
         self.data['atencion'].update(estado='total',total_preparado='250000.00')
         self.data['atencion']['items'][0].update(cantidad_preparada=10,cantidad_cancelada=0)
         r=self.response('/portal/pedidos/')
-        self.assertContains(r,'<h3>Entregado</h3>',html=True)
+        self.assertContains(r,'<h3 class="pedido-estado estado-emitido">Entregado</h3>',html=True)
         self.assertNotContains(r,'LIN 121');self.assertNotContains(r,'VV 194')
         self.local.refresh_from_db();self.assertEqual(self.local.estado,'emitido')
     def test_detalle_parcial_y_sin_linea(self):
