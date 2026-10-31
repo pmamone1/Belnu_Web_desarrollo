@@ -150,7 +150,7 @@ def catalogo(request):
     context=base(request,perfil,d);context.update(ranking_disponible=ranking_disponible,destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,subcategorias=subcategorias,subcategoria=subcategoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     from .pagina import pagina_publica,MENSAJES
     from .pagina_views import contenido_contexto
-    context.update(contenido_contexto(pagina_publica(d),d) if d else {
+    context.update(contenido_contexto(pagina_publica(d),d,session=request.session) if d else {
         'pagina':{'diseno':'compacto'},'pagina_mensajes':MENSAJES,
         'bloques':[{'tipo':'catalogo','activo':True}]})
     template='midistri_portal/catalogo_inicial.html' if context.get('pagina',{}).get('inicial_anterior') else 'midistri_portal/catalogo.html'

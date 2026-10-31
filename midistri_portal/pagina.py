@@ -98,6 +98,14 @@ def validar_pagina(data,did,fuentes=True):
                 x['mensaje']=b['mensaje']
             if b['tipo']=='catalogo':
                 catalogs+=1;x['activo']=True
+            origen=b.get('origen','manual')
+            if origen not in ('manual','catalogo_aleatorio'):raise ValueError
+            if origen=='catalogo_aleatorio':
+                if b['tipo'] not in ('banner','carrusel_fotos','carrusel_productos'):raise ValueError
+                amount=b.get('cantidad',6)
+                if type(amount) is not int or not 1<=amount<=20:raise ValueError
+                x.update(origen=origen,cantidad=amount)
+            elif 'origen' in b:x['origen']='manual'
             slides=b.get('diapositivas',[])
             if not isinstance(slides,list) or len(slides)>20:raise ValueError
             x['diapositivas']=[]
@@ -109,7 +117,7 @@ def validar_pagina(data,did,fuentes=True):
                 if src.get('publicacion'):
                     if type(src['publicacion']) is not int:raise ValueError
                     slide['publicacion']=src['publicacion']
-                    if fuentes and x['activo'] and not vigente_slide(slide,did):raise ValidationError('Producto o material retirado. Reemplazalo u ocultá el bloque.')
+                    if fuentes and x['activo'] and origen!='catalogo_aleatorio' and not vigente_slide(slide,did):raise ValidationError('Producto o material retirado. Reemplazalo u ocultá el bloque.')
                 elif src.get('material_id'):
                     slide['material_id']=str(UUID(src['material_id']))
                     from urllib.parse import urlsplit
@@ -169,7 +177,7 @@ def guardar_borrador(perfil,did,data,revision,operacion,token,metadata=None):
 def payload_remoto(page,oid):
     materials=[];sources=[]
     for b in page.datos['bloques']:
-        if not b['activo']:continue
+        if not b['activo'] or b.get('origen')=='catalogo_aleatorio':continue
         for s in b.get('diapositivas',[]):
             if s.get('material_id'):materials.append(s['material_id'])
             elif s.get('publicacion'):
@@ -239,17 +247,23 @@ def pagina_publica(distribuidora):
     if t:return inicial(t)
     return dict(version=1,diseno='compacto',tema='claro',mensajes=dict(MENSAJES),presentacion={},bloques=[{'id':'catalogo','tipo':'catalogo','activo':True}])
 
-def bloques_vigentes(data,did,preview=False):
+def bloques_vigentes(data,did,preview=False,session=None):
     from django.conf import settings
-    output=[]
+    output=[];pool=None
     for b in data.get('bloques',[]):
         if not b.get('activo'):continue
         if not preview and not getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) and b['tipo'] not in ('catalogo','contacto') and not b.get('mensaje'):continue
         x=deepcopy(b);slides=[]
         from .editor_estilos import validar_estilo,estilo_css
         x['estilo']=validar_estilo(b.get('estilo',{}));x['css']=estilo_css(x['estilo'])
-        for s in b.get('diapositivas',[]):
-            item=vigente_slide(s,did)
+        automatico=b.get('origen')=='catalogo_aleatorio'
+        if automatico:
+            from .banners_automaticos import candidatos,slides_automaticos
+            if pool is None:pool=candidatos(did)
+            raw=slides_automaticos(b,did,session,preview,pool=pool)
+        else:raw=b.get('diapositivas',[])
+        for s in raw:
+            item=s if automatico else vigente_slide(s,did)
             if not item:continue
             if preview and item.get('material_id'):
                 item['url']='/portal/administrar/promociones/material/'+str(did)+'/'+item['material_id']+'/'
