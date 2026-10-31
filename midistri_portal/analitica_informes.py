@@ -45,6 +45,7 @@ def resultado(q,filtros):
     activekeys=set(activity);orderedkeys={k for k,v in byorder.items() if v};totals=events.aggregate(consultas_productos=Count('pk',filter=Q(tipo='producto_consulta')),productos_consultados=Count('producto_id',distinct=True,filter=Q(tipo='producto_consulta')),fotos=Count('pk',filter=Q(tipo='foto_ampliada')),videos=Count('pk',filter=Q(tipo__in=['video_mp4','video_enlace'])),ingresos=Count('pk',filter=Q(tipo__in=['ingreso','ingreso_recordado'])),visitas=Count('visita',distinct=True))
     reconciled=any(o['conciliacion'] for o in orders)
     summary=dict(vendedores_activos=len(activekeys),**totals,pedidos=len(orders),pedidos_sin_visita=sum(key(o) not in activekeys for o in orders),conversion=round(100*len(activekeys&orderedkeys)/len(activekeys),1) if activekeys else None,total_solicitado=None if reconciled else sum((Decimal(o['total_solicitado']) for o in orders),Decimal(0)),total_confirmado=None if reconciled else sum((Decimal(o['total_confirmado']) for o in orders),Decimal(0)),conciliacion=reconciled)
+    metricas_base={'eventos':events,'vendedores':rows,'pedidos':list(orders)}
     group=filtros.get('grupo','activos')
     if group not in {k for k,label in GRUPOS}:group='activos'
     filtros['grupo']=group
@@ -84,7 +85,7 @@ def resultado(q,filtros):
         if r['conciliacion']:
             for field in ('unidades_solicitadas','unidades_confirmadas','total_solicitado','total_confirmado'):r[field]=None
     products=list(events.filter(producto_id__isnull=False).values('producto_id','distribuidora_id').annotate(nombre=Max('producto'),sku=Max('sku'),consultas=Count('pk',filter=Q(tipo='producto_consulta')),fotos=Count('pk',filter=Q(tipo='foto_ampliada')),videos=Count('pk',filter=Q(tipo__in=['video_mp4','video_enlace']))).order_by('-consultas','nombre'))
-    return dict(consulta=q,resumen=summary,vendedores=vendors,ficha=selected,productos=products,pedidos=orders,eventos=events.order_by('-fecha','-pk'),medicion_desde=measurement,intervalos=intervals,incidencias=gaps,estados=list(states.values()),grupos=GRUPOS,tipos=ETIQUETAS,filtros=dict(filtros),distribuidoras=q.meta['distribuidoras'])
+    return dict(consulta=q,resumen=summary,metricas_base=metricas_base,vendedores=vendors,ficha=selected,productos=products,pedidos=orders,eventos=events.order_by('-fecha','-pk'),medicion_desde=measurement,intervalos=intervals,incidencias=gaps,estados=list(states.values()),grupos=GRUPOS,tipos=ETIQUETAS,filtros=dict(filtros),distribuidoras=q.meta['distribuidoras'])
 
 def seguro(value):
     if isinstance(value,str) and value.lstrip().startswith(('=','+','-','@')):return "'"+value
@@ -94,6 +95,8 @@ def seguro(value):
 def excel(data):
     from openpyxl import Workbook
     if data['eventos'].count()>20000 or any(len(data[k])>20000 for k in ('vendedores','productos','pedidos')):raise ApiError('Hay más de 20.000 filas. Reducí el período o los filtros antes de exportar.',400)
+    from .analitica_productos import enriquecer
+    enriquecer(data,{'distribuidora':data['consulta'].distribuidora_id})
     wb=Workbook();wb.remove(wb.active)
     def sheet(name,headers,rows):
         s=wb.create_sheet(name);s.append(headers)
@@ -103,7 +106,7 @@ def excel(data):
     summary=data['resumen'];q=data['consulta']
     sheet('Resumen',['Medida','Valor'],[(k,v) for k,v in summary.items()]+[('Desde',q.desde),('Hasta',q.hasta),('Corte',q.meta['corte']),('Medición desde',data['medicion_desde']),('Aviso','Actividad orientativa; no registra acciones anteriores al inicio ni confirma lectura de videos externos.')])
     sheet('Vendedores',['Vendedor','Distribuidora ID','Vendedor ID','LIN','VV','Actual','Activo','Email habilitado','Acciones período','Visitas','Ingresos','Productos distintos consultados','Consultas de producto','Cobertura del período','Acceso positivo previo acreditado','Última acción registrada','Pedidos período','Pedidos históricos'],[(v['nombre'],v['distribuidora_id'],v['id'],v['lin'],v['vv'],v['actual'],v['activo'],v['contacto'],v['acciones'],v['visitas'],v['ingresos'],v['productos_consultados'],v['consultas_productos'],v['cobertura_periodo'],v['acceso_previo'],v['ultima'],v['pedidos'],v['pedidos_historicos']) for v in data['vendedores']])
-    sheet('Productos',['Producto','SKU','Distribuidora ID','Consultas','Fotos ampliadas','Videos iniciados / enlaces abiertos'],[(p['nombre'],p['sku'],p['distribuidora_id'],p['consultas'],p['fotos'],p['videos']) for p in data['productos']])
+    sheet('Productos',['Producto','SKU','Distribuidora ID','Consultas','Fotos ampliadas','Videos iniciados / enlaces abiertos','Vendedores con interés (período)','Pedidos posteriores conocidos','Conversión vendedores (%)','Pedidos por consultas (%)','Desglose de pedidos incompleto'],[(p['nombre'],p['sku'],p['distribuidora_id'],p['consultas'],p['fotos'],p['videos'],p['interes']['vendedores'],p['interes']['pedidos_posteriores'],p['interes']['conversion'],p['interes']['pedidos_por_consulta'],p['interes']['incompleto']) for p in data['productos']])
     sheet('Pedidos',['Referencia','Fecha','Distribuidora ID','Vendedor','Estado','Atención','Solicitado','Confirmado','Unidades solicitadas','Unidades confirmadas','Conciliación'],[(o['referencia'],parse_datetime(o['creado']),o['distribuidora_id'],o['vendedor'],o['estado_label'],o['atencion_label'],o['total_solicitado'],o['total_confirmado'],o['unidades_solicitadas'],o['unidades_confirmadas'],o['conciliacion']) for o in data['pedidos']])
     sheet('Estados',['Estado','Atención','Pedidos','Unidades solicitadas','Unidades confirmadas','Solicitado','Confirmado','Por conciliar'],[(r['estado'],r['atencion'],r['pedidos'],r['unidades_solicitadas'],r['unidades_confirmadas'],r['total_solicitado'],r['total_confirmado'],r['conciliacion']) for r in data['estados']])
     sheet('Acciones',['Fecha Argentina','Distribuidora ID','Vendedor','Acción','Producto','SKU','Recurso','Cantidad','Pedido'],[(e.fecha,e.distribuidora_id,e.vendedor,ETIQUETAS.get(e.tipo,e.tipo),e.producto,e.sku,e.recurso,e.cantidad,str(e.pedido) if e.pedido else '') for e in data['eventos'].iterator()])
