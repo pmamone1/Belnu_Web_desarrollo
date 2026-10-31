@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v35 · Fotos y estados de pedidos
+
+Verificar foto pequeña/grande/vertical sin deformación, PC/celular, cierre y estados con texto/contraste en cuatro temas; conservar parcial/cancelación y detalle desplegable. No enviar campañas.
+
+El visor amplía también fotos pequeñas sin recortarlas; Mis pedidos distingue pendientes, preparación, entregados y cancelados con colores definidos y texto. No modifica archivos originales, estados, saldos ni envíos. Guía vigente: [Fotos y estados](GALERIA_ESTADOS_v35.md).
+
 ## MiDistri-Pedidos v34 vigente · Análisis del catálogo
 
 Indicadores desplegables, interés/conversión por producto y Excel, spinner de edición/guardado, acceso visible a estadísticas y nombres sin LIN/VV. Acumulativa32/33. Sin nuevas migraciones, captura adicional, cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.
