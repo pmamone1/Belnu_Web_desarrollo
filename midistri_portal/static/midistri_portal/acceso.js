@@ -34,7 +34,7 @@ document.addEventListener('submit',async e=>{
         if(!window.MidistriTab||!MidistriTab.proof(true))throw Error('Habilitá el almacenamiento de esta pestaña para ingresar.');
         const r=await MidistriTab.request(f.action,{method:'POST',body:new FormData(f)});
         const data=await r.json();if(!r.ok)throw Error(data.error||'No pudimos completar el ingreso.');
-        if(data.fase==='dentro'){location.assign(data.url);return;}
+        if(data.fase==='dentro'){if(data.dispositivo_recordado&&window.MidistriRecordado)MidistriRecordado.loginCompleted();location.assign(data.url);return;}
         document.getElementById('acceso-opciones').hidden=false;
         message().textContent=data.mensaje||'Elegí con qué perfil querés entrar.';
         if(data.fase==='codigo')resetCode();

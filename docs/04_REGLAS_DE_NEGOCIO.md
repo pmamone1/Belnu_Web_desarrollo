@@ -1,3 +1,15 @@
+## MiDistri-Pedidos v30
+
+Acceso de vendedor recordado automáticamente tras el primer código, sin vencimiento propio. Olvido revocable por dispositivo, perfiles acreditados y carritos por pestaña. Sólo portal0014 aditiva; requiere Urban622. Conserva captura e intervalos de analítica. Sin campañas, cambios económicos, históricos, remitentes, WhatsApp, cron o venv.
+
+Guía vigente: [Acceso recordado](ACCESO_RECORDADO_v30.md).
+
+Después de verificar el primer código de Email, MiDistri recuerda este dispositivo automáticamente, sin casilla para marcar ni vencimiento absoluto o por inactividad impuesto por la aplicación. El código inicial conserva sus treinta minutos y un solo uso.
+Al volver en el mismo navegador entra directamente al perfil acreditado. Si hay varios kioscos acreditados, permite elegir uno. Cada pestaña conserva su carrito independiente. Cambiar perfil no concede nuevas distribuidoras por coincidencia de Email.
+El botón «Salir y olvidar este dispositivo» cierra todas las pestañas de vendedor del dispositivo. Si no hay conexión, deja el olvido pendiente y lo confirma al reconectar, incluso después de cerrar y abrir el navegador.
+El navegador debe conservar sus cookies: borrarlas, usar otro navegador o modo privado exige un nuevo código. La cookie se renueva con el uso dentro del límite del navegador (hasta 400 días); no se puede garantizar permanencia si el navegador la elimina.
+La administración de distribuidoras continúa requiriendo la validación de Urban Soft. El bloque 20/65 sigue unido y las demás distribuidoras conservan su aislamiento.
+
 ## MiDistri-Pedidos v29
 
 Corrige la unicidad de intervalos en MariaDB mediante índice ordinario y coherencia de estado. Sólo nueva 0013; conserva 0012, fechas, eventos y captura activa. Urban 621 se mantiene. No cambia SQLMode, credenciales, remitentes, WhatsApp, cron, catálogo o venv. Sin envíos.

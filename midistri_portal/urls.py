@@ -1,6 +1,8 @@
 from django.urls import path
-from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views, pagina_views, editor_views, analitica_views
+from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views, pagina_views, editor_views, analitica_views, dispositivos_views
 urlpatterns=[
+path('acceso/recordado/',dispositivos_views.recordado,name='midistri_acceso_recordado'),
+path('acceso/olvidar/',dispositivos_views.olvidar,name='midistri_olvidar_dispositivo'),
 path('administrar/estadisticas/',analitica_views.panel,name='midistri_analitica_panel'),
 path('administrar/estadisticas/iniciar/',analitica_views.iniciar,name='midistri_analitica_iniciar'),
 path('administrar/estadisticas/<uuid:ident>/paso/',analitica_views.paso,name='midistri_analitica_paso'),

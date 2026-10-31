@@ -106,6 +106,8 @@ def _select(request,seleccion):
     else:
         try:response=JsonResponse(crear_sesion_pestana(request,result['perfil'],result['session_token'],ident,proof))
         except (KeyError,TypeError):raise ApiError('Respuesta de acceso inválida.') from None
+        from .dispositivos import recordar_acceso
+        response=recordar_acceso(request,response,request.midistri_tab,nuevo=True)
     pending.pop(ident,None);request.session['midistri_login_pending']=pending
     return response
 

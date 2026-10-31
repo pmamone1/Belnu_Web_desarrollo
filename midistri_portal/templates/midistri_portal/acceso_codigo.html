@@ -1,6 +1,6 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
 <section><h2>Entrar con mi Email</h2><p>Usá el Email asociado a tu vendedor o a tu cuenta de Urban Soft. No necesitás registrarte ni crear contraseña.</p>
-<p>El código vale <strong>30 minutos</strong> y se utiliza una sola vez. Una vez adentro podés seguir usando el portal. Para cerrar el acceso de forma segura, tocá Salir.</p>
+<p>El código vale <strong>30 minutos</strong> y se utiliza una sola vez. {% if request.midistri_recordar_enabled %}Después de validar el primer código, este dispositivo recordará tu acceso automáticamente, sin vencimiento impuesto por MiDistri. Para quitarlo, tocá «Salir y olvidar este dispositivo».{% else %}Una vez adentro podés seguir usando el portal. Para cerrar el acceso de forma segura, tocá Salir.{% endif %}</p>
 <p id="acceso-mensaje" role="status" aria-live="polite"></p>
 <form data-codigo="iniciar" method="post" action="{% url 'midistri_codigo_iniciar' %}">{% csrf_token %}
 <label>Email <input type="email" name="email" autocomplete="email" required maxlength="254"></label><button>Recibir código</button></form>

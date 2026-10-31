@@ -70,6 +70,7 @@ class CambioTienda(models.Model):
 
 
 class SesionVendedorPortal(models.Model):
+    dispositivo=models.ForeignKey('midistri_portal.DispositivoRecordado',on_delete=models.PROTECT,null=True,blank=True,related_name='pestanas')
     id=models.UUIDField(primary_key=True,default=uuid4,editable=False)
     prueba_hash=models.CharField(max_length=64)
     navegador_hash=models.CharField(max_length=64)
@@ -108,3 +109,5 @@ class CambioPromocional(models.Model):
 from .pagina_models import PaginaTienda,VersionPagina,EdicionPagina
 
 from .analitica_models import EvidenciaAnalitica,IncidenciaAnalitica,ControlAnalitica,IntervaloAnalitico,SesionAnalitica,EventoAnalitico,ConsultaAnalitica
+
+from .dispositivos_models import DispositivoRecordado

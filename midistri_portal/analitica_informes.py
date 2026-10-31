@@ -11,7 +11,7 @@ from .client import ApiError
 from .models import EventoAnalitico,IntervaloAnalitico,SesionVendedorPortal
 
 AR=pytz.timezone('America/Argentina/Buenos_Aires')
-ETIQUETAS={'ingreso':'Ingreso','catalogo':'Catálogo','producto_consulta':'Consulta de producto','foto_ampliada':'Foto ampliada','video_mp4':'Video: reproducción iniciada','video_enlace':'Enlace de video abierto','carrito':'Cantidad en carrito','carrito_visto':'Carrito consultado','pedidos_vistos':'Historial consultado','pedido_visto':'Pedido consultado','pedido':'Pedido aceptado'}
+ETIQUETAS={'ingreso':'Ingreso','ingreso_recordado':'Acceso recordado','catalogo':'Catálogo','producto_consulta':'Consulta de producto','foto_ampliada':'Foto ampliada','video_mp4':'Video: reproducción iniciada','video_enlace':'Enlace de video abierto','carrito':'Cantidad en carrito','carrito_visto':'Carrito consultado','pedidos_vistos':'Historial consultado','pedido_visto':'Pedido consultado','pedido':'Pedido aceptado'}
 ESTADOS={'recibido':'Recibido, pendiente de gestionar','ok':'OK para preparar','emitido':'Preparado / remito emitido','cancelado':'Cancelado'}
 ATENCION={'pendiente':'Sin preparación confirmada','parcial':'Atención parcial','total':'Atención completa','cancelada':'Sin unidades confirmadas','por_conciliar':'Por conciliar'}
 GRUPOS=[('medicion_incompleta','Medición incompleta / no medida'),('activos','Vendedores actuales'),('sin_ingresos','Sin ingreso registrado desde la medición'),('sin_actividad','Sin actividad en el período'),('sin_pedidos_periodo','Ingresaron, sin pedido en el período'),('nunca_pedido','Sin pedidos históricos'),('con_pedidos','Con pedidos en el período'),('sin_contacto','Sin Email habilitado'),('historicos','Inactivos / históricos')]
@@ -23,7 +23,7 @@ def resultado(q,filtros):
     all_events=EventoAnalitico.objects.filter(distribuidora_id__in=q.distribuidoras,fecha__lte=cut)
     events=all_events.filter(fecha__gte=start,fecha__lt=end)
     key=lambda r:(r['distribuidora_id'],r['vendedor_id'])
-    activity={key(r):r for r in events.values('distribuidora_id','vendedor_id').annotate(acciones=Count('pk'),visitas=Count('visita',distinct=True),ingresos=Count('pk',filter=Q(tipo='ingreso')),productos_consultados=Count('producto_id',distinct=True,filter=Q(tipo='producto_consulta')),consultas_productos=Count('pk',filter=Q(tipo='producto_consulta')),ultima=Max('fecha'))}
+    activity={key(r):r for r in events.values('distribuidora_id','vendedor_id').annotate(acciones=Count('pk'),visitas=Count('visita',distinct=True),ingresos=Count('pk',filter=Q(tipo__in=['ingreso','ingreso_recordado'])),productos_consultados=Count('producto_id',distinct=True,filter=Q(tipo='producto_consulta')),consultas_productos=Count('pk',filter=Q(tipo='producto_consulta')),ultima=Max('fecha'))}
     ever={key(r):r for r in all_events.values('distribuidora_id','vendedor_id').annotate(ultima=Max('fecha'),nombre=Max('vendedor'))}
     from .analitica_cobertura import cobertura
     local=q.meta['local'];raw_intervals=local['intervalos'];gaps=local['incidencias']
@@ -42,7 +42,7 @@ def resultado(q,filtros):
         a=activity.get(k,{});v.update(acciones=a.get('acciones',0),visitas=a.get('visitas',0),ingresos=a.get('ingresos',0),ultima=ever.get(k,{}).get('ultima'),pedidos=len(byorder[k]),medido=historical[k[0]],acceso_previo=k in prior,cobertura_periodo=status[k[0]],productos_consultados=a.get('productos_consultados',0),consultas_productos=a.get('consultas_productos',0))
         rows.append(v)
     rows.sort(key=lambda r:(r['nombre'].casefold(),r['distribuidora_id'],r['id']))
-    activekeys=set(activity);orderedkeys={k for k,v in byorder.items() if v};totals=events.aggregate(consultas_productos=Count('pk',filter=Q(tipo='producto_consulta')),productos_consultados=Count('producto_id',distinct=True,filter=Q(tipo='producto_consulta')),fotos=Count('pk',filter=Q(tipo='foto_ampliada')),videos=Count('pk',filter=Q(tipo__in=['video_mp4','video_enlace'])),ingresos=Count('pk',filter=Q(tipo='ingreso')),visitas=Count('visita',distinct=True))
+    activekeys=set(activity);orderedkeys={k for k,v in byorder.items() if v};totals=events.aggregate(consultas_productos=Count('pk',filter=Q(tipo='producto_consulta')),productos_consultados=Count('producto_id',distinct=True,filter=Q(tipo='producto_consulta')),fotos=Count('pk',filter=Q(tipo='foto_ampliada')),videos=Count('pk',filter=Q(tipo__in=['video_mp4','video_enlace'])),ingresos=Count('pk',filter=Q(tipo__in=['ingreso','ingreso_recordado'])),visitas=Count('visita',distinct=True))
     reconciled=any(o['conciliacion'] for o in orders)
     summary=dict(vendedores_activos=len(activekeys),**totals,pedidos=len(orders),pedidos_sin_visita=sum(key(o) not in activekeys for o in orders),conversion=round(100*len(activekeys&orderedkeys)/len(activekeys),1) if activekeys else None,total_solicitado=None if reconciled else sum((Decimal(o['total_solicitado']) for o in orders),Decimal(0)),total_confirmado=None if reconciled else sum((Decimal(o['total_confirmado']) for o in orders),Decimal(0)),conciliacion=reconciled)
     group=filtros.get('grupo','activos')
