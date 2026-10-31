@@ -32,3 +32,7 @@ Las migraciones hacia adelante y su repetición conservaron los registros anteri
 ## Estado de entrega
 
 Bases Urban621 y MiDistri29 confirmadas instaladas por el usuario. El log de MiDistri29 confirma0013, captura activa y cuatro intervalos abiertos; respaldo de código81zg6eue. Esta versión nueva requiere instalación y activación en cPanel; publicar GitHub o crear ZIP no la instala.
+
+## Correcciones de revisión
+
+Las pestañas recordadas se vinculan a la huella del dispositivo validado y su prueba privada, sin depender de una sesión Django aleatoria. Restaurar no rota sessionid; el OTP inicial sí. Una selección retirada o pestaña vieja no borra la cookie válida del dispositivo; se ofrecen opciones actualizadas o recuperar la pestaña. Salir invalida también el HTML o PDF pendiente de navegación y prevalece sobre una navegación ocupada.

@@ -98,7 +98,8 @@ def recordar_acceso(request,response,tab,nuevo=False):
         if row.revocado or not secrets.compare_digest(row.hash_cookie,fingerprint):
             raise PermissionDenied('Ese dispositivo fue olvidado.')
         tab.dispositivo=row
-        tab.save(update_fields=['dispositivo'])
+        tab.navegador_hash=fingerprint
+        tab.save(update_fields=['dispositivo','navegador_hash'])
         pending.pop(ident,None);request.session['midistri_dispositivo_pendiente']=pending
         cookie(response,value)
         import json

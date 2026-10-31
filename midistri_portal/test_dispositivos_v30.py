@@ -149,6 +149,68 @@ class DispositivoPortalTests(TestCase):
         from .models import DispositivoRecordado
         self.assertFalse(DispositivoRecordado.objects.get().revocado)
 
+    def test_restauraciones_con_instantanea_de_cookies_no_invalidan_otras_pestanas(self):
+        self.login()
+        for warm in (False,True):
+            with self.subTest(warm=warm):
+                initial=dict(self.client.cookies)
+                if not warm:initial.pop(settings.SESSION_COOKIE_NAME,None)
+                a,b=Client(),Client()
+                for c in (a,b):
+                    for key,value in initial.items():c.cookies[key]=value.value
+                ha={'HTTP_X_MIDISTRI_TAB':str(uuid4()),'HTTP_X_MIDISTRI_TAB_PROOF':'c'*64}
+                hb={'HTTP_X_MIDISTRI_TAB':str(uuid4()),'HTTP_X_MIDISTRI_TAB_PROOF':'d'*64}
+                self.assertEqual(a.post('/portal/acceso/recordado/',**ha).status_code,200)
+                self.assertEqual(b.post('/portal/acceso/recordado/',**hb).status_code,200)
+                if settings.SESSION_COOKIE_NAME in b.cookies:a.cookies[settings.SESSION_COOKIE_NAME]=b.cookies[settings.SESSION_COOKIE_NAME].value
+                with patch('midistri_portal.views.api',return_value=self.profile):
+                    self.assertEqual(a.get('/portal/',**ha).status_code,200)
+                    self.assertEqual(b.get('/portal/',**hb).status_code,200)
+                self.assertEqual(SesionVendedorPortal.objects.get(pk=ha['HTTP_X_MIDISTRI_TAB']).datos.get('midistri_cart',{}),{})
+
+    def test_perfil_retirado_del_selector_no_borra_dispositivo_valido(self):
+        self.login();self.remote_profiles.append({'seleccion':'q'*32,'nombre':'Otro kiosco','distribuidora':'61 - Recova','tipo':'vendedor','distribuidora_id':61,'vendedor_id':8})
+        old=self.remote_profiles[0]['seleccion'];self.headers['HTTP_X_MIDISTRI_TAB']=str(uuid4());self.headers['HTTP_X_MIDISTRI_TAB_PROOF']='b'*64
+        self.assertEqual(self.resume().json()['fase'],'elegir')
+        self.remote_profiles=self.remote_profiles[1:]
+        response=self.resume(seleccion=old)
+        self.assertNotIn(self.devices.COOKIE,response.cookies)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.json()['fase'],'elegir')
+        self.assertEqual(self.resume(seleccion='q'*32).json()['fase'],'dentro')
+
+    def test_pestana_de_dispositivo_viejo_no_borra_cookie_nueva(self):
+        self.login();old=dict(self.headers)
+        self.headers['HTTP_X_MIDISTRI_TAB']=str(uuid4());self.headers['HTTP_X_MIDISTRI_TAB_PROOF']='b'*64
+        self.login();new_cookie=self.client.cookies[self.devices.COOKIE].value
+        response=self.client.post('/portal/acceso/recordado/',**old)
+        self.assertNotIn(self.devices.COOKIE,response.cookies)
+        self.assertEqual(self.client.cookies[self.devices.COOKIE].value,new_cookie)
+
+    def test_nuevo_otp_en_misma_pestana_sustituye_dispositivo(self):
+        self.login();old=self.client.cookies[self.devices.COOKIE].value
+        self.login();current=self.client.cookies[self.devices.COOKIE].value
+        self.assertNotEqual(old,current)
+        self.assertEqual(self.resume().json()['fase'],'dentro')
+        from .models import DispositivoRecordado
+        self.assertEqual(DispositivoRecordado.objects.filter(revocado=False).count(),1)
+
+    def test_perfil_retirado_durante_api_restaurar_conserva_otras_opciones(self):
+        self.login();old=self.remote_profiles[0]['seleccion']
+        self.remote_profiles.append({'seleccion':'q'*32,'nombre':'Otro kiosco','distribuidora':'61 - Recova','tipo':'vendedor','distribuidora_id':61,'vendedor_id':8})
+        original=self.device_response
+        def changing(action,**kw):
+            if action=='seller-device-resume':
+                self.remote_profiles=self.remote_profiles[1:]
+                raise ApiError('Perfil retirado',403)
+            return original(action,**kw)
+        self.headers['HTTP_X_MIDISTRI_TAB']=str(uuid4());self.headers['HTTP_X_MIDISTRI_TAB_PROOF']='b'*64
+        with patch('midistri_portal.dispositivos.api',side_effect=changing):response=self.resume(seleccion=old)
+        self.assertEqual(response.status_code,200)
+        self.assertEqual(response.json()['fase'],'elegir')
+        self.assertEqual(len(response.json()['identidades']),1)
+        self.assertNotIn(self.devices.COOKIE,response.cookies)
+
 from . import test_analitica_informes_v28 as analytics_fixtures
 class InformesRecordadosTests(TestCase):
     setUp=analytics_fixtures.InformesAnaliticaTests.setUp
