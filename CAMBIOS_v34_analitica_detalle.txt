@@ -1,0 +1,4 @@
+MiDistri-Pedidos v34
+Indicadores desplegables, interés/conversión por producto y Excel, spinner de edición/guardado, acceso visible a estadísticas y nombres sin LIN/VV. Acumulativa32/33. Sin nuevas migraciones, captura adicional, cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.
+Guía: docs/ANALITICA_DETALLE_v34.md
+Sin cambios de configuración operativa ni instalación productiva durante la preparación.

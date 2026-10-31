@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v34 vigente · Análisis del catálogo
+
+Indicadores desplegables, interés/conversión por producto y Excel, spinner de edición/guardado, acceso visible a estadísticas y nombres sin LIN/VV. Acumulativa32/33. Sin nuevas migraciones, captura adicional, cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.
+
+Guía: [Indicadores y productos](ANALITICA_DETALLE_v34.md).
+
 ## MiDistri-Pedidos v33 vigente · Editor y pedidos
 
 Editor con estilos independientes por mensaje, eliminación reversible de bloques y advertencias localizadas; Mis pedidos en tabla desplegable adaptable. Sin migraciones nuevas ni cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.

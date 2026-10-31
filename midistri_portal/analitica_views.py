@@ -60,16 +60,29 @@ def _error(request,error,ajax=False):
 
 @require_GET
 def panel(request,ident=None):
+    ajax=request.GET.get('parcial')=='metrica'
     try:
         ctx=_operador(request);today=timezone.localtime(timezone.now(),informes.AR).date()
         ctx.update(titulo='Estadísticas de vendedores',desde=(today-timedelta(days=29)).isoformat(),hasta=today.isoformat())
         if ident:
             q=_consulta(ident,ctx);data=informes.resultado(q,request.GET)
             params=request.GET.copy();params.pop('pagina',None);params.pop('pagina_pedidos',None);params.pop('pagina_vendedores',None);params.pop('pagina_productos',None)
-            params['distribuidora']=q.distribuidora_id
+            params['distribuidora']=ctx['tienda']['id']
             ctx.update(data,desde=q.desde.isoformat(),hasta=q.hasta.isoformat(),acciones=Paginator(data['eventos'],50).get_page(request.GET.get('pagina',1)),ordenes=Paginator(data['pedidos'],50).get_page(request.GET.get('pagina_pedidos',1)),vendedores_pagina=Paginator(data['vendedores'],50).get_page(request.GET.get('pagina_vendedores',1)),productos_pagina=Paginator(data['productos'],50).get_page(request.GET.get('pagina_productos',1)),params=params.urlencode(),excel_url=reverse('midistri_analitica_excel',args=[ident])+'?'+params.urlencode())
+            from .analitica_detalle import detalle,tarjetas
+            ctx['tarjetas']=tarjetas(data['resumen'],params)
+            if not ajax:
+                from .analitica_productos import enriquecer
+                enriquecer(data,params,ctx['productos_pagina'].object_list)
+            if request.GET.get('detalle'):
+                ctx['detalle_indicador']=detalle(data,request.GET['detalle'],request.GET.get('pagina_detalle',1),params)
+            if ajax:
+                if 'detalle_indicador' not in ctx:raise ApiError('Elegí un indicador.',400)
+                from django.template.loader import render_to_string
+                return privada(JsonResponse({'html':render_to_string('midistri_portal/analitica_detalle.html',ctx,request=request)}))
+        elif ajax:raise ApiError('Volvé a consultar antes de abrir un indicador.',409)
         return privada(render(request,'midistri_portal/analitica_panel.html',ctx))
-    except ApiError as e:return _error(request,e)
+    except ApiError as e:return _error(request,e,ajax=ajax)
 
 @require_POST
 def iniciar(request):
