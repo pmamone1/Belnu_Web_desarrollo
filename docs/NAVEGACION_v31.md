@@ -19,3 +19,6 @@ Si hay diferencias no revisadas, el instalador se detiene antes de copiar. No fo
 
 ## Validación y estado
 Pruebas locales con SMTP en memoria y datos sintéticos. No se envían correos reales ni campañas. La instalación productiva de623/31 y su comprobación en el sitio real quedan pendientes de que se ejecuten los comandos entregados.
+
+## Revisión final de recuperación
+El rollback del portal exige el esquema coherente ya instalado en30 y regenera los estáticos publicados desde las fuentes restauradas con collectstatic --clear antes de iniciar. No elimina media, registros ni migraciones. Los ensayos locales compararon también los bytes servidos. Ver el informe de revisión de esta entrega.

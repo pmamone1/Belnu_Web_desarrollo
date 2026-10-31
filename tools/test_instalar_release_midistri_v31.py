@@ -160,8 +160,8 @@ class InstallerTests(unittest.TestCase):
         fresh=importlib.util.module_from_spec(spec);spec.loader.exec_module(fresh)
         with patch.object(fresh,'run') as run:
             fresh.comprobar_restauracion(self.root)
-        self.assertEqual(run.call_count,1)
-        self.assertEqual(run.call_args.args[1:3],('shell','-c'))
+        self.assertEqual(run.call_count,2)
+        self.assertEqual(run.call_args_list[0].args[1:3],('shell','-c'))
         self.assertIn('MigrationRecorder',run.call_args.args[-1])
         self.assertNotIn('0011_publicacion_ranking_analitica',run.call_args.args[-1])
 

@@ -93,9 +93,10 @@ def validar_restauracion(applied):
         raise ValueError('Restauración bloqueada: hay migraciones de esta entrega aplicadas. Preparar una corrección hacia adelante; no revertir esquema ni históricos.')
 
 def comprobar_restauracion(root):
-    code="from django.db import connection; from django.db.migrations.recorder import MigrationRecorder; applied=MigrationRecorder(connection).applied_migrations(); assert not set("+repr([tuple(t) for t in TARGETS])+").intersection(applied), 'Restauración bloqueada: migraciones de esta entrega aplicadas. Requiere corrección hacia adelante, sin revertir esquema ni históricos.'"
-    code += "; table='midistri_portal_sesionvendedorportal'; cursor=connection.cursor(); columns=[x.name for x in connection.introspection.get_table_description(cursor,table)] if table in connection.introspection.table_names(cursor) else []; cursor.close(); assert 'midistri_portal_dispositivorecordado' not in connection.introspection.table_names() and 'dispositivo_id' not in columns, 'Restauracion bloqueada: existe esquema nuevo o DDL parcial; corregir hacia adelante sin revertir datos'"
+    # v31 is code-only on top of v30: its device schema must remain installed.
+    code="from django.db import connection; from django.db.migrations.recorder import MigrationRecorder; assert ('midistri_portal','0014_dispositivo_recordado') in MigrationRecorder(connection).applied_migrations(), 'Restauracion bloqueada: falta la migracion base30; no se modificaron archivos'"
     run(root,'shell','-c',code)
+    comprobar_intervalos(root)  # Reject partial/incoherent DDL, not a healthy base30.
 
 
 def validar_plan(plan):
@@ -158,6 +159,7 @@ def main():
         revisar_respaldo(Path(opts.restore).absolute(),root)
         control(root,'stop')
         restore(Path(opts.restore).absolute(),root)
+        run(root,'collectstatic','--clear','--noinput')
         control(root,'start')
         return
     bundle=Path(__file__).resolve().parent
