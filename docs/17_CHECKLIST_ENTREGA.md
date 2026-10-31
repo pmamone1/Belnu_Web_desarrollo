@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v33 vigente · Editor y pedidos
+
+Editor con estilos independientes por mensaje, eliminación reversible de bloques y advertencias localizadas; Mis pedidos en tabla desplegable adaptable. Sin migraciones nuevas ni cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.
+
+Guía: [Edición y pedidos](EDITOR_PEDIDOS_v33.md).
+
+Pruebas de aceptación: quitar Acceso Distribuidor sólo del encabezado público; abrir administración desde Urban. Crear/eliminar/deshacer/rehacer promoción; catálogo protegido. Guardar dos mensajes con estilos diferentes, restablecer uno y publicar sólo tras revisar. Cargar borrador con foto retirada, localizar aviso y reemplazar/ocultar/eliminar sin rehabilitar la foto. Pedidos recibidos/entregados parciales/cancelados: mostrar cantidades y totales del snapshot y nunca confundir pendiente con cero. Probar alcance de otro vendedor, fallo de actualización y pantallas320/390/1440. Instalación no envía campañas ni activa programación.
+
 Verificación actual: [Evidencia32](VERIFICACION_v32.md). Confirmar sesión estable, subcategoría, modo automático y previa sin encolado.
 
 ## MiDistri32 vigente: variedad e incentivos

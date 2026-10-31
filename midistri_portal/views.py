@@ -302,6 +302,9 @@ def pedidos(request):
         if not locals().get('perfil'):return error_page(request,e)
         messages.warning(request,'No pudimos actualizar los estados. Mostramos la última información guardada.')
     ctx=base(request,perfil);ctx['ocultar_lin']=True;ctx['pedidos']=PedidoLocal.objects.filter(vendedor_id=perfil['id'],distribuidora_id=perfil['distribuidora_id']).order_by('-creado')[:100]
+    from .historial_presentacion import resumen_pedido
+    ctx['pedidos']=list(ctx['pedidos'])
+    for order in ctx['pedidos']:order.resumen=resumen_pedido(order)
     return render(request,'midistri_portal/pedidos.html',ctx)
 
 

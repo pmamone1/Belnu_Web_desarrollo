@@ -26,8 +26,8 @@ class CabezalTests(TestCase):
         clean=p.validar_pagina(data,20);html=html_pagina(clean,self.d)
         header=html.partition('<header')[2].partition('</header>')[0]
         self.assertIn('/portal/administrar/promociones/material/20/',header)
-        self.assertIn('Productos &lt;QA&gt;',header);self.assertIn('Mi gestión',header)
-        self.assertIn('/portal/administrar/entrada/?destino=tienda',header)
+        self.assertIn('Productos &lt;QA&gt;',header);self.assertNotIn('Mi gestión',header)
+        self.assertNotIn('/portal/administrar/entrada/?destino=tienda',header)
     def test_etiquetas_se_guardan_publican_y_borradores_previos_tienen_defaults(self):
         from . import pagina as p
         from .editor_views import html_pagina
@@ -39,7 +39,7 @@ class CabezalTests(TestCase):
         self.assertEqual(p.pagina_publica(self.d)['mensajes'].get('nav_catalogo'),'Ver productos')
         for key in ('nav_catalogo','nav_distribuidor'):data['mensajes'].pop(key,None)
         old=p.validar_pagina(data,20);html=html_pagina(old,self.d)
-        self.assertIn('>Catálogo</a>',html);self.assertIn('>Acceso Distribuidor</a>',html)
+        self.assertIn('>Catálogo</a>',html);self.assertNotIn('>Acceso Distribuidor</a>',html)
         data['mensajes']['nav_catalogo']='x'*81
         with self.assertRaises(ValidationError):p.validar_pagina(data,20)
     def test_editor_ofrece_cabezal_logo_y_progreso_publicacion(self):

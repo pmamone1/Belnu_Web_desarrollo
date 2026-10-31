@@ -5,7 +5,7 @@ from .presentacion import TEMAS
 class PaginaForm(forms.Form):
     encabezado=forms.CharField(max_length=150,required=False,label='Nombre / encabezado de la tienda')
     nav_catalogo=forms.CharField(max_length=80,required=False,label='Texto del botón Catálogo')
-    nav_distribuidor=forms.CharField(max_length=80,required=False,label='Texto del botón Acceso Distribuidor')
+    nav_distribuidor=forms.CharField(max_length=80,required=False,widget=forms.HiddenInput)
     diseno=forms.ChoiceField(choices=DISENOS,label='Diseño de la página')
     tema=forms.ChoiceField(choices=TEMAS,label='Color predeterminado')
     email=forms.EmailField(required=False,label='Email de contacto')

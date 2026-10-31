@@ -44,15 +44,15 @@ def dinamica(request):
             return privada(JsonResponse({'diapositivas':[dict(publicacion=a['publicacion'],tipo='foto',url=a['url'],titulo=a['producto'],texto='',enlace='',boton='') for a in chosen]}))
         if action=='guardar':page=p.guardar_borrador(ctx['operador'],did,data['datos'],data['revision'],data['operacion'],token)
         elif action=='render':
-            clean=p.validar_pagina(data['datos'],did)
-            return privada(JsonResponse({'html':html_pagina(clean,d)}))
+            clean=p.validar_pagina(data['datos'],did,fuentes=False)
+            return privada(JsonResponse({'html':html_pagina(clean,d),'advertencias':p.advertencias_pagina(clean,did)}))
         elif action=='revisar':result['firma']=p.revisar_borrador(ctx['operador'],did,token)
         elif action=='publicar':
             v=p.publicar_revision(ctx['operador'],did,data.get('firma',''),token);result['publicada']=str(v.pk)
         elif action!='cargar':raise ValidationError('Acción inválida.')
         from .editor_estilos import validar_estilo
         result['estilos_defecto']=validar_estilo({})
-        result.update(datos=page.datos,revision=page.revision,html=html_pagina(page.datos,d),recursos=recursos(did))
+        result.update(datos=page.datos,revision=page.revision,html=html_pagina(page.datos,d),recursos=recursos(did),advertencias=p.advertencias_pagina(page.datos,did))
         return privada(JsonResponse(result))
     except ApiError as e:return privada(JsonResponse({'error':str(e)},status=e.status if e.status in (401,403) else 503))
     except (ValidationError,KeyError,ValueError,TypeError) as e:return privada(JsonResponse({'error':str(e)},status=409 if 'cambió' in str(e) or 'confirmar' in str(e) else 400))

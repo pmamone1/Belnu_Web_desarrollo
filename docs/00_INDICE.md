@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v33 vigente · Editor y pedidos
+
+Editor con estilos independientes por mensaje, eliminación reversible de bloques y advertencias localizadas; Mis pedidos en tabla desplegable adaptable. Sin migraciones nuevas ni cambios económicos, históricos, remitentes, WhatsApp, cron o venv. Sin envíos.
+
+Guía: [Edición y pedidos](EDITOR_PEDIDOS_v33.md).
+
 ## MiDistri32 vigente: variedad e incentivos
 
 Guía: [Catálogo y preparación](ROTACION_INCENTIVOS_v32.md). catálogo Recomendados estable por sesión, subcategorías, banners automáticos y acceso Continuar; preparación privada de incentivos para Urban624, sin SMTP. Sin migraciones nuevas, activación de cron, cambios de remitentes, WhatsApp o venv. Sin envíos.

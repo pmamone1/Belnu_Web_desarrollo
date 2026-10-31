@@ -132,7 +132,11 @@ def validar_pagina(data,did,fuentes=True):
                 x['diapositivas'].append(slide)
             blocks.append(x)
         if catalogs!=1:raise ValidationError('Debe haber exactamente un catálogo visible.')
-        return {'version':1,'diseno':data['diseno'],'tema':data['tema'],'mensajes':messages,'presentacion':presentation,'bloques':blocks}
+        result={'version':1,'diseno':data['diseno'],'tema':data['tema'],'mensajes':messages,'presentacion':presentation,'bloques':blocks}
+        if 'estilos_mensajes' in data:
+            from .mensaje_estilos import validar_mensajes
+            result['estilos_mensajes']=validar_mensajes(data['estilos_mensajes'])
+        return result
     except (KeyError,TypeError,ValueError,AttributeError):
         raise ValidationError('Página inválida: hasta10 bloques activos,20 fotos por carrusel y rotación entre3 y15 segundos.') from None
 
@@ -161,13 +165,18 @@ def borrador_tienda(perfil,did,token):
 def guardar_borrador(perfil,did,data,revision,operacion,token,metadata=None):
     fresh,did=autorizar(perfil,did,token)
     if type(revision) is not int or revision<0:raise ValidationError('Revisión inválida.')
-    clean=validar_pagina(data,did);fp=huella(clean);oid=UUID(str(operacion))
+    clean=validar_pagina(data,did,fuentes=False);fp=huella(clean);oid=UUID(str(operacion))
     with transaction.atomic():
         page=_pagina(did)
         old=EdicionPagina.objects.filter(pk=oid).first()
         if old:
             if old.pagina_id!=page.pk or old.operador_id!=fresh['operador_id'] or old.huella!=fp:raise ValidationError('La operación ya corresponde a otra edición.')
             return page
+        for protected in page.datos['bloques']:
+            if protected['tipo'] not in ('catalogo','contacto'):continue
+            updated=next((b for b in clean['bloques'] if b['id']==protected['id'] and b['tipo']==protected['tipo']),None)
+            if updated is None or (protected['activo'] and not updated['activo']):
+                raise ValidationError('El catálogo y el contacto existentes permanecen protegidos.')
         if page.pendiente_id:raise ValidationError('Hay una publicación por confirmar. Reintentá antes de editar.')
         if page.revision!=revision:raise ValidationError('El borrador cambió. Recargá para no perder cambios.')
         page.datos=clean;page.revision+=1;page.save(update_fields=['datos','revision'])
@@ -298,3 +307,14 @@ def descartar_pendiente(perfil,did,ident,revision,motivo,token):
         EdicionPagina.objects.create(id=uuid4(),pagina=page,operador_id=fresh['operador_id'],revision=page.revision,
             huella=huella(page.datos),datos={'accion':'descartar_intento','version':str(version.pk),'motivo':reason})
         return page
+
+
+def advertencias_pagina(data,did):
+    """Locate stale sources without changing a draft or making them public."""
+    result=[]
+    for block in data.get('bloques',[]):
+        if not block.get('activo') or block.get('origen')=='catalogo_aleatorio':continue
+        for index,slide in enumerate(block.get('diapositivas',[]),1):
+            if slide.get('publicacion') and not vigente_slide(slide,did):
+                result.append({'bloque':block['id'],'diapositiva':index,'texto':'Bloque «'+(block.get('titulo') or block['tipo'])+'», diapositiva '+str(index)+': producto o material retirado. Reemplazalo, quitá la diapositiva u ocultá/eliminá el bloque antes de publicar.'})
+    return result

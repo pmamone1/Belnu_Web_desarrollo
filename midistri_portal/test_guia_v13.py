@@ -12,9 +12,9 @@ class AccesoGuiaTests(TestCase):
         nonce=parse_qs(urlsplit(response['Location']).query)['desafio'][0]
         api.return_value={'perfil':dict(PROFILE,permisos=['midistri.tienda_configurar','pedidos.gestionar']),'session_token':'s'*43}
         return self.client.post('/portal/administrar/entrar/',{'codigo':'c'*43,'desafio':nonce},HTTP_ORIGIN='https://sistema7000.belnu.com.ar')
-    def test_publico_tiene_acceso_distribuidor(self):
+    def test_publico_omite_acceso_distribuidor_desde_v33(self):
         r=self.client.get('/portal/')
-        self.assertContains(r,'Acceso Distribuidor')
+        self.assertNotContains(r,'Acceso Distribuidor')
     @patch('midistri_portal.operadores.api')
     def test_entrada_directa_editor(self,api):
         r=self.completar(self.entrada(),api)
