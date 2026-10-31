@@ -75,7 +75,7 @@ def resultado(q,filtros):
     states={}
     for o in orders:
         state=(o['estado'],o['atencion']);o['estado_label']=ESTADOS.get(o['estado'],o['estado']);o['atencion_label']=ATENCION.get(o['atencion'],o['atencion'])
-        if state not in states:states[state]=dict(estado=o['estado_label'],atencion=o['atencion_label'],pedidos=0,unidades_solicitadas=0,unidades_confirmadas=0,total_solicitado=Decimal(0),total_confirmado=Decimal(0),conciliacion=False)
+        if state not in states:states[state]=dict(codigo_estado=o['estado'],codigo_atencion=o['atencion'],estado=o['estado_label'],atencion=o['atencion_label'],pedidos=0,unidades_solicitadas=0,unidades_confirmadas=0,total_solicitado=Decimal(0),total_confirmado=Decimal(0),conciliacion=False)
         r=states[state];r['pedidos']+=1
         if o['conciliacion']:r['conciliacion']=True
         else:

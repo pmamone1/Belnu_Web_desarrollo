@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v36 · Pedidos por estado desplegables
+
+Validar50+1, grupo correcto, ficha/corte, conciliación, PC/celular, teclado y sinJS; conservar permisos/caducidad. No enviar campañas.
+
+Las filas de Pedidos por estado y atención permiten consultar los pedidos del grupo en la misma pantalla, con vendedor, fecha, referencia, cantidades e importes;50 por página y sin mezclar estados/fichas. Incluye fotos/colores de35. Sin cambios económicos o envíos. Guía: [Pedidos por estado](ESTADOS_DESPLEGABLES_v36.md).
+
 ## MiDistri-Pedidos v35 · Fotos y estados de pedidos
 
 Verificar foto pequeña/grande/vertical sin deformación, PC/celular, cierre y estados con texto/contraste en cuatro temas; conservar parcial/cancelación y detalle desplegable. No enviar campañas.
