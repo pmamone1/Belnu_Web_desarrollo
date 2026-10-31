@@ -1,3 +1,15 @@
+## MiDistri-Pedidos v31
+
+Encabezado sin botón de salida; acceso recordado y Cambiar perfil conservados. Paginación grande, filtros conservados y diseño adaptable. Spinner accesible mientras se recupera el acceso. Sin nuevas migraciones ni cambios económicos, credenciales, asignaciones de remitentes, WhatsApp, cron o venv. Sin campañas ni correos de prueba reales.
+
+Guía vigente: [Navegación y espera de acceso](NAVEGACION_v31.md).
+
+Bases Urban622 y MiDistri30 confirmadas instaladas por el usuario. Esta entrega requiere instalación productiva; un commit o ZIP no instala el código. Este apartado prevalece sobre instrucciones históricas incompatibles.
+
+- [ ] Verificar ambas huellas y ejecutar los dos preflight antes de aplicar.
+- [ ] Instalar Urban623 y portal31, conservando variables actuales. No requiere activar banderas, sincronizar catálogo ni modificar cron.
+- [ ] Comprobar código por remitente compartido, marca pública y paginación/espera. No reenviar campañas.
+
 ## MiDistri-Pedidos v30
 
 Acceso de vendedor recordado automáticamente tras el primer código, sin vencimiento propio. Olvido revocable por dispositivo, perfiles acreditados y carritos por pestaña. Sólo portal0014 aditiva; requiere Urban622. Conserva captura e intervalos de analítica. Sin campañas, cambios económicos, históricos, remitentes, WhatsApp, cron o venv.
