@@ -1,0 +1,6 @@
+# Verificación MiDistri32
+287 pruebas MariaDB:285 correctas y2omisiones preexistentes. Productor y modo previa con transporte simulado. UI1440/390/320,páginas1/2/12: filtros, subcategoría, orden y búsqueda conservados, sin desbordamiento. PDFprincipal con capítulo vigente y páginas anteriores conservadas; capítulo y unión revisados visualmente.
+Instaladores28 pruebas contra30/31, preflight, rechazo de cambios, restauración con esquema0014 y recolección de estáticos. Sin migraciones nuevas ni producción/SMTP como QA.
+Revisión independiente del conjunto; los cuatro hallazgos de la programación se resolvieron en Urban, y el portal transmite explícitamente vista_previa para impedir que una consulta se convierta en campaña. Una previa se puede preparar con la configuración pausada; no autoriza ni encola.
+Decisiones: se retira lo inválido de inmediato con precios actuales aunque la posición esté fijada; nuevas publicaciones entran en otra sesión. Pueden reducirse los totales de paginación cuando se retira mercadería. Los intereses de cada perfil siguen aislados. Sin menores diferidos.
+La instalación productiva requiere su ejecución y confirmación real. Conservar remitentes, WhatsApp, cron existentes, analítica y dispositivos.

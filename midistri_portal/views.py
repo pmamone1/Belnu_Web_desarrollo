@@ -99,19 +99,29 @@ def catalogo(request):
     if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
     q=request.GET.get('q',saved.get('q',''))[:100]
     categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
-    orden=request.GET.get('orden',saved.get('orden','nombre'))
-    ordenes={'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk'),'ventas':('nombre','pk')}
-    if orden not in ordenes:orden='nombre'
+    subcategoria=request.GET.get('subcategoria',saved.get('subcategoria',''))[:200]
+    orden=request.GET.get('orden',saved.get('orden','recomendados'))
+    ordenes={'recomendados':('nombre','pk'),'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk'),'ventas':('nombre','pk')}
+    if orden not in ordenes:orden='recomendados'
     from .busqueda import clasificar
+    from .catalogo_rotacion import orden_sesion
+    ordered=orden_sesion(request,d.pk,products,perfil) if d and orden=='recomendados' else []
     classification={p.pk:clasificar(p) for p in products}
     categorias=sorted({c for cats,sub in classification.values() for c in cats},key=str.casefold)
     if categoria=='__sin_categoria__':products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if not cats])
     elif categoria:products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if categoria in cats])
-    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria,'orden':orden}
+    selected_ids=set(products.values_list('pk',flat=True))
+    subcategorias=sorted({sub for pk,(cats,sub) in classification.items() if pk in selected_ids and sub},key=str.casefold)
+    if subcategoria not in subcategorias:subcategoria=''
+    if subcategoria:products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if sub==subcategoria])
+    request.session['midistri_catalogo_filtros']={'distribuidora':d.pk if d else '', 'q':q,'categoria':categoria,'subcategoria':subcategoria,'orden':orden}
     if q:
         from .busqueda import buscar
         products=buscar(products,q)
     products=products.order_by(*((('-_similitud',)+ordenes[orden]) if q and orden=='nombre' else ordenes[orden]))
+    if orden=='recomendados':
+        positions={pk:i for i,pk in enumerate(ordered)}
+        products=sorted((p for p in products if p.pk in positions),key=lambda p:(-getattr(p,'_similitud',0) if q else 0,positions[p.pk]))
     ranking_disponible=True
     if orden=='ventas':
         def sales_position(product):
@@ -137,10 +147,10 @@ def catalogo(request):
             if type(position) is int and 1<=position<=10:
                 product.foto_destacada=foto_producto(product);destacados.append(product)
         destacados.sort(key=lambda x:x.indicadores['ranking'])
-    context=base(request,perfil,d);context.update(ranking_disponible=ranking_disponible,destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
+    context=base(request,perfil,d);context.update(ranking_disponible=ranking_disponible,destacados=destacados,distribuidoras=ds,productos=page,q=q,categorias=categorias,categoria=categoria,subcategorias=subcategorias,subcategoria=subcategoria,orden=orden,presentacion=presentacion_publica(d),promociones=promociones_publicas(d),temas=TEMAS)
     from .pagina import pagina_publica,MENSAJES
     from .pagina_views import contenido_contexto
-    context.update(contenido_contexto(pagina_publica(d),d) if d else {
+    context.update(contenido_contexto(pagina_publica(d),d,session=request.session) if d else {
         'pagina':{'diseno':'compacto'},'pagina_mensajes':MENSAJES,
         'bloques':[{'tipo':'catalogo','activo':True}]})
     template='midistri_portal/catalogo_inicial.html' if context.get('pagina',{}).get('inicial_anterior') else 'midistri_portal/catalogo.html'

@@ -1,0 +1,5 @@
+MiDistri-Pedidos v32
+Actualización preparada para bases30/31; instalación productiva pendiente de confirmación.
+Cambio: catálogo Recomendados estable por sesión, subcategorías, banners automáticos y acceso Continuar; preparación privada de incentivos para Urban624, sin SMTP. Sin migraciones nuevas, activación de cron, cambios de remitentes, WhatsApp o venv. Sin envíos.
+
+Guía: docs/ROTACION_INCENTIVOS_v32.md.

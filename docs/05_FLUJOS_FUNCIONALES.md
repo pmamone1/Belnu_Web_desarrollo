@@ -1,3 +1,8 @@
+## MiDistri32 vigente: variedad e incentivos
+
+Guía: [Catálogo y preparación](ROTACION_INCENTIVOS_v32.md). catálogo Recomendados estable por sesión, subcategorías, banners automáticos y acceso Continuar; preparación privada de incentivos para Urban624, sin SMTP. Sin migraciones nuevas, activación de cron, cambios de remitentes, WhatsApp o venv. Sin envíos.
+
+
 ## MiDistri-Pedidos v31
 
 Encabezado sin botón de salida; acceso recordado y Cambiar perfil conservados. Paginación grande, filtros conservados y diseño adaptable. Spinner accesible mientras se recupera el acceso. Sin nuevas migraciones ni cambios económicos, credenciales, asignaciones de remitentes, WhatsApp, cron o venv. Sin campañas ni correos de prueba reales.

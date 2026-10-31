@@ -35,7 +35,7 @@ def recursos(did):
                 tipo=m['tipo'],url=m['url'],publicacion=product.pk))
     return result
 
-def contenido_contexto(page,d,preview=False):
+def contenido_contexto(page,d,preview=False,session=None):
     data=page.datos if hasattr(page,'datos') else page
     presentation=dict(data['presentacion'])
     logo=presentation.get('logo')
@@ -47,7 +47,7 @@ def contenido_contexto(page,d,preview=False):
     presentation['logo']=SimpleNamespace(url=logo)
     presentation.update(tema=data['tema'],bienvenida=data['mensajes'].get('bienvenida',''),instrucciones=data['mensajes'].get('instrucciones',''))
     return dict(pagina=data,pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
-        bloques=p.bloques_vigentes(data,d.pk,preview),presentacion=SimpleNamespace(**presentation))
+        bloques=p.bloques_vigentes(data,d.pk,preview,session),presentacion=SimpleNamespace(**presentation))
 
 def guardar_accion(request,page,ctx,token,subida=None,metadata=None):
     data=deepcopy(page.datos);did=ctx['tienda']['id'];accion=request.POST.get('accion')
