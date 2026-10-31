@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {createRequire}=require('node:module'),deps=createRequire('C:/Users/pmamo/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/package.json');
+(async()=>{const b=await deps('playwright').chromium.launch({headless:true});try{const p=await b.newPage();
+await p.route('**/*',r=>r.request().url()==='http://127.0.0.1:63405/portal/'?r.fulfill({contentType:'text/html',body:'<body data-recordar="1" data-recordar-presente="1"><main></main></body>'}):r.abort());
+await p.goto('http://127.0.0.1:63405/portal/');await p.addStyleTag({path:path.join(__dirname,'../midistri_portal/static/midistri_portal/temas.css')});
+await p.evaluate(()=>{window.MidistriTab={proof:()=>true,request:()=>new Promise((resolve,reject)=>{window.complete=resolve;window.fail=reject;}),clear:()=>{},load:()=>{window.loaded=true;}};});
+await p.addScriptTag({path:process.argv[2]||path.join(__dirname,'../midistri_portal/static/midistri_portal/recordado.js')});
+assert.equal(await p.locator('.recordado-spinner').count(),1);assert.equal(await p.locator('#midistri-recordado-status').getAttribute('aria-busy'),'true');
+assert.equal(await p.locator('.recordado-spinner').getAttribute('aria-hidden'),'true');await p.screenshot({path:path.join(__dirname,'../tmp/qa_navegacion31/spinner.png')});
+await p.emulateMedia({reducedMotion:'reduce'});assert.equal(await p.locator('.recordado-spinner').evaluate(e=>getComputedStyle(e).animationName),'none');
+await p.evaluate(()=>window.fail(new Error('Prueba sin conexion')));await p.getByRole('button',{name:'Reintentar'}).waitFor();
+assert.equal(await p.locator('.recordado-spinner').count(),0);assert.equal(await p.locator('#midistri-recordado-status').getAttribute('aria-busy'),'false');
+console.log('Spinner OK: visible only while waiting, accessible status, reduced motion and error retry.');
+}finally{await b.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

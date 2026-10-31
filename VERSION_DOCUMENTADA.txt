@@ -1,3 +1,3 @@
-MiDistri-Pedidos v30
-Candidato documentado: v30 (base29; actualización preparada; instalación de esta versión en producción pendiente).
-Cambio: Acceso de vendedor recordado automáticamente tras el primer código, sin vencimiento propio. Olvido revocable por dispositivo, perfiles acreditados y carritos por pestaña. Sólo portal0014 aditiva; requiere Urban622. Conserva captura e intervalos de analítica. Sin campañas, cambios económicos, históricos, remitentes, WhatsApp, cron o venv.
+MiDistri-Pedidos v31
+Entrega preparada: v31 (base30 confirmada instalada; esta actualización pendiente de instalación en producción).
+Cambio: Encabezado sin botón de salida; acceso recordado y Cambiar perfil conservados. Paginación grande, filtros conservados y diseño adaptable. Spinner accesible mientras se recupera el acceso. Sin nuevas migraciones ni envíos; conserva credenciales, remitentes, WhatsApp, cron y venv.
