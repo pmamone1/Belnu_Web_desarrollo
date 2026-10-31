@@ -85,7 +85,7 @@ def cerrar_sesion_pestana(request):
 
 class TabSession(MutableMapping):
     """Reuse the tested order flow, isolating its entire state and messages."""
-    PRIVATE={'midistri_token','midistri_cart','midistri_cart_id','midistri_revision','midistri_catalogo_filtros','_messages'}
+    PRIVATE={'midistri_token','midistri_cart','midistri_cart_id','midistri_revision','midistri_catalogo_filtros','midistri_catalogo_orden','midistri_banners_automaticos','_messages'}
     def __init__(self,original,row):self.original=original;self.row=row;self.empty={}
     def __getitem__(self,key):
         if key=='midistri_token':
