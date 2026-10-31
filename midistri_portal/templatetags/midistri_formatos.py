@@ -21,3 +21,11 @@ def fecha_arg(value):
     import pytz
     try:return timezone.localtime(parse_datetime(value),pytz.timezone('America/Argentina/Buenos_Aires')).strftime('%d/%m/%Y %H:%M:%S')
     except (TypeError,ValueError,AttributeError):return 'Fecha no disponible'
+
+
+@register.filter
+def estilo_mensaje(pagina,key):
+    from ..mensaje_estilos import css_mensaje
+    from django.core.exceptions import ValidationError
+    try:return css_mensaje(pagina.get('estilos_mensajes',{}),key)
+    except (ValidationError,AttributeError,TypeError):return ''
