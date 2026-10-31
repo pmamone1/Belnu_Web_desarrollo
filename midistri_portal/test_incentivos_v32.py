@@ -35,3 +35,12 @@ class ProductorTests(TestCase):
             return {'ejecucion':1,'destinatarios':2,'estado':'preparada'}
         with patch('midistri_portal.incentivos_preparacion.api',side_effect=fake) as api:
             result=procesar();self.assertEqual(result['preparadas'],1);self.assertEqual(api.call_count,2)
+
+    def test_previa_se_transmite_sin_convertirse_en_campana(self):
+        from .incentivos_preparacion import procesar
+        config=dict(self.config,vista_previa=True)
+        def fake(action,**kw):
+            if action=='weekly-incentives-due':return {'version':1,'configuraciones':[config]}
+            self.assertTrue(kw['data'].get('vista_previa'))
+            return {'vista_previa':True,'estado':'previa_sin_envios'}
+        with patch('midistri_portal.incentivos_preparacion.api',side_effect=fake):self.assertEqual(procesar()['preparadas'],1)

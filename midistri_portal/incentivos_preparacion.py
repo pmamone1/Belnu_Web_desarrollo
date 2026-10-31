@@ -35,7 +35,7 @@ def procesar():
     for c in configs:
         try:
             data=preparar_periodo(c)
-            api('weekly-incentives-prepare',method='POST',data={'configuracion':c['id'],'revision':c['revision'],'hasta':c['hasta'],'actividad':data})
+            api('weekly-incentives-prepare',method='POST',data={'configuracion':c['id'],'revision':c['revision'],'hasta':c['hasta'],'actividad':data,'vista_previa':c.get('vista_previa',False)})
             count+=1
         except ApiError as exc:errors.append({'configuracion':c.get('id'),'motivo':str(exc)})
     return {'preparadas':count,'errores':errors,'sin_envios_smtp':True}
