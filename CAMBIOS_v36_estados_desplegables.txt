@@ -1,0 +1,3 @@
+MiDistri-Pedidos v36
+Detalle por estado/atención en la misma consulta,50 por página, vendedor/fecha/referencia/cantidades/importes. Conserva permisos, alcance y corte.
+Acumulativa34/35, sin migraciones ni datos/envíos/cron. Producción pendiente. Guía: docs/ESTADOS_DESPLEGABLES_v36.md

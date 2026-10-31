@@ -72,6 +72,8 @@ def panel(request,ident=None):
             from .analitica_detalle import detalle,tarjetas
             ctx['tarjetas']=tarjetas(data['resumen'],params)
             if not ajax:
+                from .analitica_estados import preparar
+                preparar(data,request.GET)
                 from .analitica_productos import enriquecer
                 enriquecer(data,params,ctx['productos_pagina'].object_list)
             if request.GET.get('detalle'):
