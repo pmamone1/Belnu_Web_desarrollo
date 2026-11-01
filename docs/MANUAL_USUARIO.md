@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v38 - Ajustes del catálogo
+
+El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.
+
+En PC, si hay muchas promociones a la izquierda, desplazá el lateral: el último botón queda completo por encima de Ver mi pedido. Al cambiar el tamaño de ventana se ajusta el espacio automáticamente. En celular/tableta el panel Filtros y promociones empieza cerrado al entrar o al cargar otro catálogo; tocá su título para abrirlo o cerrarlo. En PC empieza abierto. La selección manual se conserva mientras seguís en la misma pantalla; al cambiar entre PC y celular se aplica el estado de ese tamaño. Sin JavaScript, los filtros siguen abiertos y utilizables. Ver [guía actual](AJUSTES_CATALOGO_v38.md).
+
 ## MiDistri-Pedidos v37 - Catálogo lateral
 
 Filtros y promociones reunidos a la izquierda en PC, panel desplegable en celular, fotos amplias y controles alineados. Relevancia conserva ventas/variedad y orden fijo por sesión;48 por página con opciones24/48/96/192 y navegación arriba/abajo. Acumulativa34/35/36: incluye las mejoras anteriores de visor, colores, pedidos y estadísticas. Sin migraciones nuevas, envíos ni cambios económicos, históricos, accesos, remitentes, WhatsApp, cron o venv. Instalación productiva pendiente de confirmación.

@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v38 - Ajustes del catálogo
+
+El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.
+
+Validar lateral con muchas promociones a1440x900,1280x720 y1100x640: último control completo sobre carrito, incluso con barra más alta y tras redimensionar. A390px navegar por la sesión real con el panel abierto: nuevo panel cerrado, apertura/cierre manual funcional. Repetir al menos cinco navegaciones/eventos render; un controlador de breakpoint activo, sin errores JS. Cruzar390/1440/390, comprobar PC abierto y móvil cerrado. Mantener prueba previa320/390/768/1280/1440, filtros/páginas, preview, sinJS y diseños/temas. Usar sólo QA local, sin campañas.
+
 ## MiDistri-Pedidos v37 - Catálogo lateral
 
 Filtros y promociones reunidos a la izquierda en PC, panel desplegable en celular, fotos amplias y controles alineados. Relevancia conserva ventas/variedad y orden fijo por sesión;48 por página con opciones24/48/96/192 y navegación arriba/abajo. Acumulativa34/35/36: incluye las mejoras anteriores de visor, colores, pedidos y estadísticas. Sin migraciones nuevas, envíos ni cambios económicos, históricos, accesos, remitentes, WhatsApp, cron o venv. Instalación productiva pendiente de confirmación.

@@ -1,3 +1,3 @@
-MiDistri-Pedidos v37
-Actualización preparada y revisada; instalación productiva pendiente de confirmación. Bases34/35/36.
-Cambio: Catálogo con filtros/promociones en lateral izquierdo, fotos completas, Relevancia estable,48 por página y navegación superior/inferior; editor y preview consistentes. Incluye mejoras35/36. Sin migraciones nuevas, cambios económicos, históricos, accesos, remitentes, WhatsApp, cron, venv ni campañas.
+MiDistri-Pedidos v38
+Candidata verificada localmente; publicación e instalación productiva pendientes de confirmación. Bases34/35/36/37.
+Lateral completo por encima del carrito y panel adaptable idempotente tras navegación de sesión. Incluye mejoras35/36/37. Sin migraciones nuevas, cambios económicos, históricos, accesos, pedidos, carrito, remitentes, WhatsApp, cron, venv ni campañas.

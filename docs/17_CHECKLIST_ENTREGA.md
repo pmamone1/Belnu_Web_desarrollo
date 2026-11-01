@@ -1,3 +1,15 @@
+## MiDistri-Pedidos v38 - Ajustes del catálogo
+
+El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.
+
+- [x] Revisar portal completo, regresiones UI y pruebas de instalador/ZIP sobre las cuatro bases reales.
+- [x] Confirmar inventario exacto, sin archivo ajeno, secretos, bases, media ni entornos; comprobar la huella del ZIP candidato final antes de publicarlo.
+- [x] Revisar manual PDF principal y unión del capítulo vigente con v37 conservado.
+- [ ] Publicar commit revisado y copiar sólo ZIP/huella a Downloads tras revisión conjunta.
+- [ ] Registrar instalación sólo cuando se confirme en producción; no incrementar contador por publicar o reintentar.
+
+Se mantiene la frecuencia autorizada de respaldo completo (30 instalaciones confirmadas o15 días), sin inventar fechas/contadores. El instalador no exige un respaldo completo nuevo por ser otra versión y conserva el respaldo automático de archivos.
+
 ## MiDistri-Pedidos v37 - Catálogo lateral
 
 Filtros y promociones reunidos a la izquierda en PC, panel desplegable en celular, fotos amplias y controles alineados. Relevancia conserva ventas/variedad y orden fijo por sesión;48 por página con opciones24/48/96/192 y navegación arriba/abajo. Acumulativa34/35/36: incluye las mejoras anteriores de visor, colores, pedidos y estadísticas. Sin migraciones nuevas, envíos ni cambios económicos, históricos, accesos, remitentes, WhatsApp, cron o venv. Instalación productiva pendiente de confirmación.
