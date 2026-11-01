@@ -1,6 +1,6 @@
 # Verificación MiDistri38
 
-Candidata local; publicación y copia a Downloads pendientes de revisión conjunta. Instalación productiva pendiente. No se usó producción, SMTP ni campañas.
+Revisión conjunta final completada sin hallazgos nuevos en Portal38. Código preparado y paquete verificado contra el commit; publicación/copia se confirman por sus resultados, instalación productiva pendiente. Instalación productiva pendiente. No se usó producción, SMTP ni campañas.
 
 - RED navegador: último control bottom834.39 frente a carrito top816 a1440x900; borde inferior oculto/no clickeable. Panel nuevo móvil permanecía abierto tras MidistriTab.load real y no respondía al breakpoint tras navegar.
 - RED adicional: observar sólo content-box no detectaba relleno de barra;1280x720 lateral bottom620 frente a carrito top594. Se observa border-box y se exige todo el lateral por encima de la barra.
