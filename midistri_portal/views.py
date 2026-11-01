@@ -130,7 +130,10 @@ def catalogo(request):
         products=sorted((p for p in products if sales_position(p) is not None),key=lambda p:(sales_position(p),p.pk))
         ranking_disponible=bool(products)
     from django.core.paginator import Paginator
-    page=Paginator(products,24).get_page(request.GET.get('page'))
+    from .catalogo_presentacion import tamano_pagina,navegacion
+    page_size=tamano_pagina(request.GET.get('page_size',saved.get('page_size',48)))
+    request.session['midistri_catalogo_filtros']['page_size']=page_size
+    page=Paginator(products,page_size).get_page(request.GET.get('page'))
     for product in page:
         product.categorias_catalogo,product.subcategoria_catalogo=clasificar(product)
         product.cantidad_carrito=request.session.get('midistri_cart',{}).get(str(product.producto_id),0)
@@ -153,6 +156,8 @@ def catalogo(request):
     context.update(contenido_contexto(pagina_publica(d),d,session=request.session) if d else {
         'pagina':{'diseno':'compacto'},'pagina_mensajes':MENSAJES,
         'bloques':[{'tipo':'catalogo','activo':True}]})
+    context['page_size']=page_size
+    navegacion(context)
     template='midistri_portal/catalogo_inicial.html' if context.get('pagina',{}).get('inicial_anterior') else 'midistri_portal/catalogo.html'
     registrar(request,perfil,'catalogo')
     return render(request,template,context)

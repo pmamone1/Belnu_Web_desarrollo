@@ -45,7 +45,7 @@ class CatalogoRotacionTests(TestCase):
         self.assertEqual(ids(a),ids(c));self.assertFalse(set(ids(a))&set(ids(b)))
         self.assertEqual(a.context['productos'].paginator.count,54)
     def test_filtro_subcategoria_y_url_conservada(self):
-        r=self.get(categoria='Alimentos',subcategoria='Alfajores')
+        r=self.get(categoria='Alimentos',subcategoria='Alfajores',page_size=24)
         self.assertEqual(r.context['productos'].paginator.count,27)
         self.assertContains(r,'name="subcategoria"');self.assertContains(r,'subcategoria=Alfajores')
         self.assertNotContains(r,'Muñecas');self.assertTrue(all(p.clasificacion['subcategoria']=='Alfajores' for p in r.context['productos']))
