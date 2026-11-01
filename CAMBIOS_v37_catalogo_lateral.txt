@@ -6,7 +6,7 @@ Actualización acumulativa sobre bases34/35/36 verificadas. Compatible con Urban
 
 ## Guía de uso
 En PC, Categoría y Subcategoría están a la izquierda; pulsá Aplicar filtros para combinar la selección con la búsqueda y el orden. Debajo aparecen las promociones laterales, también las que antes ocupaban el margen derecho. El lateral acompaña el recorrido y permite desplazarse si contiene muchas promociones. Los banners centrales se conservan.
-En celular y tableta, tocá Filtros y promociones para desplegar esa columna. Los controles siguen disponibles sin JavaScript; en ese caso el panel empieza abierto. La entrada pública sin tienda no reserva una columna vacía.
+En celular y tableta, tocá Filtros y promociones para desplegar esa columna. Los controles siguen disponibles sin JavaScript; en ese caso el panel empieza abierto. Tras una navegación con la sesión activa puede permanecer abierto: podés cerrarlo manualmente. La entrada pública sin tienda no reserva una columna vacía.
 Buscá por nombre, SKU o parecido desde la barra del catálogo. Relevancia combina ventas netas consignadas acreditadas con variedad. Es el criterio previo Recomendados con un nombre más breve: el orden permanece fijo durante la sesión, incluso al paginar, filtrar o volver del carrito. Más vendidos conserva su criterio propio; también podés ordenar por nombre y precios.
 El catálogo abre con 48 productos por página; podés elegir 24, 48, 96 o 192. Buscar o aplicar filtros vuelve a la primera página. Anterior y Siguiente están arriba y abajo, conservan búsqueda, categoría/subcategoría, orden y cantidad por página. La selección de tamaño se recuerda durante la navegación de esa tienda.
 Las fotos ocupan un cuadro completo sin recortarse. En PC se muestran hasta cuatro columnas en el diseño compacto; Fotos conserva tarjetas más grandes y Lista su disposición horizontal. En celular desde 390 px se muestran dos columnas; en pantallas menores se utiliza una para que entren cantidades y botones. Cantidad y Agregar/actualizar quedan al pie de las tarjetas de cada fila.
@@ -26,3 +26,6 @@ Para recuperar código: usar el instalar.py de esta entrega con --root /home/mco
 
 ## Validación
 Suite del portal, pruebas de instalación sobre las bases reales, compatibilidad Python3.7, navegador con PC1440/1280, tableta768 y celular390/320, cuatro temas/diseños, filtros/páginas, fotos/controles, preview y sinJS. Evidencia final en VERIFICACION_v37.md. Pruebas aisladas con SQLite en memoria, API sintética y correo local; no se usa producción ni SMTP.
+
+## Mejoras menores diferidas
+El último botón de un lateral muy largo puede quedar parcialmente bajo la barra del carrito; su centro sigue visible y clickeable. El panel móvil no reaplica automáticamente su cierre al reemplazarse la página dentro de una sesión, aunque se puede cerrar manualmente. Se registran para una próxima mejora visual sin modificar datos ni bloquear pedidos.

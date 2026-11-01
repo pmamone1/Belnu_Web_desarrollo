@@ -27,3 +27,7 @@ main:has(.catalogo-layout){max-width:1480px}
 @media print{.catalogo-lateral{position:static;max-height:none;overflow:visible}.catalogo-panel>summary{display:none}.catalogo-panel:not([open])>.catalogo-panel-contenido{display:block}.catalogo-barra,.catalogo-paginacion{display:none}}
 
 .tienda-columnas.catalogo-layout.sin-lateral{grid-template-columns:1fr}
+
+/* The adjacent44px +/- controls replace the native spinner without hiding digits. */
+.catalogo-grid .producto-compra input[type=number]{appearance:textfield;-moz-appearance:textfield}
+.catalogo-grid .producto-compra input[type=number]::-webkit-inner-spin-button,.catalogo-grid .producto-compra input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
