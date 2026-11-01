@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+En Mis pedidos aparece Firme o Consignado cuando Urban informa el tratamiento. Abrí Ver detalle: firme no admite devolución consignada; consignado muestra plazo y todas las fechas Devolución hasta el. En incorporación, rige la fecha de la salida. Entregado expresa avance operativo; el remito consignado no confirma deuda aplicada. La distribuidora gestiona devoluciones/control/cierre/pagos desde Urban. Históricos sin modalidad conservan su presentación; no reenviar para corregir modalidad. Consultá la guía detallada.
+
+Si una salida vinculada se anula, Mis pedidos refleja la parte que sigue vigente o la cancelación. Un comprobante que incluya una consignación anulada se retira entero aunque reúna otras partes vigentes: pedí uno vigente a la distribuidora. El PDF histórico se conserva sin reescribir y los remitos sólo muestran fechas de tu vendedor.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Coordinada con Urban 631. Modalidades opcionales se validan antes de guardar, sin inferir desde emitido/remito ni reemplazar última respuesta válida por datos inválidos. Firme sin devolución consignada; consignado muestra cada fecha, incluida heredada de salida vigente. Sin rutas/permisos/modelos nuevos. No tocar templates/accounts/forgotPassword.html ajeno. Publicación, ZIP e instalación se registran por separado; Portal 39 no acredita aplicación de Urban 0132.
+
+Anulación de fuente Urban actualiza atención/cancelación efectiva sin reescribir Pedido; documento que incluya consignación anulada se retira completo y orienta a pedir comprobante vigente. Remitos limitan fechas al vendedor. Anulación nativa prepara aviso operativo único en cola, sin SMTP real en QA ni instalación. Corte portal: 332 OK, 2 omitidas y QA de tres anchos; Urban dirigido 119 OK/DDL memoria OK, regresión amplia con 37 incidencias legadas reproducidas en base 630. No afirmar concurrencia PostgreSQL, paquete, publicación o producción completados.
+
+Evidencia local y límites: [Verificación v39](docs/VERIFICACION_v39.md). Publicación e instalación pendientes.
+
+Guía vigente: [Modalidad comercial del pedido](docs/PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

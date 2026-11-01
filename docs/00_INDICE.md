@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Guía vigente de historial/detalle, contrato opcional con Urban 631, compatibilidad, recuperación y validación. Conserva catálogo 38. MiDistri 39 es candidato; instalación pendiente.
+
+La guía agrega vigencia de documentos y atención/cancelación efectiva por fuentes enlazadas; incluye resultados técnicos y límites de QA, sin confundirlos con publicación o instalación.
+
+Evidencia local y límites: [Verificación v39](VERIFICACION_v39.md). Publicación e instalación pendientes.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

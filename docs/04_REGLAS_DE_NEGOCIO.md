@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Mostrar sólo modalidades explícitas validadas de Urban. Firme: plazo 0, sin fechas/devolución consignada. Consignado: 7/14/21/30 y fechas por salida, incluida heredada anterior a confirmación. Históricos sin metadatos no se rellenan. Entregado no prueba cargo firme. DTO inválido preserva última respuesta válida. No cambia importes/snapshots, alcance o permisos; no crea obligaciones/pagos.
+
+La cancelación efectiva respeta fuentes enlazadas, manteniendo Pedido y documentos históricos. Un PDF con fuente consignada anulada se retira completo aunque incluya otra parte vigente; se solicita comprobante vigente, sin recortar o reescribir. Fechas del remito sólo del vendedor. El aviso nativo de anulación se prepara una sola vez en cola, sin campaña ni envío de instalación.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.
