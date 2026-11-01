@@ -2,3 +2,5 @@ MiDistri-Pedidos v39
 Candidato documentado sobre MiDistri 38; instalación productiva pendiente de confirmación.
 Historial/detalle con modalidad firme/consignado, plazo y fechas informadas por Urban 631. DTO modalidades_pedidos opcional/estricto; históricos compatibles, sin inferir deuda por remito. Sin nuevas migraciones portal, cambios de precios/snapshots, remitentes, cron o venv ni campañas/envíos. Pruebas/publicación se informan con evidencia real, separadas de instalación.
 Corrección final: cancelación efectiva por fuentes, comprobante afectado retirado entero sin reescribir histórico y solicitud de documento vigente. Corte portal 332 OK con 2 omitidas y QA visual de tres anchos; Urban 123 dirigidas OK/DDL memoria OK, regresión amplia con 37 incidencias legadas reproducidas. Paquete/publicación/instalación pendientes; sin concurrencia PostgreSQL ejecutada.
+
+Cierre de entrega: código y ZIP publicados/verificados por separado de la instalación productiva. Ver VERIFICACION de esta versión.

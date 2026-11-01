@@ -40,3 +40,9 @@ Portal 39 no agrega migraciones; conservar esquema existente. Restauración del 
 Manual_MiDistri_Pedidos_Online.pdf: 41 páginas, 1 nueva y 40 preservadas de base 38. tools/actualizar_manual_v39.py compara streams de contenido y texto de cada página histórica extraída con git show. Conservación comprobada. Nueva página y unión con primera anterior renderizadas con Poppler e inspeccionadas visualmente, sin cortes ni solapes.
 
 Documentación técnica/usuario, VERSION_DOCUMENTADA, CAMBIOS, checklist y pruebas manuales actualizados. Pendientes: ZIP final/huellas/Downloads, commits publicados, comandos completos de cPanel, instalación y aceptación productiva confirmadas. Sin campañas, SMTP real, modificación de remitentes/WhatsApp/cron/venv o respaldo SQL nuevo por esta documentación.
+
+## Cierre de entrega acreditado
+
+Entrega verificada: implementación publicada en https://github.com/pmamone1/Belnu_Web_desarrollo/commit/44110307c77c542e1a29b936e50ca10a1ef04d41, revisión https://github.com/pmamone1/Belnu_Web_desarrollo/pull/40. ZIP construido desde el commit publicado, contenido y huellas comprobados contra Git y copiado a C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución y confirmación; no se deduce del ZIP ni de la publicación. Los comandos completos se entregan en el chat. El cierre documental posterior conserva el código probado. Sin campañas ni SMTP real.
+
+Las comprobaciones finales de paquete sobre el inventario completo dieron Urban30OK y Portal29OK. Los archivos privados, bases, media y entornos quedan fuera. Los ZIP incluyen los manuales actualizados y sus documentos de compatibilidad/recuperación. No instalar sobre una base que el preflight rechace ni forzar las huellas.

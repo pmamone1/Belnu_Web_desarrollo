@@ -1,17 +1,22 @@
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 - [x] Corte portal: 332 pruebas OK con 2 omitidas; historial/detalle QA local a 320/390/1440 px. Registrar corte final y motivos de omitidas en evidencia técnica.
-- [ ] Verificar historial/detalle PC/celular: firme sin devolución, consignado con varias fechas y aviso de remito sin deuda aplicada.
-- [ ] Revisar regresiones catálogo 38, autenticación, alcance y snapshots; ningún cambio en forgotPassword.html.
-- [ ] Confirmar plan vacío de nuevas migraciones portal y coordinación con Urban 631/0132; no inferir instalación de publicación.
+- [x] Verificar historial/detalle PC/celular: firme sin devolución, consignado con varias fechas y aviso de remito sin deuda aplicada.
+- [x] Revisar regresiones catálogo 38, autenticación, alcance y snapshots; ningún cambio en forgotPassword.html.
+- [x] Confirmar plan vacío de nuevas migraciones portal y coordinación con Urban 631/0132; no inferir instalación de publicación.
 - [x] Manual PDF principal: 1 páginas nuevas + 40 históricas = 41; streams/texto conservados y revisión visual Poppler de nuevas páginas y unión completada.
-- [ ] Verificar ZIP/base 38/documentación/PDF principal, preservación de páginas y unión visual; registrar evidencia antes de publicar.
-- [ ] Publicar commit real, verificar ZIP en Downloads y comandos cPanel; registrar instalación por resultado real. Sin campañas, SMTP ni respaldo SQL nuevo por versión.
+- [x] Verificar ZIP/base 38/documentación/PDF principal, preservación de páginas y unión visual; registrar evidencia antes de publicar.
+- [x] Publicar commit real, verificar ZIP en Downloads y comandos cPanel; registrar instalación por resultado real. Sin campañas, SMTP ni respaldo SQL nuevo por versión.
 
-- [ ] Revisar atención efectiva por fuentes enlazadas, anulación parcial/completa y retiro íntegro del PDF con fuente anulada; pedir comprobante vigente y no reescribir histórico.
+- [x] Revisar atención efectiva por fuentes enlazadas, anulación parcial/completa y retiro íntegro del PDF con fuente anulada; pedir comprobante vigente y no reescribir histórico.
 - [x] Declarar límites de integración: Urban 123 pruebas dirigidas y DDL memoria OK; regresión amplia con 37 incidencias legadas reproducidas en base 630 y concurrencia PostgreSQL no ejecutada.
 
 Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
+- [ ] Ejecutar instalación y aceptación productiva: pendiente del operador. La entrega de archivos no acredita que se haya instalado.
+
+Entrega verificada: implementación publicada en https://github.com/pmamone1/Belnu_Web_desarrollo/commit/44110307c77c542e1a29b936e50ca10a1ef04d41, revisión https://github.com/pmamone1/Belnu_Web_desarrollo/pull/40. ZIP construido desde el commit publicado, contenido y huellas comprobados contra Git y copiado a C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución y confirmación; no se deduce del ZIP ni de la publicación. Los comandos completos se entregan en el chat. El cierre documental posterior conserva el código probado. Sin campañas ni SMTP real.
+
 
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
