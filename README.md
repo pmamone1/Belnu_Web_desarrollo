@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Mis pedidos y detalle muestran Firme o Consignado, plazo y cada fecha informada por Urban 631. Entregado es estado operativo y el remito consignado no confirma deuda aplicada. modalidades_pedidos opcional con validación estricta; históricos sin metadatos conservados. Sin nuevas migraciones ni campañas; instalación productiva pendiente.
+
+La atención/cancelación efectiva sigue las fuentes Urban enlazadas. Si un comprobante incluye una consignación anulada se retira entero y se solicita uno vigente, sin reescribir histórico. Corte: 332 pruebas OK con 2 omitidas y QA visual a 320/390/1440 px.
+
+Evidencia local y límites: [Verificación v39](docs/VERIFICACION_v39.md). Publicación e instalación pendientes.
+
+Guía vigente: [Modalidad comercial del pedido](docs/PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

@@ -1,3 +1,18 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+- [x] Corte portal: 332 pruebas OK con 2 omitidas; historial/detalle QA local a 320/390/1440 px. Registrar corte final y motivos de omitidas en evidencia técnica.
+- [ ] Verificar historial/detalle PC/celular: firme sin devolución, consignado con varias fechas y aviso de remito sin deuda aplicada.
+- [ ] Revisar regresiones catálogo 38, autenticación, alcance y snapshots; ningún cambio en forgotPassword.html.
+- [ ] Confirmar plan vacío de nuevas migraciones portal y coordinación con Urban 631/0132; no inferir instalación de publicación.
+- [x] Manual PDF principal: 1 páginas nuevas + 40 históricas = 41; streams/texto conservados y revisión visual Poppler de nuevas páginas y unión completada.
+- [ ] Verificar ZIP/base 38/documentación/PDF principal, preservación de páginas y unión visual; registrar evidencia antes de publicar.
+- [ ] Publicar commit real, verificar ZIP en Downloads y comandos cPanel; registrar instalación por resultado real. Sin campañas, SMTP ni respaldo SQL nuevo por versión.
+
+- [ ] Revisar atención efectiva por fuentes enlazadas, anulación parcial/completa y retiro íntegro del PDF con fuente anulada; pedir comprobante vigente y no reescribir histórico.
+- [x] Declarar límites de integración: Urban 123 pruebas dirigidas y DDL memoria OK; regresión amplia con 37 incidencias legadas reproducidas en base 630 y concurrencia PostgreSQL no ejecutada.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

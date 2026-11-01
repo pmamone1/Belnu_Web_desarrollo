@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Vendedor > Mis pedidos > identificar modalidad > Ver detalle > condiciones y todas las fechas. Confirmación/devolución/control/cierre/pago corresponden a la distribuidora en Urban. La política manual/MiDistri se configura allí, no por vendedor en catálogo. Ante datos no actualizados conservar último estado válido y consultar a la distribuidora; no reenviar para cambiar modalidad.
+
+Anulación autorizada en Urban > actualizar atención efectiva por fuentes > mostrar parcial/cancelación en portal > retirar comprobante completo si contiene fuente anulada > pedir comprobante vigente. No reenviar para corregir ni alterar el PDF histórico; los otros circuitos de avisos se conservan.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

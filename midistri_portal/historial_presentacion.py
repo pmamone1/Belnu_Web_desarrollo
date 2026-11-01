@@ -1,5 +1,6 @@
 """Read-only presentation of an already validated order snapshot."""
 from decimal import Decimal
+from .modalidades import modalidades_presentacion
 
 def resumen_pedido(pedido):
     data=pedido.respuesta or {};items=data.get('items',pedido.datos.get('items',[]))
@@ -15,4 +16,4 @@ def resumen_pedido(pedido):
         amount=0 if pedido.estado=='cancelado' else accepted.get(item['producto_id'])
         if amount is not None:known=True;current+=price*amount
         rows.append(dict(nombre=item.get('nombre') or str(item['producto_id']),codigo=item.get('codigo',''),solicitada=quantity,aceptada=amount,faltante=quantity-amount if amount is not None else None,precio=price))
-    return dict(filas=rows,total_solicitado=requested,total_vigente=current if known or pedido.estado=='cancelado' else None,finalizado=final,sin_desglose=unknown,motivo=(data.get('anulacion') or {}).get('motivo') or review.get('motivo',''))
+    return dict(modalidades=modalidades_presentacion(data),filas=rows,total_solicitado=requested,total_vigente=current if known or pedido.estado=='cancelado' else None,finalizado=final,sin_desglose=unknown,motivo=(data.get('anulacion') or {}).get('motivo') or review.get('motivo',''))
