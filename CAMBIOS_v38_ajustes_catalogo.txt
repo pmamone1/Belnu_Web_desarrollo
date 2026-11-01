@@ -1,0 +1,8 @@
+MiDistri-Pedidos v38 - Ajustes del catálogo
+
+1. El lateral largo reserva el alto real de Ver mi pedido: último botón completo, cambios de altura observados y ajuste al redimensionar.
+2. Inicialización idempotente en midistri:render: panel nuevo cerrado en móvil/tableta y abierto en PC; elección manual preservada en la pantalla actual y breakpoint activo sin acumulación de listeners.
+3. Acumulativa34/35/36/37. Instalador38 con hashes exactos y respaldo de archivos, sintaxis Python3.7 y plan vacío; sin migraciones nuevas.
+4. Documentación técnica, ocho entradas obligatorias, manual de usuario y PDF principal con capítulo vigente; contenido37 conservado.
+5. Sin producción, SMTP, campañas ni cambios económicos, históricos, precios, pedidos, sesiones, permisos, carrito, remitentes, WhatsApp, cron o venv. Archivo ajeno forgotPassword.html excluido.
+6. Publicación, copia Downloads e instalación productiva pendientes de revisión/confirmación. Resultados ejecutados en docs/VERIFICACION_v38.md. No se cuentan instalaciones a partir de un ZIP.

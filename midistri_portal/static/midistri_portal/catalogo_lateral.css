@@ -1,7 +1,7 @@
 /* Presentation adapter: saved left/right promotions share one sidebar. */
 main:has(.catalogo-layout){max-width:1480px}
 .tienda-columnas.catalogo-layout{display:grid;grid-template-columns:260px minmax(0,1fr);align-items:start;gap:24px}
-.catalogo-lateral{position:sticky;top:16px;min-width:0;max-height:calc(100dvh - 32px);overflow:auto;scrollbar-gutter:stable;overscroll-behavior:contain}
+.catalogo-lateral{position:sticky;top:16px;min-width:0;max-height:max(0px,calc(100dvh - 32px - var(--catalogo-carrito-alto,84px)));overflow:auto;scrollbar-gutter:stable;overscroll-behavior:contain}
 .catalogo-panel{border:1px solid var(--border);border-radius:16px;background:var(--panel);color:var(--text)}
 .catalogo-panel>summary{display:none;cursor:pointer;min-height:48px;padding:12px 16px;font-weight:700;list-style:none}
 .catalogo-panel>summary::-webkit-details-marker{display:none}.catalogo-panel>summary span{float:right}
