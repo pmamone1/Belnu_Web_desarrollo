@@ -155,12 +155,10 @@ def preview(request):
         firma=p.revisar_borrador(perfil,did,token)
         d=page.tienda.distribuidora
         from .catalogo_elegible import elegibles
-        products=Paginator(elegibles(Publicacion.objects.filter(distribuidora=d)),24).get_page(request.GET.get('page'))
-        for product in products:
-            product.galeria=product.multimedia;product.foto_card=next((m['url'] for m in product.galeria if m['tipo']=='foto'),None)
-            product.galeria_dom_id='galeria-'+str(product.producto_id);product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
         ctx.update(contenido_contexto(page,d,True))
-        ctx.update(distribuidora=d,productos=products,temas=TEMAS,titulo='Vista previa privada',firma=firma,
+        ctx.update(distribuidora=d,temas=TEMAS,titulo='Vista previa privada',firma=firma,
             revision=page.revision,preview=True,preview_movil=request.GET.get('pantalla')=='movil')
+        from .catalogo_presentacion import preview as preparar_preview
+        preparar_preview(ctx,d,request.GET.get('page',1))
         return privada(render(request,'midistri_portal/catalogo.html',ctx))
     except (ApiError,ValidationError) as e:return fallo(request,e if isinstance(e,ApiError) else ApiError(str(e),409))

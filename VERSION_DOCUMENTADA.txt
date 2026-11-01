@@ -1,3 +1,3 @@
-MiDistri-Pedidos v36
-Actualización preparada y revisada; instalación productiva pendiente de confirmación.
-Cambio: Detalle desplegable de pedidos por estado/atención, paginado en la misma pantalla. Acumulativa34/35; incluye fotos ampliadas y colores. Conserva Urban626/627. Sin migraciones, datos económicos, históricos, remitentes, WhatsApp, cron o envíos.
+MiDistri-Pedidos v37
+Actualización preparada y revisada; instalación productiva pendiente de confirmación. Bases34/35/36.
+Cambio: Catálogo con filtros/promociones en lateral izquierdo, fotos completas, Relevancia estable,48 por página y navegación superior/inferior; editor y preview consistentes. Incluye mejoras35/36. Sin migraciones nuevas, cambios económicos, históricos, accesos, remitentes, WhatsApp, cron, venv ni campañas.

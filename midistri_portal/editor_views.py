@@ -21,7 +21,9 @@ def html_pagina(data,d):
     from types import SimpleNamespace
     ctx['request']=SimpleNamespace(user=SimpleNamespace(is_staff=False),midistri_codigo_enabled=getattr(settings,'MIDISTRI_LOGIN_CODIGO_ENABLED',False))
     ctx.update(titulo='MiDistri - Pedidos Online - '+(d.nombre_comercial or d.nombre),distribuidora=d,
-        productos=Paginator(elegibles(Publicacion.objects.filter(distribuidora=d)),24).get_page(1),temas=TEMAS)
+        temas=TEMAS)
+    from .catalogo_presentacion import preview
+    preview(ctx,d)
     return render_to_string('midistri_portal/catalogo.html',ctx)
 
 @require_POST

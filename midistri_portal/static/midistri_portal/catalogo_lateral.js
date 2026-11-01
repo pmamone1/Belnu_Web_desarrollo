@@ -1,0 +1,2 @@
+/* Progressive enhancement: native filters remain open and usable without JS. */
+(function(){'use strict';document.querySelectorAll('[data-catalogo-panel]').forEach(panel=>{const media=window.matchMedia('(max-width:1023px)'),preview=!!panel.closest('.preview-movil');function layout(){panel.open=!(media.matches||preview)}layout();if(media.addEventListener)media.addEventListener('change',layout);else media.addListener(layout);});})();
