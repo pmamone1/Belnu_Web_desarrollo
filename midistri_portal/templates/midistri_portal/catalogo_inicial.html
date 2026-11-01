@@ -1,5 +1,5 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}{% load midistri_formatos %}
-<div class="tienda-columnas catalogo-layout">{% include "midistri_portal/catalogo_filtros.html" %}<div class="tienda-centro">
+<div class="tienda-columnas catalogo-layout{% if not distribuidora %} sin-lateral{% endif %}">{% if distribuidora %}{% include "midistri_portal/catalogo_filtros.html" %}{% endif %}<div class="tienda-centro">
 {% include 'midistri_portal/promociones.html' %}
 
 {% if presentacion %}<section>

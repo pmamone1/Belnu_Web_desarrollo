@@ -45,3 +45,7 @@ class CatalogoLateralTests(TestCase):
         page=pagina_publica(self.d);page['inicial_anterior']=True
         with patch('midistri_portal.pagina.pagina_publica',return_value=page):r=self.get()
         self.assertContains(r,'catalogo-lateral');self.assertContains(r,'class="catalogo-paginacion"',count=2)
+
+    def test_entrada_publica_sin_tienda_no_reserva_lateral_vacio(self):
+        r=self.client.get('/portal/')
+        self.assertEqual(r.status_code,200);self.assertNotContains(r,'class="catalogo-lateral"')

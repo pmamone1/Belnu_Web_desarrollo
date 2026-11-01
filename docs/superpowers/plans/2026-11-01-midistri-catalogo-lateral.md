@@ -27,5 +27,5 @@ Interfaces: .catalogo-layout sidebar + .tienda-centro, .catalogo-barra form and 
 
 ### Task 3: Entrega37 acumulativa34/35/36
 Files: docs/manual/version/CAMBIOS/checklist/tests and PDFprincipal; scripts instalar/paquete/test_* v37 and releaseinventory. Preserve all prior included portal improvements; no Urban changes required by catalog.
-- [ ] Tests/source compatibility Python3.7, installer dryrun/apply/recovery on verified bases34/35/36, inventory/PDFjoin and ZIPvscommit; expected all PASS.
+- [x] Tests/source compatibility Python3.7, installer dryrun/apply/recovery on verified bases34/35/36, inventory/PDFjoin and ZIPvscommit; expected all PASS.
 - [ ] One independent wholebranch review; Important/Critical RED→GREEN, minors/rulings recorded. Commit and publish GitHub; verified ZIP to Downloads and full cPanelcommands with Urban628; no production installation or campaigns.

@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v37 - Catálogo lateral
+
+Filtros y promociones reunidos a la izquierda en PC, panel desplegable en celular, fotos amplias y controles alineados. Relevancia conserva ventas/variedad y orden fijo por sesión;48 por página con opciones24/48/96/192 y navegación arriba/abajo. Acumulativa34/35/36: incluye las mejoras anteriores de visor, colores, pedidos y estadísticas. Sin migraciones nuevas, envíos ni cambios económicos, históricos, accesos, remitentes, WhatsApp, cron o venv. Instalación productiva pendiente de confirmación.
+
+Guía vigente: [Catálogo lateral](CATALOGO_LATERAL_v37.md).
+
+Comprobar bases34/35/36 con hashes, sintaxis Python3.7, manual PDF vigente/unión, suite aislada, cuatro temas/diseños, PC/celular/sinJS, galería/carrito/analítica. ZIP contra commit publicado y archivo ajeno forgotPassword intacto/excluido. Sin campañas ni cambios de cron.
+
 ## MiDistri-Pedidos v36 · Pedidos por estado desplegables
 
 Validar50+1, grupo correcto, ficha/corte, conciliación, PC/celular, teclado y sinJS; conservar permisos/caducidad. No enviar campañas.

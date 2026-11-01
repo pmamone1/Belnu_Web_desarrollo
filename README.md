@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v37 - Catálogo lateral
+
+Filtros y promociones reunidos a la izquierda en PC, panel desplegable en celular, fotos amplias y controles alineados. Relevancia conserva ventas/variedad y orden fijo por sesión;48 por página con opciones24/48/96/192 y navegación arriba/abajo. Acumulativa34/35/36: incluye las mejoras anteriores de visor, colores, pedidos y estadísticas. Sin migraciones nuevas, envíos ni cambios económicos, históricos, accesos, remitentes, WhatsApp, cron o venv. Instalación productiva pendiente de confirmación.
+
+Guía vigente: [Catálogo lateral](docs/CATALOGO_LATERAL_v37.md).
+
 ## MiDistri-Pedidos v36 · Pedidos por estado desplegables
 
 Las filas de Pedidos por estado y atención permiten consultar los pedidos del grupo en la misma pantalla, con vendedor, fecha, referencia, cantidades e importes;50 por página y sin mezclar estados/fichas. Incluye fotos/colores de35. Sin cambios económicos o envíos. Guía: [Pedidos por estado](docs/ESTADOS_DESPLEGABLES_v36.md).
