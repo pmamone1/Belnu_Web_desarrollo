@@ -12,7 +12,7 @@ class AbastecimientoPortalTests(TestCase):
     def test_descarga_scoped_y_formulario(self):
         with patch('midistri_portal.operadores.api',return_value=PROFILE),patch('midistri_portal.operadores_views.api',return_value=b'validated-xlsx') as api:
             r=self.client.get('/portal/administrar/abastecimiento/?distribuidora=20')
-            self.assertContains(r,'Excel para Urban Point')
+            self.assertContains(r,'Excel de abastecimiento')
             r=self.client.post('/portal/administrar/abastecimiento/',{'distribuidora':20,'desde':'2026-10-01','hasta':'2026-10-22','estado':'pendientes'})
         self.assertEqual(r.status_code,200);self.assertEqual(r['Content-Type'],MIME)
         self.assertEqual(api.call_args.args[0],'operator-order-supply')

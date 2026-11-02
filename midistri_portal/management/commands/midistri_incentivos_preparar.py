@@ -3,7 +3,7 @@ from django.core.management.base import BaseCommand,CommandError
 from midistri_portal.client import ApiError
 from midistri_portal.incentivos_preparacion import procesar
 class Command(BaseCommand):
-    help='Prepara las semanas autorizadas usando la cola Urban; no envía SMTP ni activa recurrencias.'
+    help='Prepara las semanas autorizadas usando la cola de la distribuidora; no envía SMTP ni activa recurrencias.'
     def handle(self,*args,**options):
         try:result=procesar()
         except ApiError as exc:raise CommandError(str(exc))

@@ -4,18 +4,38 @@ from urllib.parse import urlsplit
 import requests
 from django.conf import settings
 
+# Exact legacy service messages only. Never rewrite names, URLs or payload values.
+MENSAJES_SERVICIO = {
+    'Falta configurar la conexión HTTPS con Urban Soft.':
+        'Falta configurar la conexión HTTPS con la distribuidora.',
+    'Falta configurar la conexión con Urban Soft.':
+        'Falta configurar la conexión con la distribuidora.',
+    'Falta actualizar Urban Soft para ingresar.':
+        'Falta actualizar la conexión de la distribuidora para ingresar.',
+    'Falta actualizar Urban Soft para ingresar sólo con Email. No se envió un código.':
+        'Falta actualizar la conexión de la distribuidora para ingresar sólo con Email. No se envió un código.',
+    'Ingrese desde Urban Soft.':
+        'Ingrese desde la administración de la distribuidora.',
+    'La sesión administrativa venció. Ingrese desde Urban Soft.':
+        'La sesión administrativa venció. Ingrese desde la administración de la distribuidora.',
+    'El acceso venció o corresponde a otra cuenta. Iniciá sesión en Urban Soft con la cuenta elegida y volvé a intentar.':
+        'El acceso venció o corresponde a otra cuenta. Iniciá sesión en la administración de la distribuidora con la cuenta elegida y volvé a intentar.',
+    'Seleccione responsables activos y autorizados de Urban Point.':
+        'Seleccione responsables activos y autorizados de la distribuidora.',
+}
+
 class ApiError(Exception):
     def __init__(self,message,status=503):
         self.status=status
-        super().__init__(message)
+        super().__init__(MENSAJES_SERVICIO.get(message,message))
 
 
 def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None,binary_media=False):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
-        raise ApiError('Falta configurar la conexión HTTPS con Urban Soft.')
-    if not settings.URBAN_API_TOKEN:raise ApiError('Falta configurar la conexión con Urban Soft.')
+        raise ApiError('Falta configurar la conexión HTTPS con la distribuidora.')
+    if not settings.URBAN_API_TOKEN:raise ApiError('Falta configurar la conexión con la distribuidora.')
     if not all(part and all(c.isalnum() or c=='-' for c in part) for part in action.split('/')):
         raise ApiError('Operación inválida.',400)
     headers={'Authorization':'Bearer '+settings.URBAN_API_TOKEN,'Accept':'application/json'}
@@ -70,7 +90,7 @@ def subir_material_tienda(archivo,distribuidora_id,operator_token,operacion_id):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment or not settings.URBAN_API_TOKEN:
-        raise ApiError('Falta configurar la conexión HTTPS con Urban Soft.')
+        raise ApiError('Falta configurar la conexión HTTPS con la distribuidora.')
     headers={'Authorization':'Bearer '+settings.URBAN_API_TOKEN,'X-Midistri-Operator':operator_token,
         'X-Midistri-Distribuidora':str(distribuidora_id),'X-Midistri-Operacion':oid,'Accept':'application/json'}
     try:

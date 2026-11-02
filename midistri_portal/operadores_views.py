@@ -52,10 +52,10 @@ def fallo_desafio(request,motivo):
     logging.getLogger('midistri.handoff').warning('handoff_failed reason=%s reference=%s',motivo,referencia)
     mensajes={
         'challenge_expired':'La pantalla de acceso venció. Iniciá nuevamente el acceso.',
-        'cookie_missing':'Falta la validación de este navegador. Iniciá el acceso desde Urban Soft en esta misma pestaña.',
+        'cookie_missing':'Falta la validación de este navegador. Iniciá el acceso desde la administración de la distribuidora en esta misma pestaña.',
         'challenge_mismatch':'La validación de acceso cambió. Iniciá nuevamente el acceso.',
         'signature_invalid':'La validación del navegador no es válida. Iniciá nuevamente el acceso.',
-        'origin_invalid':'No pudimos comprobar el origen del acceso. Iniciá nuevamente desde Urban Soft.'}
+        'origin_invalid':'No pudimos comprobar el origen del acceso. Iniciá nuevamente desde la administración de la distribuidora.'}
     return render(request,'midistri_portal/operador_acceso_error.html',
         {'titulo':'Acceso de Distribuidor','error':mensajes[motivo],'referencia':referencia},status=403)
 
@@ -109,7 +109,7 @@ def completar(request):
         return HttpResponse('Tienda no válida.',status=403)
     did=int(selected) if selected else contexto.get('distribuidora') or ids[0]
     if did not in ids:
-        return HttpResponse('La tienda solicitada no está autorizada. Volvé a entrar desde Urban Soft.',status=403)
+        return HttpResponse('La tienda solicitada no está autorizada. Volvé a entrar desde la administración de la distribuidora.',status=403)
     destino=contexto.get('destino','panel')
     permiso='midistri.tienda_configurar' in result['perfil']['permisos']
     from .sesiones_operador import guardar_operador
@@ -177,7 +177,7 @@ def publicar(request):
             request.session['midistri_sync_pendiente']=True
             try:sincronizar();request.session.pop('midistri_sync_pendiente',None)
             except (ApiError,ValueError):
-                messages.warning(request,'Guardado en Urban; falta actualizar catálogo para vendedores.')
+                messages.warning(request,'Guardado en el sistema de la distribuidora; falta actualizar catálogo para vendedores.')
             else:messages.success(request,'Publicación guardada y catálogo actualizado.')
             return redirect('/portal/administrar/productos/?'+urlencode({'distribuidora':did}))
         modo=request.POST.get('modo','seleccionados')
@@ -235,7 +235,7 @@ def capacidades():
     if (type(data.get('version')) is not int or data['version']!=1 or
         type(data.get('contrato_pedido')) is not int or data['contrato_pedido']!=2 or
         data.get('preparacion_parcial') is not True or data.get('acceso_por_contacto') is not True):
-        raise ApiError('Capacidades de Urban Soft incompatibles. No se confirmó la preparación.')
+        raise ApiError('La conexión de la distribuidora no es compatible. No se confirmó la preparación.')
     return True
 
 @require_http_methods(['GET','POST'])
@@ -275,7 +275,7 @@ def pedido_panel(request,ident):
             puede_emitir=ctx['operador']['financiero'] and 'pedidos.remitos' in ctx['operador']['permisos'],
             puede_remito='pedidos.remitos_ver' in ctx['operador']['permisos'])
         if request.method=='POST' and accion in ('aprobar','cancelar','emitir'):
-            messages.success(request,'Operación registrada en Urban Soft.')
+            messages.success(request,'Operación registrada en la administración de la distribuidora.')
             return redirect('/portal/administrar/pedido/'+str(ident)+'/?'+urlencode({'distribuidora':did}))
         return render(request,'midistri_portal/operador_pedido.html',ctx)
     except (KeyError,TypeError,ValueError):return fallo(request,ApiError('Detalle o cantidades de pedido inválidos.',400))
@@ -303,7 +303,7 @@ def abastecimiento_panel(request):
                     'hasta':request.POST.get('hasta',''),'estado':request.POST.get('estado','pendientes')},
                 binary_mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
             r=HttpResponse(data,content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            r['Content-Disposition']='attachment; filename="MiDistri_abastecimiento_Urban_Point.xlsx"'
+            r['Content-Disposition']='attachment; filename="MiDistri_abastecimiento.xlsx"'
             r['Cache-Control']='private, no-store'
             return r
         # Python 3.7 production: use pytz already required by Django 3.2.

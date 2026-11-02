@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; código publicado e instalación productiva pendiente.
+
+Guía vigente: [Marca visible v40](docs/MARCA_VISIBLE_v40.md).
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 Entrega verificada: implementación publicada en https://github.com/pmamone1/Belnu_Web_desarrollo/commit/44110307c77c542e1a29b936e50ca10a1ef04d41, revisión https://github.com/pmamone1/Belnu_Web_desarrollo/pull/40. ZIP construido desde el commit publicado, contenido y huellas comprobados contra Git y copiado a C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución y confirmación; no se deduce del ZIP ni de la publicación. Los comandos completos se entregan en el chat. El cierre documental posterior conserva el código probado. Sin campañas ni SMTP real.

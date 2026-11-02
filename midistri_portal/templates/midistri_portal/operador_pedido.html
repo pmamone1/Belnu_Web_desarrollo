@@ -1,6 +1,6 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
 <h3>Pedido de MiDistri-Pedidos · {{ pedido.referencia|default:pedido.id }}</h3><p>{{ pedido.vendedor }} · LIN {{ pedido.lin|default_if_none:"—" }} · VV {{ pedido.vv|default_if_none:"—" }} · {{ pedido.estado }}</p>
-{% if not parciales %}<p>Urban Soft todavía permite únicamente la preparación completa. Para cantidades parciales, actualice Urban Soft.</p>{% endif %}
+{% if not parciales %}<p>La conexión de la distribuidora todavía permite únicamente la preparación completa. Para cantidades parciales, solicitá su actualización.</p>{% endif %}
 <form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 <table><thead><tr><th>Producto</th><th>Solicitadas</th><th>Precio vendedor</th><th>Preparadas / a preparar</th><th>Canceladas por falta de stock</th></tr></thead><tbody>
 {% for i in items %}<tr><td>{{ i.nombre }} · {{ i.codigo }}</td><td>{{ i.cantidad }}</td><td>$ {{ i.precio }}</td><td>
@@ -14,5 +14,5 @@
 {% if pedido.estado == "recibido" or pedido.estado == "ok" %}<button name="accion" value="cancelar" class="secondary" formnovalidate>Cancelar por falta de stock</button>{% endif %}
 {% if puede_emitir and pedido.estado == "ok" %}{% if revision %}<input type="hidden" name="revision" value="{{ revision }}"><label><input type="checkbox" name="confirmar_preparacion" value="si" required> Confirmo las cantidades y el cargo revisado.</label><button name="accion" value="emitir">Confirmar preparación y generar cargo / remito</button>{% else %}<button name="accion" value="revisar_preparacion">Revisar preparación</button>{% endif %}{% endif %}
 </form>
-{% if pedido.estado == "emitido" %}<p>Estado de Email: {{ pedido.email_estado|default:"Consultar en Urban Soft" }}. El envío se procesa por la cola configurada.</p>{% if puede_remito %}<form method="post" action="{% url 'midistri_operador_remito' ident=pedido.id %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Ver / imprimir remito</button></form>{% endif %}{% endif %}
+{% if pedido.estado == "emitido" %}<p>Estado de Email: {{ pedido.email_estado|default:"Consultar en la administración de la distribuidora" }}. El envío se procesa por la cola configurada.</p>{% if puede_remito %}<form method="post" action="{% url 'midistri_operador_remito' ident=pedido.id %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Ver / imprimir remito</button></form>{% endif %}{% endif %}
 <p><a href="{% url 'midistri_operador_pedidos' %}?distribuidora={{ tienda.id }}">Volver a pedidos</a></p>{% endblock %}

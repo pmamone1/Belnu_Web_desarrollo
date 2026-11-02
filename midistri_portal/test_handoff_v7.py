@@ -48,7 +48,7 @@ class HandoffV7Tests(TestCase):
         response = self.client.post('/portal/administrar/entrar/',
             {'codigo': 'secret-c' * 6, 'desafio': 'secret-n' * 6},
             HTTP_ORIGIN='https://sistema7000.belnu.com.ar')
-        self.assertContains(response, 'Iniciar de nuevo desde Urban Soft', status_code=403)
+        self.assertContains(response, 'Iniciar de nuevo desde la administración de la distribuidora', status_code=403)
         self.assertContains(response, '/portal/administrar/entrada/', status_code=403)
         self.assertNotContains(response, 'secret-c', status_code=403)
         self.assertNotContains(response, 'secret-n', status_code=403)

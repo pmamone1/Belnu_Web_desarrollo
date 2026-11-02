@@ -1,3 +1,16 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; código publicado e instalación productiva pendiente.
+
+Guía vigente: [Marca visible v40](MARCA_VISIBLE_v40.md).
+
+- [x] Verificar acceso, error de acceso y panel a 320/390/1440 px sin marca de integración, incluida la forma abreviada Urban.
+- [x] Revisar permisos, vínculo real y Excel de abastecimiento.
+- [x] Verificar PDF principal y unión con histórico; inventario y ZIP sin archivos privados.
+- [x] Registrar commit publicado, ZIP/huella y ubicación en Downloads; instalación productiva pendiente, sin inferir confirmación.
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 - [x] Corte portal: 332 pruebas OK con 2 omitidas; historial/detalle QA local a 320/390/1440 px. Registrar corte final y motivos de omitidas en evidencia técnica.

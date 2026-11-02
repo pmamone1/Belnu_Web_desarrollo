@@ -12,7 +12,7 @@ PERMISOS={'pedidos.gestionar','pedidos.remitos','pedidos.remitos_ver',
 def origen_urban():
     u=urlsplit(settings.URBAN_API_BASE)
     if u.scheme!='https' or not u.netloc or u.username or u.password or u.query or u.fragment:
-        raise ApiError('Falta configurar la conexión HTTPS con Urban Soft.')
+        raise ApiError('Falta configurar la conexión HTTPS con la distribuidora.')
     return u.scheme+'://'+u.netloc
 
 def habilitado():
@@ -41,7 +41,7 @@ def perfil_valido(data):
 def perfil_operador(request,permiso=None):
     if not habilitado():raise ApiError('La administración de MiDistri está desactivada.')
     token=token_operador(request)
-    if not token:raise ApiError('Ingrese desde Urban Soft.',401)
+    if not token:raise ApiError('Ingrese desde la administración de la distribuidora.',401)
     try:perfil=perfil_valido(api('operator-profile',operator_token=token))
     except ApiError as e:
         if e.status in (401,403):borrar_token(request,token)
