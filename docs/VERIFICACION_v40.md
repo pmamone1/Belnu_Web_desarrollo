@@ -22,8 +22,14 @@ Manual_MiDistri_Pedidos_Online.pdf: 42 páginas = una nueva vigente + 41 de v39.
 
 ## Entrega
 
-Inventario explícito tools/release_files_v40.json; paquete incremental sólo para base39. ZIP candidato en output/midistri_pedidos_v40_marca.zip; su manifiesto identifica el HEAD usado al construir y producción pendiente. El coordinador debe reconstruir desde commit publicado para la entrega final. Inventario ampliado: 49 payloads y 51 entradas de ZIP. No incluye forgotPassword.html, credenciales, bases, media privada, tmp ni entornos. Producción, publicación GitHub y copia final a Downloads pendientes y separadas. Sin nuevas campañas ni respaldo SQL completo generado. No se incrementan instalaciones confirmadas por crear este paquete.
+Inventario explícito tools/release_files_v40.json; paquete incremental sólo para base39. ZIP en output/midistri_pedidos_v40_marca.zip reconstruido desde commit publicado; su manifiesto identifica el HEAD usado y producción pendiente. Cada payload y el instalador se compararon byte por byte con git show del commit publicado antes de copiar. Inventario ampliado: 49 payloads y 51 entradas de ZIP. No incluye forgotPassword.html, credenciales, bases, media privada, tmp ni entornos. Código publicado y ZIP guardado en Downloads; instalación productiva pendiente y separada. Sin nuevas campañas ni respaldo SQL completo generado. No se incrementan instalaciones confirmadas por crear este paquete.
 
 ## Revisión de referencias abreviadas
 
 Se corrigieron también «Guardado en Urban» en aviso de publicación y pantalla Productos, y «Los archivos que Urban ya haya autorizado» en publicación pendiente del editor. Dos textos administrativos de comandos usan conexión/cola de la distribuidora. Se conserva el texto de productos/tiendas y las identidades de URL. Escaneo r"\burban\b" sobre vistas/recursos; Playwright repite las nueve comprobaciones con ese patrón ampliado.
+
+## Cierre de entrega acreditado
+
+Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
+
+La reconstrucción final posterior a este cierre conserva las huellas de base39 y registra su propio commit fuente en release_manifest.json. La huella del ZIP final se entrega en el chat para no introducir una referencia circular dentro del propio paquete.

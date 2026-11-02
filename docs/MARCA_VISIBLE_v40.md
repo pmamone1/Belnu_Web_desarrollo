@@ -28,3 +28,7 @@ Se crea respaldo automático privado de archivos reemplazados. Restaurar con el 
 Ver VERIFICACION_v40.md. Publicación, copia a Downloads y aceptación/instalación productiva se registran por separado. Esta guía no acredita producción ni activación de cron. Sin SMTP real ni campañas durante QA.
 
 La limpieza incluye referencias abreviadas estáticas a Urban en avisos de guardado/publicación pendiente y ayuda de comandos; sin modificar datos propios ni destinos reales.
+
+## Publicación
+
+Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
