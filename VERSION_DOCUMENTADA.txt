@@ -1,3 +1,5 @@
 MiDistri-Pedidos v41
 Pedidos propios: fecha débito y devolución porproducto explícita; legacy estricto conservado. Marca40 incluida; paquete39/40 sin migraciones ni nuevas rutas/importes. RemitoPDF sin estas reglas.
-Candidato; publicación e instalación productiva pendientes. Evidencia docs/VERIFICACION_v41.md. Sin campañas ni SMTP real.
+Código publicado; instalación productiva pendiente. Evidencia docs/VERIFICACION_v41.md. Sin campañas ni SMTP real.
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.

@@ -28,3 +28,7 @@ Instalador verifica huellas, entorno, esquema y plan vacío antes de copiar, y d
 ## Validación y entrega
 
 Ver VERIFICACION_v41.md. Documentación/manual/CAMBIOS/VERSION/checklist actualizados. Revisión, publicación final, ZIP/Downloads e instalación productiva se acreditan por separado. Sin campañas ni SMTP real.
+
+## Publicación acreditada
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.

@@ -13,4 +13,4 @@
 - [x] Presentar fecha de débito y devolución porproducto sin inferir salidas/obligaciones. No crear importes ni mutar históricos.
 - [x] Regresión completa, marca y QA visual tres anchos; revisar manual nuevo+unión histórica.
 - [x] Preparar docs/manual/VERSION/CAMBIOS/checklist y paquete acumulativo49archivos40+archivos41; bases39/40, sin migraciones.
-- [ ] Revisión independiente antes de commit/push; sólo luego publicar y copiar ZIP final aDownloads con comandos cPanel.
+- [x] Revisión independiente antes de commit/push; sólo luego publicar y copiar ZIP final aDownloads con comandos cPanel.

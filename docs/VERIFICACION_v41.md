@@ -26,8 +26,14 @@ Manual_MiDistri_Pedidos_Online.pdf: 43 páginas = 1 nueva vigente v41 + 42 hist�
 
 Paquete acumulativo 39+40+41 con inventario explícito de 66 archivos y 68 entradas de ZIP en tools/release_files_v41.json, bases 39 SHA 824f5da3b7f8fdb11a9b567e5ffa0c21f031ffe9 y 40 SHA f362520c247b23796d5b0846f1170b13ab1b5587. Excluye cambio ajeno, credenciales, media, bases y entornos. Instalador crea respaldo privado de archivos, no exige respaldo SQL nuevo por cada paquete ni incrementa instalaciones confirmadas.
 
-Revisión independiente, publicación GitHub, reconstrucción del ZIP final/copia a Downloads y producción se acreditan por separado. En este corte: validación local completada; revisión independiente completada sin hallazgos; publicación final e instalación productiva pendientes. Sin campañas ni envíos SMTP.
+Revisión independiente, publicación GitHub, reconstrucción del ZIP final/copia a Downloads y producción se acreditan por separado. En este corte: validación local completada; revisión independiente completada sin hallazgos; publicación final y copia a Downloads comprobadas; instalación productiva pendiente. Sin campañas ni envíos SMTP.
 
 ## Revisión independiente
 
 Revisión fresca de v41 completada: 22 pruebas independientes OK y sin hallazgos. Contrato legado, extensión estricta, UI y conservación del PDF revisados antes de publicar.
+
+## Cierre de entrega acreditado
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.
+
+Se comparan los 66 payloads y el instalador raíz byte por byte con git show del commit publicado; integridad/huellas del ZIP y copia Downloads comprobadas. Reconstrucción final posterior al cierre documental registra su propio source_commit en release_manifest.json; huella final en el chat para evitar referencia circular dentro del ZIP.
