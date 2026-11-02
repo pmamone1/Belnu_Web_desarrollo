@@ -1,0 +1,7 @@
+MiDistri-Pedidos v41
+
+## MiDistri-Pedidos v41 - Pedidos propios
+
+Mis pedidos y detalle leen la extensión opcional de pedidos consignados propios: fecha de débito y devolución por producto, sin requerir salidas. Conserva DTOs históricos y marca MiDistri40. No calcula importes ni añade estas reglas al remito PDF. Paquete acumulativo para bases39/40, sin migraciones nuevas. Código candidato; publicación e instalación productiva pendientes.
+
+Detalles técnicos/compatibilidad/recuperación: docs/PEDIDOS_PROPIOS_v41.md. Evidencia: docs/VERIFICACION_v41.md.

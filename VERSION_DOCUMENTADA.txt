@@ -1,7 +1,3 @@
-MiDistri-Pedidos v40
-Marca visible MiDistri/distribuidora en acceso, administración y mensajes conocidos. Base39; sin cambios de contratos, rutas, permisos, datos ni migraciones.
-Código publicado; instalación productiva pendiente. Validaciones documentadas en docs/VERIFICACION_v40.md. Sin campañas ni SMTP real.
-
-La limpieza incluye referencias abreviadas estáticas a Urban en avisos de guardado/publicación pendiente y ayuda de comandos; sin modificar datos propios ni destinos reales.
-
-Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
+MiDistri-Pedidos v41
+Pedidos propios: fecha débito y devolución porproducto explícita; legacy estricto conservado. Marca40 incluida; paquete39/40 sin migraciones ni nuevas rutas/importes. RemitoPDF sin estas reglas.
+Candidato; publicación e instalación productiva pendientes. Evidencia docs/VERIFICACION_v41.md. Sin campañas ni SMTP real.

@@ -74,7 +74,7 @@ def pedido_valido(data,perfil,ident=None,anterior=None):
         except (KeyError,ValueError,TypeError):raise ApiError('Anulación de pedido inválida.') from None
     if 'modalidades_pedidos' in data:
         from .modalidades import modalidades_validas
-        result['modalidades_pedidos']=modalidades_validas(data['modalidades_pedidos'],data.get('pedidos'))
+        result['modalidades_pedidos']=modalidades_validas(data['modalidades_pedidos'],data.get('pedidos'),[item['producto_id'] for item in clean])
     result.update(items=clean)
     for key in ('distribuidora','linea','lin','vv','creado','pedidos'):
         if key in data:result[key]=data[key]

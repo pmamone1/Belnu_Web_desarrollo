@@ -343,9 +343,12 @@ def detalle(request,ident):
         distribuidora_id=perfil['distribuidora_id'],producto_id__in=[i['producto_id'] for i in items])}
     review=pedido.respuesta.get('revision_comercial')
     accepted={r['producto_id']:r['cantidad_preparada'] for r in review['cantidades']} if review else {}
+    from .modalidades import devoluciones_presentacion
+    returns=devoluciones_presentacion(pedido.respuesta)
     for item in items:
         row=dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'})
         row['foto']=photos.get(item['producto_id'],'')
+        row['devolucion_producto']=returns.get(item['producto_id'],'')
         if review:row['cantidad_aceptada']=accepted[item['producto_id']]
         shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))
