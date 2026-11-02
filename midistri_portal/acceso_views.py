@@ -50,9 +50,9 @@ def iniciar(request):
         if legacy:
             if not selected.isdecimal() or not Distribuidora.objects.filter(activa=True,pk=int(selected)).exists():
                 raise ApiError('Tienda no disponible.',400)
-            if caps.get('login_codigo_tienda')!=1:raise ApiError('Falta actualizar Urban Soft para ingresar.',503)
+            if caps.get('login_codigo_tienda')!=1:raise ApiError('Falta actualizar la conexión de la distribuidora para ingresar.',503)
         elif caps.get('login_email_perfiles')!=1:
-            raise ApiError('Falta actualizar Urban Soft para ingresar sólo con Email. No se envió un código.',503)
+            raise ApiError('Falta actualizar la conexión de la distribuidora para ingresar sólo con Email. No se envió un código.',503)
         email=forms.EmailField(max_length=254).clean(request.POST.get('email',''))
         navegador(request,True)
         ip=salted_hmac('midistri.login.ip',request.META.get('REMOTE_ADDR',''),algorithm='sha256').hexdigest()

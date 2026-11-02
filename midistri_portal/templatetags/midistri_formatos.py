@@ -29,3 +29,10 @@ def estilo_mensaje(pagina,key):
     from django.core.exceptions import ValidationError
     try:return css_mensaje(pagina.get('estilos_mensajes',{}),key)
     except (ValidationError,AttributeError,TypeError):return ''
+
+
+@register.filter
+def mensaje_servicio(value):
+    """Present known stored errors without changing the historical record."""
+    from ..client import MENSAJES_SERVICIO
+    return MENSAJES_SERVICIO.get(str(value),value)

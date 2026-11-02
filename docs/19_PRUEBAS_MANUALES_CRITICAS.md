@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; publicación e instalación productiva pendientes.
+
+Guía vigente: [Marca visible v40](MARCA_VISIBLE_v40.md).
+
+Con fixtures: abrir /portal/acceso/, validar cuenta de la distribuidora, forzar callback inválido (403) y revisar reintento; abrir panel autorizado y comprobar tienda/permiso insuficiente. Recorrer catálogo/ranking, editor, estadísticas y abastecimiento: etiquetas neutras, nombre Excel nuevo y destinos existentes. Confirmar que un error remoto conocido conserva estado y un texto de producto no se reemplaza. En producción estos pasos están pendientes de aceptación.
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 Pendientes de aceptación en QA local y sin SMTP:

@@ -122,7 +122,7 @@ def confirmar_pendiente(perfil,tienda_id,operacion_id,token):
         'distribuidora':did,'bloque':str(cambio.bloque_id),'material':data['material_id'] or None,
         'activo':data['activo'],'revision':revision,'operacion':str(cambio.pk)})
     if result.get('ok') is not True or result.get('revision')!=revision+1:
-        raise ApiError('No se confirmó la publicación en Urban Soft.')
+        raise ApiError('No se confirmó la publicación en la administración de la distribuidora.')
     with transaction.atomic():
         Distribuidora.objects.select_for_update().get(pk=did,activa=True)
         cambio=CambioPromocional.objects.select_for_update().get(pk=cambio.pk)

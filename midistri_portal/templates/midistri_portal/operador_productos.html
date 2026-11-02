@@ -1,8 +1,8 @@
 {% extends 'midistri_portal/operador_base.html' %}{% block panel %}
 <h3>Productos · {{ tienda.nombre }}</h3>
-{% if sync_pendiente %}<p class="notice">Guardado en Urban; falta actualizar catálogo para vendedores.</p><form method="post" action="{% url 'midistri_operador_sincronizar' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Actualizar copia del catálogo</button></form>{% endif %}
+{% if sync_pendiente %}<p class="notice">Guardado en el sistema de la distribuidora; falta actualizar catálogo para vendedores.</p><form method="post" action="{% url 'midistri_operador_sincronizar' %}">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}"><button>Actualizar copia del catálogo</button></form>{% endif %}
 <form method="get" class="search"><input type="hidden" name="distribuidora" value="{{ tienda.id }}"><input name="q" value="{{ q }}" placeholder="Producto o nombre" aria-label="Buscar producto"><button>Buscar</button></form>
-<p>{{ catalogo.total }} productos activos. Los precios y las fotos se administran en Urban Soft.</p>
+<p>{{ catalogo.total }} productos activos. Los precios y las fotos se administran en la administración de la distribuidora.</p>
 <form method="post" action="{% url 'midistri_operador_publicar' %}">{% csrf_token %}
 <input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 <label>Proveedor para productos nuevos <select name="proveedor" required><option value="">Elegir proveedor</option>{% for p in catalogo.proveedores %}<option value="{{ p.id }}">{{ p.nombre }}</option>{% endfor %}</select></label>

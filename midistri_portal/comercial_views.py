@@ -41,7 +41,7 @@ def configuracion(request):
                 try:revision=int(request.POST.get('revision',''))
                 except ValueError:raise ApiError('Revisión inválida.',400)
                 guardar_configuracion_urban(ctx['operador'],token,dict(form.cleaned_data,distribuidora=did),revision,request.POST.get('operacion',''))
-                messages.success(request,'Nombre comercial y mensajes guardados en Urban Soft. No se envió ninguna campaña.')
+                messages.success(request,'Nombre comercial y mensajes guardados en la administración de la distribuidora. No se envió ninguna campaña.')
                 return redirect('/portal/administrar/comunicacion/?distribuidora='+str(did))
         current=validar_config(api('operator-store-settings',method='POST',operator_token=token,data={'distribuidora':did}),did)
         ctx.update(form=form or ComercialForm(initial=current),revision=current['revision'],operacion=str(uuid4()))

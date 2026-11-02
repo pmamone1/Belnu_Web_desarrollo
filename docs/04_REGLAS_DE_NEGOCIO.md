@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; publicación e instalación productiva pendientes.
+
+Guía vigente: [Marca visible v40](MARCA_VISIBLE_v40.md).
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 Mostrar sólo modalidades explícitas validadas de Urban. Firme: plazo 0, sin fechas/devolución consignada. Consignado: 7/14/21/30 y fechas por salida, incluida heredada anterior a confirmación. Históricos sin metadatos no se rellenan. Entregado no prueba cargo firme. DTO inválido preserva última respuesta válida. No cambia importes/snapshots, alcance o permisos; no crea obligaciones/pagos.

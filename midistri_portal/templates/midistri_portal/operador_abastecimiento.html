@@ -4,6 +4,6 @@
 <form method="post">{% csrf_token %}<input type="hidden" name="distribuidora" value="{{ tienda.id }}">
 <label>Desde <input type="date" name="desde" value="{{ desde }}" required></label><label>Hasta <input type="date" name="hasta" value="{{ hasta }}" required></label>
 <label>Estado <select name="estado"><option value="pendientes">Pendientes</option><option value="todos">Todos, con preparados y cancelados</option></select></label>
-<button>Descargar Excel para Urban Point</button></form>
+<button>Descargar Excel de abastecimiento</button></form>
 <p>Hasta 200 pedidos por exportación; si hay más, reduzca las fechas. El Excel de depósito con detalle por vendedor sigue disponible en Pedidos.</p>
 <a href="{% url 'midistri_operador_pedidos' %}?distribuidora={{ tienda.id }}">Volver a pedidos</a>{% endblock %}

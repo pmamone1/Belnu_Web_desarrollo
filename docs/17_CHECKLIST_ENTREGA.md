@@ -1,3 +1,14 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; publicación e instalación productiva pendientes.
+
+Guía vigente: [Marca visible v40](MARCA_VISIBLE_v40.md).
+
+- [x] Verificar acceso, error de acceso y panel a 320/390/1440 px sin marca de integración, incluida la forma abreviada Urban.
+- [x] Revisar permisos, vínculo real y Excel de abastecimiento.
+- [x] Verificar PDF principal y unión con histórico; inventario y ZIP sin archivos privados.
+- [ ] Registrar commit publicado, ZIP/huella y ubicación en Downloads por separado de instalación confirmada.
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 - [x] Corte portal: 332 pruebas OK con 2 omitidas; historial/detalle QA local a 320/390/1440 px. Registrar corte final y motivos de omitidas en evidencia técnica.

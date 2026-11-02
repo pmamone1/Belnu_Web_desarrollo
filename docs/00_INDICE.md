@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v40 - Marca visible
+
+El acceso dice «cuenta de la distribuidora» y las vistas de administración, catálogo, estadísticas, promociones y pedidos usan MiDistri/distribuidora. Se conservan rutas, destinos reales, permisos, funciones, datos e históricos. Los errores heredados conocidos se adaptan por coincidencia exacta; contenidos propios y mensajes desconocidos se preservan. Sin migraciones nuevas ni envíos. Base39; publicación e instalación productiva pendientes.
+
+Guía vigente: [Marca visible v40](MARCA_VISIBLE_v40.md).
+
 ## MiDistri-Pedidos v39 - Modalidad comercial
 
 Guía vigente de historial/detalle, contrato opcional con Urban 631, compatibilidad, recuperación y validación. Conserva catálogo 38. MiDistri 39 es candidato; instalación pendiente.

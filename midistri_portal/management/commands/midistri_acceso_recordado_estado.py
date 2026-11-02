@@ -15,6 +15,6 @@ class Command(BaseCommand):
         if not options['local']:
             try:caps=api('capabilities')
             except ApiError as exc:raise CommandError(str(exc))
-            if caps.get('seller_device')!=1:raise CommandError('Urban no ofrece el contrato seller_device=1.')
+            if caps.get('seller_device')!=1:raise CommandError('La conexión de la distribuidora no ofrece el contrato seller_device=1.')
             result['urban_habilitado']=caps.get('seller_device_habilitado') is True
         self.stdout.write(json.dumps(result))
