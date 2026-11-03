@@ -1,3 +1,20 @@
+## MiDistri-Pedidos v39 - Modalidad comercial
+
+Pendientes de aceptación en QA local y sin SMTP:
+
+1. Firme: etiqueta en fila y condiciones al desplegar/detalle; sin fecha ni invitación a devolución consignada.
+2. Consignado con 7/14/21/30 días: mostrar plazo y cada fecha, incluso heredada anterior a confirmación. Sin fechas, aviso explícito; sin afirmar deuda por Entregado/remito.
+3. Histórico sin modalidades_pedidos o con lista vacía: presentación/importes conservados. Entrega parcial/cancelación mantiene cantidades y snapshot.
+4. Rechazar DTO con claves extra, IDs ajenos/duplicados/booleanos, plazo/modalidad incompatibles, fecha imposible y firme con devolución; preservar última respuesta válida.
+5. Probar vendedor/distribuidora ajenos, sesión y caducidad. Revisar 320/390/1440px, teclado/sinJS, historial/detalle y catálogo 38 sin regresión.
+6. Confirmar consulta/actualización/reimpresión sin crear deuda, devolución, cierre, pago o envío. Instalación sin nueva migración, cron ni cambio de remitentes.
+
+7. Anular en QA una fuente de consignación: atención efectiva parcial/completa, cantidades históricas conservadas, comprobante combinado retirado entero y aviso de solicitar documento vigente. No cambiar PDF ni atribuir al vendedor fechas de otro. Repetir anulación prepara sólo un aviso en cola, sin SMTP real.
+
+Corte técnico ejecutado: 332 pruebas OK con 2 omitidas y QA visual local 320/390/1440 px. Aceptación productiva pendiente. Urban: 123 dirigidas OK/DDL memoria OK, regresión amplia con 37 incidencias legadas reproducidas en base 630; sin concurrencia PostgreSQL ejecutada.
+
+Guía vigente: [Modalidad comercial del pedido](PEDIDOS_MODALIDADES_v39.md).
+
 ## MiDistri-Pedidos v38 - Ajustes del catálogo
 
 El lateral largo reserva el alto real de la barra Ver mi pedido y se recalcula al cambiar de tamaño. Cada catálogo nuevo tras navegar con la sesión inicia cerrado en celular/tableta y abierto en PC; se conserva la apertura manual del panel actual. Acumulativa sobre34/35/36/37; conserva el catálogo lateral y las mejoras previas. Sin migraciones nuevas, cambios de precios, pedidos, sesiones, carrito, históricos ni campañas. Código preparado; instalación productiva pendiente de confirmación.

@@ -1,0 +1,12 @@
+MiDistri-Pedidos v39 - Modalidad comercial del pedido
+Base 38; coordinada con Urban 631; candidato, instalación pendiente de confirmación.
+- Historial/detalle muestran firme/consignado, plazo y todas las fechas de devolución informadas.
+- Firme sin devolución consignada. Entregado es operativo; remito consignado no afirma deuda aplicada.
+- modalidades_pedidos opcional y estricto; históricos compatibles, DTO inválido conserva última respuesta válida.
+- Sin rutas/permisos/modelos/migraciones nuevas; mantiene alcance, precios/snapshots y catálogo 38.
+- Restaurar archivos portal no revierte Urban 0132 ni tratamientos/salidas.
+- Documentación técnica/usuario, checklist, pruebas manuales y manual PDF actualizados. No se modifica forgotPassword.html ajeno.
+- Corte portal: 332 pruebas OK con 2 omitidas y QA local historial/detalle a 320/390/1440 px. Urban 123 dirigidas OK/DDL memoria OK, regresión amplia con 37 incidencias legadas reproducidas en base 630; no concurrencia PostgreSQL ejecutada. Publicación/paquete pendientes. No afirmar instalación productiva. Sin campañas, SMTP ni cambios de remitentes/cron/venv.
+- Atención/cancelación efectiva según fuentes Urban enlazadas sin reescribir Pedido. Si el comprobante contiene fuente consignada anulada se retira entero y se pide uno vigente, conservando PDF histórico.
+- Remitos consignados sólo fechas del vendedor; anulación nativa prepara aviso operativo único en cola. Instalación/QA no envían SMTP ni campañas; otros avisos/remitentes/cron se conservan.
+- Evidencia técnica cerrada en VERIFICACION_v39.md: dos pruebas omitidas por motor PostgreSQL/MariaDB, sin concurrencia real acreditada en esta corrida SQLite. Pruebas previas de instalador/paquete 29 Portal y 30 Urban; ZIP final/publicación/instalación pendientes.

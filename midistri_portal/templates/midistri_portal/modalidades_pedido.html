@@ -1,0 +1,4 @@
+{% if modalidades %}<div class="pedido-modalidades"><h4>Tratamiento comercial</h4>
+{% for modalidad in modalidades %}<div class="pedido-modalidad">{% if modalidad.modalidad == 'firme' %}<p><strong>En firme · no admite devolución de consignación</strong></p>{% else %}<p><strong>Consignado · plazo de {{ modalidad.plazo_dias }} días</strong></p>
+{% for fecha in modalidad.vencimientos %}<p>Devolución hasta el <time datetime="{{ fecha|date:'Y-m-d' }}">{{ fecha|date:'d/m/Y' }}</time>.</p>{% empty %}<p>La fecha de devolución todavía no está informada.</p>{% endfor %}<p class="tiny">La emisión del remito no confirma una deuda aplicada.</p>{% endif %}</div>{% endfor %}
+</div>{% endif %}
