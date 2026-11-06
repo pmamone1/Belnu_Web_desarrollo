@@ -22,6 +22,8 @@ def validar_snapshot(data):
             seen.add((did,pid))
             for k,limit in [('nombre',200),('codigo',80),('categoria',100)]:
                 if not isinstance(p[k],str) or len(p[k])>limit:raise ValueError
+            description=p.get('descripcion','')
+            if not isinstance(description,str) or len(description)>2000 or '\x00' in description:raise ValueError
             classification=p.get('clasificacion',{'categorias':[p['categoria']] if p['categoria'] else [],'subcategoria':''})
             if not isinstance(classification,dict) or set(classification)!={'categorias','subcategoria'}:raise ValueError
             categories=classification['categorias'];sub=classification['subcategoria']
@@ -53,7 +55,7 @@ def validar_snapshot(data):
             if order is not None and (type(order) is not int or not 1<=order<=1000000):raise ValueError
             indicators=dict(indicators)
             if order is not None:indicators['orden_ventas']=order
-            rows.append((did,pid,{'clasificacion':classification,'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'codigo':p['codigo'],'categoria':p['categoria'],
+            rows.append((did,pid,{'clasificacion':classification,'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'descripcion':description,'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ValueError('Catálogo incompleto o inválido. Se conserva la última copia válida.') from None

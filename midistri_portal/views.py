@@ -140,7 +140,7 @@ def catalogo(request):
         product.galeria=product.multimedia if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) else []
         product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)
         product.galeria_dom_id='galeria-'+str(product.producto_id)
-        product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
+        product.galeria_datos={'nombre':product.nombre,'descripcion':product.descripcion,'items':product.galeria}
     from .presentacion import presentacion_publica,TEMAS
     from .promociones import promociones_publicas
     destacados=[]

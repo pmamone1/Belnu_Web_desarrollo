@@ -1,3 +1,14 @@
+## MiDistri-Pedidos v42 · Reseña del producto
+
+### Cargar y actualizar
+La descripción se escribe en la ficha del producto de la administración distribuidora y llega al portal con la sincronización habitual. Es opcional, texto plano de hasta2.000caracteres. No se genera una reseña automáticamente.
+### Ampliar una foto
+Abrir la foto del catálogo muestra la reseña bajo el material ampliado. Sigue visible al pasar entre fotos del mismo producto. Al abrir otro producto muestra su propio texto; si no tiene descripción no aparece un espacio vacío. Conserva controles de foto/video y analítica. La alternativa sin JavaScript muestra texto escapado.
+### Instalar la pareja
+Primero Urban659 y después MiDistri42. Sólo portal0015 agrega la copia de descripción. Las versiones39/40/41 con0014 se admiten mediante paquete acumulativo de41 más esta mejora. No se modifican pedidos ni remitos, importes, remitentes o cron. No se envían campañas al instalar.
+
+
+
 ## MiDistri-Pedidos v41 - Pedidos propios
 
 Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.

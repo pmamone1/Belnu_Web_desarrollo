@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v42 · Reseña del producto
+
+Reseña pública en la foto ampliada, sincronizada desde Urban659. Campo opcional2000 y texto seguro. [Guía](docs/DESCRIPCION_v42.md). Sólo portal0015; instalación pendiente.
+
 ## MiDistri-Pedidos v41 - Pedidos propios
 
 Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.

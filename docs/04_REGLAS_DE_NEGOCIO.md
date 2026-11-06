@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v42 · Reseña del producto
+
+Reseña pública del producto, texto plano hasta2000. No cambia pedidos, precios, remitos, acceso de vendedores ni datos económicos.
+
 ## MiDistri-Pedidos v41 - Pedidos propios
 
 Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.

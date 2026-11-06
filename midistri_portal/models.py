@@ -13,6 +13,7 @@ class Publicacion(models.Model):
     producto_id=models.PositiveIntegerField()
     distribuidora=models.ForeignKey(Distribuidora,on_delete=models.PROTECT)
     nombre=models.CharField(max_length=200)
+    descripcion=models.TextField(blank=True,default='',max_length=2000)
     codigo=models.CharField(max_length=80,blank=True)
     categoria=models.CharField(max_length=100,blank=True)
     clasificacion=models.JSONField(default=dict,blank=True)

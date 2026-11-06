@@ -1,3 +1,6 @@
+MiDistri-Pedidos v42
+Reseña al ampliar foto, texto plano opcional2000 y sincronización compatible. Sólo portal0015 aditiva; requiereUrban659. Paquete acumulativo39/40/41, instalación pendiente. Sin campañas ni cambios económicos.
+
 MiDistri-Pedidos v41
 Pedidos propios: fecha débito y devolución porproducto explícita; legacy estricto conservado. Marca40 incluida; paquete39/40 sin migraciones ni nuevas rutas/importes. RemitoPDF sin estas reglas.
 Código publicado; instalación productiva pendiente. Evidencia docs/VERIFICACION_v41.md. Sin campañas ni SMTP real.

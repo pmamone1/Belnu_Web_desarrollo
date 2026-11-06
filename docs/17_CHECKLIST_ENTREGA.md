@@ -1,3 +1,12 @@
+## MiDistri-Pedidos v42 · Reseña del producto
+
+- [x] RED y29pruebas de reseña/galería/contrato/multimedia/catálogo.
+- [x] Revisión independiente y visor local con reseña, navegación, vacío y escape de etiquetas verificados.
+- [x] Manual PDF44 páginas y unión visual verificada; 43 páginas anteriores conservadas.
+- [x] 3 pruebas de paquete/instalador sobre bases39/40/41: preflight/copia simulados, plan y rollback verificados.
+- [ ] ZIP final/source_commit y publicación: acreditar al entregar. Ver VERIFICACION_v42.md.
+- [ ] Instalación0015 productiva. Ningún envío real.
+
 ## MiDistri-Pedidos v41 - Pedidos propios
 
 Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.
