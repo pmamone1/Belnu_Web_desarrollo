@@ -24,6 +24,6 @@ def preview(context,d,page_number=1):
     for product in page:
         product.categorias_catalogo,product.subcategoria_catalogo=clasificar(product)
         product.galeria=product.multimedia;product.foto_card=next((m['url'] for m in product.galeria if m['tipo']=='foto'),None)
-        product.galeria_dom_id='galeria-'+str(product.producto_id);product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
+        product.galeria_dom_id='galeria-'+str(product.producto_id);product.galeria_datos={'nombre':product.nombre,'descripcion':product.descripcion,'items':product.galeria}
     context.update(distribuidora=d,productos=page,page_size=48,q='',categoria='',subcategoria='',orden='recomendados',ranking_disponible=True,categorias=sorted({c for cats,sub in classification for c in cats},key=str.casefold),subcategorias=sorted({sub for cats,sub in classification if sub},key=str.casefold))
     return navegacion(context)

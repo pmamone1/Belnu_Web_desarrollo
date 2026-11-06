@@ -24,6 +24,9 @@ MENSAJES_SERVICIO = {
         'Seleccione responsables activos y autorizados de la distribuidora.',
 }
 
+MAX_RESPONSE_BYTES=16*1024*1024
+MAX_SNAPSHOT_BYTES=128*1024*1024
+
 class ApiError(Exception):
     def __init__(self,message,status=503):
         self.status=status
@@ -44,10 +47,11 @@ def api(action,method='GET',data=None,token=None,binary=False,operator_token=Non
     try:
         with requests.request(method,base+action+'/',json=data if method=='POST' else None,
                 headers=headers,timeout=(5,30),allow_redirects=False,stream=True) as r:
+            limit=MAX_SNAPSHOT_BYTES if action=='snapshot' and method=='GET' and not (binary or binary_mime or binary_media) else MAX_RESPONSE_BYTES
             content=bytearray()
             for chunk in r.iter_content(65536):
                 content.extend(chunk)
-                if len(content)>16*1024*1024:raise ApiError('Respuesta demasiado grande; consulte con la distribuidora.')
+                if len(content)>limit:raise ApiError('Respuesta demasiado grande; consulte con la distribuidora.')
             if r.status_code!=200:
                 try:message=json.loads(content.decode('utf-8')).get('error','No se pudo completar la operación.')
                 except (ValueError,AttributeError):message='No se pudo completar la operación.'

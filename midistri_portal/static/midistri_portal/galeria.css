@@ -4,3 +4,5 @@
 
 /* El visor amplía también imágenes pequeñas, conservando la foto completa. */
 .galeria-stage img{width:100%;height:60vh}@media(max-width:560px){.galeria-stage img{height:48vh}}
+
+.galeria-descripcion{margin:14px 0;padding:12px 14px;background:var(--panel,#fff);border:1px solid currentColor;border-radius:10px}.galeria-descripcion h3{font-size:17px;margin:0 0 8px}.galeria-descripcion p,.galeria-resena-alternativa{white-space:pre-line;overflow-wrap:anywhere;line-height:1.5;margin:0}
