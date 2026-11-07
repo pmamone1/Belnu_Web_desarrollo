@@ -3,6 +3,7 @@ from urllib.parse import urlsplit
 from django.conf import settings
 from django.db import transaction
 from django.utils import timezone
+from .abastecimiento import validar_abastecimiento
 from .models import Distribuidora,Publicacion,Sincronizacion
 
 
@@ -55,7 +56,8 @@ def validar_snapshot(data):
             if order is not None and (type(order) is not int or not 1<=order<=1000000):raise ValueError
             indicators=dict(indicators)
             if order is not None:indicators['orden_ventas']=order
-            rows.append((did,pid,{'clasificacion':classification,'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'descripcion':description,'codigo':p['codigo'],'categoria':p['categoria'],
+            abastecimiento=validar_abastecimiento(p.get('abastecimiento',{}))
+            rows.append((did,pid,{'abastecimiento':abastecimiento,'clasificacion':classification,'indicadores':indicators,'multimedia':multimedia,'nombre':p['nombre'],'descripcion':description,'codigo':p['codigo'],'categoria':p['categoria'],
                 'precio':price,'pvp':pvp,'imagenes':images,'display':display,'activa':True}))
     except (KeyError,ValueError,TypeError,InvalidOperation,AttributeError):
         raise ValueError('Catálogo incompleto o inválido. Se conserva la última copia válida.') from None

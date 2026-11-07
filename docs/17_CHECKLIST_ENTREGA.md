@@ -1,3 +1,11 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+- [x] Pruebas de contrato, catálogo, vista previa y carrito con datos sintéticos. Las cantidades que superan el stock local se rechazan cuando el proveedor está sin disponibilidad.
+- [x] Migraciones del modelo verificadas en SQLite aislado. La prueba automatizada no ejecutó cambios productivos.
+- [x] Inventario e instalación simulada en las bases 39 a 42, rutas de migración en SQLite y unión del PDF de 45 páginas verificados. Ver [evidencia](VERIFICACION_v43.md).
+- [ ] Publicar commit, cotejar ZIP final y hash con el código publicado, y entregar los comandos de cPanel.
+- [ ] Confirmar instalación y sincronización productivas después de Urban Soft v1.18.660.
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 - [x] RED y29pruebas de reseña/galería/contrato/multimedia/catálogo.

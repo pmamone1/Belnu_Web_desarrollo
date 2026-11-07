@@ -1,3 +1,13 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+Ejecutar en un entorno de prueba con un snapshot de ejemplo y una sesión sintética.
+
+1. Abrir el catálogo público, la vista previa y los destacados con una ficha de proveedor disponible. Verificar el estado, la fecha de consulta y, si hay stock local, el indicador separado. Abrir la foto pública en la galería.
+2. Sincronizar una ficha con proveedor indisponible y cero unidades locales. Debe seguir visible y sin entrega estimada de 96 horas. Con sesión de vendedor, probar cantidad y botón deshabilitados. Un envío directo también debe ser rechazado.
+3. Con proveedor indisponible y una unidad local, agregar una unidad. Intentar dos y comprobar que el carrito conserva la unidad previa. Simular una baja de stock después de revisar el carrito. El envío debe pedir quitar el producto o bajar la cantidad y conservar el carrito.
+4. Verificar que un producto anterior sin el campo nuevo conserve su ficha y el flujo habitual. Un snapshot inválido debe conservar el último catálogo válido. Consultar un pedido ya recibido y comprobar que sigue accesible con su referencia original.
+5. Tras la instalación autorizada, comprobar el catálogo y sus fotos de forma visual. No enviar un pedido de prueba en producción.
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 En QA, ampliar foto con reseña con saltos/etiquetas y producto sin reseña; navegar fotos y cambiar de producto. Confirmar texto inerte, foto completa, foco/cierre y analítica. Snapshot viejo vacío; inválido conserva copia completa. Catálogo8500productos/descripciones2000no se corta por16MiB; otros recursos mantienen16. Sobre límite snapshot se rechaza. No probar creando pedidos o mensajes reales.

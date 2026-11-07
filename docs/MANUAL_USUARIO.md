@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+En el catálogo, «Disponible en proveedor» indica el estado informado por la última consulta. «Disponible en depósito» indica existencias locales. La fecha junto al estado corresponde a la consulta al proveedor. La distribuidora confirma disponibilidad para cada pedido.
+
+Un artículo puede seguir visible aunque esté agotado. Si el proveedor está sin disponibilidad, sólo se pueden pedir las unidades locales informadas. Si al revisar el carrito hay menos unidades que antes, bajá la cantidad o quitá el producto y volvé a enviar. Para ver las fotos o la reseña, abrí la galería como de costumbre. [Guía vigente](ABASTECIMIENTO_PROVEEDOR_v43.md).
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 ### Cargar y actualizar

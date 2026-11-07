@@ -1,3 +1,9 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+- La disponibilidad publicada corresponde a la distribuidora activa. El catálogo distingue depósito y proveedor, y reserva los plazos anteriores para las fichas con el contrato anterior.
+- Un artículo sin proveedor disponible permanece visible. Los pedidos nuevos pueden incluirlo hasta el stock local informado. Con cero unidades locales se desactiva la compra. Urban vuelve a validar antes de recibir un pedido.
+- Los precios, remitos y pedidos previos conservan su propia información. El proveedor se identifica de forma genérica en el portal. [Contrato público](ABASTECIMIENTO_PROVEEDOR_v43.md).
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 Reseña pública del producto, texto plano hasta2000. No cambia pedidos, precios, remitos, acceso de vendedores ni datos económicos.

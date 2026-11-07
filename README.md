@@ -1,3 +1,7 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+El catálogo muestra la disponibilidad del proveedor y del depósito por separado. Los productos agotados siguen visibles y el carrito valida las cantidades antes de crear un pedido nuevo. Integración con Urban Soft v1.18.660. El ZIP acumulativo admite bases 39, 40, 41 y 42. Instalación productiva pendiente. [Guía de uso e instalación](docs/ABASTECIMIENTO_PROVEEDOR_v43.md).
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 Reseña pública en la foto ampliada, sincronizada desde Urban659. Campo opcional2000 y texto seguro. [Guía](docs/DESCRIPCION_v42.md). Sólo portal0015; instalación pendiente.

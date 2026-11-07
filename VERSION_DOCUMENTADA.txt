@@ -1,3 +1,6 @@
+MiDistri-Pedidos v43
+Disponibilidad de proveedor y depósito en el catálogo, comprobación del stock local en carrito y fotos servidas por Urban. Integración con Urban Soft v1.18.660. Migración 0016 aditiva, con 0015 incluida para bases 39 a 41. Bases admitidas 39, 40, 41 y 42. Instalación productiva pendiente.
+
 MiDistri-Pedidos v42
 Reseña al ampliar foto, texto plano opcional2000 y sincronización compatible. Sólo portal0015 aditiva; requiereUrban659. Paquete acumulativo39/40/41, instalación pendiente. Sin campañas ni cambios económicos.
 

@@ -1,3 +1,8 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+- [Guía de usuario, contrato, migración, instalación y restauración](ABASTECIMIENTO_PROVEEDOR_v43.md)
+- [Verificación local y pendientes de entrega](VERIFICACION_v43.md)
+
 ## MiDistri-Pedidos v42 · Reseña del producto
 
 [Descripción de producto y galería](DESCRIPCION_v42.md).

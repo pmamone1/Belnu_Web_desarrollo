@@ -23,10 +23,32 @@ class Publicacion(models.Model):
     multimedia=models.JSONField(default=list)
     display=models.PositiveIntegerField(null=True)
     indicadores=models.JSONField(default=dict,blank=True)
+    abastecimiento=models.JSONField(default=dict,blank=True)
     activa=models.BooleanField(default=True)
     class Meta:
         unique_together=[('producto_id','distribuidora')]
         ordering=['nombre']
+
+    @property
+    def limite_stock_local(self):
+        datos = self.abastecimiento
+        if datos and not datos['disponible']:
+            return datos['stock_local_disponible']
+        return None
+
+    @property
+    def bloqueado_por_abastecimiento(self):
+        return self.limite_stock_local == 0
+
+    def cantidad_supera_stock_local(self, cantidad):
+        limite = self.limite_stock_local
+        return limite is not None and cantidad > limite
+
+    @property
+    def fecha_abastecimiento(self):
+        from .abastecimiento import fecha_proveedor
+        actualizado = self.abastecimiento.get('actualizado')
+        return fecha_proveedor(actualizado) if actualizado is not None else None
 
 class Sincronizacion(models.Model):
     id=models.PositiveSmallIntegerField(primary_key=True,default=1)
