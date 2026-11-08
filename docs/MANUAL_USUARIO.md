@@ -1,3 +1,28 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+En el catálogo, «Disponible en proveedor» indica el estado informado por la última consulta. «Disponible en depósito» indica existencias locales. La fecha junto al estado corresponde a la consulta al proveedor. La distribuidora confirma disponibilidad para cada pedido.
+
+Un artículo puede seguir visible aunque esté agotado. Si el proveedor está sin disponibilidad, sólo se pueden pedir las unidades locales informadas. Si al revisar el carrito hay menos unidades que antes, bajá la cantidad o quitá el producto y volvé a enviar. Para ver las fotos o la reseña, abrí la galería como de costumbre. [Guía vigente](ABASTECIMIENTO_PROVEEDOR_v43.md).
+
+## MiDistri-Pedidos v42 · Reseña del producto
+
+### Cargar y actualizar
+La descripción se escribe en la ficha del producto de la administración distribuidora y llega al portal con la sincronización habitual. Es opcional, texto plano de hasta2.000caracteres. No se genera una reseña automáticamente.
+### Ampliar una foto
+Abrir la foto del catálogo muestra la reseña bajo el material ampliado. Sigue visible al pasar entre fotos del mismo producto. Al abrir otro producto muestra su propio texto; si no tiene descripción no aparece un espacio vacío. Conserva controles de foto/video y analítica. La alternativa sin JavaScript muestra texto escapado.
+### Instalar la pareja
+Primero Urban659 y después MiDistri42. Sólo portal0015 agrega la copia de descripción. Las versiones39/40/41 con0014 se admiten mediante paquete acumulativo de41 más esta mejora. No se modifican pedidos ni remitos, importes, remitentes o cron. No se envían campañas al instalar.
+
+
+
+## MiDistri-Pedidos v41 - Pedidos propios
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.
+
+Mis pedidos y detalle leen la extensión opcional de pedidos consignados propios: fecha de débito y devolución por producto, sin requerir salidas. Conserva DTOs históricos y marca MiDistri40. No calcula importes ni añade estas reglas al remito PDF. Paquete acumulativo para bases39/40, sin migraciones nuevas. Código publicado; instalación productiva pendiente.
+
+Guía vigente: [Pedidos propios v41](PEDIDOS_PROPIOS_v41.md).
+
 ## MiDistri-Pedidos v40 - Marca visible
 
 Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.

@@ -1,3 +1,19 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+El snapshot admite el campo opcional de cuatro claves Publicacion.abastecimiento. Urban Soft v1.18.660 calcula la vigencia y conserva la comprobación final del pedido. El portal valida el snapshot antes de guardarlo y aplica el límite local si el proveedor está sin disponibilidad. El instalador comprueba 0014, admite en el plan 0015 y 0016, y ejecuta sólo el destino 0016. Consulte la política de restauración y el estado de publicación en [la guía técnica](docs/ABASTECIMIENTO_PROVEEDOR_v43.md) y [la verificación](docs/VERIFICACION_v43.md).
+
+## MiDistri-Pedidos v42 · Reseña del producto
+
+Publicacion.descripcion, snapshot opcional validado, json_script/textContent y copia atómica. Transporte128MiB sólo snapshotGET, resto16. [Compatibilidad/rollback](docs/DESCRIPCION_v42.md). Instalar Urban659 primero.
+
+## MiDistri-Pedidos v41 - Pedidos propios
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.
+
+Mis pedidos y detalle leen la extensión opcional de pedidos consignados propios: fecha de débito y devolución por producto, sin requerir salidas. Conserva DTOs históricos y marca MiDistri40. No calcula importes ni añade estas reglas al remito PDF. Paquete acumulativo para bases39/40, sin migraciones nuevas. Código publicado; instalación productiva pendiente.
+
+Guía vigente: [Pedidos propios v41](docs/PEDIDOS_PROPIOS_v41.md).
+
 ## MiDistri-Pedidos v40 - Marca visible
 
 Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.

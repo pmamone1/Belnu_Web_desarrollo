@@ -140,7 +140,7 @@ def catalogo(request):
         product.galeria=product.multimedia if getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False) else []
         product.foto_card=next((i['url'] for i in product.galeria if i['tipo']=='foto'),None)
         product.galeria_dom_id='galeria-'+str(product.producto_id)
-        product.galeria_datos={'nombre':product.nombre,'items':product.galeria}
+        product.galeria_datos={'nombre':product.nombre,'descripcion':product.descripcion,'items':product.galeria}
     from .presentacion import presentacion_publica,TEMAS
     from .promociones import promociones_publicas
     destacados=[]
@@ -176,13 +176,25 @@ def multiplo_valido(producto,cantidad):
     return type(cantidad) is int and 0<=cantidad<=9999 and cantidad%paso==0
 
 
+def aviso_sin_abastecimiento(request, producto):
+    if producto.bloqueado_por_abastecimiento:
+        messages.error(request, producto.nombre+' no tiene disponibilidad para pedidos nuevos.')
+    else:
+        messages.error(request, 'No hay suficientes unidades en depósito para '+producto.nombre+'. Reducí la cantidad.')
+
+
 def productos_carrito(request,perfil):
     cart=request.session.get('midistri_cart',{})
     products={str(p.producto_id):p for p in elegibles(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'],producto_id__in=cart))}
     rows=[]
     for pid,qty in cart.items():
         if pid in products:
-            p=products[pid];rows.append({'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p),'error_display':not multiplo_valido(p,qty)})
+            p=products[pid]
+            rows.append({
+                'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p),
+                'error_display':not multiplo_valido(p,qty),
+                'error_abastecimiento':p.cantidad_supera_stock_local(qty),
+            })
     return rows,len(rows)!=len(cart)
 
 
@@ -196,6 +208,9 @@ def cantidad(request):
         if not 0<=qty<=9999:raise ValueError
         if qty:
             product=elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
+            if product.cantidad_supera_stock_local(qty):
+                aviso_sin_abastecimiento(request,product)
+                return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
             if not multiplo_valido(product,qty):
                 messages.error(request,'Pedí '+product.nombre+' en múltiplos de '+str(product.display or 1)+' unidades.')
                 return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
@@ -231,7 +246,7 @@ def carrito(request):
     request.session['midistri_revision']=revision
     present={str(r['producto'].producto_id) for r in rows}
     retirados=[pid for pid in request.session.get('midistri_cart',{}) if pid not in present]
-    ctx=base(request,perfil);ctx.update(rows=rows,missing=missing,invalidas=any(r['error_display'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
+    ctx=base(request,perfil);ctx.update(rows=rows,missing=missing,invalidas=any(r['error_display'] or r['error_abastecimiento'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
     return render(request,'midistri_portal/carrito.html',ctx)
 
 
@@ -265,6 +280,9 @@ def enviar(request):
         if existing.estado=='pendiente':transmitir(request,existing)
         return redirect('midistri_detalle',ident=existing.pk)
     rows,missing=productos_carrito(request,perfil)
+    bloqueado=next((r['producto'] for r in rows if r['error_abastecimiento']),None)
+    if bloqueado:
+        aviso_sin_abastecimiento(request,bloqueado);return redirect('midistri_carrito')
     if not rows or missing or any(r['error_display'] for r in rows):
         messages.error(request,'Revisá el carrito antes de enviar.');return redirect('midistri_carrito')
     revision=firma_revision(rows,perfil)
@@ -343,9 +361,12 @@ def detalle(request,ident):
         distribuidora_id=perfil['distribuidora_id'],producto_id__in=[i['producto_id'] for i in items])}
     review=pedido.respuesta.get('revision_comercial')
     accepted={r['producto_id']:r['cantidad_preparada'] for r in review['cantidades']} if review else {}
+    from .modalidades import devoluciones_presentacion
+    returns=devoluciones_presentacion(pedido.respuesta)
     for item in items:
         row=dict(item,**{k:v for k,v in byid.get(item['producto_id'],{}).items() if k!='producto_id'})
         row['foto']=photos.get(item['producto_id'],'')
+        row['devolucion_producto']=returns.get(item['producto_id'],'')
         if review:row['cantidad_aceptada']=accepted[item['producto_id']]
         shown.append(row)
     total=Decimal(attention['total_preparado']) if attention and attention['estado']!='pendiente' else sum((Decimal(i['precio'])*i['cantidad'] for i in items),Decimal('0'))

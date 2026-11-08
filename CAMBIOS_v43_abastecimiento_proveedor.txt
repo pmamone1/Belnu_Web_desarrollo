@@ -1,0 +1,8 @@
+MiDistri-Pedidos v43 · Disponibilidad de proveedor
+07/11/2026
+
+- El catálogo y las vistas previas distinguen el estado del proveedor y el stock del depósito.
+- Los artículos agotados siguen visibles. Si el proveedor está sin disponibilidad, las cantidades de pedidos nuevos quedan limitadas al stock local que informó Urban.
+- El portal valida la extensión del snapshot y conserva la última copia válida si los nuevos datos son inválidos.
+- Se incorpora 0016_publicacion_abastecimiento. El ZIP acumulativo admite las bases revisadas 39, 40, 41 y 42.
+- La instalación productiva y la sincronización en cPanel están pendientes. La guía, el manual y el registro de pruebas se incluyen en la entrega.

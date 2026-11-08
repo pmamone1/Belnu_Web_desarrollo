@@ -1,3 +1,27 @@
+## MiDistri-Pedidos v43 · Disponibilidad de proveedor
+
+Ejecutar en un entorno de prueba con un snapshot de ejemplo y una sesión sintética.
+
+1. Abrir el catálogo público, la vista previa y los destacados con una ficha de proveedor disponible. Verificar el estado, la fecha de consulta y, si hay stock local, el indicador separado. Abrir la foto pública en la galería.
+2. Sincronizar una ficha con proveedor indisponible y cero unidades locales. Debe seguir visible y sin entrega estimada de 96 horas. Con sesión de vendedor, probar cantidad y botón deshabilitados. Un envío directo también debe ser rechazado.
+3. Con proveedor indisponible y una unidad local, agregar una unidad. Intentar dos y comprobar que el carrito conserva la unidad previa. Simular una baja de stock después de revisar el carrito. El envío debe pedir quitar el producto o bajar la cantidad y conservar el carrito.
+4. Verificar que un producto anterior sin el campo nuevo conserve su ficha y el flujo habitual. Un snapshot inválido debe conservar el último catálogo válido. Consultar un pedido ya recibido y comprobar que sigue accesible con su referencia original.
+5. Tras la instalación autorizada, comprobar el catálogo y sus fotos de forma visual. No enviar un pedido de prueba en producción.
+
+## MiDistri-Pedidos v42 · Reseña del producto
+
+En QA, ampliar foto con reseña con saltos/etiquetas y producto sin reseña; navegar fotos y cambiar de producto. Confirmar texto inerte, foto completa, foco/cierre y analítica. Snapshot viejo vacío; inválido conserva copia completa. Catálogo8500productos/descripciones2000no se corta por16MiB; otros recursos mantienen16. Sobre límite snapshot se rechaza. No probar creando pedidos o mensajes reales.
+
+## MiDistri-Pedidos v41 - Pedidos propios
+
+Implementación publicada: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/354f9d7366fba1cffe2eaf436ebc34911eabc04e. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/42. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. Instalación productiva pendiente de ejecución y confirmación. No requiere instalar v40 antes: el ZIP v41 incluye marca40 y admite directamente las bases revisadas39/40. Sin campañas ni SMTP real.
+
+Mis pedidos y detalle leen la extensión opcional de pedidos consignados propios: fecha de débito y devolución por producto, sin requerir salidas. Conserva DTOs históricos y marca MiDistri40. No calcula importes ni añade estas reglas al remito PDF. Paquete acumulativo para bases39/40, sin migraciones nuevas. Código publicado; instalación productiva pendiente.
+
+Guía vigente: [Pedidos propios v41](PEDIDOS_PROPIOS_v41.md).
+
+Con fixtures, consultar propio consignado con devolución mixta y sin devolución: fecha débito configurada y cada producto. Probar plazos7/14/21/30 sin recalcular fechas, DTO incompleto/privado/flag inválido preservando última respuesta válida. Consultar histórico con vencimientos y otro sin metadata; precios/cantidades intactos. Revisar marca de todas vistas y descargar remito por ruta existente sin incorporar condiciones nuevas. Validación productiva pendiente.
+
 ## MiDistri-Pedidos v40 - Marca visible
 
 Código de implementación publicado y verificado: https://github.com/pmamone1/Belnu_Web_desarrollo/commit/4dd224e2f95dd7dfa108ecf248fe519cc39c83ac. Draft PR: https://github.com/pmamone1/Belnu_Web_desarrollo/pull/41. ZIP construido desde código publicado, comparado con Git y guardado en C:/Users/pmamo/Downloads. La instalación productiva sigue pendiente de ejecución/confirmación; una publicación o ZIP no la acredita. Cierre documental separado, sin campañas ni SMTP real.
