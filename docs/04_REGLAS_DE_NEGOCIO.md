@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+La disponibilidad de Kanji controla los pedidos nuevos de esas publicaciones en MiDistri, aunque quede stock local. Si no está disponible, se excluye de la navegación, destacados y promociones basadas en fichas; una búsqueda puede devolverlo como referencia. Esta pauta reemplaza la excepción de stock local de v43 sólo en el portal.
+
 ## Catálogo con más espacio · v46
 
 El ancho del catálogo no cambia la selección de ofertas de cada distribuidora ni el orden elegido. La vista en lista sigue mostrando una fila por producto.

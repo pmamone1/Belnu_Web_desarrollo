@@ -273,7 +273,7 @@ def bloques_vigentes(data,did,preview=False,session=None):
         else:raw=b.get('diapositivas',[])
         for s in raw:
             item=s if automatico else vigente_slide(s,did)
-            if not item:continue
+            if not item or (item.get('producto') and item['producto'].bloqueado_por_abastecimiento):continue
             if preview and item.get('material_id'):
                 item['url']='/portal/administrar/promociones/material/'+str(did)+'/'+item['material_id']+'/'
             slides.append(item)

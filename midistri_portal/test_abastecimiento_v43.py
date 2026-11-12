@@ -47,7 +47,7 @@ class AbastecimientoTests(TestCase):
     def test_enlace_y_categoria_kanji_del_catalogo_de_la_tienda(self):
         from urllib.parse import parse_qs, urlsplit
 
-        data = self.datos()
+        data = self.datos(disponible=True)
         base = data['publicaciones'][0]
         base['nombre'] = 'Televisor del proveedor'
         base['categoria'] = 'Electrónica'
@@ -102,13 +102,25 @@ class AbastecimientoTests(TestCase):
                 self.assertEqual(list(Publicacion.objects.values()), before)
                 self.assertEqual(Sincronizacion.objects.get(pk=1).completada, completada)
 
-    def test_catalogo_visible_sin_promesa_de_entrega_96hs(self):
-        aplicar_snapshot(self.datos())
-        r = self.client.get('/portal/?distribuidora=20')
+    def test_sin_disponibilidad_solo_aparece_al_buscar(self):
+        aplicar_snapshot(self.datos(stock_local_disponible=6))
+        for filtros in ({}, {'categoria': 'Kanji'}, {'orden': 'ventas'}, {'q': '   '}):
+            with self.subTest(filtros=filtros):
+                listado = self.client.get('/portal/', {'distribuidora': 20, **filtros})
+                self.assertNotContains(listado, 'Producto con presentación opcional')
+                self.assertEqual(listado.context['productos'].paginator.count, 0)
+        r = self.client.get('/portal/', {'distribuidora': 20, 'q': 'SKU-314', 'categoria': 'Kanji', 'orden': 'ventas'})
         self.assertContains(r, 'Producto con presentación opcional')
         self.assertContains(r, 'Sin disponibilidad en proveedor')
         self.assertContains(r, '01/11/2026')
         self.assertNotContains(r, 'Entrega en 96 hs')
+        self.assertNotContains(r, 'Más vendidos en tu distribuidora')
+        from .banners_automaticos import candidatos
+        self.assertEqual(candidatos(20), {})
+        aplicar_snapshot(self.datos(disponible=True))
+        reingreso = self.client.get('/portal/', {'distribuidora': 20, 'q': '', 'categoria': 'Kanji'})
+        self.assertEqual(reingreso.context['productos'].paginator.count, 1)
+        self.assertEqual(len(candidatos(20)), 1)
 
     def test_catalogo_separa_disponibilidad_del_proveedor_y_del_deposito(self):
         aplicar_snapshot(self.datos(disponible=True, stock_local_disponible=6))
@@ -123,7 +135,7 @@ class AbastecimientoTests(TestCase):
         aplicar_snapshot(self.datos())
         tienda = Tienda.objects.create(distribuidora_id=20)
         html = html_pagina(inicial(tienda), tienda.distribuidora)
-        self.assertIn('Sin disponibilidad en proveedor', html)
+        self.assertNotIn('Producto con presentación opcional', html)
         self.assertNotIn('Entrega en 96 hs', html)
 
     @patch('midistri_portal.views.api')
@@ -131,7 +143,7 @@ class AbastecimientoTests(TestCase):
         api.return_value = self.perfil
         aplicar_snapshot(self.datos())
         self.iniciar_sesion()
-        r = self.client.get('/portal/')
+        r = self.client.get('/portal/', {'q': 'SKU-314'})
         self.assertContains(r, 'Agregar / actualizar')
         self.assertRegex(r.content.decode(), r'<input name="cantidad"[^>]* disabled')
         self.assertRegex(r.content.decode(), r'<button[^>]* disabled[^>]*>Agregar / actualizar')
@@ -140,36 +152,36 @@ class AbastecimientoTests(TestCase):
         self.assertEqual(self.client.session.get('midistri_cart', {}), {})
 
     @patch('midistri_portal.views.api')
-    def test_puede_agregar_si_hay_stock_local_aunque_el_proveedor_no_tenga(self, api):
+    def test_rechaza_agregar_si_falta_stock_proveedor_aunque_haya_en_deposito(self, api):
         api.return_value = self.perfil
         aplicar_snapshot(self.datos(stock_local_disponible=6))
         self.iniciar_sesion()
         self.client.post('/portal/cantidad/', {'producto': '314', 'cantidad': '2'})
-        self.assertEqual(self.client.session['midistri_cart'], {'314': 2})
+        self.assertFalse(self.client.session.get('midistri_cart'))
 
     @patch('midistri_portal.views.api')
-    def test_no_agrega_mas_del_stock_local_sin_proveedor(self, api):
+    def test_rechaza_editar_carrito_sin_proveedor(self, api):
         api.return_value = self.perfil
         aplicar_snapshot(self.datos(stock_local_disponible=1))
         self.iniciar_sesion(midistri_cart={'314': 1})
         r = self.client.post('/portal/cantidad/', {'producto': '314', 'cantidad': '2'}, follow=True)
-        self.assertContains(r, 'No hay suficientes unidades en depósito')
+        self.assertContains(r, 'no tiene disponibilidad para pedidos nuevos')
         self.assertEqual(self.client.session['midistri_cart'], {'314': 1})
 
     @patch('midistri_portal.views.api')
-    def test_conserva_carrito_si_el_stock_local_bajo_tras_revisar(self, api):
+    def test_conserva_carrito_si_el_proveedor_deja_de_tener_stock(self, api):
         api.return_value = self.perfil
-        aplicar_snapshot(self.datos(stock_local_disponible=2))
+        aplicar_snapshot(self.datos(disponible=True, stock_local_disponible=2))
         self.iniciar_sesion(midistri_cart={'314': 2}, midistri_cart_id=str(uuid4()))
         self.client.get('/portal/carrito/')
         revision = self.client.session['midistri_revision']
         aplicar_snapshot(self.datos(stock_local_disponible=1))
         r = self.client.post('/portal/enviar/', {'revision': revision}, follow=True)
-        self.assertContains(r, 'No hay suficientes unidades en depósito')
+        self.assertContains(r, 'no tiene disponibilidad para pedidos nuevos')
         self.assertFalse(PedidoLocal.objects.exists())
         self.assertEqual(self.client.session['midistri_cart'], {'314': 2})
-        self.client.post('/portal/cantidad/', {'producto': '314', 'cantidad': '1', 'origen': 'carrito'})
-        self.assertEqual(self.client.session['midistri_cart'], {'314': 1})
+        self.client.post('/portal/cantidad/', {'producto': '314', 'cantidad': '0', 'origen': 'carrito'})
+        self.assertEqual(self.client.session['midistri_cart'], {})
 
     @patch('midistri_portal.views.api')
     def test_rechaza_enviar_carrito_si_cambio_disponibilidad_tras_revisar(self, api):

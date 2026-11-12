@@ -9,6 +9,7 @@ from .catalogo_rotacion import sesion_estado,BANNER_KEY
 def candidatos(did):
     result={}
     for product in Publicacion.objects.filter(distribuidora_id=did,distribuidora__activa=True,activa=True,precio__gt=0,pvp__gt=0).order_by('pk'):
+        if product.bloqueado_por_abastecimiento:continue
         photos=[m.get('url') for m in product.multimedia if m.get('tipo')=='foto']
         photos += [m.get('url') if isinstance(m,dict) else m for m in product.imagenes]
         for url in photos:

@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+v47 se instala sobre v46, con la migración 0016 aplicada. Cambia la presentación pública y la validación del carrito en MiDistri. No necesita cambios de Urban Soft ni otra sincronización para aplicar el filtro a la copia existente. El respaldo de código permite revertir sin tocar la base.
+
 ## Catálogo con más espacio · v46
 
 v46 se instala sobre v45 con la migración 0016 ya aplicada. Cambia una hoja de estilo y su versión de caché. El instalador recopila estáticos, conserva un respaldo de los archivos reemplazados y permite restaurarlos. No ejecuta sincronizaciones ni migraciones.

@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+Buscar por nombre o SKU permite consultar fotos, precio y estado de un artículo de Kanji sin disponibilidad. Si estaba en el carrito, se puede quitar. No se modifican pedidos previamente registrados.
+
 ## Catálogo con más espacio · v46
 
 En el catálogo, los filtros y las promociones quedan a la izquierda en escritorio. En celular, se conserva el acceso desplegable a los filtros. Las pantallas de administración mantienen su ancho.

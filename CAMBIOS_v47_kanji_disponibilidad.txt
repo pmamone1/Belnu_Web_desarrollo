@@ -1,0 +1,4 @@
+MiDistri-Pedidos v47
+Base: v46
+Kanji sin disponibilidad: sólo por búsqueda. Bloqueo de pedidos nuevos y retiro del carrito. No se cambian productos, precios, pedidos históricos, campañas ni esquema.
+Validación local: 36 pruebas del portal.

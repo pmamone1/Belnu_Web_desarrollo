@@ -97,7 +97,7 @@ def catalogo(request):
     products=elegibles(Publicacion.objects.filter(distribuidora=d))
     saved=request.session.get('midistri_catalogo_filtros',{})
     if str(saved.get('distribuidora'))!=str(getattr(d,'pk',None)):saved={}
-    q=request.GET.get('q',saved.get('q',''))[:100]
+    q=request.GET.get('q',saved.get('q',''))[:100].strip()
     categoria=request.GET.get('categoria',saved.get('categoria',''))[:200]
     subcategoria=request.GET.get('subcategoria',saved.get('subcategoria',''))[:200]
     orden=request.GET.get('orden',saved.get('orden','recomendados'))
@@ -107,6 +107,9 @@ def catalogo(request):
     from .catalogo_rotacion import orden_sesion
     ordered=orden_sesion(request,d.pk,products,perfil) if d and orden=='recomendados' else []
     classification={p.pk:clasificar(p) for p in products}
+    sin_proveedor={p.pk for p in products if p.bloqueado_por_abastecimiento}
+    if not q and sin_proveedor:
+        products=products.exclude(pk__in=sin_proveedor)
     categorias=sorted({c for cats,sub in classification.values() for c in cats},key=str.casefold)
     if categoria=='__sin_categoria__':products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if not cats])
     elif categoria:products=products.filter(pk__in=[pk for pk,(cats,sub) in classification.items() if categoria in cats])
@@ -127,7 +130,10 @@ def catalogo(request):
         def sales_position(product):
             value=product.indicadores.get('orden_ventas',product.indicadores.get('ranking'))
             return value if type(value) is int and value>0 else None
-        products=sorted((p for p in products if sales_position(p) is not None),key=lambda p:(sales_position(p),p.pk))
+        products=sorted(
+            (p for p in products if q or sales_position(p) is not None),
+            key=lambda p:(-getattr(p,'_similitud',0) if q else 0,
+                          sales_position(p) is None, sales_position(p) or 0, p.pk))
         ranking_disponible=bool(products)
     from django.core.paginator import Paginator
     from .catalogo_presentacion import tamano_pagina,navegacion
@@ -146,6 +152,7 @@ def catalogo(request):
     destacados=[]
     if d and categoria != KANJI_CATEGORIA:
         for product in elegibles(Publicacion.objects.filter(distribuidora=d)):
+            if product.bloqueado_por_abastecimiento:continue
             position=product.indicadores.get('ranking')
             if type(position) is int and 1<=position<=10:
                 product.foto_destacada=foto_producto(product);destacados.append(product)
@@ -177,10 +184,7 @@ def multiplo_valido(producto,cantidad):
 
 
 def aviso_sin_abastecimiento(request, producto):
-    if producto.bloqueado_por_abastecimiento:
-        messages.error(request, producto.nombre+' no tiene disponibilidad para pedidos nuevos.')
-    else:
-        messages.error(request, 'No hay suficientes unidades en depósito para '+producto.nombre+'. Reducí la cantidad.')
+    messages.error(request, producto.nombre+' no tiene disponibilidad para pedidos nuevos.')
 
 
 def productos_carrito(request,perfil):
@@ -193,7 +197,7 @@ def productos_carrito(request,perfil):
             rows.append({
                 'producto':p,'cantidad':qty,'importe':p.precio*qty,'foto':foto_producto(p),
                 'error_display':not multiplo_valido(p,qty),
-                'error_abastecimiento':p.cantidad_supera_stock_local(qty),
+                'error_abastecimiento':p.cantidad_bloqueada_por_abastecimiento(qty),
             })
     return rows,len(rows)!=len(cart)
 
@@ -208,7 +212,7 @@ def cantidad(request):
         if not 0<=qty<=9999:raise ValueError
         if qty:
             product=elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
-            if product.cantidad_supera_stock_local(qty):
+            if product.cantidad_bloqueada_por_abastecimiento(qty):
                 aviso_sin_abastecimiento(request,product)
                 return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
             if not multiplo_valido(product,qty):

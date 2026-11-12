@@ -1,3 +1,9 @@
+## Disponibilidad de Kanji · v47
+
+- [x] Validación local: 36 pruebas del portal.
+- [ ] Verificar en cPanel el plan de migraciones vacío y la instalación.
+- [ ] Verificar en MiDistri que el listado excluye productos sin disponibilidad y que se conservan en la búsqueda.
+
 ## Catálogo con más espacio · v46
 
 - [ ] Verificar los márgenes, las columnas y el panel izquierdo en escritorio; probar filtros y ausencia de desplazamiento horizontal en celular.

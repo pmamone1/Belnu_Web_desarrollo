@@ -29,20 +29,13 @@ class Publicacion(models.Model):
         unique_together=[('producto_id','distribuidora')]
         ordering=['nombre']
 
-    @property
-    def limite_stock_local(self):
-        datos = self.abastecimiento
-        if datos and not datos['disponible']:
-            return datos['stock_local_disponible']
-        return None
 
     @property
     def bloqueado_por_abastecimiento(self):
-        return self.limite_stock_local == 0
+        return self.abastecimiento.get('disponible') is False
 
-    def cantidad_supera_stock_local(self, cantidad):
-        limite = self.limite_stock_local
-        return limite is not None and cantidad > limite
+    def cantidad_bloqueada_por_abastecimiento(self, cantidad):
+        return cantidad > 0 and self.bloqueado_por_abastecimiento
 
     @property
     def fecha_abastecimiento(self):

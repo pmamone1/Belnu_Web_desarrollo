@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+[Disponibilidad y búsqueda del catálogo Kanji (v47)](KANJI_DISPONIBILIDAD_v47.md).
+
 ## Catálogo con más espacio · v46
 
 [Catálogo más ancho en escritorio y celular (v46)](CATALOGO_ANCHO_v46.md).

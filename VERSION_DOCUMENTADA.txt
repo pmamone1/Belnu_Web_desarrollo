@@ -1,3 +1,6 @@
+MiDistri-Pedidos v47
+Base v46. Artículos de Kanji sin disponibilidad: sólo por búsqueda, con pedido deshabilitado. Sin migraciones ni cambios de Urban Soft.
+
 MiDistri-Pedidos v46
 Base v45. Márgenes laterales reducidos y más columnas en pantallas anchas en el catálogo de vendedores. Sin migraciones, cambios de precios, pedidos ni campañas.
 

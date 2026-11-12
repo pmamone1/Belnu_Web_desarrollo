@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+Los artículos de Kanji sin disponibilidad se ven al buscarlos por nombre o SKU, con el pedido deshabilitado. Cuando Kanji vuelve a informar disponibilidad, reaparecen en el listado tras actualizar el catálogo. [Guía v47](KANJI_DISPONIBILIDAD_v47.md).
+
 ## Catálogo con más espacio · v46
 
 El catálogo deja márgenes laterales más chicos y muestra más productos por fila cuando hay espacio. Podés usar los filtros de la izquierda en escritorio o desplegarlos en el celular. [Guía v46](CATALOGO_ANCHO_v46.md).

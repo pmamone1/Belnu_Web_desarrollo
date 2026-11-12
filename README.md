@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+El catálogo público de MiDistri muestra los artículos de Kanji con disponibilidad. Si Kanji informa que no hay stock, el artículo se encuentra por búsqueda con el pedido deshabilitado. [Guía v47](docs/KANJI_DISPONIBILIDAD_v47.md).
+
 ## Catálogo con más espacio · v46
 
 El catálogo de vendedores aprovecha todo el ancho disponible y mantiene los filtros a la izquierda en escritorio. [Guía v46](docs/CATALOGO_ANCHO_v46.md).

@@ -142,4 +142,5 @@ def fuente_vigente(row):
 def promociones_publicas(distribuidora):
     if not distribuidora or not getattr(settings,'MIDISTRI_MULTIMEDIA_ENABLED',False):return []
     rows=BloquePromocional.objects.filter(tienda__distribuidora=distribuidora,activo=True).select_related('origen_publicacion','tienda').order_by('orden','id')
-    return [r for r in rows if fuente_vigente(r)][:10]
+    return [r for r in rows if fuente_vigente(r) and
+            not (r.origen_publicacion_id and r.origen_publicacion.bloqueado_por_abastecimiento)][:10]

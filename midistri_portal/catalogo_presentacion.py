@@ -26,7 +26,8 @@ def preview(context,d,page_number=1):
     from .busqueda import clasificar
     products=list(elegibles(Publicacion.objects.filter(distribuidora=d)).order_by('nombre','pk'))
     classification=[clasificar(p) for p in products]
-    page=Paginator(products,48).get_page(page_number)
+    visibles=[p for p in products if not p.bloqueado_por_abastecimiento]
+    page=Paginator(visibles,48).get_page(page_number)
     for product in page:
         product.categorias_catalogo,product.subcategoria_catalogo=clasificar(product)
         product.galeria=product.multimedia;product.foto_card=next((m['url'] for m in product.galeria if m['tipo']=='foto'),None)

@@ -1,3 +1,7 @@
+## Disponibilidad de Kanji · v47
+
+Con un SKU de Kanji sin disponibilidad y uno disponible, verificar que sólo el segundo aparezca al navegar. Buscar el primero por SKU y verificar el aviso y el control deshabilitado. Si ya está en un carrito de prueba, verificar que se puede quitar, sin transmitir ningún pedido.
+
 ## Catálogo con más espacio · v46
 
 Abrir un catálogo en vista de fotos con filtro por categoría. A 1920 px debe mostrar cuatro columnas y a 390 px debe conservar el filtro desplegable, sin desborde horizontal. En vista de lista, confirmar que no se agregan columnas.
