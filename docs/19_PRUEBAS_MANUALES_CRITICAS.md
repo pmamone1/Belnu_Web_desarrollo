@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+Abrir un catálogo en vista de fotos con filtro por categoría. A 1920 px debe mostrar cuatro columnas y a 390 px debe conservar el filtro desplegable, sin desborde horizontal. En vista de lista, confirmar que no se agregan columnas.
+
 ## Relevancia en sesiones abiertas · MiDistri v45
 
 1. En prueba, dejar abierto el catálogo de una tienda y anotar la primera página por Relevancia.

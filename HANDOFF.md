@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+v46 se instala sobre v45 con la migración 0016 ya aplicada. Cambia una hoja de estilo y su versión de caché. El instalador recopila estáticos, conserva un respaldo de los archivos reemplazados y permite restaurarlos. No ejecuta sincronizaciones ni migraciones.
+
 # Entrega MiDistri v45
 
 Actualiza las altas del catálogo en sesiones existentes sobre v44. [Uso, validación y restauración](docs/CATALOGO_ALTAS_v45.md). Sin migraciones ni estáticos.

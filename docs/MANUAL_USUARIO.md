@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+El catálogo deja márgenes laterales más chicos y muestra más productos por fila cuando hay espacio. Podés usar los filtros de la izquierda en escritorio o desplegarlos en el celular. [Guía v46](CATALOGO_ANCHO_v46.md).
+
 ## Publicaciones nuevas desde MiDistri v45
 
 Podés buscar por SKU una publicación nueva sin cerrar la sesión. Relevancia conserva el orden de las fichas existentes y agrega las nuevas al final. [Guía](CATALOGO_ALTAS_v45.md).

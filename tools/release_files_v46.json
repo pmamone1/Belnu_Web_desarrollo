@@ -1,0 +1,20 @@
+[
+  "midistri_portal/static/midistri_portal/catalogo_lateral.css",
+  "midistri_portal/templates/midistri_portal/base.html",
+  "README.md",
+  "HANDOFF.md",
+  "VERSION_DOCUMENTADA.txt",
+  "docs/00_INDICE.md",
+  "docs/04_REGLAS_DE_NEGOCIO.md",
+  "docs/05_FLUJOS_FUNCIONALES.md",
+  "docs/17_CHECKLIST_ENTREGA.md",
+  "docs/19_PRUEBAS_MANUALES_CRITICAS.md",
+  "docs/MANUAL_USUARIO.md",
+  "docs/CATALOGO_ANCHO_v46.md",
+  "CAMBIOS_v46_catalogo_ancho.txt",
+  "Manual_MiDistri_Pedidos_Online.pdf",
+  "tools/instalar_release_midistri_v46.py",
+  "tools/paquete_integracion_v46.py",
+  "tools/release_files_v46.json",
+  "tools/actualizar_manual_v46.py"
+]

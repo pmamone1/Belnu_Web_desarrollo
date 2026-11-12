@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+El catálogo de vendedores aprovecha todo el ancho disponible y mantiene los filtros a la izquierda en escritorio. [Guía v46](docs/CATALOGO_ANCHO_v46.md).
+
 # MiDistri-Pedidos v45
 
 Las nuevas publicaciones aparecen en Relevancia aunque el catálogo ya esté abierto. [Guía vigente](docs/CATALOGO_ALTAS_v45.md).

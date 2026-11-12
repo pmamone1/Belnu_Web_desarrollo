@@ -1,3 +1,9 @@
+## Catálogo con más espacio · v46
+
+- [ ] Verificar los márgenes, las columnas y el panel izquierdo en escritorio; probar filtros y ausencia de desplazamiento horizontal en celular.
+- [ ] Comprobar el ZIP sobre v45, el plan de migraciones vacío y la recopilación de la hoja de estilo v46.
+- [ ] Verificar la versión y la hoja de estilo cargadas en producción después de instalar.
+
 ## Entrega MiDistri v45
 
 - [ ] Verificar que una sesión existente encuentre un SKU nuevo sin reordenar las fichas existentes.

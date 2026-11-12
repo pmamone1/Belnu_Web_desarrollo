@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+[Catálogo más ancho en escritorio y celular (v46)](CATALOGO_ANCHO_v46.md).
+
 ## Novedades MiDistri v45
 
 - [Altas del catálogo en sesiones abiertas](CATALOGO_ALTAS_v45.md)

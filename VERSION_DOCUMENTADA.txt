@@ -1,3 +1,6 @@
+MiDistri-Pedidos v46
+Base v45. Márgenes laterales reducidos y más columnas en pantallas anchas en el catálogo de vendedores. Sin migraciones, cambios de precios, pedidos ni campañas.
+
 MiDistri-Pedidos v45
 Base v44. Muestra las nuevas publicaciones en Relevancia sin alterar el orden de los productos existentes. Sin migraciones, cambios de stock, pedidos ni campañas.
 

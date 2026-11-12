@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+El ancho del catálogo no cambia la selección de ofertas de cada distribuidora ni el orden elegido. La vista en lista sigue mostrando una fila por producto.
+
 ## Relevancia desde MiDistri v45
 
 Los productos elegibles nuevos se agregan al final en la misma sesión; el buscador los encuentra por su nombre o SKU. Las ofertas retiradas se ocultan. [Reglas](CATALOGO_ALTAS_v45.md).

@@ -1,0 +1,4 @@
+MiDistri-Pedidos v46
+Base: v45
+Catálogo público con márgenes más chicos y más columnas en escritorio ancho. Sin cambios de esquema, productos, precios, pedidos ni campañas.
+Validación local: 28 pruebas del catálogo, rotación y abastecimiento.

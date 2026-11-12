@@ -1,3 +1,7 @@
+## Catálogo con más espacio · v46
+
+En el catálogo, los filtros y las promociones quedan a la izquierda en escritorio. En celular, se conserva el acceso desplegable a los filtros. Las pantallas de administración mantienen su ancho.
+
 ## Buscar altas en MiDistri desde v45
 
 Después de sincronizar, recargar el catálogo o buscar por SKU permite ver una publicación nueva sin salir. [Flujo](CATALOGO_ALTAS_v45.md).
