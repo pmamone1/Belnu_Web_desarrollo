@@ -1,3 +1,7 @@
+# MiDistri-Pedidos v45
+
+Las nuevas publicaciones aparecen en Relevancia aunque el catálogo ya esté abierto. [Guía vigente](docs/CATALOGO_ALTAS_v45.md).
+
 # MiDistri-Pedidos v44
 
 Acceso al catálogo Kanji con logo y filtro por categoría. [Guía vigente](docs/CATALOGO_KANJI_v44.md).

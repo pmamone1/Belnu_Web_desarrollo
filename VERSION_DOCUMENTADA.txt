@@ -1,3 +1,6 @@
+MiDistri-Pedidos v45
+Base v44. Muestra las nuevas publicaciones en Relevancia sin alterar el orden de los productos existentes. Sin migraciones, cambios de stock, pedidos ni campañas.
+
 MiDistri-Pedidos v44
 Base v43. Acceso al catálogo Kanji con logo y filtro por categoría, limitado a las ofertas publicadas en cada distribuidora. Sin migraciones. Instalación productiva pendiente.
 

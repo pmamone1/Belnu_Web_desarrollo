@@ -1,3 +1,7 @@
+# Entrega MiDistri v45
+
+Actualiza las altas del catálogo en sesiones existentes sobre v44. [Uso, validación y restauración](docs/CATALOGO_ALTAS_v45.md). Sin migraciones ni estáticos.
+
 # Entrega MiDistri v44
 
 Acceso al catálogo de Kanji basado en la copia de ofertas del portal v43. [Uso, compatibilidad y restauración](docs/CATALOGO_KANJI_v44.md). Sin migraciones. Instalación productiva pendiente.

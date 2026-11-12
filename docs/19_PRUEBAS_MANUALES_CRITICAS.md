@@ -1,3 +1,9 @@
+## Relevancia en sesiones abiertas · MiDistri v45
+
+1. En prueba, dejar abierto el catálogo de una tienda y anotar la primera página por Relevancia.
+2. Incorporar un producto a la copia de esa tienda. Recargar y buscar por SKU dentro de su categoría; confirmar que se muestra y que se conserva el orden previo.
+3. Retirar otra oferta y verificar que desaparezca. Consultar otra tienda y comprobar que no se incorporen productos fuera de su alcance.
+
 ## Catálogo Kanji MiDistri v44
 
 1. Abrir el catálogo de una distribuidora con ofertas de Kanji y tocar el logo. Verificar que se limpie la búsqueda anterior y aparezcan los artículos publicados en esa tienda.

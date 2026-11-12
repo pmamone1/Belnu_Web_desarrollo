@@ -1,3 +1,9 @@
+## Entrega MiDistri v45
+
+- [ ] Verificar que una sesión existente encuentre un SKU nuevo sin reordenar las fichas existentes.
+- [ ] Comprobar aislamiento por tienda, baja de una oferta y conservación de paginación.
+- [ ] Verificar paquete sobre v44, plan de migraciones vacío y reinicio sólo de MiDistri.
+
 ## Entrega MiDistri v44
 
 - [ ] Verificar logo y filtro en una distribuidora con ofertas y otra sin ofertas.

@@ -1,3 +1,7 @@
+## Buscar altas en MiDistri desde v45
+
+Después de sincronizar, recargar el catálogo o buscar por SKU permite ver una publicación nueva sin salir. [Flujo](CATALOGO_ALTAS_v45.md).
+
 ## Catálogo Kanji desde MiDistri v44
 
 El logo abre el catálogo filtrado en Kanji. La misma categoría se puede elegir en Filtros. [Flujo completo](CATALOGO_KANJI_v44.md).

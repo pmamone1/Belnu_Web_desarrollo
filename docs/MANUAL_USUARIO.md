@@ -1,3 +1,7 @@
+## Publicaciones nuevas desde MiDistri v45
+
+Podés buscar por SKU una publicación nueva sin cerrar la sesión. Relevancia conserva el orden de las fichas existentes y agrega las nuevas al final. [Guía](CATALOGO_ALTAS_v45.md).
+
 ## Catálogo Kanji desde MiDistri v44
 
 Tocá el logo Kanji o elegí Kanji en Categoría para ver los productos publicados por tu distribuidora. [Guía vigente](CATALOGO_KANJI_v44.md).

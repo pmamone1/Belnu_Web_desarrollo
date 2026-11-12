@@ -1,0 +1,3 @@
+MiDistri-Pedidos v45
+
+Relevancia incorpora las nuevas publicaciones en sesiones abiertas y conserva el orden de las ofertas existentes. Se mantienen el alcance por tienda, los filtros, la prioridad de coincidencias exactas y la disponibilidad informada. Base v44, sin migraciones ni cambios de estáticos.

@@ -29,7 +29,16 @@ def orden_sesion(request,did,products,perfil=None,rng=None):
     session=sesion_estado(request.session)
     key=str(did)+':'+str((perfil or {}).get('id','publico'))
     state=session.get(ORDEN_KEY)
-    if not isinstance(state,dict) or state.get('perfil')!=key or state.get('version')!=1:
+    if (not isinstance(state,dict) or state.get('perfil')!=key or state.get('version')!=1
+            or not isinstance(state.get('ids'),list)):
         state={'version':1,'perfil':key,'ids':[p.pk for p in ordenar_mezcla(products,rng)]}
         session[ORDEN_KEY]=state
-    return list(state['ids'])
+        return list(state['ids'])
+    # Preserve the relative order of existing offers, without hiding new ones
+    # for the rest of the session. Retired offers are no longer eligible.
+    activos={p.pk for p in products}
+    vigentes=[pk for pk in state['ids'] if pk in activos]
+    ids=vigentes+sorted(activos.difference(vigentes))
+    if ids!=state['ids']:
+        session[ORDEN_KEY]={**state,'ids':ids}
+    return ids

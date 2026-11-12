@@ -1,3 +1,7 @@
+## Novedades MiDistri v45
+
+- [Altas del catálogo en sesiones abiertas](CATALOGO_ALTAS_v45.md)
+
 ## Novedades MiDistri v44
 
 - [Acceso y categoría Kanji en el catálogo](CATALOGO_KANJI_v44.md)

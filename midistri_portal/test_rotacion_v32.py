@@ -12,11 +12,13 @@ class OrdenSesionTests(SimpleTestCase):
         self.assertEqual(len(result),44)
         self.assertNotEqual([p.pk for p in result],list(range(1,45)))
         self.assertTrue(any(p.pk>11 for p in result[:6]))
-    def test_orden_congelado_no_incluye_altas_nuevas(self):
+    def test_orden_congelado_anexa_altas_sin_reordenar(self):
         from .catalogo_rotacion import orden_sesion
         request=NS(session={});products=self.products()
         first=orden_sesion(request,20,products,rng=Random(1))
-        self.assertEqual(orden_sesion(request,20,products[::-1]+[NS(pk=99,indicadores={})],rng=Random(9)),first)
+        actuales=products[::-1]+[NS(pk=99,indicadores={})]
+        self.assertEqual(orden_sesion(request,20,actuales,rng=Random(9)),first+[99])
+        self.assertEqual(orden_sesion(request,20,actuales,rng=Random(8)),first+[99])
         other=orden_sesion(NS(session={}),20,products,rng=Random(9));self.assertNotEqual(first,other)
     def test_pestanas_y_perfiles_aislados(self):
         from .catalogo_rotacion import orden_sesion
@@ -54,10 +56,19 @@ class CatalogoRotacionTests(TestCase):
         other=a.context['productos'][1];other.precio=19;other.save()
         b=self.get();self.assertNotIn(pub.pk,[p.pk for p in b.context['productos']])
         self.assertEqual(next(p.precio for p in b.context['productos'] if p.pk==other.pk),19)
-    def test_nueva_publicacion_espera_proxima_sesion(self):
-        self.get();p=Publicacion.objects.create(distribuidora=self.d,producto_id=999,nombre='Nuevo',precio=1,pvp=2,imagenes=['https://example.test/n.jpg'])
-        a=self.get();self.assertEqual(a.context['productos'].paginator.count,54)
-        self.assertNotIn(p.pk,[x.pk for x in a.context['productos']])
+    def test_una_sesion_abierta_encuentra_el_sku_recien_publicado(self):
+        a=self.get()
+        first=[p.pk for p in a.context['productos']]
+        sku='WSH-HE600013600RAC'
+        pub=Publicacion.objects.create(distribuidora=self.d,producto_id=999,
+            nombre='Horno eléctrico',codigo=sku,categoria='Kanji',precio=1,pvp=2,
+            imagenes=['https://example.test/horno.jpg'])
+        b=self.get()
+        self.assertEqual(b.context['productos'].paginator.count,55)
+        self.assertEqual([p.pk for p in b.context['productos']],first)
+        encontrado=self.get(q=sku,categoria='Kanji')
+        self.assertEqual(encontrado.context['orden'],'recomendados')
+        self.assertEqual([p.pk for p in encontrado.context['productos']],[pub.pk])
     def test_busqueda_exacta_tiene_prioridad(self):
         r=self.get(q='Producto 54');self.assertEqual(r.context['productos'][0].nombre,'Producto 54')
     @override_settings(MIDISTRI_LOGIN_CODIGO_ENABLED=True,MIDISTRI_ACCESO_RECORDADO_ENABLED=True)

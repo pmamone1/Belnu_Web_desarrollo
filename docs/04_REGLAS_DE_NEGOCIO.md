@@ -1,3 +1,7 @@
+## Relevancia desde MiDistri v45
+
+Los productos elegibles nuevos se agregan al final en la misma sesión; el buscador los encuentra por su nombre o SKU. Las ofertas retiradas se ocultan. [Reglas](CATALOGO_ALTAS_v45.md).
+
 ## Catálogo Kanji desde MiDistri v44
 
 El portal muestra las ofertas del catálogo proveedor publicadas en su distribuidora con los controles de elegibilidad existentes. [Reglas vigentes](CATALOGO_KANJI_v44.md).
