@@ -1,3 +1,7 @@
+## Catálogo Kanji desde MiDistri v44
+
+Tocá el logo Kanji o elegí Kanji en Categoría para ver los productos publicados por tu distribuidora. [Guía vigente](CATALOGO_KANJI_v44.md).
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 En el catálogo, «Disponible en proveedor» indica el estado informado por la última consulta. «Disponible en depósito» indica existencias locales. La fecha junto al estado corresponde a la consulta al proveedor. La distribuidora confirma disponibilidad para cada pedido.

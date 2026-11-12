@@ -1,3 +1,7 @@
+## Novedades MiDistri v44
+
+- [Acceso y categoría Kanji en el catálogo](CATALOGO_KANJI_v44.md)
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 - [Guía de usuario, contrato, migración, instalación y restauración](ABASTECIMIENTO_PROVEEDOR_v43.md)

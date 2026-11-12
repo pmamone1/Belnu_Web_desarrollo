@@ -103,7 +103,7 @@ def catalogo(request):
     orden=request.GET.get('orden',saved.get('orden','recomendados'))
     ordenes={'recomendados':('nombre','pk'),'nombre':('nombre','pk'),'precio_asc':('precio','nombre','pk'),'precio_desc':('-precio','nombre','pk'),'pvp_asc':('pvp','nombre','pk'),'pvp_desc':('-pvp','nombre','pk'),'ventas':('nombre','pk')}
     if orden not in ordenes:orden='recomendados'
-    from .busqueda import clasificar
+    from .busqueda import KANJI_CATEGORIA, clasificar
     from .catalogo_rotacion import orden_sesion
     ordered=orden_sesion(request,d.pk,products,perfil) if d and orden=='recomendados' else []
     classification={p.pk:clasificar(p) for p in products}
@@ -144,7 +144,7 @@ def catalogo(request):
     from .presentacion import presentacion_publica,TEMAS
     from .promociones import promociones_publicas
     destacados=[]
-    if d:
+    if d and categoria != KANJI_CATEGORIA:
         for product in elegibles(Publicacion.objects.filter(distribuidora=d)):
             position=product.indicadores.get('ranking')
             if type(position) is int and 1<=position<=10:

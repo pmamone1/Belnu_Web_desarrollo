@@ -1,5 +1,7 @@
 """Presentation-only catalogue controls, shared by public and private preview."""
 from urllib.parse import urlencode
+from django.urls import reverse
+from .busqueda import KANJI_CATEGORIA
 OPCIONES=(24,48,96,192)
 
 def tamano_pagina(value):
@@ -11,6 +13,10 @@ def navegacion(context):
     filters.update(distribuidora=d.pk if d else '',page_size=context.get('page_size',48))
     def link(number):return '?'+urlencode(dict(filters,page=number))+'#productos'
     context.update(page_sizes=OPCIONES,page_size=filters['page_size'],catalogo_anterior=link(page.previous_page_number()) if page.has_previous() else '',catalogo_siguiente=link(page.next_page_number()) if page.has_next() else '',catalogo_limpiar='?'+urlencode(dict(distribuidora=filters['distribuidora'],q='',categoria='',subcategoria='',orden='recomendados',page_size=filters['page_size']))+'#productos')
+    if d and KANJI_CATEGORIA in context.get('categorias', ()):
+        kanji = dict(filters, q='', categoria=KANJI_CATEGORIA, subcategoria='', orden='recomendados')
+        context['catalogo_kanji_url'] = reverse('midistri_catalogo') + '?' + urlencode(kanji) + '#productos'
+        context['catalogo_kanji_activo'] = filters['categoria'] == KANJI_CATEGORIA
     return context
 
 def preview(context,d,page_number=1):

@@ -1,3 +1,8 @@
+## Entrega MiDistri v44
+
+- [ ] Verificar logo y filtro en una distribuidora con ofertas y otra sin ofertas.
+- [ ] Verificar compilación de estáticos y plan vacío de migraciones, con instalación y restauración sobre v43.
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 - [x] Pruebas de contrato, catálogo, vista previa y carrito con datos sintéticos. Las cantidades que superan el stock local se rechazan cuando el proveedor está sin disponibilidad.

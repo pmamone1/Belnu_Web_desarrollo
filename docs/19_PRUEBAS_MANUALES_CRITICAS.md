@@ -1,3 +1,9 @@
+## Catálogo Kanji MiDistri v44
+
+1. Abrir el catálogo de una distribuidora con ofertas de Kanji y tocar el logo. Verificar que se limpie la búsqueda anterior y aparezcan los artículos publicados en esa tienda.
+2. Aplicar Kanji desde Categoría. Comprobar que sigan disponibles subcategorías y paginación.
+3. Abrir una tienda sin ofertas de Kanji. Comprobar que el acceso no aparezca.
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 Ejecutar en un entorno de prueba con un snapshot de ejemplo y una sesión sintética.

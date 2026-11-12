@@ -44,6 +44,40 @@ class AbastecimientoTests(TestCase):
         self.assertEqual(p.abastecimiento, {})
         self.assertEqual(Publicacion.objects.get(distribuidora_id=65).abastecimiento, {})
 
+    def test_enlace_y_categoria_kanji_del_catalogo_de_la_tienda(self):
+        from urllib.parse import parse_qs, urlsplit
+
+        data = self.datos()
+        base = data['publicaciones'][0]
+        base['nombre'] = 'Televisor del proveedor'
+        base['categoria'] = 'Electrónica'
+        base['clasificacion'] = {'categorias': ['Electrónica'], 'subcategoria': 'Televisores'}
+        data['publicaciones'].append({**base, 'producto_id': 55, 'nombre': 'Electrónica local',
+            'abastecimiento': {}, 'indicadores': {'ranking': 2, 'entrega': '96', 'ultimas_unidades': False}})
+        data['publicaciones'][1]['nombre'] = 'Producto de otra tienda'
+        aplicar_snapshot(data)
+
+        catalogo = self.client.get('/portal/', {'distribuidora': 20, 'q': 'local', 'orden': 'ventas'})
+        self.assertIn('Kanji', catalogo.context['categorias'])
+        self.assertContains(catalogo, '<option value="Kanji">Kanji</option>', html=True)
+        self.assertIn('Electrónica', catalogo.context['categorias'])
+        self.assertContains(catalogo, 'catalogo-kanji.jpg')
+        acceso = catalogo.context['catalogo_kanji_url']
+        filtros = parse_qs(urlsplit(acceso).query, keep_blank_values=True)
+        self.assertEqual(filtros['distribuidora'], ['20'])
+        self.assertEqual(filtros['categoria'], ['Kanji'])
+        self.assertEqual(filtros['q'], [''])
+        self.assertEqual(filtros['orden'], ['recomendados'])
+        filtrado = self.client.get(acceso)
+        self.assertEqual([p.nombre for p in filtrado.context['productos']], ['Televisor del proveedor'])
+        self.assertEqual(filtrado.context['subcategorias'], ['Televisores'])
+        self.assertEqual(filtrado.context['productos'][0].categorias_catalogo, ['Electrónica', 'Kanji'])
+        self.assertNotContains(filtrado, 'Electrónica local')
+        self.assertNotContains(filtrado, 'Producto de otra tienda')
+        otra = self.client.get('/portal/', {'distribuidora': 65})
+        self.assertNotIn('Kanji', otra.context['categorias'])
+        self.assertNotContains(otra, 'catalogo-kanji.jpg')
+
     def test_snapshot_rechaza_dtos_invalidos_sin_cambiar_copia(self):
         aplicar_snapshot(self.datos())
         before = list(Publicacion.objects.values())

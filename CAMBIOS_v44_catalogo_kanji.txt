@@ -1,0 +1,4 @@
+MiDistri-Pedidos v44
+
+Logo y acceso al catálogo proveedor Kanji. Categoría Kanji en el filtro de la tienda.
+Base v43. Sin migraciones. Instalación productiva pendiente.

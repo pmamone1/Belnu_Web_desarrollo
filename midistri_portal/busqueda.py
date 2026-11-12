@@ -3,6 +3,8 @@ import re
 import unicodedata
 from difflib import SequenceMatcher
 
+KANJI_CATEGORIA = 'Kanji'
+
 def normalizar(text):
     return ''.join(c for c in unicodedata.normalize('NFKD',text.casefold()) if not unicodedata.combining(c))
 def raiz(word):
@@ -11,7 +13,12 @@ def raiz(word):
 
 def clasificar(product):
     data=product.clasificacion or {}
-    return data.get('categorias',[product.categoria] if product.categoria else []),data.get('subcategoria','')
+    categorias = data.get('categorias', [product.categoria] if product.categoria else [])
+    # The v43 snapshot uses this marker for the sole integrated supplier catalogue, Kanji.
+    abastecimiento = product.abastecimiento or {}
+    if abastecimiento.get('origen') == 'proveedor' and KANJI_CATEGORIA not in categorias:
+        categorias = [*categorias, KANJI_CATEGORIA]
+    return categorias, data.get('subcategoria', '')
 
 def distancia(a,b,limite):
     if abs(len(a)-len(b))>limite:return limite+1

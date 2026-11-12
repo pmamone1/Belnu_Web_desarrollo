@@ -1,3 +1,7 @@
+## Catálogo Kanji desde MiDistri v44
+
+El portal muestra las ofertas del catálogo proveedor publicadas en su distribuidora con los controles de elegibilidad existentes. [Reglas vigentes](CATALOGO_KANJI_v44.md).
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 - La disponibilidad publicada corresponde a la distribuidora activa. El catálogo distingue depósito y proveedor, y reserva los plazos anteriores para las fichas con el contrato anterior.

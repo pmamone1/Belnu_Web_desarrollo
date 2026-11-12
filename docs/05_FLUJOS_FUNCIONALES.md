@@ -1,3 +1,7 @@
+## Catálogo Kanji desde MiDistri v44
+
+El logo abre el catálogo filtrado en Kanji. La misma categoría se puede elegir en Filtros. [Flujo completo](CATALOGO_KANJI_v44.md).
+
 ## MiDistri-Pedidos v43 · Disponibilidad de proveedor
 
 1. Urban habilita los productos elegidos, calcula disponibilidad y ofrece fotos públicas validadas. MiDistri sincroniza ese catálogo.
