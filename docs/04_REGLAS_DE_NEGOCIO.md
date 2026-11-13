@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+La insignia suma las unidades del carrito guardadas en el perfil activo. El texto público toma sólo la configuración publicada de la distribuidora. Informa sobre la consignación y el derecho a devolución salvo casos especiales; no modifica reglas de devolución.
+
 ## Disponibilidad de Kanji · v47
 
 La disponibilidad de Kanji controla los pedidos nuevos de esas publicaciones en MiDistri, aunque quede stock local. Si no está disponible, se excluye de la navegación, destacados y promociones basadas en fichas; una búsqueda puede devolverlo como referencia. Esta pauta reemplaza la excepción de stock local de v43 sólo en el portal.

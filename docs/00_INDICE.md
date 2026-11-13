@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+[Guía del carrito y configuración de la presentación](CARRITO_PRESENTACION_v48.md).
+
 ## Disponibilidad de Kanji · v47
 
 [Disponibilidad y búsqueda del catálogo Kanji (v47)](KANJI_DISPONIBILIDAD_v47.md).

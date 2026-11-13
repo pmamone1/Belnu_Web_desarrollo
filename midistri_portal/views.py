@@ -250,7 +250,9 @@ def carrito(request):
     request.session['midistri_revision']=revision
     present={str(r['producto'].producto_id) for r in rows}
     retirados=[pid for pid in request.session.get('midistri_cart',{}) if pid not in present]
-    ctx=base(request,perfil);ctx.update(rows=rows,missing=missing,invalidas=any(r['error_display'] or r['error_abastecimiento'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
+    from .pagina import PRESENTACION_CARRITO
+    ctx=base(request,perfil);ctx.setdefault('carrito_presentacion', PRESENTACION_CARRITO)
+    ctx.update(en_carrito=True,rows=rows,missing=missing,invalidas=any(r['error_display'] or r['error_abastecimiento'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
     return render(request,'midistri_portal/carrito.html',ctx)
 
 

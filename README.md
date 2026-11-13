@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+El carrito tiene un contador de unidades y una presentación editable por tienda. [Guía v48](docs/CARRITO_PRESENTACION_v48.md).
+
 ## Disponibilidad de Kanji · v47
 
 El catálogo público de MiDistri muestra los artículos de Kanji con disponibilidad. Si Kanji informa que no hay stock, el artículo se encuentra por búsqueda con el pedido deshabilitado. [Guía v47](docs/KANJI_DISPONIBILIDAD_v47.md).

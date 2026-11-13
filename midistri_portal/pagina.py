@@ -22,6 +22,24 @@ MENSAJES={
  'bienvenida':'','instrucciones':'','carrito':'Este pedido queda sujeto a disponibilidad y aceptación por parte de la distribuidora.',
  'recibido':'Recibimos tu pedido','contacto':'','boton_pedido':'Ver mi pedido',
 }
+PRESENTACION_CARRITO = {
+    'activo': True,
+    'titulo': 'Tu próximo pedido empieza acá',
+    'texto': 'Hacé tus pedidos directo a tu distribuidora. La mercadería es consignada y tus pedidos tienen derecho a devolución, salvo casos especiales.',
+}
+
+
+def validar_presentacion_carrito(value):
+    if (not isinstance(value, dict) or set(value) != set(PRESENTACION_CARRITO)
+            or type(value['activo']) is not bool):
+        raise ValidationError('La presentación del carrito no es válida.')
+    titulo = texto(value['titulo'], 150)
+    cuerpo = texto(value['texto'], 1000)
+    if value['activo'] and (not titulo or not cuerpo):
+        raise ValidationError('Completá el título y el texto de la presentación del carrito, u ocultala.')
+    return dict(activo=value['activo'], titulo=titulo, texto=cuerpo)
+
+
 TIPOS=('texto','banner','carrusel_fotos','carrusel_productos','video','contacto','catalogo')
 
 def huella(data):
@@ -133,6 +151,8 @@ def validar_pagina(data,did,fuentes=True):
             blocks.append(x)
         if catalogs!=1:raise ValidationError('Debe haber exactamente un catálogo visible.')
         result={'version':1,'diseno':data['diseno'],'tema':data['tema'],'mensajes':messages,'presentacion':presentation,'bloques':blocks}
+        if 'presentacion_carrito' in data:
+            result['presentacion_carrito'] = validar_presentacion_carrito(data['presentacion_carrito'])
         if 'estilos_mensajes' in data:
             from .mensaje_estilos import validar_mensajes
             result['estilos_mensajes']=validar_mensajes(data['estilos_mensajes'])

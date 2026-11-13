@@ -1,0 +1,5 @@
+MiDistri-Pedidos v48 · Base v47
+- Ícono de carrito con total de unidades, incluido en el carrito y en el acceso desde el catálogo.
+- Presentación de consignación y devolución con excepciones, editable por distribuidora desde el editor visual.
+- Sin migraciones, cambios en Urban Soft ni operaciones de pedidos o devoluciones.
+- Instalación productiva pendiente.

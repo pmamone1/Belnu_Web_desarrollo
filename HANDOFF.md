@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+v48 se instala sobre v47 con la migración 0016 ya aplicada. Reutiliza la configuración publicada y el carrito existentes. El campo de presentación es opcional para preservar las huellas de las páginas anteriores. [Instalación y reversión](docs/CARRITO_PRESENTACION_v48.md).
+
 ## Disponibilidad de Kanji · v47
 
 v47 se instala sobre v46, con la migración 0016 aplicada. Cambia la presentación pública y la validación del carrito en MiDistri. No necesita cambios de Urban Soft ni otra sincronización para aplicar el filtro a la copia existente. El respaldo de código permite revertir sin tocar la base.

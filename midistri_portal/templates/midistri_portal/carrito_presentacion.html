@@ -1,0 +1,8 @@
+<section class="carrito-presentacion"{% if previa %} data-carrito-previa{% endif %} aria-labelledby="carrito-presentacion-titulo">
+  <div class="carrito-presentacion-contenido">
+    <span class="carrito-antetitulo">MiDistri · Pedidos online</span>
+    <h2 id="carrito-presentacion-titulo" data-carrito-titulo>{{ presentacion.titulo }}</h2>
+    <p data-carrito-texto>{{ presentacion.texto }}</p>
+  </div>
+  <div class="carrito-ilustracion" aria-hidden="true">{% include 'midistri_portal/carrito_icono.html' %}</div>
+</section>

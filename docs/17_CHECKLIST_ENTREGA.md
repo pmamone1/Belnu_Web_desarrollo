@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+Comprobar la actualización de cantidades, la vista en PC y celular y que texto y visibilidad sólo cambien tras publicar. Verificar ZIP sobre v47, sin migraciones, y la portada del manual. [Detalle](CARRITO_PRESENTACION_v48.md).
+
 ## Disponibilidad de Kanji · v47
 
 - [x] Validación local: 36 pruebas del portal.

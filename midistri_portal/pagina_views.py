@@ -46,7 +46,7 @@ def contenido_contexto(page,d,preview=False,session=None):
     presentation['favicon']=url_marca(presentation['favicon_marca']) if presentation.get('favicon_marca') else logo
     presentation['logo']=SimpleNamespace(url=logo)
     presentation.update(tema=data['tema'],bienvenida=data['mensajes'].get('bienvenida',''),instrucciones=data['mensajes'].get('instrucciones',''))
-    return dict(pagina=data,pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
+    return dict(pagina=data,carrito_presentacion=data.get('presentacion_carrito', p.PRESENTACION_CARRITO),pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
         bloques=p.bloques_vigentes(data,d.pk,preview,session),presentacion=SimpleNamespace(**presentation))
 
 def guardar_accion(request,page,ctx,token,subida=None,metadata=None):
@@ -137,7 +137,8 @@ def editor(request):
         initial.update(diseno=page.datos['diseno'],tema=page.datos['tema'])
         if request.GET.get('clasico')!='1':
             from .marcas import opciones
-            ctx.update(titulo='Mi tienda · Editor visual',page=page,recursos=recursos(did),temas=TEMAS,marcas=opciones())
+            ctx.update(titulo='Mi tienda · Editor visual',page=page,recursos=recursos(did),temas=TEMAS,marcas=opciones(),
+                carrito_presentacion_defecto=p.PRESENTACION_CARRITO)
             return privada(render(request,'midistri_portal/editor_visual.html',ctx))
         ctx.update(titulo='Mi tienda · editor de página',page=page,form=PaginaForm(initial=initial),
             recursos=recursos(did),operacion=str(uuid4()),error_form=error,

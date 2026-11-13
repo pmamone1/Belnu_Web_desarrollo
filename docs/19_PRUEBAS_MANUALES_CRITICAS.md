@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+En una tienda de prueba, agregar tres unidades, actualizar a una y quitar el producto; comprobar que el contador marque 3, 1 y 0. Cambiar título y texto desde el editor, verificar la vista previa y publicar. Confirmar que otra tienda mantiene su texto y que ocultar el bloque no oculta el contador. Probar en PC y celular.
+
 ## Disponibilidad de Kanji · v47
 
 Con un SKU de Kanji sin disponibilidad y uno disponible, verificar que sólo el segundo aparezca al navegar. Buscar el primero por SKU y verificar el aviso y el control deshabilitado. Si ya está en un carrito de prueba, verificar que se puede quitar, sin transmitir ningún pedido.

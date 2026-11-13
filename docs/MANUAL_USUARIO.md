@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+El número junto al ícono del carrito indica cuántas unidades agregaste. Para editar u ocultar el mensaje de presentación, entrá a **Configurar MiDistri → Presentación del carrito**. Cuando esté listo, elegí **Revisar y publicar**. [Guía v48](CARRITO_PRESENTACION_v48.md).
+
 ## Disponibilidad de Kanji · v47
 
 Los artículos de Kanji sin disponibilidad se ven al buscarlos por nombre o SKU, con el pedido deshabilitado. Cuando Kanji vuelve a informar disponibilidad, reaparecen en el listado tras actualizar el catálogo. [Guía v47](KANJI_DISPONIBILIDAD_v47.md).

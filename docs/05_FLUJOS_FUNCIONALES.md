@@ -1,3 +1,7 @@
+## Presentación del carrito · v48
+
+Al aplicar cantidades, el acceso al carrito y su encabezado muestran el nuevo total. Para cambiar la presentación: Configurar MiDistri → Diseño y mensajes de la tienda → Presentación del carrito → Revisar y publicar.
+
 ## Disponibilidad de Kanji · v47
 
 Buscar por nombre o SKU permite consultar fotos, precio y estado de un artículo de Kanji sin disponibilidad. Si estaba en el carrito, se puede quitar. No se modifican pedidos previamente registrados.

@@ -1,0 +1,23 @@
+.sticky .carrito-boton{display:inline-flex;align-items:center;justify-content:center;gap:.85rem;font-weight:700}
+.carrito-indicador{display:inline-flex;position:relative;align-items:center;flex:none;gap:.25rem;line-height:1}
+.carrito-indicador svg{width:1.5em;height:1.5em}
+.carrito-unidades{display:inline-grid;place-items:center;min-width:1.65rem;min-height:1.65rem;padding:.2rem .35rem;background:#ffdd84;color:#3b2c12;border-radius:999px;font-size:.82rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}
+.carrito-solo-lectores{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.carrito-cabecera{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;margin:1.4rem 0 .75rem}
+.carrito-cabecera h2,.carrito-cabecera p{margin:0}
+.carrito-cabecera p{font-size:.95rem;margin-top:.3rem;color:var(--muted,#53655c)}
+.carrito-cabecera .carrito-indicador{border-radius:999px;background:var(--soft,#e5f0e9);padding:.55rem .7rem;color:var(--text,#173e31)}
+.carrito-presentacion{display:flex;position:relative;align-items:center;justify-content:space-between;gap:clamp(.8rem,3vw,2.5rem);overflow:hidden;margin:1rem 0;padding:clamp(1.2rem,4vw,3rem);border:1px solid var(--border,#ccd9d1);border-radius:1.4rem;background:linear-gradient(115deg,var(--panel,#fff),var(--soft,#e5f0e9));color:var(--text,#173e31);font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-wrap:anywhere}
+.carrito-presentacion[hidden]{display:none}
+.carrito-presentacion h2{margin:.55rem 0;font-size:clamp(1.5rem,4.3vw,2.75rem);font-weight:800;letter-spacing:-.035em;line-height:1.1}
+.carrito-presentacion p{max-width:58ch;margin:0;line-height:1.55;font-size:clamp(.95rem,2vw,1.1rem);white-space:pre-line}
+.carrito-antetitulo{display:inline-block;color:var(--primary,#236447);font-size:.75rem;letter-spacing:.105em;text-transform:uppercase;font-weight:800}
+.carrito-ilustracion{flex:none;display:grid;place-items:center;width:clamp(2.75rem,11vw,7rem);aspect-ratio:1;border-radius:25%;background:var(--primary,#236447);color:var(--on-primary,#fff);transform:rotate(-8deg)}
+.carrito-ilustracion svg{width:50%;height:50%}
+.editor-carrito{min-width:0;border:1px solid #bdceca;border-radius:10px;padding:10px;margin:14px 0}
+.editor-carrito legend{font-size:14px;font-weight:700}
+.editor-carrito .carrito-presentacion{padding:.8rem}
+.editor-carrito .carrito-presentacion h2{font-size:1.2rem}
+.editor-carrito .carrito-presentacion p{font-size:.85rem}
+.editor-carrito .carrito-ilustracion{display:none}
+@media(max-width:480px){.carrito-presentacion{align-items:flex-start}.carrito-ilustracion{width:2.5rem}}
