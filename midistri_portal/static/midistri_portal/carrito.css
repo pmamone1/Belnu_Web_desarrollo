@@ -1,4 +1,13 @@
-.sticky .carrito-boton{display:inline-flex;align-items:center;justify-content:center;gap:.85rem;font-weight:700}
+header .portal-nav{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:.7rem;margin-bottom:0}
+.portal-nav-enlaces{display:flex;align-items:center;flex-wrap:wrap;gap:.45rem 1rem;min-height:44px}
+.portal-nav-enlaces .tienda-apariencia{margin-inline-start:0}
+header .portal-nav .carrito-boton{grid-column:2;display:inline-flex;align-items:center;justify-content:center;gap:.55rem;font-weight:700;min-height:44px;padding:.5rem .7rem;color:var(--text);background:var(--panel);text-align:left}
+header .portal-nav .carrito-boton:hover{background:var(--soft)}
+.carrito-estado{font-size:.9rem;min-height:1.2em;margin:.35rem 0;color:var(--text)}
+.carrito-estado:empty{margin:0;min-height:0}
+.carrito-estado[data-error]{padding:.5rem;border:1px solid currentColor;border-radius:6px}
+[data-carrito-cantidad][aria-busy=true]{opacity:.75}
+@media(max-width:580px){.portal-nav .carrito-boton-texto{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.portal-nav-enlaces{font-size:.92rem}}
 .carrito-indicador{display:inline-flex;position:relative;align-items:center;flex:none;gap:.25rem;line-height:1}
 .carrito-indicador svg{width:1.5em;height:1.5em}
 .carrito-unidades{display:inline-grid;place-items:center;min-width:1.65rem;min-height:1.65rem;padding:.2rem .35rem;background:#ffdd84;color:#3b2c12;border-radius:999px;font-size:.82rem;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.15}

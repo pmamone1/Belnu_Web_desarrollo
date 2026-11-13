@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+El carrito aparece en el menú superior y se actualiza sin recargar. [Guía v49](docs/CARRITO_NAVBAR_v49.md).
+
 ## Presentación del carrito · v48
 
 El carrito tiene un contador de unidades y una presentación editable por tienda. [Guía v48](docs/CARRITO_PRESENTACION_v48.md).

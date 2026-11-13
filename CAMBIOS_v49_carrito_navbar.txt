@@ -1,0 +1,6 @@
+MiDistri-Pedidos v49 · Bases v47 y v48
+- Ícono y contador de unidades a la derecha del menú en PC y celular.
+- Cantidades, bajas y totales del carrito sin recargar; opción Quitar.
+- Encabezados y vistas de vendedor sin referencias automáticas a la distribuidora.
+- Incluye la presentación editable del carrito de v48. Sin migraciones.
+- Instalación productiva pendiente.

@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+En dos pestañas con acceso vendedor, agregá en una y comprobá que la otra conserve su carrito. En el carrito cambiá la cantidad, confirmá que se conserva la observación y quitá el último producto. Verificá el contador en cero, el total y que no aparezca Enviar pedido con el carrito vacío. En un encabezado guardado con «20 - Belgrano» o «Dist. 20», verificá que el sitio público lo oculte. Repetí en celular.
+
 ## Presentación del carrito · v48
 
 En una tienda de prueba, agregar tres unidades, actualizar a una y quitar el producto; comprobar que el contador marque 3, 1 y 0. Cambiar título y texto desde el editor, verificar la vista previa y publicar. Confirmar que otra tienda mantiene su texto y que ocultar el bloque no oculta el contador. Probar en PC y celular.

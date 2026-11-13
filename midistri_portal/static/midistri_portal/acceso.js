@@ -41,9 +41,11 @@ document.addEventListener('submit',async e=>{
         document.querySelectorAll('[data-codigo]').forEach(x=>{x.hidden=x.dataset.codigo!==(data.fase==='codigo'?'verificar':'seleccionar');});
         if(data.fase==='elegir'){
             const select=document.querySelector('[name=seleccion]');select.replaceChildren();
-            data.identidades.forEach(x=>{
+            data.identidades.forEach((x,index)=>{
                 const o=document.createElement('option');o.value=x.seleccion;
-                o.textContent=(x.tipo==='administracion'?'Administración · ':'Vendedor · ')+x.nombre+' · '+x.distribuidora;select.append(o);
+                const admin=x.tipo==='administracion';
+                const duplicado=data.identidades.some((item,i)=>i!==index&&item.tipo===x.tipo&&item.nombre===x.nombre);
+                o.textContent=(admin?'Administración · ':'Vendedor · ')+x.nombre+(admin?' · '+x.distribuidora:duplicado?' · Perfil '+(index+1):'');select.append(o);
             });
         }
         const focus=document.querySelector('form:not([hidden]) input:not([type=hidden]),form:not([hidden]) select');if(focus)focus.focus();

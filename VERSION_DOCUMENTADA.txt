@@ -1,3 +1,6 @@
+MiDistri-Pedidos v49
+Bases v47 y v48. Carrito en el menú superior con actualizaciones sin recarga. Las vistas de vendedor no agregan el nombre de la distribuidora. Sin migraciones. Instalación productiva pendiente.
+
 MiDistri-Pedidos v48
 Base v47. Carrito con contador de unidades y mensaje editable por distribuidora sobre consignación y derecho a devolución, salvo casos especiales. Sin migraciones ni cambios en Urban Soft. Instalación productiva pendiente.
 

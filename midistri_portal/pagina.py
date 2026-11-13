@@ -18,14 +18,14 @@ MENSAJES={
  'encabezado':'',
  'nav_catalogo':'Catálogo','nav_distribuidor':'Acceso Distribuidor',
  'titulo':'Elegí los productos para tu Kiosco!',
- 'subtitulo':'Portal para realizar pedidos. La distribuidora confirma disponibilidad.',
- 'bienvenida':'','instrucciones':'','carrito':'Este pedido queda sujeto a disponibilidad y aceptación por parte de la distribuidora.',
+ 'subtitulo':'Hacé pedidos online. Te confirmamos la disponibilidad.',
+ 'bienvenida':'','instrucciones':'','carrito':'El pedido queda sujeto a confirmación y disponibilidad.',
  'recibido':'Recibimos tu pedido','contacto':'','boton_pedido':'Ver mi pedido',
 }
 PRESENTACION_CARRITO = {
     'activo': True,
     'titulo': 'Tu próximo pedido empieza acá',
-    'texto': 'Hacé tus pedidos directo a tu distribuidora. La mercadería es consignada y tus pedidos tienen derecho a devolución, salvo casos especiales.',
+    'texto': 'Hacé tus pedidos online, en un solo lugar. La mercadería es consignada y tus pedidos tienen derecho a devolución, salvo casos especiales.',
 }
 
 

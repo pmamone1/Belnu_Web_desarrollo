@@ -8,7 +8,7 @@ from .test_operadores import PROFILE
 class MarcaPortalTests(TestCase):
     def test_acceso_email_neutro_y_perfiles_conservados(self):
         response=self.client.get('/portal/acceso/')
-        self.assertContains(response,'cuenta de la distribuidora')
+        self.assertContains(response,'Usá el Email asociado a tu perfil.')
         self.assertNotContains(response,'Urban Soft')
 
     def test_error_de_acceso_conserva_estado_y_reintento(self):

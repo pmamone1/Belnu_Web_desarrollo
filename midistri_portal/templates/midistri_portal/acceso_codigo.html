@@ -1,5 +1,5 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
-<section><h2>Entrar con mi Email</h2><p>Usá el Email asociado a tu vendedor o a tu cuenta de la distribuidora. No necesitás registrarte ni crear contraseña.</p>
+<section><h2>Entrar con mi Email</h2><p>Usá el Email asociado a tu perfil. No necesitás registrarte ni crear contraseña.</p>
 <p>{% if request.midistri_recordar_enabled %}Si este dispositivo ya está reconocido, entrás directamente. Si necesitás verificar el acceso, te pediremos un código.{% else %}Continuá con tu Email para verificar el acceso.{% endif %}</p>
 <p id="acceso-mensaje" role="status" aria-live="polite"></p>
 <form data-codigo="iniciar" method="post" action="{% url 'midistri_codigo_iniciar' %}">{% csrf_token %}

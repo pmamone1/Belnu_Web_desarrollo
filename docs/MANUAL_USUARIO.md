@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+El carrito está arriba a la derecha. El número indica unidades. Tocá Agregar / actualizar desde el catálogo o Actualizar y Quitar desde el carrito. [Guía v49](CARRITO_NAVBAR_v49.md).
+
 ## Presentación del carrito · v48
 
 El número junto al ícono del carrito indica cuántas unidades agregaste. Para editar u ocultar el mensaje de presentación, entrá a **Configurar MiDistri → Presentación del carrito**. Cuando esté listo, elegí **Revisar y publicar**. [Guía v48](CARRITO_PRESENTACION_v48.md).

@@ -29,7 +29,7 @@ def identificar(request):
     except ApiError as e:
         if e.status in (401,403):
             for key in ('midistri_token','midistri_cart','midistri_cart_id'):request.session.pop(key,None)
-            messages.error(request,'Tu acceso fue desactivado. Entrá nuevamente con tu Email y código.' if getattr(request,'midistri_codigo_enabled',False) else 'Tu acceso venció o fue desactivado. Pedí un nuevo enlace a tu distribuidora.')
+            messages.error(request,'Tu acceso fue desactivado. Entrá nuevamente con tu Email y código.' if getattr(request,'midistri_codigo_enabled',False) else 'Tu acceso venció o fue desactivado. Pedí un nuevo enlace de acceso.')
             return None
         raise
 
@@ -40,11 +40,17 @@ def base(request,perfil=None,distribuidora=None):
     if distribuidora is None and perfil:
         distribuidora=Distribuidora.objects.filter(pk=perfil['distribuidora_id'],activa=True).first()
     saved=request.session.get('midistri_catalogo_filtros',{})
-    context={'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online'+
-        (' - '+perfil['distribuidora'] if perfil else (' - '+(distribuidora.nombre_comercial or distribuidora.nombre) if distribuidora else '')),
+    context={'catalogo_url':'/portal/?'+urlencode(saved),'perfil':perfil,'distribuidora':distribuidora,'titulo':'MiDistri - Pedidos Online',
         'cart_count':sum(request.session.get('midistri_cart',{}).values()),
         'sync':Sincronizacion.objects.filter(pk=1).first()}
-    if distribuidora:context.update(contenido_contexto(pagina_publica(distribuidora),distribuidora))
+    if distribuidora:
+        context.update(contenido_contexto(pagina_publica(distribuidora),distribuidora))
+        from .identidad_publica import encabezado_visible
+        context['pagina_mensajes']['encabezado'] = encabezado_visible(
+            context['pagina_mensajes'].get('encabezado', ''), distribuidora,
+            perfil.get('distribuidora', '') if perfil else '')
+        from .presentacion import TEMAS
+        context['temas'] = TEMAS
     try:
         from .analitica_contexto import contexto as contexto_analitico
         context['analitica_contexto']=contexto_analitico(request,perfil)
@@ -183,8 +189,12 @@ def multiplo_valido(producto,cantidad):
     return type(cantidad) is int and 0<=cantidad<=9999 and cantidad%paso==0
 
 
+def texto_sin_abastecimiento(producto):
+    return producto.nombre + ' no tiene disponibilidad para pedidos nuevos.'
+
+
 def aviso_sin_abastecimiento(request, producto):
-    messages.error(request, producto.nombre+' no tiene disponibilidad para pedidos nuevos.')
+    messages.error(request, texto_sin_abastecimiento(producto))
 
 
 def productos_carrito(request,perfil):
@@ -204,33 +214,70 @@ def productos_carrito(request,perfil):
 
 @require_POST
 def cantidad(request):
-    try:perfil=identificar(request)
-    except ApiError as e:return error_page(request,e)
-    if not perfil:return redirect('midistri_catalogo')
+    ajax = request.headers.get('Accept') == 'application/json'
+    en_carrito = request.POST.get('origen') == 'carrito'
+    destino = 'midistri_carrito' if en_carrito else 'midistri_catalogo'
+
+    def error(texto, status=400):
+        if ajax:
+            return JsonResponse({'error': texto}, status=status)
+        messages.error(request, texto)
+        return redirect(destino)
+
     try:
-        pid=int(request.POST['producto']);qty=int(request.POST['cantidad'])
-        if not 0<=qty<=9999:raise ValueError
+        perfil = identificar(request)
+    except ApiError as exc:
+        if ajax:
+            return error('No pudimos comprobar tu acceso. Volvé a intentar.', 503)
+        return error_page(request, exc)
+    if not perfil:
+        if ajax:
+            return error('Ingresá con tu Email para actualizar el carrito.', 401)
+        return redirect('midistri_catalogo')
+
+    try:
+        pid = int(request.POST['producto'])
+        qty = 0 if request.POST.get('quitar') == '1' else int(request.POST['cantidad'])
+        if pid < 1 or not 0 <= qty <= 9999:
+            raise ValueError
         if qty:
-            product=elegibles(Publicacion.objects.all()).get(producto_id=pid,distribuidora_id=perfil['distribuidora_id'])
+            product = elegibles(Publicacion.objects.all()).get(
+                producto_id=pid, distribuidora_id=perfil['distribuidora_id'])
             if product.cantidad_bloqueada_por_abastecimiento(qty):
-                aviso_sin_abastecimiento(request,product)
-                return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
-            if not multiplo_valido(product,qty):
-                messages.error(request,'Pedí '+product.nombre+' en múltiplos de '+str(product.display or 1)+' unidades.')
-                return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
-    except (ValueError,KeyError,Publicacion.DoesNotExist):
-        messages.error(request,'Producto o cantidad no válidos.');return redirect('midistri_catalogo')
-    cart=request.session.get('midistri_cart',{})
-    anterior=cart.get(str(pid),0)
-    if qty:cart[str(pid)]=qty
-    else:cart.pop(str(pid),None)
-    if len(cart)>200:messages.error(request,'Máximo 200 productos por pedido.');return redirect('midistri_carrito')
-    request.session['midistri_cart']=cart
-    request.session.pop('midistri_revision',None)
-    request.session['midistri_cart_id']=str(uuid4())
-    if anterior!=qty:registrar(request,perfil,'carrito',producto=pid,cantidad=qty)
-    messages.success(request,'Pedido actualizado.')
-    return redirect('midistri_carrito' if request.POST.get('origen')=='carrito' else 'midistri_catalogo')
+                return error(texto_sin_abastecimiento(product))
+            if not multiplo_valido(product, qty):
+                return error('Pedí ' + product.nombre + ' en múltiplos de ' + str(product.display or 1) + ' unidades.')
+    except (ValueError, KeyError, Publicacion.DoesNotExist):
+        return error('Producto o cantidad no válidos.')
+
+    cart = dict(request.session.get('midistri_cart', {}))
+    anterior = cart.get(str(pid), 0)
+    if qty:
+        cart[str(pid)] = qty
+    else:
+        cart.pop(str(pid), None)
+    if len(cart) > 200:
+        return error('Máximo 200 productos por pedido.')
+    if anterior != qty:
+        request.session['midistri_cart'] = cart
+        request.session.pop('midistri_revision', None)
+        request.session['midistri_cart_id'] = str(uuid4())
+        registrar(request, perfil, 'carrito', producto=pid, cantidad=qty)
+    if ajax:
+        result = dict(unidades=sum(cart.values()), cantidad=qty, mensaje='Carrito actualizado.')
+        if en_carrito:
+            from django.template.loader import render_to_string
+            from .pagina import pagina_publica, MENSAJES
+            from .identidad_publica import mensaje_visible
+            tienda = Distribuidora.objects.filter(pk=perfil['distribuidora_id'], activa=True).first()
+            pagina = pagina_publica(tienda)
+            result['carrito_html'] = render_to_string('midistri_portal/carrito_contenido.html',
+                dict(datos_carrito(request, perfil), pagina=pagina, pagina_mensajes={
+                    'carrito': mensaje_visible('carrito', pagina['mensajes'].get('carrito') or MENSAJES['carrito'])
+                }), request=request)
+        return JsonResponse(result)
+    messages.success(request, 'Pedido actualizado.')
+    return redirect(destino)
 
 
 def firma_revision(rows,perfil):
@@ -238,22 +285,32 @@ def firma_revision(rows,perfil):
     return sha256(json.dumps(data,sort_keys=True).encode()).hexdigest()
 
 
+def datos_carrito(request, perfil):
+    rows, missing = productos_carrito(request, perfil)
+    if 'midistri_cart_id' not in request.session:
+        request.session['midistri_cart_id'] = str(uuid4())
+    revision = firma_revision(rows, perfil)
+    request.session['midistri_revision'] = revision
+    present = {str(r['producto'].producto_id) for r in rows}
+    retirados = [pid for pid in request.session.get('midistri_cart', {}) if pid not in present]
+    return dict(rows=rows, missing=missing, retirados=retirados, revision=revision,
+                invalidas=any(r['error_display'] or r['error_abastecimiento'] for r in rows),
+                total=sum((r['importe'] for r in rows), Decimal('0')))
+
+
 @require_GET
 def carrito(request):
-    try:perfil=identificar(request)
-    except ApiError as e:return error_page(request,e)
-    if not perfil:return redirect('midistri_catalogo')
-    rows,missing=productos_carrito(request,perfil)
-    if missing:messages.warning(request,'Hay productos retirados del catálogo. Revisá el pedido antes de enviarlo.')
-    if 'midistri_cart_id' not in request.session:request.session['midistri_cart_id']=str(uuid4())
-    revision=firma_revision(rows,perfil)
-    request.session['midistri_revision']=revision
-    present={str(r['producto'].producto_id) for r in rows}
-    retirados=[pid for pid in request.session.get('midistri_cart',{}) if pid not in present]
+    try:
+        perfil = identificar(request)
+    except ApiError as e:
+        return error_page(request, e)
+    if not perfil:
+        return redirect('midistri_catalogo')
     from .pagina import PRESENTACION_CARRITO
-    ctx=base(request,perfil);ctx.setdefault('carrito_presentacion', PRESENTACION_CARRITO)
-    ctx.update(en_carrito=True,rows=rows,missing=missing,invalidas=any(r['error_display'] or r['error_abastecimiento'] for r in rows),retirados=retirados,revision=revision,total=sum((r['importe'] for r in rows),Decimal('0')))
-    return render(request,'midistri_portal/carrito.html',ctx)
+    ctx = base(request, perfil)
+    ctx.setdefault('carrito_presentacion', PRESENTACION_CARRITO)
+    ctx.update(datos_carrito(request, perfil), en_carrito=True)
+    return render(request, 'midistri_portal/carrito.html', ctx)
 
 
 def transmitir(request,pedido):
@@ -388,7 +445,7 @@ def repetir(request,ident):
     if not perfil:return redirect('midistri_catalogo')
     pedido=propio(perfil,ident)
     if pedido.estado=='pendiente':
-        messages.warning(request,'Primero reintentá el envío para confirmar si la distribuidora ya lo recibió.')
+        messages.warning(request,'Primero reintentá el envío para confirmar que el pedido se recibió.')
         return redirect('midistri_detalle',ident=pedido.pk)
     items=pedido.respuesta.get('items',pedido.datos.get('items',[]))
     available=set(elegibles(Publicacion.objects.filter(distribuidora_id=perfil['distribuidora_id'])).values_list('producto_id',flat=True))

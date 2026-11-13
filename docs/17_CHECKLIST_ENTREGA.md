@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+Verificar las bases v47 y v48 en el inventario, la portada del manual, el aislamiento entre pestañas y los controles del carrito en PC y celular.
+
 ## Presentación del carrito · v48
 
 Comprobar la actualización de cantidades, la vista en PC y celular y que texto y visibilidad sólo cambien tras publicar. Verificar ZIP sobre v47, sin migraciones, y la portada del manual. [Detalle](CARRITO_PRESENTACION_v48.md).

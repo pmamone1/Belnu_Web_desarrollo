@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+Instalador compatible con v47 y v48. No modifica modelos, permisos ni rutas. [Compatibilidad y reversión](docs/CARRITO_NAVBAR_v49.md).
+
 ## Presentación del carrito · v48
 
 v48 se instala sobre v47 con la migración 0016 ya aplicada. Reutiliza la configuración publicada y el carrito existentes. El campo de presentación es opcional para preservar las huellas de las páginas anteriores. [Instalación y reversión](docs/CARRITO_PRESENTACION_v48.md).

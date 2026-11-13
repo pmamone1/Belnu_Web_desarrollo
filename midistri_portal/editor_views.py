@@ -20,7 +20,7 @@ def html_pagina(data,d):
     from django.conf import settings
     from types import SimpleNamespace
     ctx['request']=SimpleNamespace(user=SimpleNamespace(is_staff=False),midistri_codigo_enabled=getattr(settings,'MIDISTRI_LOGIN_CODIGO_ENABLED',False))
-    ctx.update(titulo='MiDistri - Pedidos Online - '+(d.nombre_comercial or d.nombre),distribuidora=d,
+    ctx.update(titulo='MiDistri - Pedidos Online',distribuidora=d,
         temas=TEMAS)
     from .catalogo_presentacion import preview
     preview(ctx,d)

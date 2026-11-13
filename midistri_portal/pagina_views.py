@@ -46,7 +46,12 @@ def contenido_contexto(page,d,preview=False,session=None):
     presentation['favicon']=url_marca(presentation['favicon_marca']) if presentation.get('favicon_marca') else logo
     presentation['logo']=SimpleNamespace(url=logo)
     presentation.update(tema=data['tema'],bienvenida=data['mensajes'].get('bienvenida',''),instrucciones=data['mensajes'].get('instrucciones',''))
-    return dict(pagina=data,carrito_presentacion=data.get('presentacion_carrito', p.PRESENTACION_CARRITO),pagina_mensajes={k:v or p.MENSAJES[k] for k,v in data['mensajes'].items()},
+    from .identidad_publica import encabezado_visible, mensaje_visible
+    mensajes = {k: mensaje_visible(k, v or p.MENSAJES[k]) for k, v in data['mensajes'].items()}
+    mensajes['encabezado'] = encabezado_visible(mensajes.get('encabezado', ''), d)
+    carrito = dict(data.get('presentacion_carrito', p.PRESENTACION_CARRITO))
+    carrito['texto'] = mensaje_visible('presentacion_carrito', carrito['texto'])
+    return dict(pagina=data, carrito_presentacion=carrito, pagina_mensajes=mensajes,
         bloques=p.bloques_vigentes(data,d.pk,preview,session),presentacion=SimpleNamespace(**presentation))
 
 def guardar_accion(request,page,ctx,token,subida=None,metadata=None):

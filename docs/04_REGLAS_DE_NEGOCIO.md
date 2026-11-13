@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+Una actualización de cantidad sólo aplica al carrito del perfil activo y mantiene las validaciones anteriores. La acción Quitar elimina la línea; el envío del pedido sigue siendo una acción separada.
+
 ## Presentación del carrito · v48
 
 La insignia suma las unidades del carrito guardadas en el perfil activo. El texto público toma sólo la configuración publicada de la distribuidora. Informa sobre la consignación y el derecho a devolución salvo casos especiales; no modifica reglas de devolución.

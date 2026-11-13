@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+[Carrito en el menú y ajustes de cantidad](CARRITO_NAVBAR_v49.md).
+
 ## Presentación del carrito · v48
 
 [Guía del carrito y configuración de la presentación](CARRITO_PRESENTACION_v48.md).

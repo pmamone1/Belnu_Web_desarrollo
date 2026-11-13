@@ -1,3 +1,7 @@
+## Carrito en el menú · v49
+
+Agregar / actualizar en el catálogo y Actualizar / Quitar en el carrito cambian la cifra del menú sin recargar. El total y la revisión se actualizan con el carrito. Revisá tu pedido muestra vendedor y línea.
+
 ## Presentación del carrito · v48
 
 Al aplicar cantidades, el acceso al carrito y su encabezado muestran el nuevo total. Para cambiar la presentación: Configurar MiDistri → Diseño y mensajes de la tienda → Presentación del carrito → Revisar y publicar.

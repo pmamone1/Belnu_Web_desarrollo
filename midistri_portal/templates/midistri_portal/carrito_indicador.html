@@ -1,5 +1,5 @@
 <span class="carrito-indicador">
   {% include 'midistri_portal/carrito_icono.html' %}
-  <span class="carrito-unidades" aria-hidden="true">{{ unidades|default:0 }}</span>
-  <span class="carrito-solo-lectores">{{ unidades|default:0 }} unidad{{ unidades|default:0|pluralize:"es" }} en el carrito</span>
+  <span class="carrito-unidades" data-carrito-unidades aria-hidden="true">{{ unidades|default:0 }}</span>
+  <span class="carrito-solo-lectores" data-carrito-descripcion>{{ unidades|default:0 }} unidad{{ unidades|default:0|pluralize:"es" }} en el carrito</span>
 </span>

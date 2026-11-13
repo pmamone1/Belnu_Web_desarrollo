@@ -114,7 +114,7 @@ class AbastecimientoTests(TestCase):
         self.assertContains(r, 'Sin disponibilidad en proveedor')
         self.assertContains(r, '01/11/2026')
         self.assertNotContains(r, 'Entrega en 96 hs')
-        self.assertNotContains(r, 'Más vendidos en tu distribuidora')
+        self.assertNotContains(r, '<h2>Más vendidos</h2>')
         from .banners_automaticos import candidatos
         self.assertEqual(candidatos(20), {})
         aplicar_snapshot(self.datos(disponible=True))
