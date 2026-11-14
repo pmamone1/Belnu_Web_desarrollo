@@ -57,6 +57,51 @@ class DispositivoPortalTests(TestCase):
         self.assertEqual(self.resume().status_code,200)
         row.refresh_from_db();self.assertEqual(row.datos['midistri_cart'],{'1':3})
         self.assertEqual(SesionVendedorPortal.objects.count(),1)
+    def test_cambio_explicito_no_reingresa_aunque_solo_haya_un_perfil_recordado(self):
+        self.login()
+        respuesta = self.resume(elegir='1')
+        self.assertEqual(respuesta.json()['fase'], 'elegir')
+        self.assertEqual(len(respuesta.json()['identidades']), 1)
+
+    def test_cambiar_kiosco_en_la_misma_pestana_cambia_token_y_aisla_carrito(self):
+        self.login()
+        self.remote_profiles.append({'seleccion': 'q'*32, 'nombre': 'Otro kiosco',
+            'distribuidora': '61 - Recova', 'tipo': 'vendedor', 'distribuidora_id': 61,
+            'vendedor_id': 8})
+        row = SesionVendedorPortal.objects.get()
+        row.datos = {'midistri_cart': {'1': 3}}
+        row.save(update_fields=['datos'])
+        old_token = row.token_urban
+        self.assertEqual(self.resume(elegir='1').json()['fase'], 'elegir')
+        def cambiar(action, **kwargs):
+            result = self.device_response(action, **kwargs)
+            if action == 'seller-device-resume':
+                result['session_token'] = 'bearer-del-otro-kiosco'
+            return result
+        with patch('midistri_portal.dispositivos.api', side_effect=cambiar):
+            self.assertEqual(self.resume(elegir='1', seleccion='q'*32).json()['fase'], 'dentro')
+        row.refresh_from_db()
+        self.assertEqual((row.vendedor_id, row.distribuidora_id), (8, 61))
+        self.assertNotEqual(row.token_urban, old_token)
+        self.assertEqual(row.datos, {})
+
+    def test_cambiar_perfil_sin_dispositivo_ofrece_volver_a_verificar(self):
+        with override_settings(MIDISTRI_ACCESO_RECORDADO_ENABLED=False):
+            self.login()
+            with patch('midistri_portal.views.api', return_value=self.profile):
+                page = self.client.get('/portal/', **self.headers)
+        self.assertContains(page, '/portal/acceso/?perfiles=1')
+        self.assertContains(page, 'Cambiar perfil')
+
+    def test_cambio_explicito_sin_cookie_no_interrumpe_el_formulario_de_email(self):
+        with override_settings(MIDISTRI_ACCESO_RECORDADO_ENABLED=False):
+            self.login()
+        respuesta = self.resume(elegir='1')
+        self.assertEqual(respuesta.json()['fase'], 'sin_recuerdo')
+        self.assertNotIn(self.devices.COOKIE, respuesta.cookies)
+        self.assertEqual(SesionVendedorPortal.objects.get().vendedor_id, 7)
+        self.assertContains(self.client.get('/portal/acceso/?perfiles=1'), 'name="email"')
+
     def test_nueva_pestana_no_copia_carrito(self):
         self.login();row=SesionVendedorPortal.objects.get();row.datos={'midistri_cart':{'1':3}};row.save()
         self.headers['HTTP_X_MIDISTRI_TAB']=str(uuid4());self.headers['HTTP_X_MIDISTRI_TAB_PROOF']='b'*64

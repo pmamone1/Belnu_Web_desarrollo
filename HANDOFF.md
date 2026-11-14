@@ -295,3 +295,7 @@ Datos/base/store anteriores intactos; migra sólo midistri_portal0001–0002. No
 ## Mis remitos · v51
 
 MiDistri v51 requiere Urban Soft v679. [Operación y rollback](docs/REMITOS_DEVOLUCION_v51.md).
+
+## Cambiar de kiosco · v52
+
+MiDistri v52 corrige el cambio explícito de kiosco y admite las bases v50 y v51. [Operación y rollback](docs/CAMBIAR_PERFIL_v52.md).

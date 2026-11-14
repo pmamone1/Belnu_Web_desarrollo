@@ -1,3 +1,6 @@
+MiDistri-Pedidos v52
+Bases v50 y v51. Cambio explícito de kiosco y alternativa con Email. Incluye el filtro de devolución de v51. Sin migraciones. Instalación productiva pendiente.
+
 MiDistri-Pedidos v51
 Base v50. Filtro de devolución unificado. Requiere Urban Soft v679. Sin migraciones. Instalación productiva pendiente.
 

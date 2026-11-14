@@ -33,7 +33,8 @@ def pantalla(request):
     ds=Distribuidora.objects.filter(activa=True).order_by('nombre')
     selected=request.GET.get('distribuidora','')
     return render(request,'midistri_portal/acceso_codigo.html',{'titulo':'Entrar a MiDistri-Pedidos',
-        'distribuidoras':ds,'seleccionada':int(selected) if selected.isdecimal() else None})
+        'distribuidoras':ds,'seleccionada':int(selected) if selected.isdecimal() else None,
+        'cambiar_perfil': request.GET.get('perfiles') == '1'})
 
 
 def _pendientes(request):

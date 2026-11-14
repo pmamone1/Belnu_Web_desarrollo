@@ -476,3 +476,7 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 
 - [ ] Verificar el único filtro Devolución, el enlace anterior al filtro y la descarga sin caché pública.
 - [ ] Validar la carga de Cerrutti con Urban Soft v679 instalado.
+
+## Cambiar de kiosco · v52
+
+- [ ] Verificar el selector con dos kioscos, el ingreso con un solo perfil, la alternativa por Email y el archivo recordado.js publicado.

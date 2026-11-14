@@ -299,3 +299,7 @@ Matrícula fuera de interfaz; LIN/VV identifica al vendedor. No mezclar bases, p
 ## Mis remitos · v51
 
 La opción Devolución agrupa los comprobantes de devolución y preparación del kiosco activo.
+
+## Cambiar de kiosco · v52
+
+El cambio explícito comprueba la selección antes de sustituir el perfil de la pestaña. Si falta un kiosco, el Email se vuelve a verificar por el flujo habitual.

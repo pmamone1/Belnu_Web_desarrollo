@@ -380,3 +380,7 @@ No se necesita cuenta administrativa ni registro público. El acceso puede revoc
 ## Mis remitos · v51
 
 En **Mis remitos**, elegí **Devolución** para buscar guías y comprobantes. Elegí **Carga de consignaciones** para consultar las cargas emitidas y guardadas de tu kiosco.
+
+## Cambiar de kiosco · v52
+
+Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi Email** y usá el Email asociado a tus kioscos.

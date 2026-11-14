@@ -1,0 +1,6 @@
+MiDistri-Pedidos v52 · Cambiar perfil
+Bases v50 y v51. Instalación productiva pendiente.
+Cambiar perfil abre el selector aunque el dispositivo sólo recuerde un kiosco.
+El menú permite volver a verificar el Email si falta un kiosco o si el dispositivo no está reconocido.
+El acceso y los carritos siguen aislados por sesión. Incluye el filtro unificado Devolución.
+Sin migraciones.

@@ -1,6 +1,6 @@
 {% extends 'midistri_portal/base.html' %}{% block content %}
-<section><h2>Entrar con mi Email</h2><p>Usá el Email asociado a tu perfil. No necesitás registrarte ni crear contraseña.</p>
-<p>{% if request.midistri_recordar_enabled %}Si este dispositivo ya está reconocido, entrás directamente. Si necesitás verificar el acceso, te pediremos un código.{% else %}Continuá con tu Email para verificar el acceso.{% endif %}</p>
+<section><h2>{% if cambiar_perfil %}Cambiar perfil{% else %}Entrar con mi Email{% endif %}</h2><p>Usá el Email asociado a tu perfil. No necesitás registrarte ni crear contraseña.</p>
+<p>{% if cambiar_perfil %}Continuá con el Email asociado a tus kioscos para volver a verificar tus perfiles.{% elif request.midistri_recordar_enabled %}Si este dispositivo ya está reconocido, entrás directamente. Si necesitás verificar el acceso, te pediremos un código.{% else %}Continuá con tu Email para verificar el acceso.{% endif %}</p>
 <p id="acceso-mensaje" role="status" aria-live="polite"></p>
 <form data-codigo="iniciar" method="post" action="{% url 'midistri_codigo_iniciar' %}">{% csrf_token %}
 <label>Email <input type="email" name="email" autocomplete="email" required maxlength="254"></label><button>Continuar</button></form>
@@ -11,5 +11,6 @@
 <form data-codigo="seleccionar" method="post" action="{% url 'midistri_codigo_seleccionar' %}" hidden>{% csrf_token %}
 <label>Elegí con qué perfil entrar <select name="seleccion" required></select></label><button>Continuar</button></form>
 <p id="acceso-opciones" hidden><button type="button" data-acceso-reenviar>Reenviar código</button> <button type="button" data-acceso-cambiar>Cambiar Email</button></p>
+{% if cambiar_perfil %}<p><a href="{% url 'midistri_catalogo' %}">Volver al catálogo</a></p>{% endif %}
 <noscript><p>Para ingresar con código necesitás habilitar JavaScript. Podés seguir consultando el catálogo público.</p></noscript></section>
 {% endblock %}

@@ -292,3 +292,7 @@ Ante fallo se conserva el intento para reintentar. Un cambio de precio requiere 
 ## Mis remitos · v51
 
 MiDistri → Mis remitos → Devolución. Buscar por fecha y descargar o abrir para imprimir.
+
+## Cambiar de kiosco · v52
+
+MiDistri → Cambiar perfil → Elegir kiosco → Continuar. Sin dispositivo reconocido o si falta un kiosco, verificar el Email desde la misma pantalla.

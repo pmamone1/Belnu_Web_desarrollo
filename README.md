@@ -292,3 +292,7 @@ No copiar paquetes, settings ni credenciales Urban a este repositorio.
 ## Mis remitos · v51
 
 Mis remitos agrupa las guías y comprobantes de devolución. [Guía v51](docs/REMITOS_DEVOLUCION_v51.md).
+
+## Cambiar de kiosco · v52
+
+Usá Cambiar perfil para elegir entre los kioscos acreditados. [Guía v52](docs/CAMBIAR_PERFIL_v52.md).

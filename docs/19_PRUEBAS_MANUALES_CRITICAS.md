@@ -417,3 +417,7 @@ Ver SKU junto al nombre y en destacados, vacío sin etiqueta y símbolo HTML esc
 ## Mis remitos · v51
 
 Comprobar el filtro Devolución con ambos tipos de documentos y abrir una carga de Cerrutti. Cambiar de kiosco y comprobar que la referencia anterior no abre.
+
+## Cambiar de kiosco · v52
+
+Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar el nombre, los pedidos y los remitos. Probar con otro dispositivo o con un solo perfil acreditado y verificar que se pueda volver a ingresar por Email.

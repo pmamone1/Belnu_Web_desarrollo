@@ -294,3 +294,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## Mis remitos · v51
 
 [Mis remitos y filtro Devolución v51](REMITOS_DEVOLUCION_v51.md).
+
+## Cambiar de kiosco · v52
+
+[Cambiar de kiosco v52](CAMBIAR_PERFIL_v52.md).

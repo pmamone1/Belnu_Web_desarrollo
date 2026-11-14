@@ -21,10 +21,13 @@ def recordado(request):
     d.conciliar()
     if request.COOKIES.get(d.OLVIDO)=='1':
         return JsonResponse({'error':'El cierre esta pendiente. Confirma el olvido antes de ingresar.'},status=403)
+    elegir = request.POST.get('elegir') == '1'
     device_valid=False;authenticated=False
     try:
         row=d.local(request)
         if row is None:
+            if elegir:
+                return JsonResponse({'fase':'sin_recuerdo'})
             try:tab=resolver_sesion_pestana(request)
             except PermissionDenied:return JsonResponse({'fase':'sin_recuerdo'})
             if tab.dispositivo_id:
@@ -41,9 +44,9 @@ def recordado(request):
         if old and (old.dispositivo_id!=row.pk or old.prueba_hash!=__import__('hashlib').sha256(proof.encode()).hexdigest() or old.revocado):
             return JsonResponse({'fase':'pestana_obsoleta','error':'Esta pestaña quedó desactualizada. Podés recuperar el acceso sin otro código.'},status=409)
         selected=request.POST.get('seleccion','')
-        if not selected and old and request.POST.get('elegir')!='1':
+        if not selected and old and not elegir:
             selected=next((i['seleccion'] for i in choices if i['vendedor_id']==old.vendedor_id and i['distribuidora_id']==old.distribuidora_id),'')
-        if not selected and len(choices)==1:selected=choices[0]['seleccion']
+        if not selected and not elegir and len(choices)==1:selected=choices[0]['seleccion']
         if not selected:return JsonResponse({'fase':'elegir','identidades':choices})
         expected=next((i for i in choices if i['seleccion']==selected),None)
         if expected is None:return JsonResponse({'fase':'elegir','identidades':choices})
