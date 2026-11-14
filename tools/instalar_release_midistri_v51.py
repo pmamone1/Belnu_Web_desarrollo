@@ -210,8 +210,8 @@ def main():
             or manifest.get('required_migration') != MIGRACION_BASE):
         raise ValueError('Manifiesto incompatible con este instalador.')
     marker = (root/'VERSION_DOCUMENTADA.txt').read_text(encoding='utf-8').splitlines()[0]
-    if marker not in ('MiDistri-Pedidos v47', 'MiDistri-Pedidos v48', 'MiDistri-Pedidos v49'):
-        raise ValueError('Este paquete requiere MiDistri-Pedidos v47, v48 o v49.')
+    if marker != 'MiDistri-Pedidos v50':
+        raise ValueError('Este paquete requiere MiDistri-Pedidos v50.')
     aplicadas = estado_publicacion(root)
     rutas_aplicadas = {ruta_migracion(app, name) for app, name in aplicadas}
     entries=manifest.get('files')
