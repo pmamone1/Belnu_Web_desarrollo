@@ -1,0 +1,5 @@
+MiDistri-Pedidos v51 · Filtro de devolución
+Base v50. Requiere Urban Soft v679. Instalación productiva pendiente.
+Mis remitos reúne la preparación y los comprobantes de devolución bajo una sola opción.
+Las cargas históricas recuperables se consultan como PDF desde el kiosco activo.
+Sin migraciones.

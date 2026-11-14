@@ -471,3 +471,8 @@ Corrección de referencia: RED reproducido, GREEN focalizado e instalador9/9. Ma
   migrar debe detenerse antes de modificar código; usar corrección hacia adelante.
 
 Validación v5: sincronizar un catálogo sintético con Display0, comprobar fotos y ambos precios, ausencia de presentación0, separación20/65 y conservación de copia previa ante texto/booleano/negativo. En cPanel revisar sincronización real después de instalar; no generar pedidos de prueba en producción.
+
+## Mis remitos · v51
+
+- [ ] Verificar el único filtro Devolución, el enlace anterior al filtro y la descarga sin caché pública.
+- [ ] Validar la carga de Cerrutti con Urban Soft v679 instalado.

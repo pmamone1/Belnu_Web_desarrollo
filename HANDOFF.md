@@ -291,3 +291,7 @@ Ver [detalle](docs/CSRF_PORTAL_v3.md) y [validación](docs/VALIDACION_v3.md).
 # Handoff MiDistri v2
 Destino exclusivo belnuweb/Python3.7. Base confirmada10b49c4. Propuesta previaPR2 conservada y endurecida con validación de respuesta/propietario/PDF y LIN/VV.
 Datos/base/store anteriores intactos; migra sólo midistri_portal0001–0002. No hay instalación ni envíos productivos.
+
+## Mis remitos · v51
+
+MiDistri v51 requiere Urban Soft v679. [Operación y rollback](docs/REMITOS_DEVOLUCION_v51.md).

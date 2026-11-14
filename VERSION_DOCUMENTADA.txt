@@ -1,3 +1,6 @@
+MiDistri-Pedidos v51
+Base v50. Filtro de devolución unificado. Requiere Urban Soft v679. Sin migraciones. Instalación productiva pendiente.
+
 MiDistri-Pedidos v50
 Bases v47 a v49. Mis remitos para el kiosco activo. Requiere Urban Soft v678. Sin migraciones.
 

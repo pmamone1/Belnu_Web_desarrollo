@@ -41,3 +41,15 @@ class MisRemitosTests(TestCase):
         with patch('midistri_portal.remitos_views.api') as api:
             self.assertEqual(self.client.get('/portal/remitos/pedido-23/').status_code,403)
             api.assert_not_called()
+
+    def test_muestra_un_solo_filtro_de_devolucion_con_respuesta_anterior(self):
+        with patch('midistri_portal.remitos_views.identificar', return_value=self.perfil), \
+             patch('midistri_portal.remitos_views.api') as api:
+            api.return_value = {'remitos': [{'id': 'salida-23', 'nombre': 'Mercadería',
+                'tipo': 'preparar_devolucion', 'fecha': '2026-11-13', 'referencia': '#19',
+                'origen_pedido': ''}], 'pagina': 1, 'anterior': None, 'siguiente': None}
+            r = self.client.get('/portal/remitos/', {'tipo': 'preparar_devolucion'})
+            self.assertNotContains(r, 'Preparación de devolución')
+            self.assertContains(r, 'value="devolucion" selected')
+            self.assertContains(r, 'Mercadería')
+            self.assertEqual(api.call_args[1]['params']['tipo'], 'devolucion')

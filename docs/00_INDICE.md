@@ -290,3 +290,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 - [Validación](VALIDACION_INTEGRACION.md)
 - [Checklist](17_CHECKLIST_ENTREGA.md)
 - [Pruebas manuales](19_PRUEBAS_MANUALES_CRITICAS.md)
+
+## Mis remitos · v51
+
+[Mis remitos y filtro Devolución v51](REMITOS_DEVOLUCION_v51.md).

@@ -376,3 +376,7 @@ Consultar Mis pedidos, estados y remito al estar preparado. Ante fallo de conexi
 el pedido guardado; no volver a armarlo para evitar solicitudes distintas.
 Si cambió precio o se retiró un producto, revisar nuevamente antes de confirmar.
 No se necesita cuenta administrativa ni registro público. El acceso puede revocarlo su distribuidora.
+
+## Mis remitos · v51
+
+En **Mis remitos**, elegí **Devolución** para buscar guías y comprobantes. Elegí **Carga de consignaciones** para consultar las cargas emitidas y guardadas de tu kiosco.

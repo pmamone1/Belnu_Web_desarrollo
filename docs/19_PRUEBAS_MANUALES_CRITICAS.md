@@ -413,3 +413,7 @@ Regresión r2: importar belnuweb/settings.py con valores ficticios; reconocer s�
 
 ## Comprobación27
 Ver SKU junto al nombre y en destacados, vacío sin etiqueta y símbolo HTML escapado. Revisar código80caracteres en celular, sin tapar cantidades/precios y con alineación porfila. Ingreso de vendedor nuevoactivo conEmail en tienda conectada, mismoEmail en dosperfiles y vendedor deotra tiendaaislado. Tienda sinremitente no debe usarotro remitente. No enviar pruebasavendedores sin instrucción.
+
+## Mis remitos · v51
+
+Comprobar el filtro Devolución con ambos tipos de documentos y abrir una carga de Cerrutti. Cambiar de kiosco y comprobar que la referencia anterior no abre.

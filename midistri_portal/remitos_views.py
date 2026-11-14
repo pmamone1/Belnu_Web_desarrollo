@@ -11,7 +11,6 @@ from .views import base, identificar
 
 TIPOS = {
     'carga': 'Carga de consignaciones',
-    'preparar_devolucion': 'Preparación de devolución',
     'devolucion': 'Devolución',
     'venta': 'Venta',
     'pedido': 'Pedido',
@@ -37,6 +36,8 @@ def lista(request):
         return redirect('midistri_catalogo')
 
     filtros = {k: request.GET.get(k, '')[:32] for k in ('tipo', 'desde', 'hasta')}
+    if filtros['tipo'] == 'preparar_devolucion':
+        filtros['tipo'] = 'devolucion'
     contexto = dict(base(request, perfil), filtros=filtros, tipos=TIPOS.items(), en_remitos=True)
     try:
         desde, hasta = validar_fecha(filtros['desde']), validar_fecha(filtros['hasta'])
@@ -51,9 +52,10 @@ def lista(request):
                         token=request.session['midistri_token'])
         filas = []
         for fila in respuesta['remitos']:
-            if fila['tipo'] not in TIPOS or not REFERENCIA.fullmatch(fila['id']):
+            tipo = 'devolucion' if fila['tipo'] == 'preparar_devolucion' else fila['tipo']
+            if tipo not in TIPOS or not REFERENCIA.fullmatch(fila['id']):
                 raise ValueError
-            filas.append(dict(fila, fecha=date.fromisoformat(fila['fecha']), tipo_label=TIPOS[fila['tipo']]))
+            filas.append(dict(fila, fecha=date.fromisoformat(fila['fecha']), tipo=tipo, tipo_label=TIPOS[tipo]))
         contexto.update(remitos=filas, pagina=respuesta['pagina'],
                         anterior=respuesta['anterior'], siguiente=respuesta['siguiente'])
     except ApiError as exc:
