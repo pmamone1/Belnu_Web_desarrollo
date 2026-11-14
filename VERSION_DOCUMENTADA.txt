@@ -1,3 +1,6 @@
+MiDistri-Pedidos v50
+Bases v47 a v49. Mis remitos para el kiosco activo. Requiere Urban Soft v678. Sin migraciones.
+
 MiDistri-Pedidos v49
 Bases v47 y v48. Carrito en el menú superior con actualizaciones sin recarga. Las vistas de vendedor no agregan el nombre de la distribuidora. Sin migraciones. Instalación productiva pendiente.
 

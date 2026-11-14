@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+Elegí Mis remitos desde el menú de MiDistri. Podés filtrar por tipo y fecha, ver e imprimir el PDF o descargarlo. [Guía](MIS_REMITOS_v50.md).
+
 ## Carrito en el menú · v49
 
 El carrito está arriba a la derecha. El número indica unidades. Tocá Agregar / actualizar desde el catálogo o Actualizar y Quitar desde el carrito. [Guía v49](CARRITO_NAVBAR_v49.md).

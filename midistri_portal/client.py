@@ -33,7 +33,7 @@ class ApiError(Exception):
         super().__init__(MENSAJES_SERVICIO.get(message,message))
 
 
-def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None,binary_media=False):
+def api(action,method='GET',data=None,token=None,binary=False,operator_token=None,binary_mime=None,binary_media=False,params=None):
     base=settings.URBAN_API_BASE.rstrip('/')+'/'
     parsed=urlsplit(base)
     if parsed.scheme!='https' or not parsed.hostname or parsed.username or parsed.password or parsed.query or parsed.fragment:
@@ -46,7 +46,7 @@ def api(action,method='GET',data=None,token=None,binary=False,operator_token=Non
     if operator_token:headers['X-Midistri-Operator']=operator_token
     try:
         with requests.request(method,base+action+'/',json=data if method=='POST' else None,
-                headers=headers,timeout=(5,30),allow_redirects=False,stream=True) as r:
+                headers=headers,timeout=(5,30),allow_redirects=False,stream=True,**({'params': params} if params else {})) as r:
             limit=MAX_SNAPSHOT_BYTES if action=='snapshot' and method=='GET' and not (binary or binary_mime or binary_media) else MAX_RESPONSE_BYTES
             content=bytearray()
             for chunk in r.iter_content(65536):

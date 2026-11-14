@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+El vendedor consulta sus remitos en MiDistri. [Guía](docs/MIS_REMITOS_v50.md).
+
 ## Carrito en el menú · v49
 
 El carrito aparece en el menú superior y se actualiza sin recargar. [Guía v49](docs/CARRITO_NAVBAR_v49.md).

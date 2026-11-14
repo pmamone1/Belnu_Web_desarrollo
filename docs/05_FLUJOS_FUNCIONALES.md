@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+En MiDistri entrá a Mis remitos, aplicá filtros y elegí Ver / imprimir PDF o Descargar PDF.
+
 ## Carrito en el menú · v49
 
 Agregar / actualizar en el catálogo y Actualizar / Quitar en el carrito cambian la cifra del menú sin recargar. El total y la revisión se actualizan con el carrito. Revisá tu pedido muestra vendedor y línea.

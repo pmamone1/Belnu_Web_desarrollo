@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+[Mis remitos en MiDistri](MIS_REMITOS_v50.md).
+
 ## Carrito en el menú · v49
 
 [Carrito en el menú y ajustes de cantidad](CARRITO_NAVBAR_v49.md).

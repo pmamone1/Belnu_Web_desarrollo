@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+Ingresar como vendedor, filtrar por tipo y fecha, abrir y descargar una copia. Cambiar de perfil y comprobar que un enlace del kiosco anterior no abra el PDF.
+
 ## Carrito en el menú · v49
 
 En dos pestañas con acceso vendedor, agregá en una y comprobá que la otra conserve su carrito. En el carrito cambiá la cantidad, confirmá que se conserva la observación y quitá el último producto. Verificá el contador en cero, el total y que no aparezca Enviar pedido con el carrito vacío. En un encabezado guardado con «20 - Belgrano» o «Dist. 20», verificá que el sitio público lo oculte. Repetí en celular.

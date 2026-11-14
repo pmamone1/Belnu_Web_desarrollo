@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+Verificar el orden de instalación, los filtros, el PDF y el rechazo de documentos de otro kiosco.
+
 ## Carrito en el menú · v49
 
 Verificar las bases v47 y v48 en el inventario, la portada del manual, el aislamiento entre pestañas y los controles del carrito en PC y celular.

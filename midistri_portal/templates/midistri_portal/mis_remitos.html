@@ -1,0 +1,53 @@
+{% extends 'midistri_portal/base.html' %}
+{% block content %}
+<style>
+.remitos-filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));align-items:end;gap:12px}
+.remitos-filtros label{display:grid;gap:4px;margin:0}
+.remitos-filtros select,.remitos-filtros input{width:100%;min-height:44px}
+.remitos-resultados{list-style:none;padding:0}
+.remitos-resultados li{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.remitos-resultados h3,.remitos-resultados p{margin:0}
+.remitos-acciones{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.remitos-acciones .button{padding:9px 13px;min-height:44px;font-size:.9rem}
+.remitos-visor{width:min(94vw,950px);max-height:90vh;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:14px}
+.remitos-visor iframe{width:100%;height:65vh;border:1px solid var(--border);margin-top:10px}
+.remitos-visor-menu{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+</style>
+<h2>Mis remitos</h2>
+<section>
+  <form class="remitos-filtros" method="get" action="{% url 'midistri_mis_remitos' %}">
+    <label>Tipo <select name="tipo"><option value="">Todos los tipos</option>
+      {% for valor, etiqueta in tipos %}<option value="{{ valor }}"{% if filtros.tipo == valor %} selected{% endif %}>{{ etiqueta }}</option>{% endfor %}
+    </select></label>
+    <label>Desde <input type="date" name="desde" value="{{ filtros.desde }}"></label>
+    <label>Hasta <input type="date" name="hasta" value="{{ filtros.hasta }}"></label>
+    <button type="submit">Filtrar</button>
+    {% if filtros.tipo or filtros.desde or filtros.hasta %}<a href="{% url 'midistri_mis_remitos' %}">Limpiar</a>{% endif %}
+  </form>
+</section>
+{% if error %}<p class="notice" role="alert">{{ error }}</p>
+{% else %}
+<ul class="remitos-resultados">
+  {% for remito in remitos %}<li class="card">
+    <div><small>{{ remito.tipo_label }}{% if remito.origen_pedido %} · {{ remito.origen_pedido }}{% endif %} · {{ remito.fecha|date:"d/m/Y" }}</small>
+    <h3>{{ remito.nombre }}</h3><p>{{ remito.referencia }}</p></div>
+    <div class="remitos-acciones">
+      <a class="button" data-remito-pdf="ver" href="{% url 'midistri_mis_remitos_archivo' remito.id %}">Ver / imprimir PDF</a>
+      <a class="button secondary" data-remito-pdf="descargar" href="{% url 'midistri_mis_remitos_archivo' remito.id %}?descargar=1">Descargar PDF</a>
+    </div>
+  </li>{% empty %}<li>No hay remitos disponibles para estos filtros.</li>{% endfor %}
+</ul>
+{% if anterior or siguiente %}<nav aria-label="Páginas de remitos">
+  {% if anterior %}<a href="?tipo={{ filtros.tipo|urlencode }}&amp;desde={{ filtros.desde|urlencode }}&amp;hasta={{ filtros.hasta|urlencode }}&amp;pagina={{ anterior }}">Anterior</a>{% endif %}
+  <span>Página {{ pagina }}</span>
+  {% if siguiente %}<a href="?tipo={{ filtros.tipo|urlencode }}&amp;desde={{ filtros.desde|urlencode }}&amp;hasta={{ filtros.hasta|urlencode }}&amp;pagina={{ siguiente }}">Siguiente</a>{% endif %}
+</nav>{% endif %}
+{% endif %}
+<dialog class="remitos-visor" data-remito-visor aria-label="Vista del remito">
+  <div class="remitos-visor-menu">
+    <a class="button" target="_blank" rel="noopener">Abrir para imprimir</a>
+    <form method="dialog"><button type="submit" class="secondary">Cerrar</button></form>
+  </div>
+  <iframe title="Remito en PDF"></iframe>
+</dialog>
+{% endblock %}

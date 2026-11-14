@@ -6,7 +6,7 @@ if(!create)return null;const a=new Uint8Array(32);crypto.getRandomValues(a);p={i
 function headers(p){return p?{'X-Midistri-Tab':p.id,'X-Midistri-Tab-Proof':p.proof}:{};}
 function notice(text){let n=document.getElementById('midistri-session-status');if(!n){n=document.createElement('p');n.id='midistri-session-status';n.className='notice';n.role='status';document.querySelector('main').prepend(n);}n.textContent=text;}
 async function raw(url,options,p){return fetch(url,Object.assign({credentials:'same-origin',redirect:'follow'},options,{headers:Object.assign({},options&&options.headers,headers(p))}));}
-function cleared(){const main=document.createElement('main');const p=document.createElement('p');p.textContent='Cerraste el acceso en esta pestaña.';main.append(p);const a=document.createElement('a');a.href='/portal/';a.textContent='Volver al portal';main.append(a);document.body.replaceChildren(main);}
+function cleared(){const visor=document.querySelector('[data-remito-visor][open]');if(visor)visor.close();const main=document.createElement('main');const p=document.createElement('p');p.textContent='Cerraste el acceso en esta pestaña.';main.append(p);const a=document.createElement('a');a.href='/portal/';a.textContent='Volver al portal';main.append(a);document.body.replaceChildren(main);}
 function pending(){try{return JSON.parse(sessionStorage.getItem(PENDING)||'null');}catch(e){return null;}}
 function retryNotice(){notice('Cerraste el acceso en esta pestaña. Falta confirmar el cierre remoto. Se reintentará al volver la conexión.');const b=document.createElement('button');b.type='button';b.textContent='Reintentar cierre remoto';b.onclick=retryLogout;document.querySelector('main').append(b);}
 async function retryLogout(){const item=pending();if(!item||closing)return;closing=true;try{
@@ -21,13 +21,65 @@ sessionStorage.removeItem(KEY);cleared();options=Object.assign({},options,{heade
 try{const r=await raw(url,options,p);if(version!==generation)return;const type=r.headers.get('Content-Type')||'';
 if(type.includes('application/json')){const data=await r.json();if(version!==generation)return;if(logout&&r.ok){sessionStorage.removeItem(PENDING);if(window.MidistriRecordado)MidistriRecordado.completeLogout();location.replace('/portal/');return;}if(logout&&!r.ok){retryNotice();return;}if(!r.ok){if(r.status===403)sessionStorage.removeItem(KEY);notice(data.error||'No pudimos completar la operación.');return;}return;}
 if(type.includes('application/pdf')){if(!r.ok){notice('No pudimos abrir el remito.');return;}const bytes=await r.blob();if(version!==generation)return;const blob=URL.createObjectURL(bytes);const a=document.createElement('a');a.href=blob;a.download='remitos_pedido.pdf';a.click();setTimeout(()=>URL.revokeObjectURL(blob),60000);return;}
-const html=await r.text();if(version!==generation)return;const page=new DOMParser().parseFromString(html,'text/html');page.querySelectorAll('script:not([type="application/json"])').forEach(x=>x.remove());document.title=page.title;document.body.replaceChildren(...page.body.childNodes);history[replace?'replaceState':'pushState']({},'',r.url);document.dispatchEvent(new CustomEvent('midistri:render'));if(r.status>=500)notice('No pudimos conectar. Tu pedido se conserva para reintentar.');
+const html=await r.text();if(version!==generation)return;const page=new DOMParser().parseFromString(html,'text/html');page.querySelectorAll('script:not([type="application/json"])').forEach(x=>x.remove());document.title=page.title;const visor=document.querySelector('[data-remito-visor][open]');if(visor)visor.close();document.body.replaceChildren(...page.body.childNodes);history[replace?'replaceState':'pushState']({},'',r.url);document.dispatchEvent(new CustomEvent('midistri:render'));if(r.status>=500)notice('No pudimos conectar. Tu pedido se conserva para reintentar.');
 }catch(e){if(version!==generation)return;if(logout){retryNotice();return;}notice(logout?'Cerramos el acceso en esta pestaña. No pudimos confirmar el cierre remoto por falta de conexión.':'No pudimos conectar. Conservamos tu pedido; podés reintentar.');}
 finally{if(version===generation)busy=false;}}
 addEventListener('online',retryLogout);if(pending())retryLogout();
 window.MidistriTab={proof:proof,request:(url,options)=>raw(url,options,proof(true)),load:url=>navigate(url,undefined,false,true),clear:()=>{generation++;busy=false;sessionStorage.removeItem(KEY);sessionStorage.removeItem(PENDING);cleared();}};
+let remitoEnCurso = false;
+document.addEventListener('click', async event => {
+    const enlace = event.target.closest('a[data-remito-pdf]');
+    const acceso = proof(false);
+    if (!enlace || !acceso || event.defaultPrevented) return;
+    event.preventDefault();
+    if (remitoEnCurso) return;
+    remitoEnCurso = true;
+    enlace.setAttribute('aria-busy', 'true');
+    const version = generation;
+    try {
+        const respuesta = await raw(enlace.href, {}, acceso);
+        if (respuesta.redirected || !respuesta.ok ||
+                !(respuesta.headers.get('Content-Type') || '').includes('application/pdf')) {
+            throw Error('Este remito no está disponible.');
+        }
+        const contenido = await respuesta.blob();
+        if (version !== generation || !enlace.isConnected) return;
+        const url = URL.createObjectURL(contenido);
+        if (enlace.dataset.remitoPdf === 'descargar') {
+            const descarga = document.createElement('a');
+            descarga.href = url;
+            const nombre = (respuesta.headers.get('Content-Disposition') || '').match(/filename="(remito-[a-z0-9-]+[.]pdf)"/);
+            descarga.download = nombre ? nombre[1] : 'remito.pdf';
+            descarga.click();
+            setTimeout(() => URL.revokeObjectURL(url), 60000);
+            return;
+        }
+        const dialogo = document.querySelector('[data-remito-visor]');
+        if (!dialogo || typeof dialogo.showModal !== 'function') {
+            URL.revokeObjectURL(url);
+            notice('Usá Descargar PDF para abrirlo e imprimirlo en tu dispositivo.');
+            return;
+        }
+        const marco = dialogo.querySelector('iframe');
+        const abrir = dialogo.querySelector('a');
+        dialogo.addEventListener('close', () => {
+            marco.removeAttribute('src');
+            abrir.removeAttribute('href');
+            URL.revokeObjectURL(url);
+            enlace.focus();
+        }, {once: true});
+        abrir.href = url;
+        marco.src = url;
+        dialogo.showModal();
+    } catch (_) {
+        if (version === generation && enlace.isConnected) notice('No pudimos abrir este remito. Volvé a intentarlo.');
+    } finally {
+        enlace.removeAttribute('aria-busy');
+        remitoEnCurso = false;
+    }
+});
 document.addEventListener('click',e=>{const a=e.target.closest('a');if(e.defaultPrevented||!a||a.target==='_blank'||a.download||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;const url=new URL(a.href,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/portal/')||url.pathname.startsWith('/portal/administrar/')||url.pathname.startsWith('/portal/acceso/')||url.hash)return;if(!proof(false))return;e.preventDefault();navigate(url.href);});
-document.addEventListener('submit',e=>{const f=e.target;if(e.defaultPrevented||f.dataset.codigo||!f.action)return;const url=new URL(f.action,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/portal/')||url.pathname.startsWith('/portal/administrar/')||url.pathname.startsWith('/portal/acceso/')||!proof(false))return;e.preventDefault();if(f.method.toLowerCase()==='get'){const u=new URL(f.action);u.search=new URLSearchParams(new FormData(f));navigate(u.href);}else navigate(f.action,{method:'POST',body:new FormData(f)},url.pathname==='/portal/salir/');});
+document.addEventListener('submit',e=>{const f=e.target;if(e.defaultPrevented||f.dataset.codigo||f.closest('[data-remito-visor]')||!f.action)return;const url=new URL(f.action,location.href);if(url.origin!==location.origin||!url.pathname.startsWith('/portal/')||url.pathname.startsWith('/portal/administrar/')||url.pathname.startsWith('/portal/acceso/')||!proof(false))return;e.preventDefault();if(f.method.toLowerCase()==='get'){const u=new URL(f.action);u.search=new URLSearchParams(new FormData(f));navigate(u.href);}else navigate(f.action,{method:'POST',body:new FormData(f)},url.pathname==='/portal/salir/');});
 addEventListener('popstate',()=>{if(proof(false))navigate(location.href,undefined,false,true);});
 if(!(document.body.dataset&&document.body.dataset.recordar==='1')&&!location.pathname.startsWith('/portal/acceso/')&&!location.pathname.startsWith('/portal/activar/')&&proof(false))navigate(location.href,undefined,false,true);
 })();

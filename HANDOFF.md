@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+Instalar Urban Soft v678 antes de MiDistri v50 para habilitar la consulta. La lista y el PDF se autorizan con el perfil activo del vendedor. [Guía](docs/MIS_REMITOS_v50.md).
+
 ## Carrito en el menú · v49
 
 Instalador compatible con v47 y v48. No modifica modelos, permisos ni rutas. [Compatibilidad y reversión](docs/CARRITO_NAVBAR_v49.md).

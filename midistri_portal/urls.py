@@ -1,4 +1,5 @@
 from django.urls import path
+from . import remitos_views
 from . import views, operadores_views, acceso_views, comercial_views, promociones_views, materiales_views, pagina_views, editor_views, analitica_views, dispositivos_views
 urlpatterns=[
 path('acceso/recordado/',dispositivos_views.recordado,name='midistri_acceso_recordado'),
@@ -41,6 +42,8 @@ path('cantidad/',views.cantidad,name='midistri_cantidad'),
 path('carrito/',views.carrito,name='midistri_carrito'),
 path('enviar/',views.enviar,name='midistri_enviar'),
 path('pedidos/',views.pedidos,name='midistri_pedidos'),
+path('remitos/',remitos_views.lista,name='midistri_mis_remitos'),
+path('remitos/<slug:referencia>/',remitos_views.archivo,name='midistri_mis_remitos_archivo'),
 path('pedido/<uuid:ident>/',views.detalle,name='midistri_detalle'),
 path('pedido/<uuid:ident>/repetir/',views.repetir,name='midistri_repetir'),
 path('pedido/<uuid:ident>/reintentar/',views.reintentar,name='midistri_reintentar'),

@@ -1,3 +1,7 @@
+## Mis remitos · MiDistri v50
+
+La consulta usa el vendedor y la distribuidora de la sesión activa. Cada PDF se vuelve a autorizar al abrirlo.
+
 ## Carrito en el menú · v49
 
 Una actualización de cantidad sólo aplica al carrito del perfil activo y mantiene las validaciones anteriores. La acción Quitar elimina la línea; el envío del pedido sigue siendo una acción separada.
