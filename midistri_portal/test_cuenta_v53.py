@@ -13,7 +13,7 @@ class CuentaTests(TestCase):
         sesion['midistri_token'] = 'a' * 43
         sesion.save()
         self.perfil = dict(id=169, nombre='98', linea='1981', distribuidora_id=1,
-                           distribuidora='20 - Belgrano', cuenta_disponible=True)
+                           distribuidora='20 - Belgrano', cuenta_disponible=True, nombre_persona='Julia Prueba')
 
     def test_piloto_muestra_aviso_remito_y_protege_saldo(self):
         movimiento = dict(fecha='2026-11-14', concepto='Traslado a cuenta de la distribuidora',
@@ -27,6 +27,8 @@ class CuentaTests(TestCase):
         with patch('midistri_portal.cuenta_views.identificar', return_value=self.perfil), \
              patch('midistri_portal.cuenta_views.api', return_value=datos) as api:
             r = self.client.get('/portal/estado-cuenta/', {'vendedor_id': 23})
+            self.assertContains(r, 'Hola, <strong>Julia Prueba</strong>')
+            self.assertContains(r, 'Vendedor <strong>98</strong>')
             self.assertContains(r, 'se cobra en tu cuenta con la distribuidora')
             self.assertContains(r, '$ -33.000,00')
             self.assertContains(r, '/portal/remitos/pedido-9/')
@@ -43,3 +45,11 @@ class CuentaTests(TestCase):
              patch('midistri_portal.cuenta_views.api') as api:
             self.assertEqual(self.client.get('/portal/estado-cuenta/').status_code, 404)
             api.assert_not_called()
+
+
+    @override_settings(MIDISTRI_LOGIN_CODIGO_ENABLED=True)
+    def test_inicio_de_sesion_desde_enlaces_directos(self):
+        for url in ('/portal/remitos/', '/portal/estado-cuenta/'):
+            r = self.client.get(url)
+            self.assertContains(r, 'Comprobando tu acceso en esta pestaña')
+            self.assertNotContains(r, 'Julia Prueba')

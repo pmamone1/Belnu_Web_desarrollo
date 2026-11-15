@@ -1,3 +1,7 @@
+## v54 · Saludo personal y estado de cuenta piloto
+
+[Guía y compatibilidad](docs/CUENTA_IDENTIDAD_v54.md). Saludo personal y estado de cuenta piloto. Bases v50 a v53. Requiere Urban Soft v690. Sin migraciones nuevas. Instalación productiva pendiente.
+
 ## v53 · Piloto de estado de cuenta
 
 [Guía y compatibilidad](docs/CUENTA_PILOTO_v53.md). Requiere Urban Soft v689. Bases MiDistri v50 a v52. Sin migraciones nuevas. Instalación productiva pendiente.

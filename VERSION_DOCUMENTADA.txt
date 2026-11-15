@@ -1,3 +1,6 @@
+MiDistri-Pedidos v54
+Saludo personal y estado de cuenta piloto. Bases v50 a v53. Requiere Urban Soft v690. Sin migraciones nuevas. Instalación productiva pendiente.
+
 MiDistri-Pedidos v53
 Bases v50 a v52. Piloto de Estado de cuenta para dos vendedores. Requiere Urban Soft v689. Sin migraciones nuevas. Instalación productiva pendiente.
 

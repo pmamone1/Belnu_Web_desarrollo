@@ -88,7 +88,7 @@ def activar(request,token):
         request.session['midistri_cart']={};request.session.pop('midistri_cart_id',None)
         request.session.set_expiry(90*24*60*60)
         registrar_ingreso(request,result['perfil'],result['session_token'])
-        messages.success(request,'Hola, '+result['perfil']['nombre']+'. Ya podés hacer tu pedido.')
+        messages.success(request, 'Ya podés hacer tu pedido.')
         return redirect('midistri_catalogo')
     return render(request,'midistri_portal/activar.html',base(request))
 

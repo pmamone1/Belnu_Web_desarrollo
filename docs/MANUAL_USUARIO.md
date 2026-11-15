@@ -388,3 +388,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## Mi estado de cuenta · v53
 
 [Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.
+
+## Saludo personal y estado de cuenta piloto · v54
+
+[Uso, compatibilidad y validación](CUENTA_IDENTIDAD_v54.md). Revisar el saldo consignado, el débito acreditado y los datos del perfil en el menú.

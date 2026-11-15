@@ -59,6 +59,7 @@ def estado_cuenta(request):
         return privada(render(request, 'midistri_portal/estado_cuenta.html', contexto,
                              status=409 if exc.status == 409 else 503))
     except (ValueError, KeyError, InvalidOperation, TypeError):
+        contexto = contexto or base(request)
         contexto['error'] = 'No pudimos consultar tu cuenta. Volvé a intentarlo.'
         return privada(render(request, 'midistri_portal/estado_cuenta.html', contexto, status=503))
     return privada(render(request, 'midistri_portal/estado_cuenta.html', contexto))

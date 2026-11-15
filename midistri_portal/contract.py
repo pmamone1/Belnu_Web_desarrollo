@@ -14,7 +14,10 @@ def perfil_valido(data):
             if data.get(key) is not None and (type(data[key]) is not int or data[key]<0):raise ValueError
     except (KeyError,ValueError,TypeError):
         raise ApiError('No se pudo validar tu acceso. Conservamos la sesión para reintentar.') from None
-    return data
+    nombre_persona = data.get('nombre_persona', '')
+    if not isinstance(nombre_persona, str) or len(nombre_persona) > 150:
+        nombre_persona = ''
+    return dict(data, nombre_persona=nombre_persona.strip())
 
 def pedido_valido(data,perfil,ident=None,anterior=None):
     try:
