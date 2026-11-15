@@ -488,3 +488,5 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 ## Saludo personal y estado de cuenta piloto · v54
 
 [Uso, compatibilidad y validación](CUENTA_IDENTIDAD_v54.md). Revisar el saldo consignado, el débito acreditado y los datos del perfil en el menú.
+
+- Corroborar que el instalador acepte todos los marcadores de las versiones base incluidas en el manifiesto.

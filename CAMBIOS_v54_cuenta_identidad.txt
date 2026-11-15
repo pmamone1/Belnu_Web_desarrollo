@@ -1,3 +1,5 @@
 MiDistri-Pedidos v54
 Saludo personal y estado de cuenta piloto.
 Bases v50 a v53. Requiere Urban Soft v690. Sin migraciones nuevas. Instalación productiva pendiente.
+
+Revisión r2 del paquete: el instalador admite todas las versiones base documentadas. Las comprobaciones de huellas y migraciones siguen vigentes.

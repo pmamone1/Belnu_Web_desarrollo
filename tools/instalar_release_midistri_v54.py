@@ -182,6 +182,8 @@ print('Plan exacto de migraciones verificado, sin modificar datos.')
 """ % (str(Path(__file__).resolve()),additions)
     run(root,'shell','-c',code)
 
+BASE_VERSIONS = tuple(f'MiDistri-Pedidos v{n}' for n in range(50, 54))
+
 def main():
     os.umask(0o077)
     parser=argparse.ArgumentParser(description=__doc__)
@@ -210,8 +212,8 @@ def main():
             or manifest.get('required_migration') != MIGRACION_BASE):
         raise ValueError('Manifiesto incompatible con este instalador.')
     marker = (root/'VERSION_DOCUMENTADA.txt').read_text(encoding='utf-8').splitlines()[0]
-    if marker not in ('MiDistri-Pedidos v50', 'MiDistri-Pedidos v51'):
-        raise ValueError('Este paquete requiere MiDistri-Pedidos v50 o v51.')
+    if marker not in BASE_VERSIONS:
+        raise ValueError('Este paquete requiere MiDistri-Pedidos v50 a v53.')
     aplicadas = estado_publicacion(root)
     rutas_aplicadas = {ruta_migracion(app, name) for app, name in aplicadas}
     entries=manifest.get('files')
