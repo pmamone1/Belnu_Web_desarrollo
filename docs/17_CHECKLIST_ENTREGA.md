@@ -520,3 +520,7 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 
 - Validar que un PDF de lote contenga datos del vendedor autenticado.
 - Comparar remitos archivados y nuevas constancias en ambas pantallas.
+
+## MiDistri-Pedidos v61 · Verificación de entrega
+
+Verificar la pareja de versiones, los filtros, ambas descargas y la privacidad. [Guía de la actualización](ESTADO_CUENTA_v61.md).

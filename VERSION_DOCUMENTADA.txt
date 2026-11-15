@@ -1,3 +1,6 @@
+MiDistri-Pedidos v61
+Filtro de fechas y descargas Excel/PDF de cuenta. Base v60. Sin migraciones.
+
 MiDistri-Pedidos v60
 Comprobantes de ventas, lotes, precios, ajustes, ampliaciones y pagos en Mis remitos y en el estado de cuenta. Base MiDistri-Pedidos v59. Sin migraciones.
 

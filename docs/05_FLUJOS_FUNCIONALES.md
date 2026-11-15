@@ -328,3 +328,7 @@ Revisá el nombre destacado debajo del saludo al elegir un kiosco.
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Flujo de consulta
+
+En Mi estado de cuenta, filtrar por fechas y descargar el Excel o el PDF del período. [Guía de la actualización](ESTADO_CUENTA_v61.md).

@@ -220,6 +220,52 @@ document.addEventListener('click', async event => {
         remitoEnCurso = false;
     }
 });
+const archivosCuenta = new Map([
+    ['excel', ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'estado-cuenta.xlsx']],
+    ['pdf', ['application/pdf', 'estado-cuenta.pdf']],
+]);
+let cuentaEnDescarga = false;
+document.addEventListener('click', async evento => {
+    const enlace = evento.target.closest('a[data-cuenta-descarga]');
+    if (!enlace || !esPortal(enlace.href) || evento.defaultPrevented || evento.button !== 0 ||
+            evento.ctrlKey || evento.metaKey || evento.shiftKey || evento.altKey) return;
+    const archivo = archivosCuenta.get(enlace.dataset.cuentaDescarga);
+    if (!archivo) return;
+    evento.preventDefault();
+    if (cuentaEnDescarga) return;
+    const acceso = codigo ? proof(false) : null;
+    if (codigo && !acceso) {
+        notice('Ingresá nuevamente para descargar tu estado de cuenta.');
+        return;
+    }
+    cuentaEnDescarga = true;
+    const [mime, nombre] = archivo;
+    const version = generation;
+    const cancelacion = plazoLectura();
+    const finalizar = MidistriProgreso.iniciar('Preparando descarga…');
+    enlace.setAttribute('aria-busy', 'true');
+    try {
+        const respuesta = await raw(enlace.href, {signal: cancelacion.signal, redirect: 'error'}, acceso);
+        if (!respuesta.ok || (respuesta.headers.get('Content-Type') || '').split(';')[0].trim() !== mime) {
+            throw Error('descarga');
+        }
+        const contenido = await respuesta.blob();
+        if (version !== generation || !enlace.isConnected) return;
+        const url = URL.createObjectURL(contenido);
+        const descarga = document.createElement('a');
+        descarga.href = url;
+        descarga.download = nombre;
+        descarga.click();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch (_) {
+        if (version === generation && enlace.isConnected) notice('No pudimos descargar tu estado de cuenta. Volvé a intentarlo.');
+    } finally {
+        cancelacion.cerrar();
+        finalizar();
+        enlace.removeAttribute('aria-busy');
+        cuentaEnDescarga = false;
+    }
+});
 document.addEventListener('click', evento => {
     const enlace = evento.target.closest('a[href]');
     if (evento.defaultPrevented || !enlace || (enlace.target && enlace.target !== '_self') ||

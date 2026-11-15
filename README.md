@@ -328,3 +328,7 @@ Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](docs/COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Versión y compatibilidad
+
+Base v60. Requiere Urban Soft v694 para filtrar y descargar la cuenta del kiosco. [Guía de la actualización](docs/ESTADO_CUENTA_v61.md).

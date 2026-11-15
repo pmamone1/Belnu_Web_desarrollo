@@ -330,3 +330,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Guía de la versión
+
+Consultar la guía de fechas, descargas y comprobantes del piloto. [Guía de la actualización](ESTADO_CUENTA_v61.md).

@@ -331,3 +331,7 @@ Actualización visual del vendedor activo. [Uso y compatibilidad](docs/NOMBRE_VE
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](docs/COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Operación y continuidad
+
+Instalar después de Urban Soft v694. El respaldo del instalador permite restaurar v60. [Guía de la actualización](docs/ESTADO_CUENTA_v61.md).

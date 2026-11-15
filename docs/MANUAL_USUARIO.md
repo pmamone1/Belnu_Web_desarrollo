@@ -416,3 +416,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Uso
+
+Abrí Mi estado de cuenta, elegí Desde y Hasta y descargá el Excel o el PDF. [Guía de la actualización](ESTADO_CUENTA_v61.md).

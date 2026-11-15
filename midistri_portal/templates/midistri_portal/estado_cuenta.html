@@ -1,6 +1,11 @@
 {% extends 'midistri_portal/base.html' %}
 {% block content %}
 <style>
+.cuenta-filtros {display:flex;flex-wrap:wrap;align-items:end;gap:.75rem}
+.cuenta-filtros label {display:grid;gap:.25rem;margin:0}
+.cuenta-filtros input,.cuenta-filtros button {min-height:44px}
+.cuenta-acciones {display:flex;gap:.5rem;flex-wrap:wrap}
+.cuenta-acciones .button {margin:0}
 .cuenta-resumen {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:.75rem;margin:1rem 0}
 .cuenta-resumen .card {margin:0}
 .cuenta-resumen strong {display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
@@ -23,9 +28,18 @@
 .cuenta-paginas {display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
 </style>
 <h2>Mi estado de cuenta</h2>
+{% if perfil %}
+<form class="cuenta-filtros" method="get" action="{% url 'midistri_estado_cuenta' %}" aria-label="Filtrar movimientos por fecha">
+  <label>Desde <input type="date" name="desde" value="{{ filtros.desde|default:'' }}"></label>
+  <label>Hasta <input type="date" name="hasta" value="{{ filtros.hasta|default:'' }}"></label>
+  <button type="submit">Filtrar</button>
+  {% if filtros.desde or filtros.hasta %}<a href="{% url 'midistri_estado_cuenta' %}">Limpiar</a>{% endif %}
+</form>
+{% endif %}
 {% if error %}
 <p class="notice" role="alert">{{ error }}</p>
 {% else %}
+{% if query_fechas %}<p>Saldos al cierre del período consultado.</p>{% endif %}
 <div class="cuenta-resumen">
   <div class="card">Consignado<strong>{{ consignado }}</strong></div>
   <div class="card">Vencido<strong>{{ vencido }}</strong></div>
@@ -35,6 +49,12 @@
 {% if requiere_revision %}<p class="notice">El detalle histórico tiene diferencias pendientes de revisión.</p>{% endif %}
 <section class="cuenta-movimientos">
   <h3>Movimientos de mercadería no editorial</h3>
+  <p>Descargá todos los movimientos del período consultado.</p>
+  {% url 'midistri_estado_cuenta' as cuenta_url %}
+  <div class="cuenta-acciones">
+    <a class="button" href="{{ cuenta_url }}?{% if query_fechas %}{{ query_fechas }}&amp;{% endif %}formato=excel" data-cuenta-descarga="excel" download>Descargar Excel</a>
+    <a class="button secondary" href="{{ cuenta_url }}?{% if query_fechas %}{{ query_fechas }}&amp;{% endif %}formato=pdf" data-cuenta-descarga="pdf" download>Descargar PDF</a>
+  </div>
   <p class="cuenta-deslizar">Deslizá la tabla para ver todos los importes.</p>
   <div class="cuenta-tabla-scroll" role="region" aria-label="Tabla de movimientos y saldos" tabindex="0">
     <table class="cuenta-tabla">
@@ -68,15 +88,15 @@
           <td>{{ f.consignado }}</td><td>{{ f.vencido }}</td>
           <td>{{ f.saldo_consignado }}</td><td>{{ f.saldo_vencido }}</td><td class="cuenta-total">{{ f.saldo_total }}</td>
         </tr>
-        {% endfor %}{% empty %}<tr><td colspan="7">Sin movimientos registrados.</td></tr>{% endfor %}
+        {% endfor %}{% empty %}<tr><td colspan="7">{% if query_fechas %}No hay movimientos en el período seleccionado.{% else %}Sin movimientos registrados.{% endif %}</td></tr>{% endfor %}
       </tbody>
     </table>
   </div>
   {% if anterior or siguiente %}
   <nav class="cuenta-paginas" aria-label="Páginas de movimientos">
-    {% if anterior %}<a href="?pagina={{ anterior }}">Más recientes</a>{% endif %}
+    {% if anterior %}<a href="?{% if query_fechas %}{{ query_fechas }}&amp;{% endif %}pagina={{ anterior }}">Más recientes</a>{% endif %}
     <span>Página {{ pagina }}</span>
-    {% if siguiente %}<a href="?pagina={{ siguiente }}">Más antiguos</a>{% endif %}
+    {% if siguiente %}<a href="?{% if query_fechas %}{{ query_fechas }}&amp;{% endif %}pagina={{ siguiente }}">Más antiguos</a>{% endif %}
   </nav>
   {% endif %}
 </section>

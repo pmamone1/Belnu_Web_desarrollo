@@ -461,3 +461,7 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 1. Consultar una venta pendiente de traslado por su liquidación.
 2. Descargar un pago, ajuste y ampliación desde ambas vistas.
 3. Consultar las ventas de un lote con otro perfil y verificar el alcance.
+
+## MiDistri-Pedidos v61 · Prueba manual
+
+Filtrar por un rango de fechas, avanzar de página y comprobar que la descarga incluya todo el intervalo. [Guía de la actualización](ESTADO_CUENTA_v61.md).

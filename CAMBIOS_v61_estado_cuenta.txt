@@ -1,0 +1,2 @@
+MiDistri-Pedidos v61
+Filtro por fechas y descargas Excel y PDF del estado de cuenta. Compatible con el piloto de Urban Soft y con los comprobantes valorizados de consignación.

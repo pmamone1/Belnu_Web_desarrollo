@@ -335,3 +335,7 @@ El nombre destacado identifica al vendedor del perfil activo.
 ## MiDistri-Pedidos v60 · Comprobantes de MiDistri
 
 [Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).
+
+## MiDistri-Pedidos v61 · Reglas vigentes
+
+La cuenta es privada y conserva el alcance de vendedor y distribuidora. El archivo incluye todo el rango solicitado. [Guía de la actualización](ESTADO_CUENTA_v61.md).
