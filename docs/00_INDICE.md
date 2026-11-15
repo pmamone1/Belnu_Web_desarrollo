@@ -322,3 +322,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## MiDistri v58 · Navegación y movimientos de cuenta
 
 [Navegación y movimientos de cuenta](NAVEGACION_CUENTA_v58.md).
+
+## MiDistri v59 · Nombre del vendedor
+
+[Nombre del vendedor activo](NOMBRE_VENDEDOR_v59.md).

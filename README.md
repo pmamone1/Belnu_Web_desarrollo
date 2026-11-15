@@ -320,3 +320,7 @@ Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).
 ## MiDistri v58 · Navegación y movimientos de cuenta
 
 [Navegación y movimientos de cuenta](docs/NAVEGACION_CUENTA_v58.md).
+
+## MiDistri v59 · Nombre del vendedor
+
+[Identificación del vendedor](docs/NOMBRE_VENDEDOR_v59.md).

@@ -327,3 +327,7 @@ El saludo usa el nombre personal verificado. La segunda línea identifica al ven
 ## MiDistri v58 · Navegación y movimientos de cuenta
 
 La tabla respeta el orden del historial y toma del servicio los saldos consignado y vencido. Suma ambos para cada saldo total. El aviso de traslado remite al resumen de cuenta de la distribuidora.
+
+## MiDistri v59 · Nombre del vendedor
+
+El nombre destacado identifica al vendedor del perfil activo.

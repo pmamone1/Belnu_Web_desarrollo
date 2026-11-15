@@ -450,3 +450,8 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 1. Cambiar entre catálogo, pedidos, cuenta y remitos. Probar Atrás y Adelante y filtrar remitos.
 2. Abrir una consulta lenta, verificar el indicador y repetir con un error controlado.
 3. Consultar varios movimientos de cuenta, abrir un comprobante y comprobar el detalle de un pedido tras navegar.
+
+## MiDistri v59 · Nombre del vendedor
+
+1. Abrir el portal en escritorio y celular.
+2. Verificar que el nombre del vendedor sea legible y más grande que su etiqueta.

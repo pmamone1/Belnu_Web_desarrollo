@@ -320,3 +320,7 @@ Al entrar o cambiar de kiosco, verificar el vendedor debajo del saludo antes de 
 ## MiDistri v58 · Navegación y movimientos de cuenta
 
 El vendedor navega, filtra y abre comprobantes desde el portal con progreso visible. Las consultas fallidas conservan el contenido anterior y muestran el error.
+
+## MiDistri v59 · Nombre del vendedor
+
+Revisá el nombre destacado debajo del saludo al elegir un kiosco.

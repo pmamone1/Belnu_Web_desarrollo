@@ -323,3 +323,7 @@ La línea Vendedor conserva el color del encabezado. [Ver compatibilidad y rollb
 ## MiDistri v58 · Navegación y movimientos de cuenta
 
 La navegación documentada cambia el contenido y mantiene la misma pestaña. El visor PDF es compartido por remitos y cuenta. [Compatibilidad, verificación y rollback](docs/NAVEGACION_CUENTA_v58.md).
+
+## MiDistri v59 · Nombre del vendedor
+
+Actualización visual del vendedor activo. [Uso y compatibilidad](docs/NOMBRE_VENDEDOR_v59.md).

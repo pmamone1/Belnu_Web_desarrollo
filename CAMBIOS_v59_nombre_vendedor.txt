@@ -1,0 +1,2 @@
+MiDistri v59
+Nombre del vendedor más grande y en negrita. Base v58. Sin migraciones.

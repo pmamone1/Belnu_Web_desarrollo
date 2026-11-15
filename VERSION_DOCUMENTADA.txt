@@ -1,3 +1,6 @@
+MiDistri-Pedidos v59
+Nombre del vendedor destacado en el encabezado. Base v58. Sin migraciones.
+
 MiDistri-Pedidos v58
 Navegación AJAX, progreso de operaciones y tabla de estado de cuenta. Base v57. Sin migraciones.
 
