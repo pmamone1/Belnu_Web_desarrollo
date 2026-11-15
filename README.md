@@ -308,3 +308,7 @@ Mis remitos agrupa las guías y comprobantes de devolución. [Guía v51](docs/RE
 ## Cambiar de kiosco · v52
 
 Usá Cambiar perfil para elegir entre los kioscos acreditados. [Guía v52](docs/CAMBIAR_PERFIL_v52.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).

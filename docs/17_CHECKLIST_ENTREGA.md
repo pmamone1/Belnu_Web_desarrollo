@@ -494,3 +494,9 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 ## Acceso por enlaces directos · v55
 
 [Guía y validación](ACCESO_DIRECTO_v55.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+- Revisar que el ZIP parta de v55, excluya archivos privados y conserve el manual anterior detrás del capítulo v56.
+- Verificar remitos y estado de cuenta por enlace directo en una pestaña nueva.
+- Comprobar la navegación en una pestaña ya abierta y la recuperación del kiosco activo.

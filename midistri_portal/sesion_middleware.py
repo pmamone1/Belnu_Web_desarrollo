@@ -5,7 +5,13 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from django.utils import timezone
 from django.utils.deprecation import MiddlewareMixin
+from django.views.decorators.csrf import ensure_csrf_cookie
 from .sesion_pestana import TabSession,resolver_sesion_pestana
+
+
+@ensure_csrf_cookie
+def _pantalla_acceso(request):
+    return render(request, 'midistri_portal/sesion_shell.html', {'titulo': 'MiDistri-Pedidos'})
 
 
 class SesionPestanaMiddleware(MiddlewareMixin):
@@ -26,7 +32,8 @@ class SesionPestanaMiddleware(MiddlewareMixin):
                 ctx.__exit__(None,None,None);request._midistri_atomic=None
                 return JsonResponse({'error':str(e)},status=403)
         elif not public:
-            if request.method=='GET':return render(request,'midistri_portal/sesion_shell.html',{'titulo':'MiDistri-Pedidos'})
+            if request.method == 'GET':
+                return _pantalla_acceso(request)
             return JsonResponse({'error':'Ingresá con tu Email en esta pestaña.'},status=403)
         request.midistri_tab=row
         request.session=TabSession(request.session,row)

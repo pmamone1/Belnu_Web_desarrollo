@@ -1,0 +1,2 @@
+MiDistri v56
+Corrige la recuperación de sesión al abrir enlaces directos. Base v55. Sin migraciones.

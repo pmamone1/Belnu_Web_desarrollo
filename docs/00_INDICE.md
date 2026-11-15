@@ -310,3 +310,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## Acceso por enlaces directos · v55
 
 [Guía y validación](ACCESO_DIRECTO_v55.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+[Guía y validación](SESION_ENLACE_v56.md).

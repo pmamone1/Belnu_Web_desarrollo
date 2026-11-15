@@ -311,3 +311,7 @@ MiDistri v51 requiere Urban Soft v679. [Operación y rollback](docs/REMITOS_DEVO
 ## Cambiar de kiosco · v52
 
 MiDistri v52 corrige el cambio explícito de kiosco y admite las bases v50 y v51. [Operación y rollback](docs/CAMBIAR_PERFIL_v52.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+Verificar la cookie de Django en la pantalla inicial de remitos y estado de cuenta. La sesión por pestaña se recupera desde el portal. [Guía, compatibilidad y rollback](docs/SESION_ENLACE_v56.md).

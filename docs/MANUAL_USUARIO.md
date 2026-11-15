@@ -396,3 +396,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## Acceso por enlaces directos · v55
 
 [Guía y validación](ACCESO_DIRECTO_v55.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+[Cómo entrar desde un enlace](SESION_ENLACE_v56.md).

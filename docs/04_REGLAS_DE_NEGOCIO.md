@@ -315,3 +315,7 @@ El cambio explícito comprueba la selección antes de sustituir el perfil de la 
 ## Acceso por enlaces directos · v55
 
 [Guía y validación](ACCESO_DIRECTO_v55.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+El control CSRF se aplica también cuando el middleware devuelve la pantalla de acceso antes de llegar a la vista. La verificación de sesión por pestaña y kiosco continúa vigente.

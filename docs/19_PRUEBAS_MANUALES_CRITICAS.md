@@ -433,3 +433,9 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 ## Acceso por enlaces directos · v55
 
 [Guía y validación](ACCESO_DIRECTO_v55.md).
+
+## MiDistri v56 · Acceso recordado desde enlaces directos
+
+1. Abrir Mis remitos desde un enlace en una pestaña nueva con un acceso recordado.
+2. Abrir Mi estado de cuenta de la misma forma con un kiosco habilitado.
+3. Volver a la primera pestaña y comprobar que mantiene su sesión y permite usar los formularios.

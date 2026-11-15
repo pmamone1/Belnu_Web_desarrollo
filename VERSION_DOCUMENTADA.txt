@@ -1,3 +1,6 @@
+MiDistri-Pedidos v56
+Acceso recordado desde enlaces directos. Base v55. Sin migraciones.
+
 MiDistri-Pedidos v55
 Corrige el acceso directo a Mis remitos y al piloto. Base v54. Sin migraciones.
 
