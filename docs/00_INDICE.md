@@ -318,3 +318,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## MiDistri v57 · Saludo y vendedor activo
 
 [Saludo y vendedor activo](SALUDO_VENDEDOR_v57.md).
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+[Navegación y movimientos de cuenta](NAVEGACION_CUENTA_v58.md).

@@ -30,6 +30,7 @@
         const activo = document.activeElement;
         const botones = Array.from(form.querySelectorAll('button:not([disabled]),input[name=cantidad]:not([disabled])'));
         enCurso = true;
+        const finalizar = MidistriProgreso.iniciar('Actualizando carrito…');
         form.setAttribute('aria-busy', 'true');
         botones.forEach(b => { b.disabled = true; });
         mostrar(estado, 'Actualizando carrito…', false);
@@ -68,6 +69,7 @@
         } catch (_) {
             mostrar(estado, 'No pudimos confirmar el cambio. Revisá el carrito antes de volver a intentarlo.', true);
         } finally {
+            finalizar();
             enCurso = false;
             form.removeAttribute('aria-busy');
             botones.forEach(b => { b.disabled = false; });

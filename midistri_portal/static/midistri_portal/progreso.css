@@ -1,0 +1,25 @@
+#midistri-progreso {
+    position: fixed;
+    inset-block-start: max(12px, env(safe-area-inset-top));
+    inset-inline-end: max(12px, env(safe-area-inset-right));
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: calc(100vw - 24px);
+    padding: 10px 14px;
+    background: var(--panel);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 3px 16px rgba(0, 0, 0, .18);
+    font-size: .95rem;
+    font-weight: 650;
+    pointer-events: none;
+}
+#midistri-progreso[hidden] {display: none}
+#midistri-progreso .recordado-spinner {width: 19px; height: 19px}
+.remitos-visor {width:min(94vw,950px);max-height:90vh;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:14px}
+.remitos-visor iframe {width:100%;height:65vh;border:1px solid var(--border);margin-top:10px}
+.remitos-visor-menu {display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+@media print {#midistri-progreso {display: none}}

@@ -1,0 +1,2 @@
+MiDistri v58
+Indicador de carga y navegación AJAX del portal. Tabla de movimientos y saldos del kiosco, con remitos por movimiento. Leyenda de traslado abreviada. Base v57. Sin migraciones.

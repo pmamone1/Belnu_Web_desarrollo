@@ -444,3 +444,9 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 
 1. Entrar con un perfil recordado.
 2. Verificar que la segunda línea del saludo identifique al vendedor y se lea con cada tema disponible.
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+1. Cambiar entre catálogo, pedidos, cuenta y remitos. Probar Atrás y Adelante y filtrar remitos.
+2. Abrir una consulta lenta, verificar el indicador y repetir con un error controlado.
+3. Consultar varios movimientos de cuenta, abrir un comprobante y comprobar el detalle de un pedido tras navegar.

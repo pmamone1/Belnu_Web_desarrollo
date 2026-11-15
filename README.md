@@ -316,3 +316,7 @@ Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).
 ## MiDistri v57 · Saludo y vendedor activo
 
 [Identificación del vendedor activo](docs/SALUDO_VENDEDOR_v57.md).
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+[Navegación y movimientos de cuenta](docs/NAVEGACION_CUENTA_v58.md).

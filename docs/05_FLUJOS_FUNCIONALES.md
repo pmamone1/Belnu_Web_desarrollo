@@ -316,3 +316,7 @@ En un enlace directo, la pantalla de acceso prepara la cookie CSRF antes de recu
 ## MiDistri v57 · Saludo y vendedor activo
 
 Al entrar o cambiar de kiosco, verificar el vendedor debajo del saludo antes de consultar documentos.
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+El vendedor navega, filtra y abre comprobantes desde el portal con progreso visible. Las consultas fallidas conservan el contenido anterior y muestran el error.

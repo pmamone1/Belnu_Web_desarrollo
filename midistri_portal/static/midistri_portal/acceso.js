@@ -27,6 +27,7 @@ document.addEventListener('submit',async e=>{
     const f=e.target;if(!f.dataset.codigo)return;e.preventDefault();if(busy)return;
     if(f.dataset.codigo==='verificar'&&! /^[0-9]{6}$/.test(codeInput().value))return;
     busy=true;
+    const finalizar = MidistriProgreso.iniciar('Comprobando el acceso…');
     if(f.dataset.codigo==='verificar')lastAutomatic=codeInput().value;
     const buttons=f.querySelectorAll('button');buttons.forEach(b=>{b.disabled=true;});
     message().textContent='Comprobando…';
@@ -34,7 +35,12 @@ document.addEventListener('submit',async e=>{
         if(!window.MidistriTab||!MidistriTab.proof(true))throw Error('Habilitá el almacenamiento de esta pestaña para ingresar.');
         const r=await MidistriTab.request(f.action,{method:'POST',body:new FormData(f)});
         const data=await r.json();if(!r.ok)throw Error(data.error||'No pudimos completar el ingreso.');
-        if(data.fase==='dentro'){if(data.dispositivo_recordado&&window.MidistriRecordado)MidistriRecordado.loginCompleted();location.assign(data.url);return;}
+        if(data.fase==='dentro'){
+            if(data.dispositivo_recordado&&window.MidistriRecordado)MidistriRecordado.loginCompleted();
+            if(MidistriTab.esPortal(data.url)) await MidistriTab.load(data.url);
+            else location.assign(data.url);
+            return;
+        }
         document.getElementById('acceso-opciones').hidden=false;
         message().textContent=data.mensaje||'Elegí con qué perfil querés entrar.';
         if(data.fase==='codigo')resetCode();
@@ -50,7 +56,7 @@ document.addEventListener('submit',async e=>{
         }
         const focus=document.querySelector('form:not([hidden]) input:not([type=hidden]),form:not([hidden]) select');if(focus)focus.focus();
     }catch(err){message().textContent=err.message;}
-    finally{busy=false;buttons.forEach(b=>{b.disabled=false;});}
+    finally{finalizar();busy=false;buttons.forEach(b=>{b.disabled=false;});}
 });
 document.addEventListener('click',async e=>{
     if(busy)return;

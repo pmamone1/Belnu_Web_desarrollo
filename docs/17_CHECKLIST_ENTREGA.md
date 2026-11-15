@@ -505,3 +505,9 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 
 - Revisar el contraste del vendedor con el tema claro, nocturno, azul y verde.
 - Verificar el ZIP con base v56 y el manual PDF con el capítulo vigente.
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+- Verificar la base v57 y que el ZIP incluya los archivos de navegación, la tabla y el manual PDF.
+- Revisar el indicador durante las consultas, los errores, la apertura del PDF y el carrito.
+- Comprobar saldos acumulados y comprobantes en escritorio y celular.

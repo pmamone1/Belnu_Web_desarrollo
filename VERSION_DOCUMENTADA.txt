@@ -1,3 +1,6 @@
+MiDistri-Pedidos v58
+Navegación AJAX, progreso de operaciones y tabla de estado de cuenta. Base v57. Sin migraciones.
+
 MiDistri-Pedidos v57
 Vendedor legible en el encabezado. Base v56. Sin migraciones.
 

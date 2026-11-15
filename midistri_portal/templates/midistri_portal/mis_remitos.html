@@ -9,9 +9,6 @@
 .remitos-resultados h3,.remitos-resultados p{margin:0}
 .remitos-acciones{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .remitos-acciones .button{padding:9px 13px;min-height:44px;font-size:.9rem}
-.remitos-visor{width:min(94vw,950px);max-height:90vh;color:var(--text);background:var(--panel);border:1px solid var(--border);border-radius:14px}
-.remitos-visor iframe{width:100%;height:65vh;border:1px solid var(--border);margin-top:10px}
-.remitos-visor-menu{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
 </style>
 <h2>Mis remitos</h2>
 <section>
@@ -43,11 +40,5 @@
   {% if siguiente %}<a href="?tipo={{ filtros.tipo|urlencode }}&amp;desde={{ filtros.desde|urlencode }}&amp;hasta={{ filtros.hasta|urlencode }}&amp;pagina={{ siguiente }}">Siguiente</a>{% endif %}
 </nav>{% endif %}
 {% endif %}
-<dialog class="remitos-visor" data-remito-visor aria-label="Vista del remito">
-  <div class="remitos-visor-menu">
-    <a class="button" target="_blank" rel="noopener">Abrir para imprimir</a>
-    <form method="dialog"><button type="submit" class="secondary">Cerrar</button></form>
-  </div>
-  <iframe title="Remito en PDF"></iframe>
-</dialog>
+{% include 'midistri_portal/remito_visor.html' %}
 {% endblock %}

@@ -69,7 +69,7 @@ async function bootstrap(selected){if(busy)return;const known=document.body.data
 if(pending()){busy=true;await forgetPending();busy=false;return;}
 if(!enabled||query.get('otro')==='1'||!window.MidistriTab||(!known&&(switching||!MidistriTab.proof(false))))return;
 busy=true;const version=generation;notice('Comprobando tu acceso recordado…',false,true);
-try{MidistriTab.proof(true);const r=await MidistriTab.request('/portal/acceso/recordado/',{method:'POST',body:form(Object.assign(switching?{elegir:'1'}:{},selected?{seleccion:selected}:{})),headers:{Accept:'application/json'}});const data=await r.json();if(version!==generation||pending())return;
+try{MidistriTab.proof(true);const r=await MidistriTab.request('/portal/acceso/recordado/',{method:'POST',body:form(Object.assign(switching?{elegir:'1'}:{},selected?{seleccion:selected}:{})),headers:{Accept:'application/json'}});if(!(r.headers.get('content-type')||'').includes('application/json'))throw Error('No pudimos comprobar el acceso. Volvé a intentarlo.');const data=await r.json();if(version!==generation||pending())return;
 if(data.fase==='pestana_obsoleta'){MidistriTab.clear();notice(data.error,true);return;}
 if(!r.ok){if(r.status===401||r.status===403){MidistriTab.clear();notice('El acceso ya no esta disponible. Ingresa con tu Email.');const a=document.createElement('a');a.href='/portal/acceso/?otro=1';a.textContent='Entrar con mi Email';document.querySelector('main').append(a);return;}throw Error(data.error||'No pudimos comprobar el acceso.');}
 if(data.fase==='elegir'){choose(data.identidades,switching);return;}

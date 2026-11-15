@@ -319,3 +319,7 @@ Verificar la cookie de Django en la pantalla inicial de remitos y estado de cuen
 ## MiDistri v57 · Saludo y vendedor activo
 
 La línea Vendedor conserva el color del encabezado. [Ver compatibilidad y rollback](docs/SALUDO_VENDEDOR_v57.md).
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+La navegación documentada cambia el contenido y mantiene la misma pestaña. El visor PDF es compartido por remitos y cuenta. [Compatibilidad, verificación y rollback](docs/NAVEGACION_CUENTA_v58.md).

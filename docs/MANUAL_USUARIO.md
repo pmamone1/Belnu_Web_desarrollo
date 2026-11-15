@@ -404,3 +404,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## MiDistri v57 · Saludo y vendedor activo
 
 [Cómo identificar el vendedor activo](SALUDO_VENDEDOR_v57.md).
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+[Cómo consultar los saldos y comprobantes](NAVEGACION_CUENTA_v58.md).

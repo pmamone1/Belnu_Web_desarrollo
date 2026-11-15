@@ -4,12 +4,22 @@
 .cuenta-resumen {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:.75rem;margin:1rem 0}
 .cuenta-resumen .card {margin:0}
 .cuenta-resumen strong {display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
-.cuenta-movimiento {border-bottom:1px solid var(--border);padding:.65rem 0}
-.cuenta-movimiento summary {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .9rem;cursor:pointer;padding:.35rem 0}
-.cuenta-movimiento summary small {grid-column:1}
-.cuenta-movimiento summary span {text-align:right}
-.cuenta-movimiento dl {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1rem;margin:.6rem 0}
-.cuenta-movimiento dd {margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.cuenta-movimientos {padding:clamp(.8rem,2vw,1.4rem);min-width:0}
+.cuenta-tabla-scroll {overflow-x:auto}
+.cuenta-tabla {border-collapse:collapse;width:100%;font-size:.9rem}
+.cuenta-tabla caption {font-weight:700;text-align:left;margin:0 0 .65rem}
+.cuenta-tabla th,.cuenta-tabla td {padding:.65rem .55rem;vertical-align:top;border-bottom:1px solid var(--border)}
+.cuenta-tabla thead th {text-align:right;background:var(--soft);vertical-align:bottom;min-width:6.35rem}
+.cuenta-tabla thead th:first-child,.cuenta-tabla thead th:nth-child(2) {text-align:left}
+.cuenta-tabla th:first-child {white-space:nowrap;text-align:left}
+.cuenta-tabla td:nth-child(2) {min-width:14rem}
+.cuenta-tabla td:nth-child(n+3) {text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cuenta-apertura,.cuenta-total {background:var(--soft);font-weight:700}
+.cuenta-tabla tr.cuenta-fin-dia > * {border-bottom:2px solid var(--border)}
+.cuenta-tabla details {margin:.35rem 0 0}
+.cuenta-tabla details a {display:inline-block;margin:.25rem .5rem .15rem 0}
+.cuenta-deslizar {display:none}
+@media(max-width:960px) {.cuenta-deslizar {display:block}}
 .cuenta-paginas {display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
 </style>
 <h2>Mi estado de cuenta</h2>
@@ -21,23 +31,47 @@
   <div class="card">Vencido<strong>{{ vencido }}</strong></div>
   <div class="card">Saldo total<strong>{{ total }}</strong></div>
 </div>
-<p class="notice"><strong>Cobro en la distribuidora.</strong> {{ aviso }}</p>
+<p class="notice"><strong>Cobro en la distribuidora.</strong> Si se trasladó un importe, se cobra en tu res. de cuenta con la distribuidora.</p>
 {% if requiere_revision %}<p class="notice">El detalle histórico tiene diferencias pendientes de revisión.</p>{% endif %}
-<section>
+<section class="cuenta-movimientos">
   <h3>Movimientos de mercadería no editorial</h3>
-  <p>Saldo anterior · Consignado {{ anterior_c }} · Vencido {{ anterior_v }}</p>
-  {% for f in movimientos %}
-  <details class="cuenta-movimiento">
-    <summary><strong>{{ f.concepto }}</strong><span>{{ f.fecha|date:"d/m/Y" }}</span><small>{{ f.referencia }}</small></summary>
-    <dl>
-      <dt>Movimiento consignado</dt><dd>{{ f.consignado }}</dd>
-      <dt>Movimiento vencido</dt><dd>{{ f.vencido }}</dd>
-      <dt>Consignado acumulado</dt><dd>{{ f.saldo_consignado }}</dd>
-      <dt>Vencido acumulado</dt><dd>{{ f.saldo_vencido }}</dd>
-    </dl>
-    {% for id, tipo in f.remitos %}<p><a href="{% url 'midistri_mis_remitos_archivo' id %}">{{ tipo }} · Ver / imprimir PDF</a> · <a href="{% url 'midistri_mis_remitos_archivo' id %}?descargar=1">Descargar PDF</a></p>{% endfor %}
-  </details>
-  {% empty %}<p>Sin movimientos registrados.</p>{% endfor %}
+  <p class="cuenta-deslizar">Deslizá la tabla para ver todos los importes.</p>
+  <div class="cuenta-tabla-scroll" role="region" aria-label="Tabla de movimientos y saldos" tabindex="0">
+    <table class="cuenta-tabla">
+      <caption>Evolución de saldos</caption>
+      <thead><tr>
+        <th scope="col">Fecha</th><th scope="col">Movimiento y comprobante</th>
+        <th scope="col">Cambio consignado</th><th scope="col">Cambio vencido</th>
+        <th scope="col">Consignado acumulado</th><th scope="col">Vencido acumulado</th>
+        <th scope="col">Saldo total acumulado</th>
+      </tr></thead>
+      <tbody>
+        <tr class="cuenta-apertura">
+          <td>—</td><td>Saldo anterior a estos movimientos</td><td>—</td><td>—</td>
+          <td>{{ anterior_c }}</td><td>{{ anterior_v }}</td><td class="cuenta-total">{{ anterior_total }}</td>
+        </tr>
+        {% regroup movimientos by fecha as dias %}
+        {% for dia in dias %}{% for f in dia.list %}
+        <tr{% if forloop.last %} class="cuenta-fin-dia"{% endif %}>
+          <th scope="row"><time datetime="{{ f.fecha|date:'Y-m-d' }}">{{ f.fecha|date:"d/m/Y" }}</time></th>
+          <td>
+            <strong>{{ f.concepto }}</strong>{% if f.referencia %}<br><small>{{ f.referencia }}</small>{% endif %}
+            {% if f.remitos %}<details><summary>Comprobantes</summary>
+              {% for id, tipo in f.remitos %}
+                <div><small>{{ tipo }}</small><br>
+                  <a data-remito-pdf="ver" href="{% url 'midistri_mis_remitos_archivo' id %}">Ver / imprimir PDF</a>
+                  <a data-remito-pdf="descargar" href="{% url 'midistri_mis_remitos_archivo' id %}?descargar=1">Descargar PDF</a>
+                </div>
+              {% endfor %}
+            </details>{% endif %}
+          </td>
+          <td>{{ f.consignado }}</td><td>{{ f.vencido }}</td>
+          <td>{{ f.saldo_consignado }}</td><td>{{ f.saldo_vencido }}</td><td class="cuenta-total">{{ f.saldo_total }}</td>
+        </tr>
+        {% endfor %}{% empty %}<tr><td colspan="7">Sin movimientos registrados.</td></tr>{% endfor %}
+      </tbody>
+    </table>
+  </div>
   {% if anterior or siguiente %}
   <nav class="cuenta-paginas" aria-label="Páginas de movimientos">
     {% if anterior %}<a href="?pagina={{ anterior }}">Más recientes</a>{% endif %}
@@ -46,5 +80,6 @@
   </nav>
   {% endif %}
 </section>
+{% include 'midistri_portal/remito_visor.html' %}
 {% endif %}
 {% endblock %}

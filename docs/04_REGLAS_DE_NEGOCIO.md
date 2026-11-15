@@ -323,3 +323,7 @@ El control CSRF se aplica también cuando el middleware devuelve la pantalla de 
 ## MiDistri v57 · Saludo y vendedor activo
 
 El saludo usa el nombre personal verificado. La segunda línea identifica al vendedor del kiosco activo.
+
+## MiDistri v58 · Navegación y movimientos de cuenta
+
+La tabla respeta el orden del historial y toma del servicio los saldos consignado y vencido. Suma ambos para cada saldo total. El aviso de traslado remite al resumen de cuenta de la distribuidora.

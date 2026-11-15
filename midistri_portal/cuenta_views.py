@@ -37,6 +37,7 @@ def estado_cuenta(request):
         if (datos['vendedor_id'], datos['distribuidora_id']) != (perfil['id'], perfil['distribuidora_id']):
             raise ValueError
         saldos = {k: _importe(datos[k]) for k in ('consignado', 'vencido', 'total', 'anterior_c', 'anterior_v')}
+        saldos['anterior_total'] = _importe(Decimal(str(datos['anterior_c'])) + Decimal(str(datos['anterior_v'])))
         movimientos = []
         for f in datos['movimientos']:
             remitos = [(d['id'], TIPOS[d['tipo']]) for d in f['remitos']
@@ -45,11 +46,12 @@ def estado_cuenta(request):
                 fecha=date.fromisoformat(f['fecha']), concepto=f['concepto'], referencia=f['referencia'],
                 consignado=_importe(f['consignado']), vencido=_importe(f['vencido']),
                 saldo_consignado=_importe(f['saldo_consignado']), saldo_vencido=_importe(f['saldo_vencido']),
+                saldo_total=_importe(Decimal(str(f['saldo_consignado'])) + Decimal(str(f['saldo_vencido']))),
                 remitos=remitos,
             ))
         contexto.update(saldos, movimientos=movimientos, pagina=datos['pagina'],
                         anterior=datos['anterior'], siguiente=datos['siguiente'],
-                        aviso=datos['aviso_traslado'], requiere_revision=datos['requiere_revision'])
+                        requiere_revision=datos['requiere_revision'])
     except ApiError as exc:
         if exc.status in (401, 403, 404):
             return privada(HttpResponse('Estado de cuenta no disponible.', status=404, content_type='text/plain'))
