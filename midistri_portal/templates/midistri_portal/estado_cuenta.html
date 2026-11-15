@@ -1,0 +1,50 @@
+{% extends 'midistri_portal/base.html' %}
+{% block content %}
+<style>
+.cuenta-resumen {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,10rem),1fr));gap:.75rem;margin:1rem 0}
+.cuenta-resumen .card {margin:0}
+.cuenta-resumen strong {display:block;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.cuenta-movimiento {border-bottom:1px solid var(--border);padding:.65rem 0}
+.cuenta-movimiento summary {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem .9rem;cursor:pointer;padding:.35rem 0}
+.cuenta-movimiento summary small {grid-column:1}
+.cuenta-movimiento summary span {text-align:right}
+.cuenta-movimiento dl {display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1rem;margin:.6rem 0}
+.cuenta-movimiento dd {margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.cuenta-paginas {display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1rem}
+</style>
+<h2>Mi estado de cuenta</h2>
+{% if error %}
+<p class="notice" role="alert">{{ error }}</p>
+{% else %}
+<div class="cuenta-resumen">
+  <div class="card">Consignado<strong>{{ consignado }}</strong></div>
+  <div class="card">Vencido<strong>{{ vencido }}</strong></div>
+  <div class="card">Saldo total<strong>{{ total }}</strong></div>
+</div>
+<p class="notice"><strong>Cobro en la distribuidora.</strong> {{ aviso }}</p>
+{% if requiere_revision %}<p class="notice">El detalle histórico tiene diferencias pendientes de revisión.</p>{% endif %}
+<section>
+  <h3>Movimientos de mercadería no editorial</h3>
+  <p>Saldo anterior · Consignado {{ anterior_c }} · Vencido {{ anterior_v }}</p>
+  {% for f in movimientos %}
+  <details class="cuenta-movimiento">
+    <summary><strong>{{ f.concepto }}</strong><span>{{ f.fecha|date:"d/m/Y" }}</span><small>{{ f.referencia }}</small></summary>
+    <dl>
+      <dt>Movimiento consignado</dt><dd>{{ f.consignado }}</dd>
+      <dt>Movimiento vencido</dt><dd>{{ f.vencido }}</dd>
+      <dt>Consignado acumulado</dt><dd>{{ f.saldo_consignado }}</dd>
+      <dt>Vencido acumulado</dt><dd>{{ f.saldo_vencido }}</dd>
+    </dl>
+    {% for id, tipo in f.remitos %}<p><a href="{% url 'midistri_mis_remitos_archivo' id %}">{{ tipo }} · Ver / imprimir PDF</a> · <a href="{% url 'midistri_mis_remitos_archivo' id %}?descargar=1">Descargar PDF</a></p>{% endfor %}
+  </details>
+  {% empty %}<p>Sin movimientos registrados.</p>{% endfor %}
+  {% if anterior or siguiente %}
+  <nav class="cuenta-paginas" aria-label="Páginas de movimientos">
+    {% if anterior %}<a href="?pagina={{ anterior }}">Más recientes</a>{% endif %}
+    <span>Página {{ pagina }}</span>
+    {% if siguiente %}<a href="?pagina={{ siguiente }}">Más antiguos</a>{% endif %}
+  </nav>
+  {% endif %}
+</section>
+{% endif %}
+{% endblock %}

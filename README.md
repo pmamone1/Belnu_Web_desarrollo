@@ -1,3 +1,7 @@
+## v53 · Piloto de estado de cuenta
+
+[Guía y compatibilidad](docs/CUENTA_PILOTO_v53.md). Requiere Urban Soft v689. Bases MiDistri v50 a v52. Sin migraciones nuevas. Instalación productiva pendiente.
+
 ## Mis remitos · MiDistri v50
 
 El vendedor consulta sus remitos en MiDistri. [Guía](docs/MIS_REMITOS_v50.md).

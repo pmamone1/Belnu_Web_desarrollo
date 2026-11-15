@@ -384,3 +384,7 @@ En **Mis remitos**, elegí **Devolución** para buscar guías y comprobantes. El
 ## Cambiar de kiosco · v52
 
 Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi Email** y usá el Email asociado a tus kioscos.
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.

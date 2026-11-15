@@ -480,3 +480,7 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 ## Cambiar de kiosco · v52
 
 - [ ] Verificar el selector con dos kioscos, el ingreso con un solo perfil, la alternativa por Email y el archivo recordado.js publicado.
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.

@@ -298,3 +298,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## Cambiar de kiosco · v52
 
 [Cambiar de kiosco v52](CAMBIAR_PERFIL_v52.md).
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.

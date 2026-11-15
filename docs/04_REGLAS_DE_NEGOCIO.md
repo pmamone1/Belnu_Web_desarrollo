@@ -303,3 +303,7 @@ La opción Devolución agrupa los comprobantes de devolución y preparación del
 ## Cambiar de kiosco · v52
 
 El cambio explícito comprueba la selección antes de sustituir el perfil de la pestaña. Si falta un kiosco, el Email se vuelve a verificar por el flujo habitual.
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.

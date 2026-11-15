@@ -421,3 +421,7 @@ Comprobar el filtro Devolución con ambos tipos de documentos y abrir una carga 
 ## Cambiar de kiosco · v52
 
 Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar el nombre, los pedidos y los remitos. Probar con otro dispositivo o con un solo perfil acreditado y verificar que se pueda volver a ingresar por Email.
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.

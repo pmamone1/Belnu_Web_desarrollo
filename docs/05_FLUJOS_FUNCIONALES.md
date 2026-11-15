@@ -296,3 +296,7 @@ MiDistri → Mis remitos → Devolución. Buscar por fecha y descargar o abrir p
 ## Cambiar de kiosco · v52
 
 MiDistri → Cambiar perfil → Elegir kiosco → Continuar. Sin dispositivo reconocido o si falta un kiosco, verificar el Email desde la misma pantalla.
+
+## Mi estado de cuenta · v53
+
+[Piloto de estado de cuenta](CUENTA_PILOTO_v53.md). Instalá Urban Soft v689 antes de MiDistri. Verificá la cuenta y los remitos del kiosco activo.
