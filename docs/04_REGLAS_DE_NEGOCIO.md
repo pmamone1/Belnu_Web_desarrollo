@@ -319,3 +319,7 @@ El cambio explícito comprueba la selección antes de sustituir el perfil de la 
 ## MiDistri v56 · Acceso recordado desde enlaces directos
 
 El control CSRF se aplica también cuando el middleware devuelve la pantalla de acceso antes de llegar a la vista. La verificación de sesión por pestaña y kiosco continúa vigente.
+
+## MiDistri v57 · Saludo y vendedor activo
+
+El saludo usa el nombre personal verificado. La segunda línea identifica al vendedor del kiosco activo.

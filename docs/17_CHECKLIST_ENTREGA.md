@@ -500,3 +500,8 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 - Revisar que el ZIP parta de v55, excluya archivos privados y conserve el manual anterior detrás del capítulo v56.
 - Verificar remitos y estado de cuenta por enlace directo en una pestaña nueva.
 - Comprobar la navegación en una pestaña ya abierta y la recuperación del kiosco activo.
+
+## MiDistri v57 · Saludo y vendedor activo
+
+- Revisar el contraste del vendedor con el tema claro, nocturno, azul y verde.
+- Verificar el ZIP con base v56 y el manual PDF con el capítulo vigente.

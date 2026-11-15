@@ -439,3 +439,8 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 1. Abrir Mis remitos desde un enlace en una pestaña nueva con un acceso recordado.
 2. Abrir Mi estado de cuenta de la misma forma con un kiosco habilitado.
 3. Volver a la primera pestaña y comprobar que mantiene su sesión y permite usar los formularios.
+
+## MiDistri v57 · Saludo y vendedor activo
+
+1. Entrar con un perfil recordado.
+2. Verificar que la segunda línea del saludo identifique al vendedor y se lea con cada tema disponible.

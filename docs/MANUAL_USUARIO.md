@@ -400,3 +400,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## MiDistri v56 · Acceso recordado desde enlaces directos
 
 [Cómo entrar desde un enlace](SESION_ENLACE_v56.md).
+
+## MiDistri v57 · Saludo y vendedor activo
+
+[Cómo identificar el vendedor activo](SALUDO_VENDEDOR_v57.md).

@@ -312,3 +312,7 @@ Usá Cambiar perfil para elegir entre los kioscos acreditados. [Guía v52](docs/
 ## MiDistri v56 · Acceso recordado desde enlaces directos
 
 Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).
+
+## MiDistri v57 · Saludo y vendedor activo
+
+[Identificación del vendedor activo](docs/SALUDO_VENDEDOR_v57.md).

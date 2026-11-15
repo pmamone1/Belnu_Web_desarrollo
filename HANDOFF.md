@@ -315,3 +315,7 @@ MiDistri v52 corrige el cambio explícito de kiosco y admite las bases v50 y v51
 ## MiDistri v56 · Acceso recordado desde enlaces directos
 
 Verificar la cookie de Django en la pantalla inicial de remitos y estado de cuenta. La sesión por pestaña se recupera desde el portal. [Guía, compatibilidad y rollback](docs/SESION_ENLACE_v56.md).
+
+## MiDistri v57 · Saludo y vendedor activo
+
+La línea Vendedor conserva el color del encabezado. [Ver compatibilidad y rollback](docs/SALUDO_VENDEDOR_v57.md).

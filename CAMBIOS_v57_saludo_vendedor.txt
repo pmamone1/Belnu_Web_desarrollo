@@ -1,0 +1,2 @@
+MiDistri v57
+Mejora el contraste del nombre del vendedor en el encabezado. Base v56. Sin migraciones.

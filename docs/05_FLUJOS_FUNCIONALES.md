@@ -312,3 +312,7 @@ MiDistri → Cambiar perfil → Elegir kiosco → Continuar. Sin dispositivo rec
 ## MiDistri v56 · Acceso recordado desde enlaces directos
 
 En un enlace directo, la pantalla de acceso prepara la cookie CSRF antes de recuperar el perfil de la pestaña. Una vez validado el acceso, MiDistri carga la página para el kiosco activo.
+
+## MiDistri v57 · Saludo y vendedor activo
+
+Al entrar o cambiar de kiosco, verificar el vendedor debajo del saludo antes de consultar documentos.
