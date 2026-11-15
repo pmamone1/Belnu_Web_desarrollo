@@ -1,3 +1,6 @@
+MiDistri-Pedidos v55
+Corrige el acceso directo a Mis remitos y al piloto. Base v54. Sin migraciones.
+
 MiDistri-Pedidos v54
 Saludo personal y estado de cuenta piloto. Bases v50 a v53. Requiere Urban Soft v690. Sin migraciones nuevas. Instalación productiva pendiente.
 

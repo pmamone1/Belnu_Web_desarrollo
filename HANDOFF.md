@@ -1,3 +1,7 @@
+## v55 · Acceso por enlaces directos
+
+[Guía y compatibilidad](docs/ACCESO_DIRECTO_v55.md). Base v54. Sin migraciones nuevas.
+
 ## v54 · Saludo personal y estado de cuenta piloto
 
 [Guía y compatibilidad](docs/CUENTA_IDENTIDAD_v54.md). Saludo personal y estado de cuenta piloto. Bases v50 a v53. Requiere Urban Soft v690. Sin migraciones nuevas. Instalación productiva pendiente.

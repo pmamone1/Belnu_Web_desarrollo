@@ -3,6 +3,9 @@ from .views import _cart_id
 
 
 def counter(request):
+    if request.path.startswith('/portal/'):
+        return {'cart_count': 0}
+
     cart_count = 0
 
     try:

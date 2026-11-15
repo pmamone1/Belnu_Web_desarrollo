@@ -306,3 +306,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## Saludo personal y estado de cuenta piloto · v54
 
 [Uso, compatibilidad y validación](CUENTA_IDENTIDAD_v54.md). Revisar el saldo consignado, el débito acreditado y los datos del perfil en el menú.
+
+## Acceso por enlaces directos · v55
+
+[Guía y validación](ACCESO_DIRECTO_v55.md).

@@ -1,0 +1,2 @@
+MiDistri v55
+Corrige el error 500 al abrir enlaces directos de MiDistri. Base v54. Sin migraciones. Instalación productiva pendiente.
