@@ -331,3 +331,7 @@ La tabla respeta el orden del historial y toma del servicio los saldos consignad
 ## MiDistri v59 · Nombre del vendedor
 
 El nombre destacado identifica al vendedor del perfil activo.
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).

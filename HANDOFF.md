@@ -327,3 +327,7 @@ La navegación documentada cambia el contenido y mantiene la misma pestaña. El 
 ## MiDistri v59 · Nombre del vendedor
 
 Actualización visual del vendedor activo. [Uso y compatibilidad](docs/NOMBRE_VENDEDOR_v59.md).
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](docs/COMPROBANTES_MIDISTRI_v60.md).

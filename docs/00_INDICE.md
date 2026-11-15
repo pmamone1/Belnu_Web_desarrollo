@@ -326,3 +326,7 @@ Ver [detalle](CSRF_PORTAL_v3.md) y [validación](VALIDACION_v3.md).
 ## MiDistri v59 · Nombre del vendedor
 
 [Nombre del vendedor activo](NOMBRE_VENDEDOR_v59.md).
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).

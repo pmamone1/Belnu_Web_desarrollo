@@ -14,8 +14,14 @@ TIPOS = {
     'devolucion': 'Devolución',
     'venta': 'Venta',
     'pedido': 'Pedido',
+    'precio': 'Cambio de precio',
+    'ajuste': 'Ajuste de carga',
+    'ampliacion': 'Ampliación de consignación',
+    'pago': 'Pago / traslado',
+    'devolucion-registro': 'Constancia de devolución',
+    'carga-registro': 'Constancia de carga',
 }
-REFERENCIA = re.compile(r'(?:salida|carga-lote|pedido)-[1-9][0-9]{0,18}\Z')
+REFERENCIA = re.compile(r'(?:salida|carga-lote|pedido|liquidacion|ajuste|ampliacion|precio|pago|devolucion-registro|carga-registro)-[1-9][0-9]{0,18}\Z')
 
 
 def validar_fecha(valor):

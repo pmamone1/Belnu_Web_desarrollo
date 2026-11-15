@@ -324,3 +324,7 @@ Guía de [acceso recordado desde enlaces directos](docs/SESION_ENLACE_v56.md).
 ## MiDistri v59 · Nombre del vendedor
 
 [Identificación del vendedor](docs/NOMBRE_VENDEDOR_v59.md).
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](docs/COMPROBANTES_MIDISTRI_v60.md).

@@ -63,7 +63,7 @@
                   <a data-remito-pdf="descargar" href="{% url 'midistri_mis_remitos_archivo' id %}?descargar=1">Descargar PDF</a>
                 </div>
               {% endfor %}
-            </details>{% endif %}
+            </details>{% else %}<br><small>Comprobante no disponible</small>{% endif %}
           </td>
           <td>{{ f.consignado }}</td><td>{{ f.vencido }}</td>
           <td>{{ f.saldo_consignado }}</td><td>{{ f.saldo_vencido }}</td><td class="cuenta-total">{{ f.saldo_total }}</td>

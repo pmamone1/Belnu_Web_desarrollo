@@ -515,3 +515,8 @@ Validación v5: sincronizar un catálogo sintético con Display0, comprobar foto
 ## MiDistri v59 · Nombre del vendedor
 
 - Verificar el encabezado en el portal, el ZIP de base v58 y el capítulo nuevo del manual.
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+- Validar que un PDF de lote contenga datos del vendedor autenticado.
+- Comparar remitos archivados y nuevas constancias en ambas pantallas.

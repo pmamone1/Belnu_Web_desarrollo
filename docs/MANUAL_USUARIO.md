@@ -412,3 +412,7 @@ Tocá **Cambiar perfil** y elegí el kiosco. Si falta uno, elegí **Verificar mi
 ## MiDistri v59 · Nombre del vendedor
 
 [Cómo identificar el vendedor activo](NOMBRE_VENDEDOR_v59.md).
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).

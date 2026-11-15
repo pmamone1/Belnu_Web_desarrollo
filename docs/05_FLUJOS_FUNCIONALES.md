@@ -324,3 +324,7 @@ El vendedor navega, filtra y abre comprobantes desde el portal con progreso visi
 ## MiDistri v59 · Nombre del vendedor
 
 Revisá el nombre destacado debajo del saludo al elegir un kiosco.
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+[Uso, alcance y compatibilidad](COMPROBANTES_MIDISTRI_v60.md).

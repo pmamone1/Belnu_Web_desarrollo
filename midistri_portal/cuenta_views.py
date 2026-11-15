@@ -40,7 +40,7 @@ def estado_cuenta(request):
         saldos['anterior_total'] = _importe(Decimal(str(datos['anterior_c'])) + Decimal(str(datos['anterior_v'])))
         movimientos = []
         for f in datos['movimientos']:
-            remitos = [(d['id'], TIPOS[d['tipo']]) for d in f['remitos']
+            remitos = [(d['id'], TIPOS[d['tipo']] + (' · ' + d['referencia'] if d.get('referencia') else '')) for d in f['remitos']
                        if REFERENCIA.fullmatch(d['id']) and d['tipo'] in TIPOS]
             movimientos.append(dict(
                 fecha=date.fromisoformat(f['fecha']), concepto=f['concepto'], referencia=f['referencia'],

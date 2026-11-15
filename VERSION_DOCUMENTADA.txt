@@ -1,3 +1,6 @@
+MiDistri-Pedidos v60
+Comprobantes de ventas, lotes, precios, ajustes, ampliaciones y pagos en Mis remitos y en el estado de cuenta. Base MiDistri-Pedidos v59. Sin migraciones.
+
 MiDistri-Pedidos v59
 Nombre del vendedor destacado en el encabezado. Base v58. Sin migraciones.
 

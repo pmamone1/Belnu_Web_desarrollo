@@ -455,3 +455,9 @@ Ingresar con un Email habilitado para dos kioscos. Cambiar al segundo y cotejar 
 
 1. Abrir el portal en escritorio y celular.
 2. Verificar que el nombre del vendedor sea legible y más grande que su etiqueta.
+
+## MiDistri-Pedidos v60 · Comprobantes de MiDistri
+
+1. Consultar una venta pendiente de traslado por su liquidación.
+2. Descargar un pago, ajuste y ampliación desde ambas vistas.
+3. Consultar las ventas de un lote con otro perfil y verificar el alcance.
